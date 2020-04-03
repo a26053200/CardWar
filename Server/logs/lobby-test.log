@@ -1,11 +1,7 @@
-23:04:04.662 INFO  com.betel.database.RedisClient 39 connectDB - Redis Database connection success! connection info:127.0.0.1:6379
-23:04:05.056 INFO  com.betel.servers.node.NodeServer 69 run - LobbyServer :8092 startup successful!
-23:04:05.058 INFO  com.betel.servers.node.NodeServer$2 93 run - Node Server Client is connecting center server:BalanceServer
-23:04:05.067 INFO  com.betel.servers.forward.ServerClient 41 run - Server Client boot start...
-23:04:05.084 INFO  com.betel.handler.ByteBufHandler 34 handlerAdded - Client ip:null is added
-23:04:05.102 INFO  com.betel.servers.forward.ServerClient 59 run - Client connect BalanceServer successful!!!
-23:04:05.102 INFO  com.betel.handler.ByteBufHandler 61 channelActive - Client ip:/118.31.3.216:8090 is online
-23:04:08.083 INFO  com.betel.common.Monitor 122 recvByteBuf - [recv] msgLen:357 json:{"server":"LobbyServer","client":"Unity","action":"player@player_login","from_server":"JsonGateServer","aid":"312419868425064448","channelId":"00163efffe0e8f62-0000493d-000000f6-e48ca651a0b13295-7320d5aa","token":"eyJzZWNyZXRLZXkiOiJlbWhsYm1kdVlXNTBZVzVuYUhWcGFuVmhibnBvWlc1bmVXaz09IiwidHRsTWlsbGlzIjoxODAwMDAwMCwiaWQiOiIzMTI0MTk4Njg0MjUwNjQ0NDgifQA="}
-23:04:08.114 INFO  com.betel.servers.node.NodeServerMonitor 39 RespondJson - Recv action: player@player_login
-23:05:17.710 INFO  com.betel.common.Monitor 122 recvByteBuf - [recv] msgLen:357 json:{"server":"LobbyServer","client":"Unity","action":"player@player_login","from_server":"JsonGateServer","aid":"312419868425064448","channelId":"00163efffe0e8f62-0000493d-000000f7-127438e22f324279-e1d75f44","token":"eyJzZWNyZXRLZXkiOiJlbWhsYm1kdVlXNTBZVzVuYUhWcGFuVmhibnBvWlc1bmVXaz09IiwidHRsTWlsbGlzIjoxODAwMDAwMCwiaWQiOiIzMTI0MTk4Njg0MjUwNjQ0NDgifQA="}
-23:05:17.711 INFO  com.betel.servers.node.NodeServerMonitor 39 RespondJson - Recv action: player@player_login
+00:34:40.928 INFO  com.betel.database.RedisClient 39 connectDB - Redis Database connection success! connection info:127.0.0.1:6379
+00:34:41.615 INFO  com.betel.servers.node.NodeServer 69 run - LobbyServer :8092 startup successful!
+00:34:41.617 INFO  com.betel.servers.node.NodeServer$2 93 run - Node Server Client is connecting center server:BalanceServer
+00:34:41.625 INFO  com.betel.servers.forward.ServerClient 41 run - Server Client boot start...
+00:34:41.642 INFO  com.betel.handler.ByteBufHandler 34 handlerAdded - Client ip:null is added
+00:34:41.649 INFO  com.betel.handler.ByteBufHandler 61 channelActive - Client ip:/192.168.31.174:8090 is online
+00:34:41.649 INFO  com.betel.servers.forward.ServerClient 59 run - Client connect BalanceServer successful!!!

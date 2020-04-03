@@ -9,12 +9,8 @@
   <version>1.0</version>
   <modules>
     <module>core</module>
-    <module>balance</module>
-    <module>account</module>
-    <module>gate-http</module>
     <module>lobby</module>
     <module>room</module>
-    <module>gate-json</module>
     <module>robot</module>
   </modules>
 
