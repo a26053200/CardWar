@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5470137012e8d314c91f904293bb2e14, type: 3}
+  m_Name: ResourceAuditingSetting
+  m_EditorClassIdentifier: 
+  Tex_Format_Recommend_IOS: 
+  Tex_Format_Forbid_IOS: 
+  Tex_Format_Recommend_Android: 
+  Tex_Format_Forbid_Android: 
+  Tex_Max_Size: 2048
+  Tex_Recommend_Size: 1024
+  Shader_Forbid: Standard
+  Mesh_Max_TrisNum: 3000
+  Mesh_Recommend_TrisNum: 1500
+  Texture_FileTypes:
+  - .psd
+  - .tiff
+  - .jpg
+  - .tga
+  - .png
+  - .gif
+  - .tif
+  - .dds
+  Forbid_Texture_FileTypes:
+  - .psd
+  - .dds
+  Material_FileTypes:
+  - .mat
+  Model_FileTypes:
+  - .fbx
+  - .obj
+  autioLengthThreshold: 5
+  audioClipLoadType_Short_Ios: 0
+  compressionFormat_Short_Ios: 0
+  audioClipLoadType_Long_Ios: 0
+  compressionFormat_Long_Ios: 0
+  audioClipLoadType_Short_Android: 0
+  compressionFormat_Short_Android: 0
+  audioClipLoadType_Long_Android: 0
+  compressionFormat_Long_Android: 0
+  Sound_FileTypes:
+  - .aif
+  - .wav
+  - .mp3
+  - .ogg

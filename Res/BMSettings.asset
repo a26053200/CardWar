@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d268296124e6984692a713e72add158, type: 3}
+  m_Name: BMSettings
+  m_EditorClassIdentifier: 
+  buildNo: 0
+  AppName: XBullet
+  BuildOutputDirName: AssetBundle
+  resDir: Assets/Res/
+  tempForceBuild: 0
+  encodeLuaFile: 0
+  useHashName: 0
+  clearManifestFile: 1
+  Suffix_Bundle: bundle
+  Ignore_Suffix: .meta,.DS_Store,.iml
+  Ignore_Folder: .svn,.idea
+  ownerDependenceSuffixs:
+  - .prefab
+  - .mat
+  - .controller
+  builds:
+  - folderList: []
+    buildType: 0
+    compressType: 0
+    pattern: 
+  - folderList: []
+    buildType: 0
+    compressType: 0
+    pattern: 
+  - folderList: []
+    buildType: 0
+    compressType: 0
+    pattern: 
+  - folderList: []
+    buildType: 0
+    compressType: 0
+    pattern: 
+  atlasSpriteFolderList:
+  - Assets/Res/Atlas
+  atlasSpritePrefabDir: Assets/Res/Prefabs/AtlasSprite/
+  uiSpriteDir: 
+  scenePaths: []
+  sceneVersions: 
