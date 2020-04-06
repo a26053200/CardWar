@@ -5,7 +5,7 @@
 ---
 
 local BaseScene = require('Game.Modules.World.Scenes.BaseScene')
----@class Game.Modules.World.Scenes.LoadingScene : Modules.World.Scenes.BaseScene
+---@class Game.Modules.World.Scenes.LoadingScene : Game.Modules.World.Scenes.BaseScene
 local LoadingScene = class("LoadingScene",BaseScene)
 
 function LoadingScene:Ctor()

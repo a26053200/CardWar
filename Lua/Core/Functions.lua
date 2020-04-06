@@ -7,6 +7,7 @@
 
 local _handler = handler
 local _EventMap = {} ---@type table<string, fun()>
+local Ticker_Sid = 1
 
 ---
 ---@param type string
@@ -95,15 +96,13 @@ end
 ---@param delay number
 ---@param handler Handler
 function DelayCallback(delay, handler)
+    local id = Ticker_Sid;
+    Ticker_Sid = Ticker_Sid + 1
     local key = tostring(handler)
-    if ticker:Contain(key) then
+    if ticker:Contain(id) then
         return
     end
-    --local go
-    --if handler.caller and handler.caller.gameObject then
-    --    go = handler.caller.gameObject
-    --end
-    ticker:DelayCallback(key,delay,function()
+    ticker:DelayCallback(id,delay,function()
         handler:Execute()
     end)
     --handler.startTime = Time.time

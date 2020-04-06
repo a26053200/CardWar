@@ -70,7 +70,7 @@ function LoginMdr:On_Click_BtnLogin()
     --self:validityInput(function()
     --    self.loginService:HttpLogin(self.username, self.password, handler(self,self.OnHttpLogin))
     --end)
-    World.EnterScene(WorldConfig.Battle)
+    World.EnterScene(WorldConfig.World)
     self:fetchInput()
     vmgr:UnloadView(ViewConfig.Login)
 end
