@@ -5,7 +5,7 @@
 -- Author LOLO
 --
 
-local Event = require("Core.Events.Event")
+local Event = require("Betel.Events.Event")
 ---@class PointerEvent : Core.Events.Event
 ---@field data UnityEngine.EventSystems.PointerEventData @ 指针事件附带的数据
 local PointerEvent = class("PointerEvent", Event)

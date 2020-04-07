@@ -33,7 +33,7 @@ function Alert.ShowTitle2(title,msg,okCallback,param,cancelCallback)
 end
 
 function Alert:Ctor()
-    local layer = vmgr:GetUILayer(UILayer.alert)
+    local layer = vmgr:GetUILayer(UILayer.LAYER_ALERT)
     Alert.super.Ctor(self, "Prefabs/UI/Common/Alert.prefab",layer)
     self.canvas = self.gameObject:GetCanvasGroup("")
     self.one_btnOk = self.gameObject:GetButton("BtnOneOk");

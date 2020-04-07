@@ -6,13 +6,13 @@
 
 local SoundConfig = require("Data.SoundConfig")
 local SoundGroup = require("Game.Modules.Common.Sound.SoundGroup")
-local Sound = require("Game.Modules.Common.Sound.Sound")
+local LuaObject = require("Betel.LuaObject")
 
----@class Game.Modules.Common.Sound.SoundPlayer : View
+---@class Game.Modules.Common.Sound.SoundPlayer : Betel.LuaObject
 ---@field lastBGM Game.Modules.Common.Sound.Sound
 ---@field soundMap <string,Game.Modules.Common.Sound.Sound>
 ---@field soundGroupMap <string,Game.Modules.Common.Sound.SoundGroup>
-local SoundPlayer = class("Game.Modules.Common.Sound.SoundPlayer")
+local SoundPlayer = class("Game.Modules.Common.Sound.SoundPlayer", LuaObject)
 
 local Default_Group = "[Group_Default]"
 
@@ -67,20 +67,20 @@ end
 
 
 ---@return Game.Modules.Common.Sound.SoundGroup
-function SoundPlayer:CreateOrGetSoundGroup(sountType, groupName)
+function SoundPlayer:CreateOrGetSoundGroup(soundType, groupName)
     local soundGroup
     if StringUtil.IsEmpty(groupName) then
-        soundGroup = self.soundGroupMap[sountType]
+        soundGroup = self.soundGroupMap[soundType]
     else
-        soundGroup = self.soundGroupMap[sountType.. "_" .. groupName]
+        soundGroup = self.soundGroupMap[soundType .. "_" .. groupName]
     end
     if soundGroup == nil then
-        local soundTypeObj = self.soundObjMap[sountType]
-        soundGroup = SoundGroup.New(soundTypeObj, groupName,self.soundVolume[sountType])
+        local soundTypeObj = self.soundObjMap[soundType]
+        soundGroup = SoundGroup.New(soundTypeObj, groupName,self.soundVolume[soundType])
         if StringUtil.IsEmpty(groupName) then
-            self.soundGroupMap[sountType] = soundGroup
+            self.soundGroupMap[soundType] = soundGroup
         else
-            self.soundGroupMap[sountType.. "_" .. groupName] = soundGroup
+            self.soundGroupMap[soundType .. "_" .. groupName] = soundGroup
         end
     end
     return soundGroup

@@ -4,7 +4,7 @@
 --- DateTime: 2018/11/15 15:42
 --- UI对象池 (暂时没有限制最大数量,超过数量时会给与警告)
 ---
-local List = require("Core.List")
+local List = require("Betel.List")
 
 
 ---@class Module.Common.Pools.ObjectPool

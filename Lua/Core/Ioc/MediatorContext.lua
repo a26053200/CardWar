@@ -4,7 +4,7 @@
 --- DateTime: 2018/6/12 10:37
 ---
 
-local IocContext = require("Core.Ioc.IocContext")
+local IocContext = require("Betel.Ioc.IocContext")
 local MediatorContext = class("MediatorContext",IocContext)
 
 function MediatorContext:Ctor(binder)

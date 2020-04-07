@@ -29,7 +29,7 @@ function Tips.Show(msg)
 end
 
 function Tips:Ctor()
-    local layer = vmgr:GetUILayer(UILayer.alert)
+    local layer = vmgr:GetUILayer(UILayer.LAYER_ALERT)
     Tips.super.Ctor(self, "Prefabs/UI/Common/Tips.prefab",layer)
     self.canvas = self.gameObject:GetCanvasGroup("")
     self.orgPos = self.gameObject.transform.localPosition

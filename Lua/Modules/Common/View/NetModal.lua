@@ -28,7 +28,7 @@ function NetModal.Hide()
 end
 
 function NetModal:Ctor()
-    local layer = vmgr:GetUILayer(UILayer.top)
+    local layer = vmgr:GetUILayer(UILayer.LAYER_TOP)
     NetModal.super.Ctor(self, "Prefabs/UI/Common/NetModal.prefab",layer)
     self.canvas = GetCanvasGroup(self.gameObject:FindChild("Tip"))
     self.tip = self.gameObject:FindChild("Tip")

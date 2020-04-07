@@ -4,8 +4,6 @@
 --- DateTime: 2019-05-18-23:22:49
 ---
 
-local WeaponNo1 = require("Game.Modules.Battle.Weapon.WeaponNo1")
-local WeaponDefault = require("Game.Modules.Battle.Weapon.WeaponDefault")
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 
 ---@class Game.Modules.Battle.View.BattleMdr : Game.Core.Ioc.BaseMediator

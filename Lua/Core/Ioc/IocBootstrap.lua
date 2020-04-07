@@ -7,7 +7,7 @@
 ---@class Game.Core.Ioc.IocBootstrap
 ---@field binder Betel.Ioc.IocBinder
 local IocBootstrap = class("IocBootstrap")
-local IocBinder = require("Core.Ioc.IocBinder")
+local IocBinder = require("Betel.Ioc.IocBinder")
 local MediatorContext = require("Game.Core.Ioc.MediatorContext")
 local ModelContext = require("Game.Core.Ioc.ModelContext")
 local ServiceContext = require("Game.Core.Ioc.ServiceContext")

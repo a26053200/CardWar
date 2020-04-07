@@ -14,9 +14,7 @@ end
 
 function WorldScene:OnEnterScene()
     --vmgr:LoadView(ViewConfig.NewbieWelcome)
-    Framework.Ticker.Launch()
-    FastBehavior.StateMachineManager.GetInstance():Init()
-    FastBehavior.StateMachineManager.GetInstance().StateActionTimeout = 100
+
 end
 
 function WorldScene:OnExitScene()

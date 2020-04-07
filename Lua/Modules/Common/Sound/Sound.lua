@@ -5,14 +5,15 @@
 ---
 ---
 
+local LuaObject = require("Betel.LuaObject")
 
----@class Game.Modules.Common.Sound.Sound : View
+---@class Game.Modules.Common.Sound.Sound : Betel.LuaObject
 ---@field New fun(prefab:Game.Modules.Common.Sound.SoundConfig, gameObject:UnityEngine.GameObject, audioSourceParams:table<string,any>):Game.Modules.Common.Sound.Sound
 ---@field gameObject UnityEngine.GameObject
 ---@field audioClip UnityEngine.AudioClip
 ---@field audioSource UnityEngine.AudioSource
 ---@field soundInfo Game.Modules.Common.Sound.SoundConfig
-local Sound = class("Game.Modules.Common.Sound.Sound")
+local Sound = class("Game.Modules.Common.Sound.Sound", LuaObject)
 
 function Sound:Ctor(soundInfo, gameObject, initVolume, audioSourceParams)
     self.soundInfo = soundInfo

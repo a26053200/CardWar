@@ -28,6 +28,7 @@ function ViewManager:Ctor()
     self.uiCamera = self.uiCanvas:FindChild("UICamera"):GetComponent(typeof(UnityEngine.Camera))
     self.uiCanvas = self.uiCanvas:GetComponent(typeof(UnityEngine.Canvas))
     dontDestroyOnLoad(self.uiCanvas.gameObject)
+    ViewManager.super.Ctor(self, self.uiCanvas.gameObject)
 end
 
 function ViewManager:Init()

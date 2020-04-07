@@ -56,7 +56,7 @@ function BaseMediator:OnAutoRegisterEvent()
         if self[funName] then
             log("Auto Register Events:" .. funName)
             LuaHelper.AddButtonClick(buttons[i].gameObject,handler(self,self[funName]))
-            buttons[i].gameObject:GetOrAddComponent(typeof(Framework.PointerScaler))
+            --buttons[i].gameObject:GetOrAddComponent(typeof(Framework.PointerScaler))
             table.insert(self.autoClickEventObjs, buttons[i].gameObject)
         end
     end
@@ -69,7 +69,7 @@ function BaseMediator:OnAutoRegisterEvent()
             if self[funName] then
                 log("Auto Register Events:" .. funName)
                 LuaHelper.AddObjectClickEvent(images[i].gameObject,handler(self,self[funName]))
-                images[i].gameObject:GetOrAddComponent(typeof(Framework.PointerScaler))
+                --images[i].gameObject:GetOrAddComponent(typeof(Framework.PointerScaler))
                 table.insert(self.autoClickEventObjs, images[i].gameObject)
             end
         end

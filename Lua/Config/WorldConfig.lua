@@ -23,25 +23,11 @@ WorldConfig.Login = {
     levelUrl = "",
     needLoading = false
 }
-WorldConfig.GuideScene = {
-    debugName = "新手引导场景",
-    level = "GuideNewbie",
-    sceneName = "GuideNewbie",
-    levelUrl = "Scenes/GuideNewbie.unity",
-    needLoading = true
-}
-WorldConfig.Lobby = {
-    debugName = "游戏大厅",
-    level = "Lobby",
-    sceneName = "Lobby",
-    levelUrl = "Scenes/Lobby.unity",
-    needLoading = false
-}
-WorldConfig.Room_HJ = {
-    debugName = "红尖",
-    level = "Room_HJ",
-    sceneName = "Room_HJ",
-    levelUrl = "Scenes/Room_HJ.unity",
+WorldConfig.World = {
+    debugName = "世界根场景",
+    level = "World",
+    sceneName = "World",
+    levelUrl = "Scenes/World.unity",
     needLoading = true
 }
 WorldConfig.Battle = {

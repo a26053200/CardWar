@@ -5,7 +5,7 @@
 -- Author LOLO
 --
 
-local Event = require("Core.Events.Event")
+local Event = require("Betel.Events.Event")
 ---@class DragDropEvent : Core.Events.Event
 ---@field data UnityEngine.EventSystems.DragDropEventData @ 指针事件附带的数据
 local DragDropEvent = class("DragDropEvent", Event)

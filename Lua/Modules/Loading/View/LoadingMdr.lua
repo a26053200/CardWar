@@ -14,7 +14,7 @@ local WaitTime = 0.2
 
 function LoadingMdr:Ctor()
     LoadingMdr.super.Ctor(self)
-    self.layer = UILayer.top
+    self.layer = UILayer.LAYER_TOP
 end
 
 function LoadingMdr:OnInit()
