@@ -18,7 +18,7 @@ function PoolVoProxy:Ctor(className)
     self.pool = List.New()
 end
 
----@return Module.Common.Pools.PoolVo
+---@return Game.Modules.Common.Pools.PoolVo
 function PoolVoProxy:Get()
     local vo = self:Pop()
     vo.delete = false
@@ -26,7 +26,7 @@ function PoolVoProxy:Get()
     return vo
 end
 
----@param vo Module.Common.Pools.PoolVo
+---@param vo Game.Modules.Common.Pools.PoolVo
 function PoolVoProxy:Store(vo)
     if vo == nil then
 
@@ -39,7 +39,7 @@ function PoolVoProxy:Store(vo)
     end
 end
 
----@return Module.Common.Pools.PoolVo
+---@return Game.Modules.Common.Pools.PoolVo
 function PoolVoProxy:Pop()
     if self.pool:Size() > 0 then
         return self.pool:Shift()
@@ -48,7 +48,7 @@ function PoolVoProxy:Pop()
     end
 end
 
----@param vo Module.Common.Pools.PoolVo
+---@param vo Game.Modules.Common.Pools.PoolVo
 ---@return boolean
 function PoolVoProxy:Contains(vo)
     return self.list.list:Contain(vo)

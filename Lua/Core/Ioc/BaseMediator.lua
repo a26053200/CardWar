@@ -18,12 +18,12 @@ local BaseMediator = class("BaseMediator",LuaMonoBehaviour)
 
 function BaseMediator:Ctor()
     BaseMediator.super.Ctor(self)
-    self.layer = UILayer.LAYER_DEPYH_UI --默认在深度排序层级
+    self.layer = UILayer.LAYER_DEPTH_UI --默认在深度排序层级
     self.netWorkListener = NetworkListener.New()
     self.clickEventMap = {} --主动注册的点击事件
     self.removeCallback = nil
     self.autoClickEventObjs = {} --自动注册的点击事件
-    self.isEnableMonoBehaviour = false --默认不启用Untiy MonoBehaviour
+    self.isEnableMonoBehaviour = false --默认不启用Unity MonoBehaviour
 end
 
 function BaseMediator:Start()
@@ -118,14 +118,14 @@ end
 
 --获取世界坐标的本地(本UI模块)坐标
 ---@param worldPos UnityEngine.Vector3
-function BaseMediator:UIWorldPosToLocalPostion(worldPos)
-    return Convert.WorldPosToCanvasLocalPostion(worldPos, self.uiCanvas.worldCamera, self.uiCanvas, self.rectTransform)
+function BaseMediator:UIWorldPosToLocalPosition(worldPos)
+    return Convert.WorldPosToCanvasLocalPosition(worldPos, self.uiCanvas.worldCamera, self.uiCanvas, self.rectTransform)
 end
 
 --获取世界坐标的本地(本UI模块)坐标
 ---@param worldPos UnityEngine.Vector3
-function BaseMediator:WorldPosToLocalPostion(worldPos, sceneCamera)
-    return Convert.WorldPosToCanvasLocalPostion(worldPos, sceneCamera, self.uiCanvas, self.rectTransform)
+function BaseMediator:WorldPosToLocalPosition(worldPos, sceneCamera)
+    return Convert.WorldPosToCanvasLocalPosition(worldPos, sceneCamera, self.uiCanvas, self.rectTransform)
 end
 
 function BaseMediator:Unload()

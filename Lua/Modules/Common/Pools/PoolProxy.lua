@@ -5,8 +5,13 @@
 --- 池对象代理
 ---
 
+---@class PoolInfo
+---@field prefabUrl string
+---@field avatarName string
+---@field effectName string
+---@field avatarUIName string
+
 local ObjectPool = require("Module.Common.Pools.ObjectPool")
-local List = require("Core.List")
 
 ---@class Module.Common.Pools.PoolProxy
 ---@field New fun(pool:string|UnityEngine.GameObject):Module.Common.Pools.PoolProxy

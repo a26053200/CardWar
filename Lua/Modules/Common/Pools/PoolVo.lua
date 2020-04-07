@@ -6,10 +6,10 @@
 ---
 
 local BaseVo = require("Game.Core.BaseVo")
----@class Module.Common.Pools.PoolVo : Game.Core.BaseVo
----@field New fun()
+---@class Game.Modules.Common.Pools.PoolVo : Game.Core.BaseVo
+---@field New fun():Game.Modules.Common.Pools.PoolVo
 ---@field delete boolean
-local PoolVo = class("Module.Common.Pools.PoolVo", BaseVo)
+local PoolVo = class("Game.Modules.Common.Pools.PoolVo", BaseVo)
 
 function PoolVo:Ctor()
 
