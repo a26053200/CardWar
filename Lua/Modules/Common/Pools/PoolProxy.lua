@@ -31,29 +31,6 @@ function PoolProxy:Ctor(pool)
     self.objectPoolMap = {}
 end
 
---初始化关卡对象池
----@param checkPointData CheckPointData
----@return table<string,number>
-function PoolProxy:InitCheckPointObjectPool(checkPointData)
-    local poolNumMap = {} ---@type table<string,number> avatarName 和 数量的映射
-    for i = 1, #checkPointData.areas do
-        local areaInfo =  checkPointData.areas[i]
-        local numMap = {}
-        for j = 1, #areaInfo.waves do
-            local waveInfo = areaInfo.waves[j]
-            for k = 1, #waveInfo.wavePoints do
-                local pointInfo = waveInfo.wavePoints[k]
-                if numMap[pointInfo.avatarName] == nil then
-                    numMap[pointInfo.avatarName] = 0
-                end
-                numMap[pointInfo.avatarName] = numMap[pointInfo.avatarName] + pointInfo.maxNum
-
-            end
-        end
-        table.insert(poolNumMap, numMap)
-    end
-    return poolNumMap
-end
 --初始化对象池
 ---@param poolsInfo table<number,PoolInfo>
 function PoolProxy:InitObjectPool(poolsInfo)

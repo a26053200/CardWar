@@ -39,10 +39,10 @@ Screen = UnityEngine.Screen
 
 --- Lua Framework
 edp = EventDispatcher.New() --全局事件派发器
-ListViewEvent = require("Game.UI.ListViewEvent")
-BaseList = require("Game.UI.BaseList")
+ListViewEvent = require("Betel.UI.ListViewEvent")
+BaseList = require("Betel.UI.BaseList")
 ListExtend = require("Module.Common.View.ListExtend") ---@type Module.Common.View.ListExtend
-ListItemRenderer = require("Game.UI.ListItemRenderer")
+ListItemRenderer = require("Betel.UI.ListItemRenderer")
 
 --- Global Events
 WorldEvents = require("Module.World.Events.WorldEvents")
