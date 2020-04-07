@@ -9,16 +9,16 @@
 ---@field type string
 ---@field delegate Delegate
 
-local LuaMonoBehaviour = require('Core.LuaMonoBehaviour')
+local LuaMonoBehaviour = require('Betel.LuaMonoBehaviour')
 
----@class Module.Common.Widgets.Widget : Core.LuaMonoBehaviour
----@field New fun(gameObject:UnityEngine.GameObject|table):Module.Common.Widgets.Widget
+---@class Game.Modules.Common.Components.Widget : Betel.LuaMonoBehaviour
+---@field New fun(gameObject:UnityEngine.GameObject|table):Game.Modules.Common.Components.Widget
 ---@field sequenceList List | table<number, DG.Tweening.Sequence>
 ---@field updateList List | table<number, UpdateHandler>
 ---@field delayFunList List | table<number, Handler>
 ---@field delayFrameFunList List | table<number, Handler>
 ---@field coList List | table<number, fun()>
-local Widget = class("Module.Common.Widgets.Widget", LuaMonoBehaviour)
+local Widget = class("Game.Modules.Common.Components.Widget", LuaMonoBehaviour)
 
 ---@param gameObject UnityEngine.GameObject|table
 function Widget:Ctor(gameObject)

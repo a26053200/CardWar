@@ -5,8 +5,8 @@
 --- 预加载
 ---
 
-local LuaMonoBehaviour = require('Core.LuaMonoBehaviour')
----@class Game.Manager.PreloadingManager : Core.LuaMonoBehaviour
+local LuaMonoBehaviour = require('Betel.LuaMonoBehaviour')
+---@class Game.Manager.PreloadingManager : Betel.LuaMonoBehaviour
 ---@field cacheUnity table<string, UnityEngine.SceneManagement.Scene> --预加载的场景缓存
 ---@field taskList List | table<string, PreloadingTask>
 local PreloadingManager = class("Game.Manager.PreloadingManager",LuaMonoBehaviour)

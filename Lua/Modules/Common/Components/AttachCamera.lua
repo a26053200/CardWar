@@ -6,15 +6,15 @@
 
 
 
-local Widget = require("Module.Common.Widgets.Widget")
+local Widget = require("Game.Modules.Common.Components.Widget")
 
----@class Module.Common.Widgets.AttachCamera : Module.Common.Widgets.Widget
----@field New fun(camera:UnityEngine.Camera) : Module.Common.Widgets.AttachCamera
+---@class Game.Modules.Common.Components.AttachCamera : Game.Modules.Common.Components.Widget
+---@field New fun(camera:UnityEngine.Camera) : Game.Modules.Common.Components.AttachCamera
 ---@field camera UnityEngine.Camera
 ---@field attachCam Framework.AttachCamera
 ---@field target UnityEngine.GameObject
 ---@field orgTarget UnityEngine.GameObject
-local AttachCamera = class("Module.Common.AttachCamera", Widget)
+local AttachCamera = class("Game.Modules.Common.Components.AttachCamera", Widget)
 
 local ZOOM_LEVEL =
 {

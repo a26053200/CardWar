@@ -4,16 +4,16 @@
 --- DateTime: 2018/6/14 0:16
 ---
 
-local NetworkListener = require("Core.Net.NetworkListener")
-local LuaMonoBehaviour = require('Core.LuaMonoBehaviour')
----@class Game.Core.Ioc.BaseMediator : Core.LuaMonoBehaviour
+local NetworkListener = require("Betel.Net.NetworkListener")
+local LuaMonoBehaviour = require('Betel.LuaMonoBehaviour')
+---@class Game.Core.Ioc.BaseMediator : Betel.LuaMonoBehaviour
 ---@field gameObject UnityEngine.GameObject
 ---@field layer UILayer 该模块所在UI层级
 ---@field rectTransform UnityEngine.RectTransform
----@field scene Module.World.Scene.BaseScene
+---@field scene Game.Modules.World.Scenes.BaseScene
 ---@field uiCanvas UnityEngine.Canvas
 ---@field uiCamera UnityEngine.Camera
----@field isEnableMonoBehaviour boolean 是否启用Untiy MonoBehaviour
+---@field isEnableMonoBehaviour boolean 是否启用Unity MonoBehaviour
 local BaseMediator = class("BaseMediator",LuaMonoBehaviour)
 
 function BaseMediator:Ctor()

@@ -4,15 +4,15 @@
 --- DateTime: 2019/7/1 17:55
 ---
 
-local Sound = require("Module.Common.Sound.Sound")
-local Widget = require("Module.Common.Widgets.Widget")
+local Sound = require("Game.Modules.Common.Sound.Sound")
+local Widget = require("Game.Modules.Common.Components.Widget")
 
----@class Module.Common.Sound.SoundGroup : Module.Common.Widgets.Widget
----@field New fun(soundTypeObj:UnityEngine.GameObject, groupName:string, soundVolume:number)
+---@class Game.Modules.Common.Sound.SoundGroup : Game.Modules.Common.Components.Widget
+---@field New fun(soundTypeObj:UnityEngine.GameObject, groupName:string, soundVolume:number):Game.Modules.Common.Sound.SoundGroup
 ---@field groupObj UnityEngine.GameObject
 ---@field soundVolume number 音量
----@field soundMap table<string,Module.Common.Sound.Sound>
----@field soundQueue table<string,Module.Common.Sound.Sound>
+---@field soundMap table<string,Game.Modules.Common.Sound.Sound>
+---@field soundQueue table<string,Game.Modules.Common.Sound.Sound>
 local SoundGroup = class("SoundGroup",Widget)
 
 function SoundGroup:Ctor(soundTypeObj, groupName, soundVolume)
@@ -29,7 +29,7 @@ function SoundGroup:Ctor(soundTypeObj, groupName, soundVolume)
 end
 
 --播放声音
----@return Module.Common.Sound.Sound
+---@return Game.Modules.Common.Sound.Sound
 function SoundGroup:DoPlay(soundName, audioSourceParams)
     if StringUtil.IsEmpty(soundName) then
         logError("sound name can not is a empty!")
@@ -72,7 +72,7 @@ end
 --强制播放,停止之前所有的声音
 ---@param soundName string 声音名称
 ---@param fadeOutOther boolean 是否淡出该组的其他声音
----@return Module.Common.Sound.Sound
+---@return Game.Modules.Common.Sound.Sound
 function SoundGroup:Play(soundName,fadeOutOther, audioSourceParams)
     if StringUtil.IsEmpty(soundName) then
         --logError("sound name can not is a empty!")

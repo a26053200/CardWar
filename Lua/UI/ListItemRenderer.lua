@@ -4,8 +4,8 @@
 --- DateTime: 2019/1/19 0:04
 ---
 
-local LuaMonoBehaviour = require("Core.LuaMonoBehaviour")
----@class Game.UI.ListItemRenderer : Core.LuaMonoBehaviour
+local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
+---@class Game.UI.ListItemRenderer : Betel.LuaMonoBehaviour
 ---@field listView ListView
 ---@field adapter LuaListViewAdapter
 ---@field cell LuaListViewCell

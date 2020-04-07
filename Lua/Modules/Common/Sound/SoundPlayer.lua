@@ -5,14 +5,14 @@
 ---
 
 local SoundConfig = require("Data.SoundConfig")
-local SoundGroup = require("Module.Common.Sound.SoundGroup")
-local Sound = require("Module.Common.Sound.Sound")
+local SoundGroup = require("Game.Modules.Common.Sound.SoundGroup")
+local Sound = require("Game.Modules.Common.Sound.Sound")
 
----@class Module.Common.Sound.SoundPlayer : View
----@field lastBGM Module.Common.Sound.Sound
----@field soundMap <string,Module.Common.Sound.Sound>
----@field soundGroupMap <string,Module.Common.Sound.SoundGroup>
-local SoundPlayer = class("Module.Common.Sound.SoundPlayer")
+---@class Game.Modules.Common.Sound.SoundPlayer : View
+---@field lastBGM Game.Modules.Common.Sound.Sound
+---@field soundMap <string,Game.Modules.Common.Sound.Sound>
+---@field soundGroupMap <string,Game.Modules.Common.Sound.SoundGroup>
+local SoundPlayer = class("Game.Modules.Common.Sound.SoundPlayer")
 
 local Default_Group = "[Group_Default]"
 
@@ -66,7 +66,7 @@ function SoundPlayer:CreateSoundObj(name,parent)
 end
 
 
----@return Module.Common.Sound.SoundGroup
+---@return Game.Modules.Common.Sound.SoundGroup
 function SoundPlayer:CreateOrGetSoundGroup(sountType, groupName)
     local soundGroup
     if StringUtil.IsEmpty(groupName) then
@@ -89,7 +89,7 @@ end
 --播放声音
 ---@param soundName string 声音名称
 ---@param fadeOutOther boolean 是否淡出该组的其他声音
----@return Module.Common.Sound.Sound
+---@return Game.Modules.Common.Sound.Sound
 function SoundPlayer:Play(soundName, fadeOutOther)
     if StringUtil.IsEmpty(soundName) then
         return

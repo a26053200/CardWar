@@ -4,8 +4,8 @@
 --- DateTime: 2018/6/19 18:18
 ---
 
-local LuaObject = require('Core.LuaObject')
----@class Game.Core.Ioc.BaseService : Core.LuaObject
+local LuaObject = require('Betel.LuaObject')
+---@class Game.Core.Ioc.BaseService : Betel.LuaObject
 local BaseService = class("BaseService", LuaObject)
 
 function BaseService:Ctor()

@@ -4,8 +4,8 @@
 --- DateTime: 2019/1/18 23:21
 ---
 
-local LuaMonoBehaviour = require("Core.LuaMonoBehaviour")
----@class Core.UI.BaseList : Core.LuaMonoBehaviour
+local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
+---@class Core.UI.BaseList : Betel.LuaMonoBehaviour
 ---@field New fun(gameObject:UnityEngine.GameObject, itemRendererClass:table, noPassEvent:boolean)
 ---@field listView ListView
 ---@field scroll UnityEngine.UI.ScrollRect

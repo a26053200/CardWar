@@ -4,8 +4,8 @@
 --- DateTime: 2018/6/19 18:18
 ---
 
----@class Game.Core.Ioc.BaseModel : Core.LuaObject
-local LuaObject = require('Core.LuaObject')
+---@class Game.Core.Ioc.BaseModel : Betel.LuaObject
+local LuaObject = require('Betel.LuaObject')
 local BaseModel = class("BaseModel",LuaObject)
 
 function BaseModel:Ctor()

@@ -6,13 +6,13 @@
 ---
 
 
----@class Module.Common.Sound.Sound : View
----@field New fun(prefab:Module.Common.Sound.SoundConfig, gameObject:UnityEngine.GameObject, audioSourceParams:table<string,any>):View
+---@class Game.Modules.Common.Sound.Sound : View
+---@field New fun(prefab:Game.Modules.Common.Sound.SoundConfig, gameObject:UnityEngine.GameObject, audioSourceParams:table<string,any>):Game.Modules.Common.Sound.Sound
 ---@field gameObject UnityEngine.GameObject
 ---@field audioClip UnityEngine.AudioClip
 ---@field audioSource UnityEngine.AudioSource
----@field soundInfo Module.Common.Sound.SoundConfig
-local Sound = class("Module.Common.Sound.Sound")
+---@field soundInfo Game.Modules.Common.Sound.SoundConfig
+local Sound = class("Game.Modules.Common.Sound.Sound")
 
 function Sound:Ctor(soundInfo, gameObject, initVolume, audioSourceParams)
     self.soundInfo = soundInfo

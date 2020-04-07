@@ -5,8 +5,8 @@
 --- 定时器
 ---
 
-local LuaObject = require("Core.LuaObject")
----@class Timer : Core.LuaObject
+local LuaObject = require("Betel.LuaObject")
+---@class Timer : Betel.LuaObject
 ---@field New fun(interval:number, handler:Handler)
 ---@field running boolean
 ---@field interval number 间隔 (单位：秒)

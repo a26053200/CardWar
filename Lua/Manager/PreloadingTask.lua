@@ -5,9 +5,9 @@
 ---
 ---
 
-local LuaObject = require("Core.LuaObject")
+local LuaObject = require("Betel.LuaObject")
 
----@class PreloadingTask : Core.LuaObject
+---@class PreloadingTask : Betel.LuaObject
 ---@field New fun(type:string,sceneInfo:SceneInfo,waitTime:number,doneCallback:fun()|Handler)
 ---@field type string
 ---@field waitTime number

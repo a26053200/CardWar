@@ -5,8 +5,8 @@
 ---
 
 
-local LuaObject = require('Core.LuaObject')
----@class Game.Core.BaseVo : Core.LuaObject
+local LuaObject = require('Betel.LuaObject')
+---@class Game.Core.BaseVo : Betel.LuaObject
 local BaseVo = class("BaseVo",LuaObject)
 
 function BaseVo:Ctor()

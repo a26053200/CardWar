@@ -142,7 +142,7 @@ Star = require("Module.Common.Star.Star")
 WorldIcon = require("Module.Common.Icon.WorldIcon")
 
 -- [声音系统]
-SoundPlayer = require("Module.Common.Sound.SoundPlayer").New()
+SoundPlayer = require("Game.Modules.Common.Sound.SoundPlayer").New()
 SoundConfig = require("Data.SoundConfig")
 SoundPlayer:Init()
 --

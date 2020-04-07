@@ -5,8 +5,8 @@
 ---
 
 
-local LuaObject = require("Core.LuaObject")
----@class Game.Manager.ViewInfo : Core.LuaObject
+local LuaObject = require("Betel.LuaObject")
+---@class Game.Manager.ViewInfo : Betel.LuaObject
 ---@field name string
 ---@field prefab string
 ---@field module string

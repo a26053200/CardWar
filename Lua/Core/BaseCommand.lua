@@ -11,8 +11,8 @@
 ---@field server string
 ---@field fields table<number, string>
 
-local LuaMonoBehaviour = require("Core.LuaMonoBehaviour")
----@class Game.Core.BaseCommand : Core.LuaMonoBehaviour
+local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
+---@class Game.Core.BaseCommand : Betel.LuaMonoBehaviour
 ---@field New fun()
 local BaseCommand = class("Game.Core.BaseCommand ",LuaMonoBehaviour)
 

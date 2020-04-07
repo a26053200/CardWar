@@ -6,9 +6,9 @@
 ---
 
 local AttachCamera = require("Module.Common.Widgets.AttachCamera")
-local Widget = require("Module.Common.Widgets.Widget")
+local Widget = require("Game.Modules.Common.Components.Widget")
 
----@class Module.Common.Widgets.MulitCameraCtrl : Module.Common.Widgets.Widget
+---@class Module.Common.Widgets.MulitCameraCtrl : Game.Modules.Common.Components.Widget
 ---@field New fun(camera:UnityEngine.Camera)
 ---@field attachCamera Module.Common.Widgets.AttachCamera
 ---@field tic BitBenderGames.TouchInputController

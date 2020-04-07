@@ -23,6 +23,7 @@ end
 
 --加载全局定义
 function LuaClient.RequireGlobalDefines()
+    require "Betel.init"
     require "Game.Core.init"
     require "Game.Config.init"
     require "Game.Manager.init"
