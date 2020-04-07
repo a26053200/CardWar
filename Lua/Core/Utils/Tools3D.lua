@@ -7,4 +7,13 @@
 local Tools3D = {}
 
 
+---@param go UnityEngine.GameObject
+---@param componentType table | userdata
+---@param includeInactive boolean
+function Tools3D.GetComponents(go, componentType, includeInactive)
+    includeInactive = includeInactive or true
+    local components = go:GetComponentsInChildren(componentType, includeInactive)
+    return components
+end
+
 return Tools3D

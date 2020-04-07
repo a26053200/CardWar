@@ -4,30 +4,166 @@
 --- DateTime: 2018/6/10 20:56
 ---
 
----UnityEngine
+--- DOTween
+---@class DOTween : DG.Tweening.DOTween
+DOTween = DG.Tweening.DOTween
+DOTween_Enum = {
+    ---@type DG.Tweening.AutoPlay
+    AutoPlay = DG.Tweening.AutoPlay,
+    ---@type DG.Tweening.AxisConstraint
+    AxisConstraint = DG.Tweening.AxisConstraint,
+    ---@type DG.Tweening.Ease
+    Ease = DG.Tweening.Ease,
+    ---@type DG.Tweening.LogBehaviour
+    LogBehaviour = DG.Tweening.LogBehaviour,
+    ---@type DG.Tweening.LoopType
+    LoopType = DG.Tweening.LoopType,
+    ---@type DG.Tweening.PathMode
+    PathMode = DG.Tweening.PathMode,
+    ---@type DG.Tweening.PathType
+    PathType = DG.Tweening.PathType,
+    ---@type DG.Tweening.RotateMode
+    RotateMode = DG.Tweening.RotateMode,
+    ---@type DG.Tweening.ScrambleMode
+    ScrambleMode = DG.Tweening.ScrambleMode,
+    ---@type DG.Tweening.TweenType
+    TweenType = DG.Tweening.TweenType,
+    ---@type DG.Tweening.UpdateType
+    UpdateType = DG.Tweening.UpdateType,
+}
+DOTween.defaultEaseType = DOTween_Enum.Ease.Linear
 
----Framework
-gameMgr = Framework.GameManager.GetGameManager()
-sceneMgr = Framework.GameManager.GetSceneManager()
-netMgr = Framework.GameManager.GetNetworkManager()
-monoMgr = Framework.GameManager.GetMonoBehaviourManager()
-
-ticker = Framework.Ticker.Launch()
-LuaHelper = Framework.LuaHelper
 Hud = Framework.Hud
---- Data Config
-Action          = require("Game.Config.Action")
-AvatarConfig    = require("Game.Config.AvatarConfig") ---@type AvatarConfig
+
+Screen = UnityEngine.Screen
+
+--- Lua Framework
+edp = EventDispatcher.New() --全局事件派发器
+ListViewEvent = require("Game.UI.ListViewEvent")
+BaseList = require("Game.UI.BaseList")
+ListExtend = require("Module.Common.View.ListExtend") ---@type Module.Common.View.ListExtend
+ListItemRenderer = require("Game.UI.ListItemRenderer")
+
+--- Global Events
+WorldEvents = require("Module.World.Events.WorldEvents")
+PointerEvent = require("Game.Events.PointerEvent")
+DragDropEvent = require("Game.Events.DragDropEvent")
+ViewEvents = require("Game.Events.ViewEvents")
+ItemEvent = require("Module.Item.Events.ItemEvent")
+PieceItemEvent = require("Module.World.Items.PieceItemEvent")
+AdventureEvent = require("Module.AdventureEvent.Events.AdventureEvent")
+
+--- FastBehavior
+--StateAction = FastBehavior.StateAction
+StateMachine = FastBehavior.StateMachine
+--StateNode = FastBehavior.StateNode
+FastLuaBehavior = FastBehavior.FastLuaBehavior
+smMgr = FastBehavior.StateMachineManager.GetInstance() --状态机
+
+---Utils
+StringUtil = require("Game.Core.Utils.StringUtil")
+ObjectUtil = require("Game.Core.Utils.ObjectUtil")
+Tools3D = require("Game.Core.Utils.Tools3D")
+UITools = require("Game.Core.Utils.UITools")
+Timer = require("Game.Core.Utils.Timer")
+TimeUtil = require("Game.Core.Utils.TimeUtil")
+BattleUtils = require("Module.Battle.Utils.BattleUtils")
+
+--- UI Utils
+Alert = require("Module.Common.View.Alert")
+Tips = require("Module.Common.View.Tips")
+NetModal = require("Module.Common.View.NetModal")
+ImageHelper = require("Module.Common.View.ImageHelper")
+
+--- Fly Show
+FlyText = require("Module.Common.FlyShow.FlyText")
+
+---Old Framework
+View = require("Game.Core.View")
 
 
 ---Game
-Tools3D = require("Game.Core.Utils.Tools3D")
-UITools = require("Game.Core.Utils.UITools")
-AStarTools = require("Game.Core.Utils.AStarTools")
-Alert = require("Game.Modules.Common.View.Alert")
-Tips = require("Game.Modules.Common.View.Tips")
-NetModal = require("Game.Modules.Common.View.NetModal")
-ImageHelper = require("Game.Modules.Common.View.ImageHelper")
-BattleEvent  = require("Game.Modules.Battle.Events.BattleEvent")
+World = require("Module.World.World")
+-- [ Constants ]
+FRAME_TIME = 1 / Application.targetFrameRate
 
-World = require("Game.Modules.World.World")
+-- [ Config ]
+Config = require("Data.Config")
+GameConst = require("Data.GameConst")
+StrategyConsts = require("Module.World.Behaviors.Strategy.StrategyConsts")
+BehaviorUtils = require("Module.World.Behaviors.BehaviorUtils")
+Language = require("Data.Languages." .. Config.language)
+
+SkillConfig         = require("Data.SkillConfig")
+AvatarConfig        = require("Data.AvatarConfig")
+EffectConfig        = require("Data.EffectConfig")
+AvatarUIConfig      = require("Data.AvatarUIConfig")
+PlotConfig          = require("Data.PlotConfig")
+BattleConfig        = require("Data.BattleConfig")
+GridBattleConfig    = require("Data.GridBattleConfig")
+CheckPointConfig    = require("Data.CheckPointConfig")
+CameraShakeConfig   = require("Data.CameraShakeConfig")
+BufferConfig        = require("Data.BufferConfig")
+PerformanceConfig   = require("Data.PerformanceConfig")
+StateConfig         = require("Data.StateConfig")
+CardConfig          = require("Data.CardConfig")
+ItemConfig          = require("Data.ItemConfig")
+AdventureEventConfig = require("Data.AdventureEventConfig")
+AdventureEventAfterEventConfig = require("Data.AdventureEventAfterEventConfig")
+PathConfig        = require("Data.PathConfig")
+StageConfig        = require("Data.StageConfig")
+ChapterConfig        = require("Data.ChapterConfig")
+
+-- [ Common ]
+--Stage.loadingSceneClass = require("Module.Loading.View.LoadingScene")
+Convert = require("Module.Common.Convert")
+Layers = require("Module.Common.Layers")
+World = require("Module.World.World")
+Convert = require("Module.Common.Convert")
+Math3D = require("Module.Common.Math3D")
+File = require("Module.Common.File")
+Tool = require("Module.Common.Tool")
+TimeConvert = require("Module.Common.TimeConvert")
+--Alert = require("Module.Common.Alert")
+PoolFactory = require("Module.Common.Pools.PoolFactory")
+BezierUtils = require("Module.Common.BezierUtils")
+Plot = require("Module.Plot.Scripts.Plot")
+GuideLine = require("Module.Common.Effect.GuideLine")
+-- [3rd]
+--SpineUtils = require("Module.Common.Spine.SpineUtils")
+AStarUtils = require("Module.Common.AStarUtils")
+MoveUtils = require("Module.Common.MoveUtils")
+GridUtils = require("Module.Common.GridUtils")
+Live2D = require("live2d.Live2D")
+Live2D.init();
+
+Icon = require("Module.Common.Icon.Icon")
+Star = require("Module.Common.Star.Star")
+WorldIcon = require("Module.Common.Icon.WorldIcon")
+
+-- [声音系统]
+SoundPlayer = require("Module.Common.Sound.SoundPlayer").New()
+SoundConfig = require("Data.SoundConfig")
+SoundPlayer:Init()
+--
+
+-- [对象池]
+PoolVoProxy     = require("Module.Common.Pools.PoolVoProxy")
+HeroVoPool      = PoolVoProxy.New("Module.World.Vo.HeroVo")
+MonsterVoPool   = PoolVoProxy.New("Module.World.Vo.MonsterVo")
+SkillVoPool     = PoolVoProxy.New("Module.World.Vo.SkillVo")
+AttributePool    = PoolVoProxy.New("Module.World.Vo.Attribute")
+--PerformancePlayer = require("Module.World.Performances.PerformancePlayer")
+--
+
+-- --------------- [ 点击时，播放特效 ] --------------- --
+local touchEffectPath = "Effect/Prefabs/TapEffect.prefab"
+---@param event TouchEvent
+--local function StageTouchPlayEffect(event)
+--    local go = PrefabPool.Get(touchEffectPath, Constants.LAYER_TOP)
+--    go.transform.localPosition = LuaHelper.ScreenToCanvasPoint(event.position)
+--    DelayedCall(1.1, PrefabPool.Recycle, nil, go, touchEffectPath)
+--end
+--AddEventListener(Stage, TouchEvent.BEGIN, StageTouchPlayEffect)
+
+--

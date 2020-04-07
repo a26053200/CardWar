@@ -5,8 +5,8 @@
 ---
 
 
-local LuaObject = require('Betel.LuaObject')
----@class Game.Core.BaseVo : Betel.LuaObject
+local LuaObject = require('Core.LuaObject')
+---@class Game.Core.BaseVo : Core.LuaObject
 local BaseVo = class("BaseVo",LuaObject)
 
 function BaseVo:Ctor()
@@ -24,7 +24,7 @@ function BaseVo:ToString()
     for k,v in pairs(self) do
         if v ~= nil then
             if type(v) ~= "function" and
-                    k ~= "__cname" and
+                    k ~= "__classname" and
                     k ~= "__class" and
                     k ~= "__index" and
                     k ~= "super" then

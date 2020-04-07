@@ -4,8 +4,8 @@
 --- DateTime: 2018/6/19 18:18
 ---
 
-local LuaObject = require('Betel.LuaObject')
----@class Game.Core.Ioc.BaseService : Betel.LuaObject
+local LuaObject = require('Core.LuaObject')
+---@class Game.Core.Ioc.BaseService : Core.LuaObject
 local BaseService = class("BaseService", LuaObject)
 
 function BaseService:Ctor()
@@ -15,24 +15,33 @@ end
 --Json请求
 ---@param action table
 ---@param param table
----@param callback func
----@param failCallback func
+---@param callback fun()
+---@param failCallback fun()
 function BaseService:JsonRequest(action, param, callback, failCallback)
-    nmgr:Request(action, param, function(response)
-        if response.state == 0 then
-            if callback then
-                callback(response.data)
-            end
-        else
-            if response.data.msg then
-                logError(response.data.msg)
-                Tips.Show(response.data.msg)
-            end
-            if failCallback then
-                failCallback(response)
-            end
-        end
-    end)
+    --nmgr:Request(action, param, function(response)
+    --    if response.state == 0 then
+    --        if callback then
+    --            callback(response.data)
+    --        end
+    --    else
+    --        if response.data.msg then
+    --            logError(response.data.msg)
+    --            Tips.Show(response.data.msg)
+    --        end
+    --        if failCallback then
+    --            failCallback(response)
+    --        end
+    --    end
+    --end)
+end
+
+--Json请求
+---@param protocol ProtocolInfo
+---@param param table<number, any>
+---@param callback Handler
+---@param failCallback Handler
+function BaseService:Request(protocol, param, callback, failCallback)
+    nmgr:SendRequest(protocol, param, callback, failCallback)
 end
 
 return BaseService

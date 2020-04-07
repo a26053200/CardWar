@@ -5,6 +5,10 @@
 ---
 
 vmgr = require("Game.Manager.ViewManager").New()
-nmgr = require("Betel.Net.NetworkManager").New()
+nmgr = require("Core.Net.NetworkManager").New()
+preloading = require("Game.Manager.PreloadingManager").New()
+
+P = nmgr.CreateProtocol --创建协议
+Action = require( "Game.Config.Action")
 
 log("All managers has all require")

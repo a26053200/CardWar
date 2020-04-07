@@ -5,8 +5,17 @@
 ---
 
 
-require "Game.Core.Define"
+---Framework
+gameMgr = Framework.GameManager.GetGameManager()
+sceneMgr = Framework.GameManager.GetSceneManager()
+netMgr = Framework.GameManager.GetNetworkManager()
+monoMgr = Framework.GameManager.GetMonoBehaviourManager()
+
+ticker = Framework.Ticker.Launch()
+LuaHelper = Framework.LuaHelper
+
 require "Game.Core.Functions"
+require "Game.Core.Define"
 require "Game.Core.Components"
 require "Game.Core.GlobalConsts"
 

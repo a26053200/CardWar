@@ -5,71 +5,177 @@
 ---
 
 
-local _handler = handler
-local _EventMap = {} ---@type table<string, fun()>
-local Ticker_Sid = 1
+-- 是否在编辑器模式下运行
+function isRunningInEditor()
+    return Application.platform == RuntimePlatform.WindowsEditor or
+            Application.platform == RuntimePlatform.LinuxEditor or
+            Application.platform == RuntimePlatform.OSXEditor;
+end
 
----
+--是否在移动设备下运行
+function isRunningInMobileDevice()
+    return Application.platform == RuntimePlatform.IPhonePlayer or Application.platform == RuntimePlatform.Android;
+end
+
+---@param target UnityEngine.Transform
+---@param parent string | UnityEngine.Transform
+function SetParent(target, parent)
+    -- 传入的 parent 是 图层名称
+    if type(parent) == "string" then
+        parent = vmgr:GetUILayer(parent)
+    end
+    target:SetParent(parent, true)
+    target.localScale = Vector3.one;
+    target.localPosition = Vector3.zero;
+end
+
+
+---=============
+--- 事件函数
+---=============
+
+local getpeer = tolua.getpeer
+--local setpeer = tolua.setpeer
+local _isnull = tolua.isnull
+local _typeof = tolua.typeof
+local unpack = unpack
+
+local _handlerMap = {}
+local _edMap = {}
+--- 获取 target 对应的 EventDispatcher 对象
+---@param target table | UnityEngine.GameObject
+---@return Core.Events.EventDispatcher
+local function GetEventDispatcher(target, remove)
+    local ed
+    -- C# 对象
+    if type(target) == "userdata" then
+        local peer = _edMap[target]
+        --local peer = getpeer(target)
+        if peer == nil then
+            peer = {}
+            _edMap[target] = peer
+            --setpeer(target, peer)
+            --print("new new peer " .. tostring(peer))
+        else
+            --print("old old peer " .. tostring(peer))
+        end
+        ed = peer.__ed
+        if ed == nil then
+            if remove then
+                return nil
+            end
+            ed = EventDispatcher.New()
+            peer.__ed = ed
+        end
+    else
+        ed = target.__ed
+        if ed == nil then
+            ed = EventDispatcher.New()
+            target.__ed = ed
+        end
+    end
+    return ed
+end
+
+---@param target any
 ---@param type string
 ---@param callback fun()
 ---@param caller any
-function AddEventListener(type, callback, caller)
-    if callback == nil or caller == nil then
-        logError("error params! callback or caller can not be nil!")
+function AddEventListener(target, type, callback, caller,...)
+    local handler = GetEventDispatcher(target):AddEventListener(type, callback, caller)
+    if not handler then
         return
     end
-    local list = _EventMap[type]
-    if list == nil then
-        list = {}
-        _EventMap[type] = list
+    local new_args = { ... }
+    local delegate = Delegate.Get(handler, new_args)
+    local execute = delegate.execute
+
+    --local delegate = function(eventData)
+    --    if eventData ~= nil then
+    --        handler:Execute(eventData, unpack(new_args));
+    --    else
+    --        handler:Execute(unpack(new_args));
+    --    end
+    --end
+    _handlerMap[handler] = delegate
+    if type == Event.UPDATE then
+        monoMgr:AddUpdateFun(execute)
+    elseif type == Event.LATE_UPDATE then
+        monoMgr:AddLateUpdateFun(execute)
+    elseif type == Event.FIXED_UPDATE then
+        monoMgr:AddFixedUpdateFun(execute)
+    elseif type == Event.DESTROY then
+        monoMgr:AddDestroyFun(execute)
+    elseif type == PointerEvent.ENTER then
+        LuaHelper.AddObjectPointerEnter(target, execute)
+    elseif type == PointerEvent.EXIT then
+        LuaHelper.AddObjectPointerExit(target, execute)
+    elseif type == PointerEvent.CLICK then
+        LuaHelper.AddObjectClickEvent(target, execute)
+    elseif type == PointerEvent.DOWN then
+        LuaHelper.AddObjectPointerDown(target, execute)
+    elseif type == PointerEvent.Up then
+        LuaHelper.AddObjectPointerUp(target, execute)
+    elseif type == DragDropEvent.BEGIN_DRAG then
+        LuaHelper.AddObjectBeginDrag(target, execute)
+    elseif type == DragDropEvent.DRAG then
+        LuaHelper.AddObjectDrag(target, execute)
+    elseif type == DragDropEvent.END_DRAG then
+        LuaHelper.AddObjectEndDrag(target, execute)
+    end
+end
+
+---@param target any
+---@param type string
+---@param callback fun()
+---@param caller any
+function RemoveEventListener(target, type, callback, caller)
+    local ed = GetEventDispatcher(target, true)
+    if ed == nil then
+        return
+    end
+    local handler = ed:RemoveEventListener(type, callback, caller)
+    if handler then
+        local delegate = _handlerMap[handler]
+        local execute = delegate.execute
+        if type == Event.UPDATE then
+            monoMgr:RemoveUpdateFun(execute)
+        elseif type == Event.LATE_UPDATE then
+            monoMgr:RemoveLateUpdateFun(execute)
+        elseif type == Event.FIXED_UPDATE then
+            monoMgr:RemoveFixedUpdateFun(execute)
+        elseif type == Event.DESTROY then
+            monoMgr:RemoveDestroyFun(execute)
+        elseif type == PointerEvent.CLICK
+            or type == PointerEvent.DOWN
+            or type == PointerEvent.ENTER
+            or type == PointerEvent.EXIT
+            or type == PointerEvent.Up
+            or type == DragDropEvent.BEGIN_DRAG
+            or type == DragDropEvent.DRAG
+            or type == DragDropEvent.END_DRAG then
+            LuaHelper.RemoveObjectEvent(target, execute)
+        end
+        _handlerMap[handler] = nil
+        --handler:Recycl()
+        Delegate.Store(delegate)
     else
-        for i = 1, #list do
-            if tostring(list[i].callback) == tostring(callback) and tostring(list[i].caller) == tostring(caller) then
-            --if list[i].callback == callback and list[i].caller == caller then
-                --logError("re add EventListener!")
-                return
-            end
-        end
-    end
-    local handler = Handler.New(callback, caller)
-    table.insert(list, handler)
-    if type == Event.Update then
-        monoMgr:AddUpdateFun(handler.Delegate)
-    elseif type == Event.LateUpdate then
-        monoMgr:AddLateUpdateFun(handler.Delegate)
-    elseif type == Event.FixedUpdate then
-        monoMgr:AddFixedUpdateFun(handler.Delegate)
+        --logError("Remove nil handler")
     end
 end
 
-function RemoveEventListener(type, callback, caller)
-    if callback == nil then
-        logError("error params! callback or caller can not be nil!")
-        return
+--- 抛出事件
+---@param target table | UnityEngine.GameObject @ 要抛出事件的目标
+---@param eventOrType Core.Events.Event | string @ 事件对象 或 事件类型
+---@param bubbles boolean @ -可选- 是否冒泡 [default: false]
+---@param recycle boolean @ -可选- 是否自动回收到池 [default: true]
+---@return void
+function DispatchEvent(target, eventOrType, bubbles, recycle)
+    if type(eventOrType) == "string" then
+        eventOrType = Event.New(eventOrType)
     end
-    local list = _EventMap[type]
-    if list == nil then
-        return
-    end
-    local del = {}
-    for i = 1, #list do
-        if tostring(list[i].callback) == tostring(callback) and tostring(list[i].caller) == tostring(caller) then
-        --if list[i].callback == callback and list[i].caller == caller then
-            if type == Event.Update then
-                monoMgr:RemoveUpdateFun(list[i].Delegate)
-            elseif type == Event.LateUpdate then
-                monoMgr:RemoveLateUpdateFun(list[i].Delegate)
-            elseif type == Event.FixedUpdate then
-                monoMgr:RemoveFixedUpdateFun(list[i].Delegate)
-            end
-            table.insert(del, i)
-        end
-    end
-    for i = 1, #del do
-        table.remove(list,del[i])
-    end
+    GetEventDispatcher(target):DispatchEvent(eventOrType, bubbles, recycle)
 end
-
 
 ---============================
 --- Delay Call
@@ -95,16 +201,19 @@ end
 
 ---@param delay number
 ---@param handler Handler
-function DelayCallback(delay, handler)
-    local id = Ticker_Sid;
-    Ticker_Sid = Ticker_Sid + 1
-    local key = tostring(handler)
-    if ticker:Contain(id) then
+---@return Handler
+function DelayCallback(delay, handler,ignoreTimeScale)
+    ignoreTimeScale = ignoreTimeScale or false
+    if ticker:Contain(handler.id) then
         return
     end
-    ticker:DelayCallback(id,delay,function()
+    --local go
+    --if handler.caller and handler.caller.gameObject then
+    --    go = handler.caller.gameObject
+    --end
+    ticker:DelayCallback(handler.id,delay,function()
         handler:Execute()
-    end)
+    end,ignoreTimeScale)
     --handler.startTime = Time.time
     --handler.delay = delay
     return handler
@@ -112,8 +221,18 @@ end
 
 ---@param handler Handler
 function CancelDelayCallback(handler)
-    local key = tostring(handler)
-    ticker:CancelDelayCallback(key)
+    ticker:CancelDelayCallback(handler.id)
+end
+
+--- 延迟到下一帧后，执行一次回调
+---@param callback fun() @ 回调函数
+---@param caller any @ -可选- 执行域（self）
+---@param frameCount number @ -可选- 延迟帧数，默认：1帧
+---@return Handler
+function DelayedFrameCall(callback, caller, frameCount, ...)
+    frameCount = frameCount == nil and 1 or frameCount
+    local handler = DelayCallback(frameCount * FRAME_TIME, Handler.New(callback, caller, ...))
+    return handler
 end
 
 delayStart()

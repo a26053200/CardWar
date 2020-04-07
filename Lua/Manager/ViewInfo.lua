@@ -4,13 +4,18 @@
 --- DateTime: 2018/6/29 23:45
 ---
 
----@class Game.Manager.ViewInfo : Betel.LuaObject
-local LuaObject = require("Betel.LuaObject")
-local ViewInfo = class("LuaMonoBehaviour",LuaObject)
+
+local LuaObject = require("Core.LuaObject")
+---@class Game.Manager.ViewInfo : Core.LuaObject
+---@field name string
+---@field prefab string
+---@field module string
+---@field status ViewStatus
+local ViewInfo = class("Game.Manager.ViewInfo",LuaObject)
 
 function ViewInfo:Ctor()
     self.name = ""
-    self.url = ""
+    self.prefab = ""
 end
 
 return ViewInfo

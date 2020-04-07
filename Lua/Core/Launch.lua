@@ -6,4 +6,5 @@
 
 --设置随机种子 每次启动随机数都不一样
 math.randomseed(tostring(os.time()):reverse():sub(1, 6))
+vmgr:Init()
 vmgr:LoadView(ViewConfig.World)

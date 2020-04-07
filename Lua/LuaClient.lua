@@ -4,6 +4,7 @@
 --- DateTime: 2018/6/11 0:11
 ---
 
+Stage = {}
 local LuaClient = {}
 
 
@@ -15,14 +16,13 @@ function LuaClient.Start()
 
     setmetatable(_G,{
         __newindex = function(_, name, value)
-            error("禁止使用全局变量")
+            error("禁止使用全局变量" .. name)
         end
     })
 end
 
 --加载全局定义
 function LuaClient.RequireGlobalDefines()
-    require "Betel.init"
     require "Game.Core.init"
     require "Game.Config.init"
     require "Game.Manager.init"
@@ -40,10 +40,10 @@ end
 --启动测试代码
 function LuaClient.DoTestCo()
     print("Timer" .. Time.time)
-    local prefab = Res.LoadPrefab("Prefabs/UI/Login/LoginWnd.prefab");
+    local prefab = Res.LoadPrefab("Models/Role/Prefabs/Role.prefab");
     local go = GameObject.Instantiate(prefab);
     log("测试日志{0}","Info")
-    logWarn("测试日志{0}","Warn")
+    logWarning("测试日志{0}","Warn")
     logError("测试日志{0}","Error")
 end
 
