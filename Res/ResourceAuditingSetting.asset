@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5470137012e8d314c91f904293bb2e14, type: 3}
   m_Name: ResourceAuditingSetting
   m_EditorClassIdentifier: 
-  Tex_Format_Recommend_IOS: 
-  Tex_Format_Forbid_IOS: 
-  Tex_Format_Recommend_Android: 
-  Tex_Format_Forbid_Android: 
+  Tex_Format_Recommend_IOS: 03000000
+  Tex_Format_Forbid_IOS: 010000000300000004000000
+  Tex_Format_Recommend_Android: 01000000
+  Tex_Format_Forbid_Android: 020000000300000004000000
   Tex_Max_Size: 2048
   Tex_Recommend_Size: 1024
   Shader_Forbid: Standard
