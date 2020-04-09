@@ -4,10 +4,10 @@
 --- DateTime: 2019/5/18 23:06
 ---
 
-local BaseScene = require('Game.Modules.World.Scenes.BaseScene')
+local SubScene = require('Game.Modules.World.Scenes.Core.SubScene')
 
----@class Game.Modules.World.Scenes.BattleScene : Game.Modules.World.Scenes.BaseScene
-local BattleScene = class("Game.Modules.World.Scenes.BattleScene",BaseScene)
+---@class Game.Modules.World.Scenes.BattleScene : Game.Modules.World.Scenes.Core.SubScene
+local BattleScene = class("Game.Modules.World.Scenes.BattleScene",SubScene)
 
 ---@param sceneInfo SceneInfo
 ---@param unityScene UnityEngine.SceneManagement.Scene
@@ -20,51 +20,6 @@ function BattleScene:OnEnterScene()
         World.battleSubScene = subScene
         vmgr:LoadView(ViewConfig.Battle)
     end)
-
-    --[[
-    self.bbObj = GameObject.New("TestFastBehavior")
-    local sm = self.bbObj:AddComponent(typeof(FastBehavior.StateMachine))
-    local bb = FastLuaBehavior.New(sm) ---@type FastBehavior.FastLuaBehavior
-    self.bb = bb
-    bb:AppendState(function()
-        self:StartCoroutine(function()
-            coroutine.wait(1)
-            print("TestFastBehavior start")
-            bb:NextState()
-        end)
-
-    end, "test")
-    bb:AppendInterval(2)
-    bb:AppendState(function()
-        self:StartCoroutine(function()
-            coroutine.wait(1)
-            print("TestFastBehavior end")
-            bb:NextState()
-        end)
-        bb:NextState()
-    end, "test")
-
-    bb:AppendBehavior(self:SubBB())
-    bb:Run()
-    --]]
-    --vmgr:LoadView(ViewConfig.NewbieWelcome)
-end
-
----@return FastBehavior.FastLuaBehavior
-function BattleScene:SubBB()
-    local sm = self.bbObj:AddComponent(typeof(FastBehavior.StateMachine))
-    local bb = FastLuaBehavior.New(sm) ---@type FastBehavior.FastLuaBehavior
-
-    bb:AppendState(function()
-        self:StartCoroutine(function()
-            coroutine.wait(1)
-            print("Sub BaseBehavior")
-            bb:Stop()
-            self.bb:NextState()
-        end)
-    end, "Sub BaseBehavior")
-
-    return bb
 end
 
 function BattleScene:OnExitScene()

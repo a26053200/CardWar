@@ -29,7 +29,7 @@ function LoginMdr:OnInit()
     --local img = self.gameObject:GetImage("Image")
     --img.sprite = Res.LoadSprite("Atlas/HeadIcon/1.jpg")
     
-    DelayCallback(0.5,Handler.New(self.On_Click_BtnLogin, self))
+    --DelayCallback(0.5,Handler.New(self.On_Click_BtnLogin, self))
 end
 
 function LoginMdr:fetchInput()

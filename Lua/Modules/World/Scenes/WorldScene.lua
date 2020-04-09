@@ -4,20 +4,23 @@
 --- DateTime: 2020-04-04 23:34
 ---
 
-local BaseScene = require('Game.Modules.World.Scenes.BaseScene')
----@class Game.Modules.World.Scenes.WorldScene : Game.Modules.World.Scenes.BaseScene
-local WorldScene = class("LobbyScene",BaseScene)
+local MainScene = require('Game.Modules.World.Scenes.Core.MainScene')
+---@class Game.Modules.World.Scenes.WorldScene : Game.Modules.World.Scenes.Core.MainScene
+local WorldScene = class("LobbyScene",MainScene)
 
-function WorldScene:Ctor()
-    BaseScene.Ctor(self)
+---@param sceneInfo SceneInfo
+---@param unityScene UnityEngine.SceneManagement.Scene
+function WorldScene:Ctor(sceneInfo, unityScene)
+    WorldScene.super.Ctor(self, sceneInfo, unityScene)
 end
 
 function WorldScene:OnEnterScene()
     --vmgr:LoadView(ViewConfig.NewbieWelcome)
-
+    self:EnterSubScene("Lobby")
 end
 
 function WorldScene:OnExitScene()
+
 end
 
 return WorldScene

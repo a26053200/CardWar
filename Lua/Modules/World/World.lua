@@ -7,7 +7,7 @@
 
 ---@class World
 ---@field mdr Game.Modules.World.View.WorldMdr
----@field battleSubScene Game.Modules.World.Scenes.SubScene
+---@field battleSubScene Game.Modules.World.Scenes.Core.SubScene
 ---@field battleBehavior Game.Modules.Battle.Behaviors.BattleBehavior
 ---@field points table<number, UnityEngine.Vector3>
 ---@field grid AStar.Grid

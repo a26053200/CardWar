@@ -4,12 +4,14 @@
 --- DateTime: 2018/8/14 22:07
 ---
 
-local BaseScene = require('Game.Modules.World.Scenes.BaseScene')
----@class Game.Modules.World.Scenes.LoadingScene : Game.Modules.World.Scenes.BaseScene
-local LoadingScene = class("LoadingScene",BaseScene)
+local MainScene = require('Game.Modules.World.Scenes.Core.MainScene')
+---@class Game.Modules.World.Scenes.LoadingScene : Game.Modules.World.Scenes.Core.MainScene
+local LoadingScene = class("Game.Modules.World.Scenes.LoadingScene",MainScene)
 
-function LoadingScene:Ctor()
-    BaseScene.Ctor(self)
+---@param sceneInfo SceneInfo
+---@param unityScene UnityEngine.SceneManagement.Scene
+function LoadingScene:Ctor(sceneInfo, unityScene)
+    LoadingScene.super.Ctor(self, sceneInfo, unityScene)
 end
 
 function LoadingScene:OnEnterScene()

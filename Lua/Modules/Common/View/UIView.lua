@@ -8,7 +8,7 @@ local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 ---@class Game.Modules.Common.View.UIView : Betel.LuaMonoBehaviour
 ---@field public New function<prefab:string | UnityEngine.GameObject, parent:UnityEngine.Transform>
 ---@field public gameObject UnityEngine.GameObject
----@field public scene Game.Modules.World.Scenes.BaseScene
+---@field public scene Game.Modules.World.Scenes.Core.BaseScene
 local UIView = class("UIView",LuaMonoBehaviour)
 
 function UIView:Ctor(prefab,parent)

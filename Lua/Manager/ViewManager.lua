@@ -9,7 +9,7 @@ local LuaMonoBehaviour = require('Betel.LuaMonoBehaviour')
 local IocBootstrap = require("Game.Core.Ioc.IocBootstrap")
 ---@class Game.Manager.ViewManager : Betel.LuaMonoBehaviour
 ---@field ioc Game.Core.Ioc.IocBootstrap
----@field scene Game.Modules.World.Scenes.BaseScene
+---@field scene Game.Modules.World.Scenes.Core.BaseScene
 ---@field viewCache table<string, Game.Core.Ioc.BaseMediator>
 ---@field viewList List | table<number, Game.Core.Ioc.BaseMediator>
 ---@field uiLayers table<string, UnityEngine.Transform>
@@ -49,7 +49,7 @@ function ViewManager:GetUILayer(layerName)
     end
     return layer.transform
 end
----@param scene Game.Modules.World.Scenes.BaseScene
+---@param scene Game.Modules.World.Scenes.Core.BaseScene
 function ViewManager:SetScene(scene)
     self.scene = scene
 end

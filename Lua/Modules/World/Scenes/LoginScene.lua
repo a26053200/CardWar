@@ -4,12 +4,14 @@
 --- DateTime: 2018/6/30 0:02
 ---
 
-local BaseScene = require('Game.Modules.World.Scenes.BaseScene')
----@class Game.Modules.World.Scenes.LoginScene : Game.Modules.World.Scenes.BaseScene
-local LoginScene = class("LoginScene",BaseScene)
+local MainScene = require('Game.Modules.World.Scenes.Core.MainScene')
+---@class Game.Modules.World.Scenes.LoginScene : Game.Modules.World.Scenes.Core.MainScene
+local LoginScene = class("LoginScene",MainScene)
 
-function LoginScene:Ctor()
-    BaseScene.Ctor(self)
+---@param sceneInfo SceneInfo
+---@param unityScene UnityEngine.SceneManagement.Scene
+function LoginScene:Ctor(sceneInfo, unityScene)
+    LoginScene.super.Ctor(self, sceneInfo, unityScene)
 end
 
 function LoginScene:OnEnterScene()

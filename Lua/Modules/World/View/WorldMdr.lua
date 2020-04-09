@@ -6,7 +6,7 @@
 
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.World.View.WorldMdr : Game.Core.Ioc.BaseMediator
----@field currScene Game.Modules.World.Scenes.BaseScene
+---@field currScene Game.Modules.World.Scenes.Core.BaseScene
 ---@field currLevelName string
 local WorldMdr = class("WorldMdr",BaseMediator)
 
@@ -78,14 +78,14 @@ end
 
 function WorldMdr:LoadLevel(levelName, sceneInfo, callback)
     sceneMgr:LoadSceneAsync(levelName, function (unityScene)
-        local sceneType = require(string.format("Game.Modules.World.Scenes.%sScene",sceneInfo.sceneName,sceneInfo.sceneName))
+        local sceneType = require(string.format("Game.Modules.World.Scenes.%sScene", sceneInfo.sceneName))
         if sceneType == nil then
-            logError("can not find scene "..sceneInfo.sceneName)
+            logError("can not find scene " .. sceneInfo.sceneName)
             logStack()
             return
         end
-        local scene = sceneType.New(sceneInfo, unityScene)
-        log("进入场景:"..sceneInfo.debugName)
+        local scene = sceneType.New(sceneInfo, unityScene)---@type Game.Modules.World.Scenes.Core.MainScene
+        log("Enter Main Scene:"..sceneInfo.debugName)
         self.currScene = scene
         self.currLevelName = levelName
         scene:OnEnterScene()

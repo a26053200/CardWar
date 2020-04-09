@@ -10,7 +10,7 @@
 ---@field level string
 ---@field sceneName string
 ---@field levelUrl string
----@field subLevels table<number,SubSceneInfo>
+---@field subLevels table<string,SubSceneInfo>
 ---@field needLoading boolean
 
 --子场景信息

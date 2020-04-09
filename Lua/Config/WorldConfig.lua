@@ -28,20 +28,17 @@ WorldConfig.World = {
     level = "World",
     sceneName = "World",
     levelUrl = "Scenes/World.unity",
-    needLoading = true
-}
-WorldConfig.Battle = {
-    debugName = "Battle",
-    level = "Battle",
-    sceneName = "Battle",
-    levelUrl = "Scenes/Battle.unity",
     needLoading = true,
     subLevels = {
-      [1] =
-      {
-          level = "Stage1",
-          levelUrl = "Scenes/Stage1.unity",
-      },
+        Lobby =
+        {
+            level = "Lobby",
+            levelUrl = "Scenes/Lobby.unity",
+        },
+        pve_research_1_UH =
+          {
+              level = "pve_research_1_UH",
+              levelUrl = "Scenes/pve_research_1_UH.unity",
+          },
     },
-    needLoading = true
 }

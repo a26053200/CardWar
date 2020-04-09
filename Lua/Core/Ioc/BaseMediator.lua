@@ -10,7 +10,7 @@ local LuaMonoBehaviour = require('Betel.LuaMonoBehaviour')
 ---@field gameObject UnityEngine.GameObject
 ---@field layer UILayer 该模块所在UI层级
 ---@field rectTransform UnityEngine.RectTransform
----@field scene Game.Modules.World.Scenes.BaseScene
+---@field scene Game.Modules.World.Scenes.Core.BaseScene
 ---@field uiCanvas UnityEngine.Canvas
 ---@field uiCamera UnityEngine.Camera
 ---@field isEnableMonoBehaviour boolean 是否启用Unity MonoBehaviour

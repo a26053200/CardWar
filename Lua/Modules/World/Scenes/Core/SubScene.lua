@@ -6,11 +6,11 @@
 
 local LuaMonoBehaviour = require('Betel.LuaMonoBehaviour')
 
----@class Game.Modules.World.Scenes.SubScene : Betel.LuaMonoBehaviour
+---@class Game.Modules.World.Scenes.Core.SubScene : Betel.LuaMonoBehaviour
 ---@field New fun(subSceneInfo:SubSceneInfo, unityScene:UnityEngine.SceneManagement.Scene)
 ---@field unityScene UnityEngine.SceneManagement.Scene
 ---@field subSceneInfo SubSceneInfo
-local SubScene = class("Game.Modules.World.Scenes.SubScene",LuaMonoBehaviour)
+local SubScene = class("Game.Modules.World.Scenes.Core.SubScene",LuaMonoBehaviour)
 
 ---@param subSceneInfo SubSceneInfo
 ---@param unityScene UnityEngine.SceneManagement.Scene
