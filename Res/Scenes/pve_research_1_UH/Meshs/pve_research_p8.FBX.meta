@@ -1,0 +1,138 @@
+fileFormatVersion: 2
+guid: eb7ce539401daf04f9a90e2a41ce18b8
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: pve_research_p8_ground01
+    100004: pve_research_p8_machines_03_01
+    100006: pve_research_p8_machines_03_02
+    100008: pve_research_p8_roof
+    100010: pve_research_p8_wall
+    100012: pve_research_ground_01
+    100014: pve_research_machines_01
+    100016: pve_research_tubo
+    100018: pve_research_tubo 1
+    100020: pve_research_wall
+    100022: pve_research_door
+    100024: pve_research_machines_02
+    100026: pve_research_machines_03
+    100028: pve_research_machines_03 1
+    100030: pve_research_machines_03 2
+    400000: //RootNode
+    400002: pve_research_p8_ground01
+    400004: pve_research_p8_machines_03_01
+    400006: pve_research_p8_machines_03_02
+    400008: pve_research_p8_roof
+    400010: pve_research_p8_wall
+    400012: pve_research_ground_01
+    400014: pve_research_machines_01
+    400016: pve_research_tubo
+    400018: pve_research_tubo 1
+    400020: pve_research_wall
+    400022: pve_research_door
+    400024: pve_research_machines_02
+    400026: pve_research_machines_03
+    400028: pve_research_machines_03 1
+    400030: pve_research_machines_03 2
+    2300000: pve_research_p8_ground01
+    2300002: pve_research_p8_machines_03_01
+    2300004: pve_research_p8_machines_03_02
+    2300006: pve_research_p8_roof
+    2300008: pve_research_p8_wall
+    2300010: pve_research_ground_01
+    2300012: pve_research_machines_01
+    2300014: pve_research_tubo
+    2300016: pve_research_tubo 1
+    2300018: pve_research_wall
+    2300020: pve_research_door
+    2300022: pve_research_machines_02
+    2300024: pve_research_machines_03
+    2300026: pve_research_machines_03 1
+    2300028: pve_research_machines_03 2
+    3300000: pve_research_p8_ground01
+    3300002: pve_research_p8_machines_03_01
+    3300004: pve_research_p8_machines_03_02
+    3300006: pve_research_p8_roof
+    3300008: pve_research_p8_wall
+    3300010: pve_research_ground_01
+    3300012: pve_research_machines_01
+    3300014: pve_research_tubo
+    3300016: pve_research_tubo 1
+    3300018: pve_research_wall
+    3300020: pve_research_door
+    3300022: pve_research_machines_02
+    3300024: pve_research_machines_03
+    3300026: pve_research_machines_03 1
+    3300028: pve_research_machines_03 2
+    4300000: pve_research_p8_machines_03_01
+    4300002: pve_research_p8_wall
+    4300004: pve_research_p8_ground01
+    4300006: pve_research_p8_roof
+    4300008: pve_research_p8_machines_03_02
+    4300010: pve_research_machines_01
+    4300012: pve_research_wall
+    4300014: pve_research_ground_01
+    4300016: pve_research_tubo
+    4300018: pve_research_tubo
+    4300020: pve_research_machines_03
+    4300022: pve_research_door
+    4300024: pve_research_machines_02
+    4300026: pve_research_machines_03
+    4300028: pve_research_machines_03
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 

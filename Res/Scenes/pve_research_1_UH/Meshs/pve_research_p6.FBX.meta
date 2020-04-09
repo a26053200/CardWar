@@ -1,0 +1,203 @@
+fileFormatVersion: 2
+guid: 83d8a573fa99dd641afdd2a256126a51
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: pve_research_p6_ground01
+    100004: pve_research_p6_machines_01
+    100006: pve_research_p6_machines_02
+    100008: pve_research_p6_machines_03
+    100010: pve_research_p6_machines_04
+    100012: pve_research_p6_machines_05
+    100014: pve_research_p6_machines_06
+    100016: pve_research_p6_roof
+    100018: pve_research_p6_wall
+    100020: pve_research_door
+    100022: pve_research_ground_01
+    100024: pve_research_machines_01
+    100026: pve_research_machines_02
+    100028: pve_research_machines_02 1
+    100030: pve_research_machines_03
+    100032: pve_research_machines_03 1
+    100034: pve_research_tubo
+    100036: pve_research_wall
+    100038: pve_research_machines_03 2
+    100040: pve_research_p7_ground01
+    100042: pve_research_p7_machines_02
+    100044: pve_research_p7_machines_03
+    100046: pve_research_p7_machines_04
+    100048: pve_research_p7_machines_05
+    100050: pve_research_p7_machines_07
+    100052: pve_research_p7_machines_08
+    100054: pve_research_p7_roof
+    100056: pve_research_p7_wall
+    400000: //RootNode
+    400002: pve_research_p6_ground01
+    400004: pve_research_p6_machines_01
+    400006: pve_research_p6_machines_02
+    400008: pve_research_p6_machines_03
+    400010: pve_research_p6_machines_04
+    400012: pve_research_p6_machines_05
+    400014: pve_research_p6_machines_06
+    400016: pve_research_p6_roof
+    400018: pve_research_p6_wall
+    400020: pve_research_door
+    400022: pve_research_ground_01
+    400024: pve_research_machines_01
+    400026: pve_research_machines_02
+    400028: pve_research_machines_02 1
+    400030: pve_research_machines_03
+    400032: pve_research_machines_03 1
+    400034: pve_research_tubo
+    400036: pve_research_wall
+    400038: pve_research_machines_03 2
+    400040: pve_research_p7_ground01
+    400042: pve_research_p7_machines_02
+    400044: pve_research_p7_machines_03
+    400046: pve_research_p7_machines_04
+    400048: pve_research_p7_machines_05
+    400050: pve_research_p7_machines_07
+    400052: pve_research_p7_machines_08
+    400054: pve_research_p7_roof
+    400056: pve_research_p7_wall
+    2300000: pve_research_p6_ground01
+    2300002: pve_research_p6_machines_01
+    2300004: pve_research_p6_machines_02
+    2300006: pve_research_p6_machines_03
+    2300008: pve_research_p6_machines_04
+    2300010: pve_research_p6_machines_05
+    2300012: pve_research_p6_machines_06
+    2300014: pve_research_p6_roof
+    2300016: pve_research_p6_wall
+    2300018: pve_research_door
+    2300020: pve_research_ground_01
+    2300022: pve_research_machines_01
+    2300024: pve_research_machines_02
+    2300026: pve_research_machines_02 1
+    2300028: pve_research_machines_03
+    2300030: pve_research_machines_03 1
+    2300032: pve_research_tubo
+    2300034: pve_research_wall
+    2300036: pve_research_machines_03 2
+    2300038: pve_research_p7_ground01
+    2300040: pve_research_p7_machines_02
+    2300042: pve_research_p7_machines_03
+    2300044: pve_research_p7_machines_04
+    2300046: pve_research_p7_machines_05
+    2300048: pve_research_p7_machines_07
+    2300050: pve_research_p7_machines_08
+    2300052: pve_research_p7_roof
+    2300054: pve_research_p7_wall
+    3300000: pve_research_p6_ground01
+    3300002: pve_research_p6_machines_01
+    3300004: pve_research_p6_machines_02
+    3300006: pve_research_p6_machines_03
+    3300008: pve_research_p6_machines_04
+    3300010: pve_research_p6_machines_05
+    3300012: pve_research_p6_machines_06
+    3300014: pve_research_p6_roof
+    3300016: pve_research_p6_wall
+    3300018: pve_research_door
+    3300020: pve_research_ground_01
+    3300022: pve_research_machines_01
+    3300024: pve_research_machines_02
+    3300026: pve_research_machines_02 1
+    3300028: pve_research_machines_03
+    3300030: pve_research_machines_03 1
+    3300032: pve_research_tubo
+    3300034: pve_research_wall
+    3300036: pve_research_machines_03 2
+    3300038: pve_research_p7_ground01
+    3300040: pve_research_p7_machines_02
+    3300042: pve_research_p7_machines_03
+    3300044: pve_research_p7_machines_04
+    3300046: pve_research_p7_machines_05
+    3300048: pve_research_p7_machines_07
+    3300050: pve_research_p7_machines_08
+    3300052: pve_research_p7_roof
+    3300054: pve_research_p7_wall
+    4300000: pve_research_p6_machines_06
+    4300002: pve_research_p6_machines_05
+    4300004: pve_research_p6_machines_04
+    4300006: pve_research_p6_machines_03
+    4300008: pve_research_p6_machines_02
+    4300010: pve_research_p6_machines_01
+    4300012: pve_research_p6_ground01
+    4300014: pve_research_p6_wall
+    4300016: pve_research_p6_roof
+    4300018: pve_research_machines_03
+    4300020: pve_research_door
+    4300022: pve_research_machines_02
+    4300024: pve_research_machines_02
+    4300026: pve_research_machines_03
+    4300028: pve_research_machines_01
+    4300030: pve_research_ground_01
+    4300032: pve_research_wall
+    4300034: pve_research_tubo
+    4300036: pve_research_machines_03
+    4300038: pve_research_p7_machines_08
+    4300040: pve_research_p7_machines_07
+    4300042: pve_research_p7_machines_05
+    4300044: pve_research_p7_machines_04
+    4300046: pve_research_p7_machines_03
+    4300048: pve_research_p7_machines_02
+    4300050: pve_research_p7_ground01
+    4300052: pve_research_p7_wall
+    4300054: pve_research_p7_roof
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 

@@ -1,0 +1,164 @@
+fileFormatVersion: 2
+guid: f1a34059e9ae23946870c725f0097fc3
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: ZZ_Head
+    100004: ZZ_L_Ear
+    100006: ZZ_LB_Calf
+    100008: ZZ_LB_Foot
+    100010: ZZ_LB_Thigh
+    100012: ZZ_LF_Calf
+    100014: ZZ_LF_Foot
+    100016: ZZ_LF_Thigh
+    100018: ZZ_Pelvis
+    100020: ZZ_R_Ear
+    100022: ZZ_RB_Calf
+    100024: ZZ_RB_Foot
+    100026: ZZ_RB_Thigh
+    100028: ZZ_RF_Calf
+    100030: ZZ_RF_Foot
+    100032: ZZ_RF_Thigh
+    100034: Bone_Root
+    100036: ZZ_01_Root
+    400000: //RootNode
+    400002: ZZ_Head
+    400004: ZZ_L_Ear
+    400006: ZZ_LB_Calf
+    400008: ZZ_LB_Foot
+    400010: ZZ_LB_Thigh
+    400012: ZZ_LF_Calf
+    400014: ZZ_LF_Foot
+    400016: ZZ_LF_Thigh
+    400018: ZZ_Pelvis
+    400020: ZZ_R_Ear
+    400022: ZZ_RB_Calf
+    400024: ZZ_RB_Foot
+    400026: ZZ_RB_Thigh
+    400028: ZZ_RF_Calf
+    400030: ZZ_RF_Foot
+    400032: ZZ_RF_Thigh
+    400034: Bone_Root
+    400036: ZZ_01_Root
+    7400000: lock-in
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: lock-in
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 56
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bone_Root
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Head
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Head/ZZ_L_Ear
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Head/ZZ_R_Ear
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis/ZZ_LB_Thigh
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis/ZZ_LB_Thigh/ZZ_LB_Calf
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis/ZZ_LB_Thigh/ZZ_LB_Calf/ZZ_LB_Foot
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis/ZZ_LF_Thigh
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis/ZZ_LF_Thigh/ZZ_LF_Calf
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis/ZZ_LF_Thigh/ZZ_LF_Calf/ZZ_LF_Foot
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis/ZZ_RB_Thigh
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis/ZZ_RB_Thigh/ZZ_RB_Calf
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis/ZZ_RB_Thigh/ZZ_RB_Calf/ZZ_RB_Foot
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis/ZZ_RF_Thigh
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis/ZZ_RF_Thigh/ZZ_RF_Calf
+        weight: 1
+      - path: Bone_Root/ZZ_01_Root/ZZ_Pelvis/ZZ_RF_Thigh/ZZ_RF_Calf/ZZ_RF_Foot
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 

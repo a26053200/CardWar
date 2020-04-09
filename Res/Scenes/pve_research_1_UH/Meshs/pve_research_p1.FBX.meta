@@ -1,0 +1,268 @@
+fileFormatVersion: 2
+guid: 764f9ac484ed6264c8a9de3f97e7196d
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: pve_research_p1_ground_01
+    100004: pve_research_p1_ground_02
+    100006: pve_research_p1_lightwall_01
+    100008: pve_research_p1_lightwall_02
+    100010: pve_research_p1_Railing
+    100012: pve_research_p1_railingGlass
+    100014: pve_research_p1_ScecondFloor_01
+    100016: pve_research_p1_ScecondFloor_02
+    100018: pve_research_p1_screen
+    100020: pve_research_p1_wall_01
+    100022: pve_research_p1_wall_02
+    100024: pve_research_p1_wall_03
+    100026: pve_research_p1_wallGlass
+    100028: pve_research_p2_roof
+    100030: pve_research_p1_roof
+    100032: Area_05_Ground_01
+    100034: Area_05_Ground_01 1
+    100036: Area_05_Ground_01 2
+    100038: pve_basement_floor01
+    100040: pve_basement_railing
+    100042: pve_defense_p5_PC
+    100044: pve_gymnasium_area08_glass_01
+    100046: pve_research_elevator
+    100048: pve_research_elevator 1
+    100050: pve_research_elevator 2
+    100052: pve_research_ground_01
+    100054: pve_research_tubo
+    100056: pve_research_wall
+    100058: pvp_01_computer_glass
+    100060: pve_basement_railing_01
+    100062: pvp_01_computer_glass_01
+    100064: Area_05_bigdoor_01
+    100066: pve_research_p7_ground01
+    100068: pve_research_p7_machines_02
+    100070: pve_research_p7_machines_03
+    100072: pve_research_p7_machines_04
+    100074: pve_research_p7_machines_05
+    100076: pve_research_p7_machines_07
+    100078: pve_research_p7_machines_08
+    100080: pve_research_p7_roof
+    100082: pve_research_p7_wall
+    400000: //RootNode
+    400002: pve_research_p1_ground_01
+    400004: pve_research_p1_ground_02
+    400006: pve_research_p1_lightwall_01
+    400008: pve_research_p1_lightwall_02
+    400010: pve_research_p1_Railing
+    400012: pve_research_p1_railingGlass
+    400014: pve_research_p1_ScecondFloor_01
+    400016: pve_research_p1_ScecondFloor_02
+    400018: pve_research_p1_screen
+    400020: pve_research_p1_wall_01
+    400022: pve_research_p1_wall_02
+    400024: pve_research_p1_wall_03
+    400026: pve_research_p1_wallGlass
+    400028: pve_research_p2_roof
+    400030: pve_research_p1_roof
+    400032: Area_05_Ground_01
+    400034: Area_05_Ground_01 1
+    400036: Area_05_Ground_01 2
+    400038: pve_basement_floor01
+    400040: pve_basement_railing
+    400042: pve_defense_p5_PC
+    400044: pve_gymnasium_area08_glass_01
+    400046: pve_research_elevator
+    400048: pve_research_elevator 1
+    400050: pve_research_elevator 2
+    400052: pve_research_ground_01
+    400054: pve_research_tubo
+    400056: pve_research_wall
+    400058: pvp_01_computer_glass
+    400060: pve_basement_railing_01
+    400062: pvp_01_computer_glass_01
+    400064: Area_05_bigdoor_01
+    400066: pve_research_p7_ground01
+    400068: pve_research_p7_machines_02
+    400070: pve_research_p7_machines_03
+    400072: pve_research_p7_machines_04
+    400074: pve_research_p7_machines_05
+    400076: pve_research_p7_machines_07
+    400078: pve_research_p7_machines_08
+    400080: pve_research_p7_roof
+    400082: pve_research_p7_wall
+    2300000: pve_research_p1_ground_01
+    2300002: pve_research_p1_ground_02
+    2300004: pve_research_p1_lightwall_01
+    2300006: pve_research_p1_lightwall_02
+    2300008: pve_research_p1_Railing
+    2300010: pve_research_p1_railingGlass
+    2300012: pve_research_p1_ScecondFloor_01
+    2300014: pve_research_p1_ScecondFloor_02
+    2300016: pve_research_p1_screen
+    2300018: pve_research_p1_wall_01
+    2300020: pve_research_p1_wall_02
+    2300022: pve_research_p1_wall_03
+    2300024: pve_research_p1_wallGlass
+    2300026: pve_research_p2_roof
+    2300028: pve_research_p1_roof
+    2300030: Area_05_Ground_01
+    2300032: Area_05_Ground_01 1
+    2300034: Area_05_Ground_01 2
+    2300036: pve_basement_floor01
+    2300038: pve_basement_railing
+    2300040: pve_defense_p5_PC
+    2300042: pve_gymnasium_area08_glass_01
+    2300044: pve_research_elevator
+    2300046: pve_research_elevator 1
+    2300048: pve_research_elevator 2
+    2300050: pve_research_ground_01
+    2300052: pve_research_tubo
+    2300054: pve_research_wall
+    2300056: pvp_01_computer_glass
+    2300058: pve_basement_railing_01
+    2300060: pvp_01_computer_glass_01
+    2300062: Area_05_bigdoor_01
+    2300064: pve_research_p7_ground01
+    2300066: pve_research_p7_machines_02
+    2300068: pve_research_p7_machines_03
+    2300070: pve_research_p7_machines_04
+    2300072: pve_research_p7_machines_05
+    2300074: pve_research_p7_machines_07
+    2300076: pve_research_p7_machines_08
+    2300078: pve_research_p7_roof
+    2300080: pve_research_p7_wall
+    3300000: pve_research_p1_ground_01
+    3300002: pve_research_p1_ground_02
+    3300004: pve_research_p1_lightwall_01
+    3300006: pve_research_p1_lightwall_02
+    3300008: pve_research_p1_Railing
+    3300010: pve_research_p1_railingGlass
+    3300012: pve_research_p1_ScecondFloor_01
+    3300014: pve_research_p1_ScecondFloor_02
+    3300016: pve_research_p1_screen
+    3300018: pve_research_p1_wall_01
+    3300020: pve_research_p1_wall_02
+    3300022: pve_research_p1_wall_03
+    3300024: pve_research_p1_wallGlass
+    3300026: pve_research_p2_roof
+    3300028: pve_research_p1_roof
+    3300030: Area_05_Ground_01
+    3300032: Area_05_Ground_01 1
+    3300034: Area_05_Ground_01 2
+    3300036: pve_basement_floor01
+    3300038: pve_basement_railing
+    3300040: pve_defense_p5_PC
+    3300042: pve_gymnasium_area08_glass_01
+    3300044: pve_research_elevator
+    3300046: pve_research_elevator 1
+    3300048: pve_research_elevator 2
+    3300050: pve_research_ground_01
+    3300052: pve_research_tubo
+    3300054: pve_research_wall
+    3300056: pvp_01_computer_glass
+    3300058: pve_basement_railing_01
+    3300060: pvp_01_computer_glass_01
+    3300062: Area_05_bigdoor_01
+    3300064: pve_research_p7_ground01
+    3300066: pve_research_p7_machines_02
+    3300068: pve_research_p7_machines_03
+    3300070: pve_research_p7_machines_04
+    3300072: pve_research_p7_machines_05
+    3300074: pve_research_p7_machines_07
+    3300076: pve_research_p7_machines_08
+    3300078: pve_research_p7_roof
+    3300080: pve_research_p7_wall
+    4300000: pve_research_p1_ground_01
+    4300002: pve_research_p1_wallGlass
+    4300004: pve_research_p1_Railing
+    4300006: pve_research_p1_wall_01
+    4300008: pve_research_p1_ScecondFloor_01
+    4300010: pve_research_p1_lightwall_01
+    4300012: pve_research_p1_screen
+    4300014: pve_research_p2_roof
+    4300016: pve_research_p1_railingGlass
+    4300018: pve_research_p1_ScecondFloor_02
+    4300020: pve_research_p1_wall_03
+    4300022: pve_research_p1_wall_02
+    4300024: pve_research_p1_lightwall_02
+    4300026: pve_research_p1_ground_02
+    4300028: pve_research_p1_roof
+    4300030: pve_research_ground_01
+    4300032: pve_gymnasium_area08_glass_01
+    4300034: pve_basement_railing
+    4300036: pve_research_elevator
+    4300038: pve_basement_floor01
+    4300040: Area_05_Ground_01
+    4300042: pve_defense_p5_PC
+    4300044: pve_research_tubo
+    4300046: pvp_01_computer_glass
+    4300048: pve_research_elevator
+    4300050: pve_research_wall
+    4300052: Area_05_Ground_01
+    4300054: pve_research_elevator
+    4300056: Area_05_Ground_01
+    4300058: pve_basement_railing_01
+    4300060: pvp_01_computer_glass_01
+    4300062: Area_05_bigdoor_01
+    4300064: pve_research_p7_machines_08
+    4300066: pve_research_p7_machines_07
+    4300068: pve_research_p7_machines_05
+    4300070: pve_research_p7_machines_04
+    4300072: pve_research_p7_machines_03
+    4300074: pve_research_p7_machines_02
+    4300076: pve_research_p7_ground01
+    4300078: pve_research_p7_wall
+    4300080: pve_research_p7_roof
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 

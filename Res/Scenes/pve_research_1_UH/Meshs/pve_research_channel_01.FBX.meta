@@ -1,0 +1,100 @@
+fileFormatVersion: 2
+guid: c438ff2f6573e2544a63d71170fff587
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: pve_research_channel_01_ground
+    100004: pve_research_channel_01_roof
+    100006: pve_research_channel_01_wall
+    100008: pve_research_ground_01
+    100010: pve_research_p5_wall_01
+    100012: pve_research_p5_wall_01 1
+    100014: pve_chick_channel_01_002
+    400000: //RootNode
+    400002: pve_research_channel_01_ground
+    400004: pve_research_channel_01_roof
+    400006: pve_research_channel_01_wall
+    400008: pve_research_ground_01
+    400010: pve_research_p5_wall_01
+    400012: pve_research_p5_wall_01 1
+    400014: pve_chick_channel_01_002
+    2300000: pve_research_channel_01_ground
+    2300002: pve_research_channel_01_roof
+    2300004: pve_research_channel_01_wall
+    2300006: pve_research_ground_01
+    2300008: pve_research_p5_wall_01
+    2300010: pve_research_p5_wall_01 1
+    2300012: //RootNode
+    2300014: pve_chick_channel_01_002
+    3300000: pve_research_channel_01_ground
+    3300002: pve_research_channel_01_roof
+    3300004: pve_research_channel_01_wall
+    3300006: pve_research_ground_01
+    3300008: pve_research_p5_wall_01
+    3300010: pve_research_p5_wall_01 1
+    3300012: //RootNode
+    3300014: pve_chick_channel_01_002
+    4300000: pve_research_channel_01_roof
+    4300002: pve_research_channel_01_ground
+    4300004: pve_research_channel_01_wall
+    4300006: pve_research_ground_01
+    4300008: pve_research_p5_wall_01
+    4300010: pve_research_p5_wall_01
+    4300012: pve_chick_channel_01_002
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

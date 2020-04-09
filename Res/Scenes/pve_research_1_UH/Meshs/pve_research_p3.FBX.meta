@@ -1,0 +1,248 @@
+fileFormatVersion: 2
+guid: 46e229b645864d44f9c7231714511d4a
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: pve_research_p3_door
+    100004: pve_research_p3_doorFrame
+    100006: pve_research_p3_ground01
+    100008: pve_research_p3_ground02
+    100010: pve_research_p3_ground03
+    100012: pve_research_p3_machines_01_01
+    100014: pve_research_p3_machines_01_02
+    100016: pve_research_p3_machines_01_03
+    100018: pve_research_p3_machines_01_04
+    100020: pve_research_p3_machines_02_01
+    100022: pve_research_p3_machines_02_02
+    100024: pve_research_p3_machines_03
+    100026: pve_research_p3_machines_04
+    100028: pve_research_p3_machines_05
+    100030: pve_research_p3_machines_06
+    100032: pve_research_p3_roof
+    100034: pve_research_p3_wall
+    100036: pve_research_p3_doorFrameC
+    100038: pve_gymnasium_area08_glass_01
+    100040: pve_gymnasium_area08_glass_01 1
+    100042: pve_gymnasium_area08_props_01
+    100044: pve_research_door
+    100046: pve_research_door 1
+    100048: pve_research_door 2
+    100050: pve_research_door 3
+    100052: pve_research_ground_01
+    100054: pve_research_ground_02
+    100056: pve_research_machines_01
+    100058: pve_research_machines_01 1
+    100060: pve_research_machines_01 2
+    100062: pve_research_machines_01 3
+    100064: pve_research_machines_02
+    100066: pve_research_tubo
+    100068: pve_research_tubo 1
+    100070: pve_research_tubo 2
+    100072: pve_research_wall
+    100074: ______001
+    400000: //RootNode
+    400002: pve_research_p3_door
+    400004: pve_research_p3_doorFrame
+    400006: pve_research_p3_ground01
+    400008: pve_research_p3_ground02
+    400010: pve_research_p3_ground03
+    400012: pve_research_p3_machines_01_01
+    400014: pve_research_p3_machines_01_02
+    400016: pve_research_p3_machines_01_03
+    400018: pve_research_p3_machines_01_04
+    400020: pve_research_p3_machines_02_01
+    400022: pve_research_p3_machines_02_02
+    400024: pve_research_p3_machines_03
+    400026: pve_research_p3_machines_04
+    400028: pve_research_p3_machines_05
+    400030: pve_research_p3_machines_06
+    400032: pve_research_p3_roof
+    400034: pve_research_p3_wall
+    400036: pve_research_p3_doorFrameC
+    400038: pve_gymnasium_area08_glass_01
+    400040: pve_gymnasium_area08_glass_01 1
+    400042: pve_gymnasium_area08_props_01
+    400044: pve_research_door
+    400046: pve_research_door 1
+    400048: pve_research_door 2
+    400050: pve_research_door 3
+    400052: pve_research_ground_01
+    400054: pve_research_ground_02
+    400056: pve_research_machines_01
+    400058: pve_research_machines_01 1
+    400060: pve_research_machines_01 2
+    400062: pve_research_machines_01 3
+    400064: pve_research_machines_02
+    400066: pve_research_tubo
+    400068: pve_research_tubo 1
+    400070: pve_research_tubo 2
+    400072: pve_research_wall
+    400074: ______001
+    2300000: pve_research_p3_door
+    2300002: pve_research_p3_doorFrame
+    2300004: pve_research_p3_ground01
+    2300006: pve_research_p3_ground02
+    2300008: pve_research_p3_ground03
+    2300010: pve_research_p3_machines_01_01
+    2300012: pve_research_p3_machines_01_02
+    2300014: pve_research_p3_machines_01_03
+    2300016: pve_research_p3_machines_01_04
+    2300018: pve_research_p3_machines_02_01
+    2300020: pve_research_p3_machines_02_02
+    2300022: pve_research_p3_machines_03
+    2300024: pve_research_p3_machines_04
+    2300026: pve_research_p3_machines_05
+    2300028: pve_research_p3_machines_06
+    2300030: pve_research_p3_roof
+    2300032: pve_research_p3_wall
+    2300034: pve_research_p3_doorFrameC
+    2300036: pve_gymnasium_area08_glass_01
+    2300038: pve_gymnasium_area08_glass_01 1
+    2300040: pve_gymnasium_area08_props_01
+    2300042: pve_research_door
+    2300044: pve_research_door 1
+    2300046: pve_research_door 2
+    2300048: pve_research_door 3
+    2300050: pve_research_ground_01
+    2300052: pve_research_ground_02
+    2300054: pve_research_machines_01
+    2300056: pve_research_machines_01 1
+    2300058: pve_research_machines_01 2
+    2300060: pve_research_machines_01 3
+    2300062: pve_research_machines_02
+    2300064: pve_research_tubo
+    2300066: pve_research_tubo 1
+    2300068: pve_research_tubo 2
+    2300070: pve_research_wall
+    2300072: ______001
+    3300000: pve_research_p3_door
+    3300002: pve_research_p3_doorFrame
+    3300004: pve_research_p3_ground01
+    3300006: pve_research_p3_ground02
+    3300008: pve_research_p3_ground03
+    3300010: pve_research_p3_machines_01_01
+    3300012: pve_research_p3_machines_01_02
+    3300014: pve_research_p3_machines_01_03
+    3300016: pve_research_p3_machines_01_04
+    3300018: pve_research_p3_machines_02_01
+    3300020: pve_research_p3_machines_02_02
+    3300022: pve_research_p3_machines_03
+    3300024: pve_research_p3_machines_04
+    3300026: pve_research_p3_machines_05
+    3300028: pve_research_p3_machines_06
+    3300030: pve_research_p3_roof
+    3300032: pve_research_p3_wall
+    3300034: pve_research_p3_doorFrameC
+    3300036: pve_gymnasium_area08_glass_01
+    3300038: pve_gymnasium_area08_glass_01 1
+    3300040: pve_gymnasium_area08_props_01
+    3300042: pve_research_door
+    3300044: pve_research_door 1
+    3300046: pve_research_door 2
+    3300048: pve_research_door 3
+    3300050: pve_research_ground_01
+    3300052: pve_research_ground_02
+    3300054: pve_research_machines_01
+    3300056: pve_research_machines_01 1
+    3300058: pve_research_machines_01 2
+    3300060: pve_research_machines_01 3
+    3300062: pve_research_machines_02
+    3300064: pve_research_tubo
+    3300066: pve_research_tubo 1
+    3300068: pve_research_tubo 2
+    3300070: pve_research_wall
+    3300072: ______001
+    4300000: pve_research_p3_machines_03
+    4300002: pve_research_p3_machines_02_02
+    4300004: pve_research_p3_machines_01_01
+    4300006: pve_research_p3_doorFrame
+    4300008: pve_research_p3_wall
+    4300010: pve_research_p3_roof
+    4300012: pve_research_p3_machines_04
+    4300014: pve_research_p3_door
+    4300016: pve_research_p3_machines_06
+    4300018: pve_research_p3_machines_05
+    4300020: pve_research_p3_ground02
+    4300022: pve_research_p3_ground03
+    4300024: pve_research_p3_ground01
+    4300026: pve_research_p3_machines_01_02
+    4300028: pve_research_p3_machines_01_04
+    4300030: pve_research_p3_machines_01_03
+    4300032: pve_research_p3_machines_02_01
+    4300034: pve_research_p3_doorFrameC
+    4300036: pve_research_machines_01
+    4300038: pve_gymnasium_area08_glass_01
+    4300040: pve_research_machines_01
+    4300042: pve_research_door
+    4300044: pve_research_wall
+    4300046: pve_research_tubo
+    4300048: pve_research_machines_01
+    4300050: pve_research_door
+    4300052: pve_research_machines_01
+    4300054: pve_research_tubo
+    4300056: pve_gymnasium_area08_glass_01
+    4300058: pve_research_ground_02
+    4300060: pve_research_ground_01
+    4300062: pve_research_tubo
+    4300064: pve_research_door
+    4300066: pve_research_machines_02
+    4300068: pve_gymnasium_area08_props_01
+    4300070: pve_research_door
+    4300072: ______001
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
