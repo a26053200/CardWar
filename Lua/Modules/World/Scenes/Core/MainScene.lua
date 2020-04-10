@@ -5,7 +5,6 @@
 --- 主场景:可以有子场景
 ---
 
-local SubScene = require('Game.Modules.World.Scenes.Core.SubScene')
 local BaseScene = require('Game.Modules.World.Scenes.Core.BaseScene')
 
 ---@class Game.Modules.World.Scenes.Core.MainScene : Game.Modules.World.Scenes.Core.BaseScene
@@ -29,7 +28,21 @@ function MainScene:Init()
 end
 
 function MainScene:EnterSubScene(subLevel, callback)
-    self:LoadSubLevel(subLevel, callback)
+    if self.currSubScene then
+        if self.currSubScene.subSceneInfo.level == subLevel then
+            --同样的场景无需更换
+            if callback ~= nil then
+                callback(self.currSubScene)
+            end
+        else
+            self.currSubScene:OnExitScene()
+            self.currSubScene:Unload(function()
+                self:LoadSubLevel(subLevel, callback)
+            end)
+        end
+    else
+        self:LoadSubLevel(subLevel, callback)
+    end
 end
 
 function MainScene:LoadSubLevel(subLevel, callback)
@@ -38,20 +51,18 @@ function MainScene:LoadSubLevel(subLevel, callback)
     else
         local subSceneInfo = self.sceneInfo.subLevels[subLevel]
         sceneMgr:LoadSubSceneAsync(subSceneInfo.level, function (unityScene)
-            local subScene = SubScene.New(subSceneInfo, unityScene)
+            local subSceneClass = require(subSceneInfo.sceneClass)
+            local subScene = subSceneClass.New(subSceneInfo, unityScene) ---@type Game.Modules.World.Scenes.Core.SubScene
             log("加载子场景完成:"..subSceneInfo.level)
-            self.currSubSceneInfo = scene
+            self.currSubSceneInfo = subSceneInfo
             self.currSubScene = subScene
             subScene:Init()
+            subScene:OnEnterScene()
             if callback ~= nil then
                 callback(subScene)
             end
         end)
     end
-end
-
-function MainScene:UnloadSubLevel(subLevel, callback)
-
 end
 
 return MainScene

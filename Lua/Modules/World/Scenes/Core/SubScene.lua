@@ -4,13 +4,13 @@
 --- DateTime: 2019/5/18 23:55
 ---
 
-local LuaMonoBehaviour = require('Betel.LuaMonoBehaviour')
+local BaseScene = require("Game.Modules.World.Scenes.Core.BaseScene")
 
----@class Game.Modules.World.Scenes.Core.SubScene : Betel.LuaMonoBehaviour
+---@class Game.Modules.World.Scenes.Core.SubScene : Game.Modules.World.Scenes.Core.BaseScene
 ---@field New fun(subSceneInfo:SubSceneInfo, unityScene:UnityEngine.SceneManagement.Scene)
 ---@field unityScene UnityEngine.SceneManagement.Scene
 ---@field subSceneInfo SubSceneInfo
-local SubScene = class("Game.Modules.World.Scenes.Core.SubScene",LuaMonoBehaviour)
+local SubScene = class("Game.Modules.World.Scenes.Core.SubScene",BaseScene)
 
 ---@param subSceneInfo SubSceneInfo
 ---@param unityScene UnityEngine.SceneManagement.Scene
@@ -37,6 +37,7 @@ end
 
 function SubScene:Unload(callback)
     sceneMgr:UnloadSubSceneAsync(self.subSceneInfo.level, function(levelName)
+        Res.UnloadAssetBundle(self.subSceneInfo.levelUrl)
         if callback ~= nil then
             callback(levelName)
         end

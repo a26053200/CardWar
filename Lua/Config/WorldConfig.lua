@@ -32,11 +32,13 @@ WorldConfig.World = {
     subLevels = {
         Lobby =
         {
+            sceneClass = "Game.Modules.World.Scenes.LobbyScene",
             level = "Lobby",
             levelUrl = "Scenes/Lobby.unity",
         },
-        pve_research_1_UH =
+        battle1 =
           {
+              sceneClass = "Game.Modules.World.Scenes.BattleScene",
               level = "pve_research_1_UH",
               levelUrl = "Scenes/pve_research_1_UH.unity",
           },

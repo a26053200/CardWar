@@ -15,6 +15,7 @@
 
 --子场景信息
 ---@class SubSceneInfo
+---@field sceneClass string
 ---@field level string
 ---@field levelUrl string
 

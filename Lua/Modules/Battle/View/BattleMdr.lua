@@ -18,16 +18,10 @@ function BattleMdr:OnInit()
     vmgr:LoadView(ViewConfig.Joystick)
 end
 
-function BattleMdr:CreateHeroAirplane()
-
-end
-
 --初始化关卡对象池
 ---@return table<string,number>
 function BattleMdr:InitCheckPointObjectPool(checkPointData)
-    local poolNumMap = {} ---@type table<string,number> avatarName 和 数量的映射
 
-    return poolNumMap
 end
 
 return BattleMdr

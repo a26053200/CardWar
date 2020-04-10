@@ -9,20 +9,18 @@ local SubScene = require('Game.Modules.World.Scenes.Core.SubScene')
 ---@class Game.Modules.World.Scenes.BattleScene : Game.Modules.World.Scenes.Core.SubScene
 local BattleScene = class("Game.Modules.World.Scenes.BattleScene",SubScene)
 
----@param sceneInfo SceneInfo
+---@param subSceneInfo SceneInfo
 ---@param unityScene UnityEngine.SceneManagement.Scene
-function BattleScene:Ctor(sceneInfo, unityScene)
-    BattleScene.super.Ctor(self, sceneInfo, unityScene)
+function BattleScene:Ctor(subSceneInfo, unityScene)
+    BattleScene.super.Ctor(self, subSceneInfo, unityScene)
 end
 
 function BattleScene:OnEnterScene()
-    self:LoadSubLevel(1,function(subScene)
-        World.battleSubScene = subScene
-        vmgr:LoadView(ViewConfig.Battle)
-    end)
+
 end
 
 function BattleScene:OnExitScene()
-    vmgr:UnloadView(ViewConfig.Battle)
+
 end
+
 return BattleScene

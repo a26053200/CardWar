@@ -7,6 +7,7 @@
 
 ---@class World
 ---@field mdr Game.Modules.World.View.WorldMdr
+---@field worldScene Game.Modules.World.Scenes.WorldScene
 ---@field battleSubScene Game.Modules.World.Scenes.Core.SubScene
 ---@field battleBehavior Game.Modules.Battle.Behaviors.BattleBehavior
 ---@field points table<number, UnityEngine.Vector3>
@@ -20,6 +21,10 @@ World.points = nil
 
 function World.EnterScene(sceneInfo, callback)
     World.mdr:EnterScene(sceneInfo, callback)
+end
+
+function World.EnterSubScene(subLevel, callback)
+    World.worldScene:EnterSubScene(subLevel, callback)
 end
 
 return World

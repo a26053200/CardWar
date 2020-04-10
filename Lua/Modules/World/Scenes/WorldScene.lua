@@ -5,6 +5,7 @@
 ---
 
 local MainScene = require('Game.Modules.World.Scenes.Core.MainScene')
+
 ---@class Game.Modules.World.Scenes.WorldScene : Game.Modules.World.Scenes.Core.MainScene
 local WorldScene = class("LobbyScene",MainScene)
 
@@ -12,6 +13,7 @@ local WorldScene = class("LobbyScene",MainScene)
 ---@param unityScene UnityEngine.SceneManagement.Scene
 function WorldScene:Ctor(sceneInfo, unityScene)
     WorldScene.super.Ctor(self, sceneInfo, unityScene)
+    World.worldScene = self
 end
 
 function WorldScene:OnEnterScene()
