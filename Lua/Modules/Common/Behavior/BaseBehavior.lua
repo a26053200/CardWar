@@ -4,77 +4,188 @@
 --- DateTime: 2019/5/20 15:51
 ---
 
-local StateAction = require("Game.Modules.Common.Behavior.StateAction")
-local StateMachine = require("Game.Modules.Common.Behavior.StateMachine")
 local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 
 ---@class Game.Modules.Common.Behavior.BaseBehavior : Betel.LuaMonoBehaviour
----@field New fun() : Game.Modules.Common.Behavior.BaseBehavior
+---@field New fun(gameObject:UnityEngine.GameObject,parent:number,cycleOverCallback:fun()):Game.Modules.Common.Behavior.BaseBehavior
+---@field id number
+---@field parent Game.Modules.Common.Behavior.BaseBehavior
 ---@field stateMachine FastBehavior.StateMachine
----@field lastBehavior Game.Modules.Common.Behavior.BaseBehavior
----@field fastLuaBehavior FastBehavior.FastLuaBehavior
-local BaseBehavior = class("Game.Modules.Common.Behavior.BaseBehavior",LuaMonoBehaviour)
+---@field fastLusBehavior FastBehavior.FastLuaBehavior
+---@field lastBehavior Game.Modules.Common.Behavior.BaseBehavior 上一个行为
+---@field subBehaviors List | table<number, Game.Modules.Common.Behavior.BaseBehavior> 上一个行为
+local BaseBehavior = class("Module.Common.Behavior.BaseBehavior", LuaMonoBehaviour)
 
----@param gameObject UnityEngine.GameObject
-function BaseBehavior:Ctor(gameObject)
+function BaseBehavior:Ctor(gameObject, parent)
     BaseBehavior.super.Ctor(self, gameObject)
+    self.parent = parent
+    --self.stateMachine = StateMachine.New()
+    self.stateMachine = smMgr:CreateStateMachine()
+    self.fastLusBehavior = smMgr:CreateFastLuaBehavior(self.stateMachine)
+    --self.lastBehavior = nil
+end
 
-    if self.gameObject then
-        self.stateMachine = self.gameObject:AddComponent(typeof(FastBehavior.StateMachine))
-        self.fastLuaBehavior = FastLuaBehavior.New(self.stateMachine)
+--创建子行为
+function BaseBehavior:CreateSubBehavior()
+    if self.subBehaviors == nil then
+        self.subBehaviors = List.New()
+    end
+    local behavior = BaseBehavior.New(self.gameObject, self)
+    self.subBehaviors:Add(behavior)
+    return behavior
+end
+--添加子行为
+---@param behavior Game.Modules.Common.Behavior.BaseBehavior
+function BaseBehavior:AppendBehavior(behavior,name)
+    name = name == nil and "Append Sub BaseBehavior id:" .. self.fastLusBehavior.id or name
+    self.fastLusBehavior:AppendBehavior(behavior.fastLusBehavior, name)
+    --self.stateMachine:AppendState(StateAction.New("AppendBehavior:"..name, Handler.New(function()
+    --    if self.lastBehavior then
+    --        self.lastBehavior:Stop()
+    --    end
+    --    behavior:Play()
+    --    self.lastBehavior = behavior
+    --end ,self),nil,nil,CanExecute))
+end
+
+--添加子行为
+---@param behavior Game.Modules.Common.Behavior.BaseBehavior
+function BaseBehavior:JoinBehavior(behavior,name)
+    name = name == nil and "Join Sub BaseBehavior id:" .. self.fastLusBehavior.id or name
+    self.fastLusBehavior:AppendBehavior(behavior.fastLusBehavior, name)
+    --self.stateMachine:AppendState(StateAction.New("AppendBehavior:"..name, Handler.New(function()
+    --    behavior:Play()
+    --    behavior.stateMachine:OnUpdate()
+    --    behavior:Stop()
+    --end ,self),nil,nil,CanExecute))
+end
+
+--添加一般状态
+---@param OnExecute Handler
+---@param OnUpdate Handler
+---@param name string
+function BaseBehavior:AppendState(OnExecute, OnUpdate, name)
+    name = name == nil and self.__classname .. " AppendState:" or name
+    self.fastLusBehavior:AppendState(function()
+        if OnExecute ~= nil then
+            OnExecute()
+        end
+    end,function()
+        if OnUpdate ~= nil then
+            OnUpdate()
+        end
+    end,name)
+    --self.stateMachine:AppendState(StateAction.New("Append:".. name,Handler.New(OnExecute,self), duration, Handler.New(OnUpdate,self), CanExecute))
+end
+
+--添加延时状态
+function BaseBehavior:AppendInterval(duration)
+    self.fastLusBehavior:AppendInterval(duration)
+    --self.stateMachine:AppendState(StateAction.New("AppendInterval:"..duration, handler , duration))
+end
+
+--开始添加选择状态
+function BaseBehavior:BeginSelect()
+    self.stateMachine:BeginSelect()
+end
+
+--结束添加选择状态
+function BaseBehavior:EndSelect()
+    self.stateMachine:EndSelect()
+end
+
+--开始添加并行状态
+function BaseBehavior:BeginJoin()
+    self.stateMachine:BeginJoin()
+end
+
+--结束添加并行状态
+function BaseBehavior:EndJoin()
+    self.stateMachine:EndJoin()
+end
+
+--播放行为,从当前状态开始播放
+function BaseBehavior:Play(cycleOverCallback)
+    if self.fastLusBehavior == nil then
+        --logError("该行为在没有播放时就已经被销毁")
+        return
+    end
+    if cycleOverCallback then
+        local handler = Handler.Get(cycleOverCallback,self)
+        self.fastLusBehavior:Run(function()
+            handler:Execute()
+            handler:Recycl()
+        end)
+    else
+        self.fastLusBehavior:Run()
+    end
+    --if self.parent == nil then
+    --    self:_debug(string.format("BaseBehavior Start"))
+    --end
+end
+
+--停止行为,下次播放时回到初始状态
+function BaseBehavior:Stop()
+    --if self.parent == nil then
+    --    self:_debug("BaseBehavior Stop:")
+    --end
+    --if self.lastBehavior then
+    --    self.lastBehavior:Stop()
+    --end
+    if self.fastLusBehavior then
+        self.fastLusBehavior:Stop()
+    else
+        self:_debugError("暂停一个被销毁的行为")
     end
 end
 
----@param OnStateEnter Handler
-function BaseBehavior:AppendState(OnStateEnter, name)
-    name = name == nil and "AppendState:" .. self.fastLuaBehavior.id or name
-    self.fastLuaBehavior:AppendState(function()
-        OnStateEnter:Execute()
-    end , name)
-end
-
----@return Game.Modules.Common.Behavior.BaseBehavior
-function BaseBehavior:CreateBehavior()
-    local behavior = BaseBehavior.New(self.gameObject)
-    return behavior
-end
-
----@param behavior Game.Modules.Common.Behavior.BaseBehavior
-function BaseBehavior:AppendBehavior(behavior, name)
-    name = name == nil and "Sub BaseBehavior id:" .. self.fastLuaBehavior.id or name
-    self.fastLuaBehavior:AppendBehavior(behavior.fastLuaBehavior, name)
-end
-
----@param interval number
-function BaseBehavior:AppendInterval(interval)
-    self.fastLuaBehavior:AppendInterval(interval)
-end
-
----@param node FastBehavior.StateNode .. tostring(handler.caller)
-function BaseBehavior:AppendStateNode(node)
-    self.fastLuaBehavior:AppendStateNode(node)
-end
-
-function BaseBehavior:Run()
-    self.fastLuaBehavior:Run()
-end
-
-function BaseBehavior:Stop()
-    self.fastLuaBehavior:Stop()
-end
-
+--下一状态
 function BaseBehavior:NextState()
-    self.fastLuaBehavior:NextState()
+    self.fastLusBehavior:NextState()
 end
 
-function BaseBehavior:Debug(msg)
-    --print(string.format("<color=#FFFF00FF> [%s-%s] </color>%s",self.gameObject.name, self.fastLuaBehavior.id, msg))
+--调试
+function BaseBehavior:isRuning()
+    return self.stateMachine.isRunning
 end
 
----@param node StateNode
+--调试
+function BaseBehavior:_debug(msg)
+    if self.gameObject then
+        print(string.format("<color=#FFFF00FF>[%s][%s]</color>\n<color=#00EE00FF>%s</color>",self.gameObject.name,self.stateMachine.id,msg))
+    else
+        print(string.format("<color=#FFFF00FF>[%s][%s]</color>\n<color=#00EE00FF>%s</color>",self.__classname,self.stateMachine.id,msg))
+    end
+end
+
+--调试
+function BaseBehavior:_debugError(msg)
+    if self.gameObject then
+        logError(string.format("[%s]\n%s",self.gameObject.name,msg))
+    else
+        logError(string.format("[%s]\n%s",self.__classname,msg))
+    end
+end
+
+--释放资源
 function BaseBehavior:Dispose()
     BaseBehavior.super.Dispose(self)
-    self.fastLuaBehavior:Stop()
+    if self.fastLusBehavior then
+        self.fastLusBehavior:Dispose()
+    end
+    self.fastLusBehavior = nil
+    if self.subBehaviors and self.parent == nil then
+        for i = 1, self.subBehaviors:Size() do
+            self.subBehaviors[i]:Dispose()
+        end
+        self.subBehaviors:Clear()
+        self.subBehaviors = nil
+    end
+    --if self.lastBehavior then
+    --    self.lastBehavior:Dispose()
+    --end
+    --self.lastBehavior = nil
+    --self.stateMachine = nil
 end
 
 return BaseBehavior

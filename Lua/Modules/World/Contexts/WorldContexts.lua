@@ -4,14 +4,147 @@
 --- DateTime: 2020/4/10 23:37
 ---
 
----@class BattleContext
----@field battleScene Game.Modules.World.Scenes.BattleScene
----@field battleBehavior Game.Modules.Battle.Behaviors.BattleBehavior
----@field points table<number, UnityEngine.Vector3>
-local WorldContexts = class("WorldContexts")
+local Hero = require("Module.World.Items.Hero")
 
-function WorldContexts:Ctor()
+---@class WorldContext
+---@field New fun()
+---@field id number
+---@field currSubScene Game.Modules.World.Scenes.Core.SubScene  当前子场景
+---@field battleBehavior Game.Modules.Battle.Behaviors.BattleBehavior    战场行为
+---@field heroList table<number, Game.Modules.Battle.Items.Hero>
+---@field avatarRoot UnityEngine.GameObject
+---@field pool Game.Modules.Common.Pools.AssetPoolProxy 对象池
+---@field attachCamera Game.Modules.Common.Components.AttachCamera
+---@field forward UnityEngine.Vector3 整个布局的朝向
+---@field heroGridLayouts table<UnityEngine.GameObject, Game.Modules.Battle.View.LayoutGrid>
+---@field battleLayout Game.Modules.Battle.View.BattleLayout
+local WorldContext = class("WorldContext")
 
+local Sid = 1
+
+function WorldContext:Ctor(mode)
+    self.id = Sid
+    Sid = Sid + 1
+    self.heroList = {}
+    self.dropList = List.New()
 end
 
-return WorldContexts
+--创建可以战斗的英雄
+---@param camp Camp 所属阵营
+---@param cards table<number, Game.Modules.Card.Vo.CardVo> 卡牌
+---@param state CardState
+function WorldContext:CreateBattleHeroes(cards, camp, state)
+    local teamLeader
+    for i = 1, #cards do
+        local card = cards[i]
+        if state == nil or card.state == state then
+            local hero = self:CreateBattleHero(card, camp)
+            if hero.heroInfo.isLeader then
+                teamLeader = hero
+            end
+            table.insert(self.heroList, hero)
+            hero.layoutIndex = card.layoutIndex
+        end
+    end
+    for _, hero in ipairs(self.heroList) do
+        hero.leader = teamLeader
+    end
+    self.leaderHero = teamLeader
+end
+
+---@param card Game.Modules.Card.Vo.CardVo 卡牌
+function WorldContext:CreateBattleHero(card, camp)
+    local heroVo = World.CreateHeroVo(card.cardInfo.avatarName)
+    heroVo.camp = camp
+    heroVo.isLeader = card.layoutIndex == 1
+    heroVo.index = card.layoutIndex
+    local hero = Hero.New(heroVo, self)
+    hero.ownerCardVo = card
+    return hero
+end
+
+---@param hero Module.World.Items.Hero
+function WorldContext:AddHero(hero)
+    table.insert(self.heroList, hero)
+    hero.layoutIndex = hero.ownerCardVo.layoutIndex
+end
+
+---@param cardInfo Game.Modules.Card.Vo.CardVo
+---@return Module.World.Items.Hero
+function WorldContext:GetHeroByCard(cardInfo)
+    for i = 1, #self.heroList do
+        if self.heroList[i].ownerCardVo == cardInfo then
+            return self.heroList[i]
+        end
+    end
+    --logError("There is no hero with card:" .. cardInfo.cardInfo.avatarName)
+    return nil
+end
+
+---@param hero Module.World.Items.Hero
+function WorldContext:RemoveHero(hero)
+    for i = 1, #self.heroList do
+        if self.heroList[i] == hero then
+            self.heroList[i]:Dispose()
+            table.remove(self.heroList, i)
+            break
+        end
+    end
+end
+
+---@param node AStar.Node
+---@return boolean
+function WorldContext:IsOverlapHeroNode(node)
+    for i = 1, #self.heroList do
+        if AStarUtils.EqualNode(self.heroList[i].currNode, node) then
+            return true
+        end
+    end
+    return false
+end
+
+-- 获取空格子
+---@param points table<number, Framework.AroundPoint>
+---@return Framework.AroundPoint
+function WorldContext:GetAroundEmptyPoint(points)
+    local point
+    local randoms = Tool.GetRandomArray(points.Length)
+    for i = 0, points.Length - 1 do
+        if not self:IsOverlapHeroNode(self.grid:NodeFromWorldPoint(points[randoms[i + 1] - 1].pos)) then
+            point = points[i]
+        end
+    end
+    return point
+end
+
+---@param handler Handler
+function WorldContext:ForEachHero(handler)
+    for i = 1, #self.heroList do
+        handler:Execute(self.heroList[i])
+    end
+    handler:Recycl()
+end
+
+function WorldContext:Dispose()
+    for i = 1, #self.heroList do
+        self.heroList[i]:Dispose()
+    end
+    if self.battleBehavior then
+        self.battleBehavior:Dispose()
+    end
+    if self.attachCamera then
+        self.attachCamera:Dispose()
+    end
+    if self.pool then
+        self.pool:Dispose()
+    end
+    for i = 1, self.dropList:Size() do
+        self.dropList[i]:Dispose()
+    end
+    self.heroList = nil
+    self.grid = nil
+    Destroy(self.avatarRoot)
+    self.avatarRoot = nil
+end
+
+return WorldContext

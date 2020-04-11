@@ -8,7 +8,7 @@
 ---@class SceneItemInfo
 ---@field id string|number
 ---@field prefabUrl string
----@field scale string
+---@field scale number
 
 --技能
 ---@class SkillInfo
@@ -44,18 +44,6 @@
 ---@field def number
 ---@field crit number
 
---Avatar基础属性
----@class AvatarInfo : SceneItemInfo
----@field name string
----@field moveSpeed number
----@field animBorn string
----@field animIdle string
----@field animAtkIdle string
----@field animWalk string
----@field animRun string
----@field baseAttr BaseAttribute
----@field attr Attribute
----@field skills table<number, AccountInfo>
 
 ---@class HeroInfo : AvatarInfo
 ---@field heroName string
@@ -69,33 +57,11 @@
 ---@field init number
 
 
----@class AreaInfo
----@field bornPos number
----@field rangeX number
----@field rangeY number
----@field waves table<number, WaveInfo>
-
----@class WaveInfo
----@field delay string
----@field borns table<number, BornInfo>
-
----@class BornInfo
----@field avatarName string
----@field numMin number
----@field numMax number
-
----@class BattleInfo
----@field pools table<number, BattleInfo>
----@field areas table<number, AreaInfo>
-
----@class AroundNode
----@field node AStar.Node
----@field ownerId number
-
-
 local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@class Game.Modules.Battle.Model.BattleModel : Game.Core.Ioc.BaseModel
 ---@field battleService Game.Modules.Battle.Service.BattleService
+---@field currentContext WorldContext
+---@field currCheckPointData CheckPointData     当前关卡数据
 local BattleModel = class("BattleModel",BaseModel)
 
 function BattleModel:Ctor()

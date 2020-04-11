@@ -10,6 +10,7 @@ local BaseScene = require("Game.Modules.World.Scenes.Core.BaseScene")
 ---@field New fun(subSceneInfo:SubSceneInfo, unityScene:UnityEngine.SceneManagement.Scene)
 ---@field unityScene UnityEngine.SceneManagement.Scene
 ---@field subSceneInfo SubSceneInfo
+---@field checkPointData CheckPointData
 local SubScene = class("Game.Modules.World.Scenes.Core.SubScene",BaseScene)
 
 ---@param subSceneInfo SubSceneInfo
@@ -18,30 +19,145 @@ function SubScene:Ctor(subSceneInfo, unityScene)
     SubScene.super.Ctor(self)
     self.subSceneInfo = subSceneInfo
     self.unityScene = unityScene
+    --self:InitSubScene()
 end
 
-function SubScene:Init()
-    UnityEngine.SceneManagement.SceneManager.SetActiveScene(self.unityScene)
+function SubScene:OnInitialize()
+    self:InitSubScene()
+end
+
+---@field checkPointData CheckPointData 场景配置数据
+function SubScene:InitScene(checkPointData)
+    self.checkPointData = checkPointData
+    self:Show()
+end
+
+---@return UnityEngine.Camera
+function SubScene:InitSubScene()
+    local camera = self:GetCamera()
+    local audioListener = self:GetAudioListener()
+    local lightObj = self:GetLightObj()
+    camera.gameObject:SetActive(false)
+    lightObj:SetActive(false)
+    audioListener.enabled = false
+end
+
+
+function SubScene:Show()
+    --self.currLuaScene = self.luaSceneClass.New(self)
+    --self.currLuaScene:OnInitialize()
+    local camera = self:GetCamera()
+    local audioListener = self:GetAudioListener()
+    local lightObj = self:GetLightObj()
+    camera.gameObject:SetActive(true)
+    lightObj:SetActive(true)
+    audioListener.enabled = true
 end
 
 ---@return UnityEngine.GameObject
-function SubScene:GetRootObjByName(name)
-    local rootObjs = self.unityScene:GetRootGameObjects()
-    for i = 0, rootObjs.Length - 1 do
-        if rootObjs[i].name == name then
-            return rootObjs[i]
-        end
-    end
-    return nil
+function SubScene:Hide()
+    local camera = self:GetCamera()
+    local lightObj =  self:GetLightObj()
+    local audioListener = self:GetAudioListener()
+    camera.gameObject:SetActive(false)
+    lightObj:SetActive(false)
+    audioListener.enabled = false
+    self:Dispose()
+    --self.currLuaScene = nil
 end
 
 function SubScene:Unload(callback)
-    sceneMgr:UnloadSubSceneAsync(self.subSceneInfo.level, function(levelName)
-        Res.UnloadAssetBundle(self.subSceneInfo.levelUrl)
-        if callback ~= nil then
-            callback(levelName)
+    preloading.cacheUnity[self.subSceneInfo.level] = nil
+    sceneMgr:UnloadSubSceneAsync(self.subSceneInfo.level, function ()
+        Res.UnloadAssetBundle(self.subSceneInfo.levelUrl, true, true)
+        if callback then
+            callback()
         end
     end)
+end
+--查找子场景的顶级Obj
+---@param name string
+---@return UnityEngine.GameObject
+function SubScene:FindRootObjInSubScene(name)
+    return sceneMgr:FindRootObjInScene(self.unityScene, name)
+end
+
+--创建GameObject
+---@param name string
+---@return UnityEngine.GameObject
+function SubScene:CreateGameObject(name)
+    local go = GameObject.New(name or "GameObject")
+    UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(go, self.unityScene)
+    return go
+end
+
+--创建GameObject
+---@param go UnityEngine.GameObject
+function SubScene:MoveGameObject(go)
+    UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(go, self.unityScene)
+    return go
+end
+
+---@return UnityEngine.Camera
+function SubScene:GetCamera()
+    if self.camera == nil then
+        local camObj = self:FindRootObjInSubScene("Main Camera")
+        if isnull(camObj) then
+            logError(string.format("This scene [%s]'s camera must named with 'Main Camera' and set to root", self.subLevelName))
+        else
+            self.camOrgPos = camObj.transform.position
+            self.camOrgRot = camObj.transform.rotation
+            self.camera = camObj:GetComponent(typeof(UnityEngine.Camera));
+        end
+    end
+    return self.camera
+end
+
+---@return UnityEngine.AudioListener
+function SubScene:GetAudioListener()
+    if self.camera ~= nil then
+        return self.camera.gameObject:GetComponent(typeof(UnityEngine.AudioListener))
+    end
+end
+
+---@return UnityEngine.GameObject
+function SubScene:GetLightObj()
+    if self.lightObj == nil then
+        local lightObj = self:FindRootObjInSubScene("Directional Light")
+        self.lightObj = lightObj:FindChild(self.checkPointData.light)
+        if isnull(self.lightObj) then
+            logError(string.format("This scene [%s]'s Light must named with 'Directional Light' and set to root", self.subLevelName))
+        end
+    end
+    return self.lightObj
+end
+
+---@return UnityEngine.Light
+function SubScene:GetLight()
+    if self.light == nil then
+        self.light = self:GetLightObj():GetComponent(typeof(UnityEngine.Light))
+        if isnull(self.light) then
+            logError(string.format("This scene has not Light!", self.subLevelName))
+        end
+    end
+    return self.light
+end
+
+--设置碰撞体的可见性
+---@param enable UnityEngine.Light
+function SubScene:SetAllColliderEnable(enable)
+    sceneMgr:ForEachRootObj(self.unityScene,
+            function(rootObj)
+                local colliders = rootObj:GetComponentsInChildren(typeof(UnityEngine.Collider), true)
+                for i = 0, colliders.Length - 1 do
+                    --print(colliders[i].gameObject.name)
+                    colliders[i].enabled = enable
+                end
+            end)
+end
+
+function SubScene:Dispose()
+    SubScene.super.Dispose(self)
 end
 
 return SubScene

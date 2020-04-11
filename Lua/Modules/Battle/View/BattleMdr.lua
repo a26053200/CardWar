@@ -4,24 +4,154 @@
 --- DateTime: 2019-05-18-23:22:49
 ---
 
-local BaseMediator = require("Game.Core.Ioc.BaseMediator")
-
----@class Game.Modules.Battle.View.BattleMdr : Game.Core.Ioc.BaseMediator
+local SceneItemEvents = require("Module.World.Events.SceneItemEvents")
+local AttachCamera = require("Module.Common.Widgets.AttachCamera")
+local GridBattleBehavior = require("Module.Battle.Behaviors.GridBattleBehavior")
+local RoundBehavior = require("Module.Battle.Behaviors.RoundBehavior")
+local BattleEvents = require("Module.World.Events.BattleEvents")
+local GridBattleEvents = require("Module.Battle.Events.GridBattleEvents")
+local BattleBaseMdr = require("Module.Battle.View.BattleMdrBase")
+---@class Module.Battle.View.BattleGridMdr : Game.Modules.Battle.View.BattleMdrBase
 ---@field battleModel Game.Modules.Battle.Model.BattleModel
 ---@field battleService Game.Modules.Battle.Service.BattleService
-local BattleMdr = class("BattleMdr", BaseMediator)
+local BattleMdr = class("Module.Battle.View.BattleGridMdr",BattleBaseMdr)
 
 function BattleMdr:OnInit()
-    World.root = GameObject.New("[World]")
-
-    vmgr:LoadView(ViewConfig.BattleInfo)
-    vmgr:LoadView(ViewConfig.Joystick)
+    BattleMdr.super.OnInit(self)
 end
 
---初始化关卡对象池
----@return table<string,number>
-function BattleMdr:InitCheckPointObjectPool(checkPointData)
+function BattleMdr:RegisterListeners()
+    BattleMdr.super.RegisterListeners(self)
+    AddEventListener(GridBattleEvents, GridBattleEvents.BattleStart, self.OnGridBattleStart, self)
+    AddEventListener(GridBattleEvents, GridBattleEvents.BattlePause, self.OnBattlePause, self)
+    AddEventListener(GridBattleEvents, GridBattleEvents.BattleResume, self.OnBattleResume, self)
+    AddEventListener(GridBattleEvents, GridBattleEvents.AllMonsterDeadOver, self.OnAllMonsterDeadOver, self)
+    AddEventListener(SceneItemEvents, SceneItemEvents.MonsterDead, self.OnMonsterDead, self)
+    AddEventListener(SceneItemEvents, SceneItemEvents.MonsterBorn, self.OnMonsterBorn, self)
+end
 
+---@param event Game.Modules.Battle.Events.BattleEvents
+function BattleMdr:OnBattlePause(event)
+    self.roundBehavior:Pause()
+end
+
+---@param event Game.Modules.Battle.Events.BattleEvents
+function BattleMdr:OnBattleResume(event)
+    self.roundBehavior:Resume()
+end
+
+---@param event Module.World.Events.SceneItemEvents
+function BattleMdr:OnMonsterBorn(event)
+    if event.target.avatarInfo.quality == MonsterQuality.Boss then
+
+    end
+end
+
+---@param event Module.World.Events.SceneItemEvents
+function BattleMdr:OnMonsterDead(event)
+    if event.target.avatarInfo.quality == MonsterQuality.Boss then
+        self.context.battleLayout:SetAllGridVisible(Camp.Def,false)
+        self:StartCoroutine(function()
+            Time.timeScale = 0.2
+            coroutine.wait(2 * 0.2)
+            Time.timeScale = 1
+        end)
+    end
+end
+
+function BattleMdr:OnGridBattleStart()
+
+end
+
+function BattleMdr:OnAllMonsterDeadOver()
+    if self.roundBehavior then
+        self.roundBehavior:Dispose()
+    end
+    self:StartCoroutine(function()
+        coroutine.step(1)
+        --战斗结算画面
+        vmgr:LoadView(ViewConfig.BattleRstTest)
+    end)
+end
+
+function BattleMdr:InitLayoutData()
+    BattleMdr.super.InitLayoutData(self)
+
+end
+
+--初始化战斗模式
+function BattleMdr:InitBattleMode()
+    BattleMdr.super.InitBattleMode(self)
+    self.context.battleBehavior = GridBattleBehavior.New(self.checkPointData, self.context)
+    self.context.battleBehavior:CreateBattle()
+end
+
+function BattleMdr:StartBattle()
+    BattleMdr.super.StartBattle(self)
+    self.context:CreateBattleHeroes(self.battleModel.playerVo.cards, Camp.Atk, CardState.GridBattle)
+
+    for i = 1, #self.context.heroList do
+        local hero = self.context.heroList[i]
+        hero:CreateCC() --  创建碰撞体，接受点击事件
+        hero:ResetAttr()
+        --hero:SetRenderEnabled(true)
+        hero:UpdateNode()
+        --hero:SetBehaviorEnabled(true)
+    end
+
+    self.context.attachCamera = AttachCamera.New(self.context.currSubScene:GetCamera(),
+            self.checkPointData.cameraDistance, self.checkPointData.cameraAngle,self.checkPointData.cameraOffset)
+    self.context.currSubScene:GetCamera().enabled = true
+    BattleEvents.Dispatch(BattleEvents.EnterScene)
+    self.context.attachCamera:AttachPos(self.context.battleLayout.areaPointObj.transform.position)
+    self.context.attachCamera:StopAttach()
+    self.context.attachCamera:Reset()
+    self.context.battleBehavior:GetCurrArea():Active()
+
+    self:StartCoroutine(function()
+        local currArea = self.context.battleBehavior:GetCurrArea()
+        --等待刷怪结束
+        while not currArea.isBornOver do
+            coroutine.step(1)
+        end
+        coroutine.wait(0.2)
+        self.context.attachCamera:AttachPos(self.context.battleLayout.areaPointObj.transform.position)
+        vmgr:LoadView(ViewConfig.BattleArrayEditor)--布阵
+        coroutine.step(1)
+        self.context.attachCamera:StartAttach()
+        --等待布局结束
+        while not self.battleModel.isEditBattleArrayComplete do
+            coroutine.step(1)
+        end
+        self:OnBattleStart()
+    end)
+end
+
+function BattleMdr:OnBattleStart()
+    self.roundBehavior = RoundBehavior.New(self.context)
+    if self.battleModel.currCheckPointData.type == CheckPointType.Resource then
+        self.info.transform:DOLocalMoveY(340,0.5)
+        self:ShowBossInfoEffect(function()
+            self.roundBehavior:Play()
+        end)
+    else
+        self.roundBehavior:Play()
+    end
+    self.context.currSubScene:SetAllColliderEnable(false)
+end
+
+function BattleMdr:OnRemove()
+    RemoveEventListener(GridBattleEvents, GridBattleEvents.BattleStart, self.OnGridBattleStart, self)
+    RemoveEventListener(GridBattleEvents, GridBattleEvents.BattlePause, self.OnBattlePause, self)
+    RemoveEventListener(GridBattleEvents, GridBattleEvents.AllMonsterDeadOver, self.OnAllMonsterDeadOver, self)
+    RemoveEventListener(SceneItemEvents, SceneItemEvents.MonsterDead, self.OnMonsterDead, self)
+    RemoveEventListener(SceneItemEvents, SceneItemEvents.MonsterBorn, self.OnMonsterBorn, self)
+
+    if self.roundBehavior then
+        self.roundBehavior:Dispose()
+    end
+    vmgr:UnloadView(ViewConfig.BattleArrayEditor)
+    BattleMdr.super.OnRemove(self)
 end
 
 return BattleMdr

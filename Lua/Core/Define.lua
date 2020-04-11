@@ -81,7 +81,7 @@ FRAME_TIME = 1 / Application.targetFrameRate
 
 -- [声音系统]
 --SoundPlayer = require("Game.Modules.Common.Sound.SoundPlayer").New()
---SoundConfig = require("Data.SoundConfig")
+--SoundConfig = require("Game.Data.SoundConfig")
 --SoundPlayer:Init()
 --
 
@@ -89,51 +89,51 @@ FRAME_TIME = 1 / Application.targetFrameRate
 
 -- --------------- [ 项目自定义 ] --------------- --
 
----Config
---Config = require("Data.Config")
---GameConst = require("Data.GameConst")
---StrategyConsts = require("Module.World.Behaviors.Strategy.StrategyConsts")
---BehaviorUtils = require("Module.World.Behaviors.BehaviorUtils")
---Language = require("Data.Languages." .. Config.language)
-
----Static Data
---SkillConfig         = require("Data.SkillConfig")
---AvatarConfig        = require("Data.AvatarConfig")
---EffectConfig        = require("Data.EffectConfig")
---AvatarUIConfig      = require("Data.AvatarUIConfig")
---PlotConfig          = require("Data.PlotConfig")
---BattleConfig        = require("Data.BattleConfig")
---GridBattleConfig    = require("Data.GridBattleConfig")
---CheckPointConfig    = require("Data.CheckPointConfig")
---CameraShakeConfig   = require("Data.CameraShakeConfig")
---BufferConfig        = require("Data.BufferConfig")
---PerformanceConfig   = require("Data.PerformanceConfig")
---StateConfig         = require("Data.StateConfig")
---CardConfig          = require("Data.CardConfig")
---ItemConfig          = require("Data.ItemConfig")
---AdventureEventConfig = require("Data.AdventureEventConfig")
---AdventureEventAfterEventConfig = require("Data.AdventureEventAfterEventConfig")
---PathConfig        = require("Data.PathConfig")
---StageConfig        = require("Data.StageConfig")
---ChapterConfig        = require("Data.ChapterConfig")
-
----Utils
---BattleUtils = require("Module.Battle.Utils.BattleUtils")
---Stage.loadingSceneClass = require("Module.Loading.View.LoadingScene")
---Convert = require("Module.Common.Convert")
---Layers = require("Module.Common.Layers")
 --World = require("Module.World.World")
---Convert = require("Module.Common.Convert")
---Math3D = require("Module.Common.Math3D")
---File = require("Module.Common.File")
---Tool = require("Module.Common.Tool")
---TimeConvert = require("Module.Common.TimeConvert")
---Alert = require("Module.Common.Alert")
---PoolFactory = require("Module.Common.Pools.PoolFactory")
---BezierUtils = require("Module.Common.BezierUtils")
+--BattleUtils = require("Module.Battle.Utils.BattleUtils")
 --Plot = require("Module.Plot.Scripts.Plot")
 --GuideLine = require("Module.Common.Effect.GuideLine")
 --PerformancePlayer = require("Module.World.Performances.PerformancePlayer")
+
+---Utils
+Convert     = require("Game.Modules.Common.Utils.Convert")
+Layers      = require("Game.Modules.Common.Utils.Layers")
+Convert     = require("Game.Modules.Common.Utils.Convert")
+Math3D      = require("Game.Modules.Common.Utils.Math3D")
+File        = require("Game.Modules.Common.Utils.File")
+Tool        = require("Game.Modules.Common.Utils.Tool")
+TimeConvert = require("Game.Modules.Common.Utils.TimeConvert")
+PoolFactory = require("Game.Modules.Common.Utils.Pools.PoolFactory")
+BezierUtils = require("Game.Modules.Common.Utils.BezierUtils")
+
+---Config
+--Config = require("Game.Data.Config")
+GameConst = require("Game.Config.GameConsts")
+--StrategyConsts = require("Module.World.Behaviors.Strategy.StrategyConsts")
+--BehaviorUtils = require("Module.World.Behaviors.BehaviorUtils")
+--Language = require("Game.Data.Languages." .. Config.language)
+
+---Static Data
+--SkillConfig         = require("Game.Data.SkillConfig")
+AvatarConfig        = require("Game.Data.AvatarConfig")
+--EffectConfig        = require("Game.Data.EffectConfig")
+--AvatarUIConfig      = require("Game.Data.AvatarUIConfig")
+--PlotConfig          = require("Game.Data.PlotConfig")
+BattleConfig        = require("Game.Data.BattleConfig")
+--GridBattleConfig    = require("Game.Data.GridBattleConfig")
+CheckPointConfig    = require("Game.Data.CheckPointConfig")
+--CameraShakeConfig   = require("Game.Data.CameraShakeConfig")
+--BufferConfig        = require("Game.Data.BufferConfig")
+--PerformanceConfig   = require("Game.Data.PerformanceConfig")
+--StateConfig         = require("Game.Data.StateConfig")
+--CardConfig          = require("Game.Data.CardConfig")
+--ItemConfig          = require("Game.Data.ItemConfig")
+--AdventureEventConfig = require("Game.Data.AdventureEventConfig")
+--AdventureEventAfterEventConfig = require("Game.Data.AdventureEventAfterEventConfig")
+--PathConfig        = require("Game.Data.PathConfig")
+--StageConfig        = require("Game.Data.StageConfig")
+--ChapterConfig        = require("Game.Data.ChapterConfig")
+
 
 ---3rd
 --AStarUtils = require("Module.Common.AStarUtils")
@@ -147,7 +147,7 @@ FRAME_TIME = 1 / Application.targetFrameRate
 --PoolVoProxy     = require("Module.Common.Pools.PoolVoProxy")
 --HeroVoPool      = PoolVoProxy.New("Module.World.Vo.HeroVo")
 --MonsterVoPool   = PoolVoProxy.New("Module.World.Vo.MonsterVo")
---SkillVoPool     = PoolVoProxy.New("Module.World.Vo.SkillVo")
+--SkillVoPool     = PoolVoProxy.New("Game.Modules.Battle.Vo.SkillVo")
 --AttributePool    = PoolVoProxy.New("Module.World.Vo.Attribute")
 --Icon = require("Module.Common.Icon.Icon")
 --Star = require("Module.Common.Star.Star")

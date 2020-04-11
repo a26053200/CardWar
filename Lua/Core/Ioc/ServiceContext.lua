@@ -14,6 +14,8 @@ end
 function ServiceContext:Launch()
     --TODO
 	self.binder:Bind(require("Game.Modules.Battle.Service.BattleService")):ToSingleton()
+	self.binder:Bind(require("Game.Modules.Card.Service.CardService")):ToSingleton()
+	self.binder:Bind(require("Game.Modules.Lobby.Service.LobbyService")):ToSingleton()
 	self.binder:Bind(require("Game.Modules.Login.Service.LoginService")):ToSingleton()
 	self.binder:Bind(require("Game.Modules.Role.Service.RoleService")):ToSingleton()
 	self.binder:Bind(require("Game.Modules.World.Service.WorldService")):ToSingleton()

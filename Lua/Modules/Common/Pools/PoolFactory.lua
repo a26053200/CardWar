@@ -4,7 +4,9 @@
 --- DateTime: 2019/6/25 14:15
 ---
 
----@class Module.Common.Pools.PoolFactory
+---@class PoolInfo
+
+---@class Game.Modules.Common.Pools.PoolFactory
 local PoolFactory = {}
 
 --统计对象池
@@ -69,8 +71,10 @@ function PoolFactory.GetAvatarPool(effectMaxNums,avatarInfo,avatarNum)
         for i = 1, #split do
             local skill = SkillConfig.Get(split[i])
             addEffectNum(skill.effect, avatarNum)
-            for _, animEffect in ipairs(skill.animEffect) do
-                addEffectNum(animEffect, avatarNum)
+            if skill.accountAction and isTable(skill.accountAction)then
+                for _, animEffect in ipairs(skill.accountAction.animEffect) do
+                    addEffectNum(animEffect, avatarNum)
+                end
             end
             addEffectNum(skill.hitEffect, 10)
             for j = 1, #skill.accounts do

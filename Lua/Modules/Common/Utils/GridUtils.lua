@@ -21,9 +21,9 @@ function GridUtils.GetNineGridPoints(center, forward, right, gridSize)
     grid[4] = center
     grid[5] = grid[4] + right * gridSize
     grid[6] = grid[4] + -right * gridSize
-    grid[7] = center + -forward * gridSize
-    grid[8] = grid[7] + right * gridSize
-    grid[9] = grid[7] + -right * gridSize
+    grid[9] = center + -forward * gridSize
+    grid[8] = grid[9] + right * gridSize
+    grid[7] = grid[9] + -right * gridSize
     return grid
 end
 

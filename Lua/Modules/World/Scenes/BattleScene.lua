@@ -15,8 +15,9 @@ function BattleScene:Ctor(subSceneInfo, unityScene)
     BattleScene.super.Ctor(self, subSceneInfo, unityScene)
 end
 
-function BattleScene:OnEnterScene()
-
+function SubScene:InitScene(checkPointData)
+    self.checkPointData = checkPointData
+    self:Show()
 end
 
 function BattleScene:OnExitScene()

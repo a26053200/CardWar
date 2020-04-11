@@ -4,105 +4,99 @@
 --- DateTime: 2019/5/21 22:48
 ---
 
-local BornArea = require("Game.Modules.Battle.Behaviors.BornArea")
 local BaseBehavior = require('Game.Modules.Common.Behavior.BaseBehavior')
 
 ---@class Game.Modules.Battle.Behaviors.BattleBehavior : Game.Modules.Common.Behavior.BaseBehavior
----@field battleInfo BattleInfo
----@field areaList table<number, Game.Modules.Battle.Behaviors.BornArea>
----@field bornAreas table<number, Game.Modules.Battle.Behaviors.BornArea>
----@field points table<number, UnityEngine.Vector3>
----@field monsterList table<number, Game.Modules.Battle.Items.Monster>
----@field lastArea Game.Modules.Battle.Behaviors.BornArea
+---@field checkPointData CheckPointData
+---@field context WorldContext
 local BattleBehavior = class("Game.Modules.Battle.Behaviors.BattleBehavior",BaseBehavior)
 
----@param battleInfo BattleInfo
----@param gameObject UnityEngine.GameObject
-function BattleBehavior:Ctor(battleInfo, gameObject)
-    BattleBehavior.super.Ctor(self, gameObject)
-    self.battleInfo = battleInfo
-    self.areaList = List.New()
-    self.bornAreas = List.New()
-
-    World.battleBehavior = self
-
-    BattleEvent.dispatcher:AddEventListener(BattleEvent.TargetDead, handler(self, self.OnTargetDead))
+---@param checkPointData CheckPointData
+---@param context UnityEngine.GameObject
+function BattleBehavior:Ctor(checkPointData, context)
+    BattleBehavior.super.Ctor(self)
+    self.context = context
+    self.checkPointData = checkPointData
 end
 
---初始化战场
+--创建战场
 function BattleBehavior:CreateBattle()
-    for i = 1, #self.battleInfo.areas do
-        local area = BornArea.New(self.battleInfo.areas[i])
-        self.areaList:Push(area)
-        area:Refresh()
-    end
-    self.bornAreas = self.areaList:Clone()
+
 end
 
---当前区域
----@return Game.Modules.Battle.Behaviors.BornArea
+--重置战场从头开始（阵型变化后调用）
+function BattleBehavior:ResetBattle()
+
+end
+
+--新的队列
+function BattleBehavior:NewQueue()
+
+end
+--统计对象池
+---@param sceneData CheckPointData
+---@return table<number,PoolInfo>
+function BattleBehavior:CalPoolsNum(sceneData)
+
+end
+
+--获取当前区域
+---@return Game.Modules.World.Layouts.AreaBase
 function BattleBehavior:GetCurrArea()
-    return self.bornAreas:Peek()
+
 end
 
---下一个区域
----@return Game.Modules.Battle.Behaviors.BornArea
+--下一区域
 function BattleBehavior:NextArea()
-    self:Debug("下一个区域")
-    if self.bornAreas:Size() == 0 then
-        self.bornAreas = self.areaList:Clone()
-    else
-        return self.bornAreas:Shift()
-    end
 
 end
 
----@param event BattleEvent
-function BattleBehavior:OnTargetDead(event)
-    local currArea = World.battleBehavior:GetCurrArea()
-    if currArea:IsAllDead() then
-        self:OnAreaAllDead()
-    end
-end
 
-function BattleBehavior:OnAreaAllDead()
-    self.lastArea = World.battleBehavior:GetCurrArea()
-    self:Debug("当前区域所有怪物都已经死亡")
-
-    self:NextArea()
-    self:StartCoroutine(function()
-        while self.lastArea:IsAllDeadOver() do
-            coroutine.step()
-        end
-        self:OnAreaAllDeadOver()
-    end)
-end
-
-function BattleBehavior:OnAreaAllDeadOver()
-    self:Debug("当前区域所有怪物都已经死亡结束")
-    self.lastArea:Clear()
-    self:Debug("清除上一个区域")
-end
-
-
----@param func Handler
-function BattleBehavior:ForEachMonster(func)
-    for i = 1, #self.bornAreas do
-        for j = 1, #self.bornAreas[i].waves do
-            for n = 1, #self.bornAreas[i].waves[j].monsterList do
-                func:Execute(self.bornAreas[i].waves[j].monsterList[n])
+--获取某阵营所有单位
+---@param camp Camp
+---@param includeDead boolean 是否包含死亡单位
+---@return List | table<number, Game.Modules.Battle.Items.Avatar>
+function BattleBehavior:GetCampAvatarList(camp, includeDead)
+    if camp == Camp.Atk then
+        local heroList = self.context.heroList
+        if not includeDead then
+            local tempList = List.New()
+            for i = 1, #heroList do
+                if not heroList[i]:IsDead() and heroList[i].layoutIndex ~= 0 then
+                    tempList:Add(heroList[i])
+                end
             end
+            return tempList
+        else
+            return List.New(heroList)
+        end
+    else
+        local tempList = List.New()
+        if self:GetCurrArea() then
+            local monsterList = self:GetCurrArea().currWave.monsterList
+            if not includeDead then
+                for i = 1, monsterList:Size() do
+                    if not monsterList[i]:IsDead() then
+                        tempList:Add(monsterList[i])
+                    end
+                end
+                return tempList
+            else
+                return monsterList
+            end
+        else
+            return tempList
         end
     end
 end
 
----@param func Handler
-function BattleBehavior:ForEach(func)
-    for i = 1, #self.bornAreas do
-        func:Execute(self.bornAreas[i])
+--回到起点
+function BattleBehavior:Clear()
+    self:_debug("强制清场")
+    if self:GetCurrArea() then
+        self:GetCurrArea():Clear()
     end
 end
-
 
 function BattleBehavior:Dispose()
     BattleBehavior.super.Dispose(self)

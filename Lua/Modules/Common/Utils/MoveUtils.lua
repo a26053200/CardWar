@@ -24,7 +24,7 @@ end
 
 
 -- 获取目标点数组最近的格子节点
----@param src Module.World.Items.Avatar
+---@param src Game.Modules.Battle.Items.Avatar
 ---@param points table<number, Framework.AroundPoint>
 ---@return Framework.AroundPoint
 function MoveUtils.GetNearestPoint(src, points, checkOverlap)
@@ -43,7 +43,7 @@ function MoveUtils.GetNearestPoint(src, points, checkOverlap)
 end
 
 -- 获取目标点数组最近的格子节点
----@param src Module.World.Items.Avatar
+---@param src Game.Modules.Battle.Items.Avatar
 ---@param points table<number, Framework.AroundPoint>
 ---@return Framework.AroundPoint
 function MoveUtils.GetAroundNearestPoint(src, points)

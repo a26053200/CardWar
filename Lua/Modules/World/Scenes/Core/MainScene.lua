@@ -56,7 +56,7 @@ function MainScene:LoadSubLevel(subLevel, callback)
             log("加载子场景完成:"..subSceneInfo.level)
             self.currSubSceneInfo = subSceneInfo
             self.currSubScene = subScene
-            subScene:Init()
+            subScene:OnInitialize()
             subScene:OnEnterScene()
             if callback ~= nil then
                 callback(subScene)

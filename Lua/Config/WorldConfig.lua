@@ -36,7 +36,7 @@ WorldConfig.World = {
             level = "Lobby",
             levelUrl = "Scenes/Lobby.unity",
         },
-        battle1 =
+        pve_research_1_UH =
           {
               sceneClass = "Game.Modules.World.Scenes.BattleScene",
               level = "pve_research_1_UH",

@@ -30,7 +30,7 @@ function MulitCameraCtrl:DelayEnableTouch(delay)
     end)
 end
 
----@param target Module.World.Items.Avatar
+---@param target Game.Modules.Battle.Items.Avatar
 function MulitCameraCtrl:StartAttachTarget(target, smooth)
     self.target = target
     self.attachCamera:Attach(target)
