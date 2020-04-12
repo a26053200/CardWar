@@ -5,9 +5,9 @@
 ---
 
 ---@class Game.Modules.Battle.Events.BattleEvents
----@field target Game.Modules.Battle.Items.Avatar
----@field hero Game.Modules.Battle.Items.Hero
----@field monster Game.Modules.Battle.Items.Monster
+---@field target Game.Modules.World.Items.Avatar
+---@field hero Game.Modules.World.Items.Hero
+---@field monster Module.World.Items.Monster
 ---@field callback Handler
 local BattleEvents = {}
 

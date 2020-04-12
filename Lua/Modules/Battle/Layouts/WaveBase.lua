@@ -17,7 +17,7 @@ local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 ---@field waveInfo WaveBaseInfo
 ---@field context WorldContext
 ---@field isActive boolean
----@field monsterList List | table<number, Game.Modules.Battle.Items.Avatar>
+---@field monsterList List | table<number, Game.Modules.World.Items.Avatar>
 local WaveBase = class("Game.Modules.World.Layouts.WaveBase",LuaMonoBehaviour)
 
 ---@param waveInfo WaveBaseInfo

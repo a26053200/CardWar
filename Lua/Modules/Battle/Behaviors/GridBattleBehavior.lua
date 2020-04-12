@@ -5,17 +5,17 @@
 --- 九宫格布局
 ---
 
-local GridBattleEvents = require("Module.Battle.Events.GridBattleEvents")
-local SceneItemEvents = require("Module.World.Events.SceneItemEvents")
-local GridArea = require("Module.Battle.Layouts.GridArea")
-local BattleBehavior = require("Module.World.Behaviors.BattleBehavior")
+local BattleEvents = require("Game.Modules.Battle.Events.BattleEvents")
+local SceneItemEvents = require("Game.Modules.Battle.Events.BattleItemEvents")
+local GridArea = require("Game.Modules.Battle.Layouts.GridArea")
+local BattleBehavior = require("Game.Modules.World.Behaviors.BattleBehavior")
 
----@class Module.Battle.Behaviors.GridBattleBehavior : Module.World.Behaviors.BattleBehavior
----@field New fun(checkPointData:CheckPointData, context:WorldContext):Module.World.Behaviors.BattleBehavior
----@field areas table<number,Module.Battle.Layouts.GridArea>  刷新区域数据
----@field areaQueue List | table<number, Module.Battle.Layouts.GridArea>  刷新区域数据 刷新区域队列
----@field lastArea Module.Battle.Layouts.GridArea 上一区域
-local GridBattleBehavior = class("Module.Battle.Behaviors.GridBattleBehavior",BattleBehavior)
+---@class Game.Modules.Battle.Behaviors.GridBattleBehavior : Module.World.Behaviors.BattleBehavior
+---@field New fun(checkPointData:CheckPointData, context:WorldContext):Game.Modules.Battle.Behaviors.BattleBehavior
+---@field areas table<number,Game.Modules.Battle.Layouts.GridArea>  刷新区域数据
+---@field areaQueue List | table<number, Game.Modules.Battle.Layouts.GridArea>  刷新区域数据 刷新区域队列
+---@field lastArea Game.Modules.Battle.Layouts.GridArea 上一区域
+local GridBattleBehavior = class("Game.Modules.Battle.Behaviors.GridBattleBehavior",BattleBehavior)
 
 ---@param checkPointData CheckPointData
 ---@param context WorldContext
@@ -24,7 +24,7 @@ function GridBattleBehavior:Ctor(checkPointData, context)
     self.checkPointData = checkPointData
     self.areas = {}
 
-    AddEventListener(SceneItemEvents, SceneItemEvents.MonsterDead, self.OnMonsterDead, self)
+    AddEventListener(SceneItemEvents, SceneItemEvents.BattleItemDead, self.OnMonsterDead, self)
 end
 
 function GridBattleBehavior:CreateBattle()
@@ -57,7 +57,7 @@ function GridBattleBehavior:NextArea()
 end
 
 --获取当前波怪物数据
----@return Module.Battle.Layouts.GridArea
+---@return Game.Modules.Battle.Layouts.GridArea
 function GridBattleBehavior:GetCurrArea()
     --if self.currBossArea and self.currBossArea.isActive then
     --    return self.currBossArea
@@ -72,7 +72,7 @@ function GridBattleBehavior:OnMonsterDead(event)
     end
     if self:GetCurrArea():IsAllDead() then
         self.isAllDead = true
-        GridBattleEvents.Dispatch(GridBattleEvents.AllMonsterDead)
+        BattleEvents.Dispatch(BattleEvents.AllMonsterDead)
         self:OnCurrAreaAllDead()
         --print("OnTargetDead IsAllDead true - " .. self:GetCurrArea():GetAliveNum())
     else
@@ -108,7 +108,7 @@ function GridBattleBehavior:OnCurrAreaAllDeadOver()
         self:_debug("清除上一区域怪 areaId:" .. self.lastArea.areaInfo.areaId)
         self.lastArea:Clear()
         self:_debug("当前区域所有怪物死亡结束 areaId:" .. self.lastArea.areaInfo.areaId)
-        GridBattleEvents.Dispatch(GridBattleEvents.AllMonsterDeadOver)
+        BattleEvents.Dispatch(BattleEvents.AllMonsterDeadOver)
     end
 end
 
@@ -116,7 +116,7 @@ end
 function GridBattleBehavior:Dispose()
     GridBattleBehavior.super.Dispose(self)
     self:Clear()
-    RemoveEventListener(SceneItemEvents, SceneItemEvents.MonsterDead, self.OnMonsterDead, self)
+    RemoveEventListener(SceneItemEvents, SceneItemEvents.BattleItemDead, self.OnMonsterDead, self)
 end
 
 return GridBattleBehavior

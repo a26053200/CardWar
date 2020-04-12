@@ -8,7 +8,7 @@
 local LuaMonoBehaviour = require("Core.LuaMonoBehaviour")
 ---@class Game.Modules.Battle.View.LayoutGrid : Core.LuaMonoBehaviour
 ---@field New fun(grid:UnityEngine.GameObject, index:number, forward:UnityEngine.Vector3):Game.Modules.Battle.View.LayoutGrid
----@field owner Game.Modules.Battle.Items.Avatar
+---@field owner Game.Modules.World.Items.Avatar
 ---@field forward UnityEngine.Vector3
 ---@field gridMat UnityEngine.Material
 ---@field selectMat UnityEngine.Material
@@ -42,7 +42,7 @@ function LayoutGrid:Ctor(gameObject, index, forward)
     self.indexTextMesh.text = tostring(index)
 end
 
----@param owner Game.Modules.Battle.Items.Avatar
+---@param owner Game.Modules.World.Items.Avatar
 function LayoutGrid:SetOwner(owner)
     self.owner = owner
     self.owner:SetBornPos(self.transform.position, self.forward)

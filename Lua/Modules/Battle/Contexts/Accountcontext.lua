@@ -5,14 +5,14 @@
 --- 攻击结算上下文
 ---
 
-local PoolVo = require("Module.Common.Pools.PoolObject")
+local PoolVo = require("Game.Modules.Common.Pools.PoolObject")
 ---@class Module.World.Contexts.AccountContext : Game.Modules.Common.Pools.PoolObject
 ---@field New fun():Module.World.Contexts.AccountContext
----@field avatar Game.Modules.Battle.Items.Avatar 攻击者
----@field targetList table<number, Game.Modules.Battle.Items.Avatar> 目标
----@field accountTargetList table<number, Game.Modules.Battle.Items.Avatar> 已经被结算的目标
+---@field avatar Game.Modules.World.Items.Avatar 攻击者
+---@field targetList table<number, Game.Modules.World.Items.Avatar> 目标
+---@field accountTargetList table<number, Game.Modules.World.Items.Avatar> 已经被结算的目标
 ---@field account AccountInfo
----@field effect Module.World.Items.EffectItem --特效结算
+---@field effect Game.Modules.World.Items.EffectItem --特效结算
 local AccountContext = class("Module.World.Contexts.AccountContext", PoolVo)
 
 local Sid = 1
@@ -22,7 +22,7 @@ function AccountContext:Ctor()
 end
 
 ---@param skillVo Game.Modules.Battle.Vo.SkillVo
----@param attacker Game.Modules.Battle.Items.Avatar
+---@param attacker Game.Modules.World.Items.Avatar
 ---@param account AccountInfo
 function AccountContext:Init(skillVo, attacker, account)
     self.id = Sid
@@ -51,7 +51,7 @@ function AccountContext:HasAccount(target)
     return self.accountTargetList:Contain(target)
 end
 --结算
----@param target Game.Modules.Battle.Items.Avatar
+---@param target Game.Modules.World.Items.Avatar
 function AccountContext:OnAccount(target)
     self.accountTargetList:Add(target)
     self:DamageAccount(self.skillVo, self.account, target)
@@ -60,7 +60,7 @@ function AccountContext:OnAccount(target)
 end
 
 --最终伤害结算
----@param target Game.Modules.Battle.Items.Avatar
+---@param target Game.Modules.World.Items.Avatar
 ---@param skillVo Game.Modules.Battle.Vo.SkillVo
 ---@param account AccountInfo
 function AccountContext:DamageAccount(skillVo, account, target)
@@ -122,7 +122,7 @@ function AccountContext:DamageAccount(skillVo, account, target)
 end
 
 --受击表现
----@param target Game.Modules.Battle.Items.Avatar
+---@param target Game.Modules.World.Items.Avatar
 ---@param skillInfo SkillInfo
 ---@param account AccountInfo
 function AccountContext:DisplayHurt(target, skillInfo, account)

@@ -38,7 +38,7 @@ function AStarTools.GetAroundNodes(grid, center, d)
 end
 
 --获取一定距离周围点
----@param src Game.Modules.Battle.Items.Avatar
+---@param src Game.Modules.World.Items.Avatar
 ---@param nodes table<number, AroundNode>
 ---@return AroundNode
 function AStarTools.GetNearestNode(src, nodes)

@@ -15,8 +15,8 @@
 ---@field enterScript string  进入该区域触发的剧情
 ---@field exitScript string   离开该区域触发的剧情
 
-local Monster = require("Module.World.Items.Monster")
-local WaveBase = require("Module.World.Layouts.WaveBase")
+local Monster = require("Game.Modules.World.Items.Monster")
+local WaveBase = require("Game.Modules.World.Layouts.WaveBase")
 
 ---@class Game.Modules.Battle.Layouts.GridWave : Game.Modules.World.Layouts.WaveBase
 ---@field New fun(waveInfo:GridWaveInfo, forward:UnityEngine.Vector3):Game.Modules.Battle.Layouts.GridWave
@@ -62,7 +62,7 @@ function GridWave:Refresh(callback)
                 else
                     monster:OnBorn()
                 end
-                monster:CreateHpBar()
+                --monster:CreateHpBar()
                 monster:ResetAttr()
                 monster.isBorn = true
                 monster:SetRenderEnabled(true)

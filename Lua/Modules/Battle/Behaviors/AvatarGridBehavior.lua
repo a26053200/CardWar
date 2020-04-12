@@ -5,16 +5,16 @@
 --- 九宫格玩法-单位的基本行为
 ---
 
-local GridBattleEvent = require("Module.Battle.Events.GridBattleEvents")
+local BattleEvent = require("Game.Modules.Battle.Events.BattleEvents")
 local BaseBehavior = require("Game.Modules.Battle.Behaviors.BattleBehavior")
 
 ---@class Game.Modules.Battle.Behaviors.AvatarGridBehavior : Game.Modules.Common.Behavior.BaseBehavior
----@field avatar Game.Modules.Battle.Items.Avatar
----@field target Game.Modules.Battle.Items.Avatar
+---@field avatar Game.Modules.World.Items.Avatar
+---@field target Game.Modules.World.Items.Avatar
 ---@field currArea Game.Modules.Battle.Layouts.GridArea
 local AvatarGridBehavior = class("Game.Modules.Battle.Behaviors.AvatarGridBehavior",BaseBehavior)
 
----@param avatar Game.Modules.Battle.Items.Avatar
+---@param avatar Game.Modules.World.Items.Avatar
 function AvatarGridBehavior:Ctor(avatar)
     AvatarGridBehavior.super.Ctor(self, avatar.gameObject)
     self.avatar = avatar
@@ -169,7 +169,7 @@ end
 
 --技能释放
 ---@param behavior Game.Modules.Common.Behavior.BaseBehavior
----@param target Game.Modules.Battle.Items.Avatar
+---@param target Game.Modules.World.Items.Avatar
 ---@param skill Game.Modules.Battle.Vo.SkillVo
 function AvatarGridBehavior:OnSkillUse(behavior, target, targetPos, skill)
     skill.startTime = Time.time --是否成功开始计时

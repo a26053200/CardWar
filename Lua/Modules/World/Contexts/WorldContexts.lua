@@ -4,14 +4,14 @@
 --- DateTime: 2020/4/10 23:37
 ---
 
-local Hero = require("Module.World.Items.Hero")
+local Hero = require("Game.Modules.World.Items.Hero")
 
 ---@class WorldContext
 ---@field New fun()
 ---@field id number
 ---@field currSubScene Game.Modules.World.Scenes.Core.SubScene  当前子场景
 ---@field battleBehavior Game.Modules.Battle.Behaviors.BattleBehavior    战场行为
----@field heroList table<number, Game.Modules.Battle.Items.Hero>
+---@field heroList table<number, Game.Modules.World.Items.Hero>
 ---@field avatarRoot UnityEngine.GameObject
 ---@field pool Game.Modules.Common.Pools.AssetPoolProxy 对象池
 ---@field attachCamera Game.Modules.Common.Components.AttachCamera
@@ -63,14 +63,14 @@ function WorldContext:CreateBattleHero(card, camp)
     return hero
 end
 
----@param hero Module.World.Items.Hero
+---@param hero Game.Modules.World.Items.Hero
 function WorldContext:AddHero(hero)
     table.insert(self.heroList, hero)
     hero.layoutIndex = hero.ownerCardVo.layoutIndex
 end
 
 ---@param cardInfo Game.Modules.Card.Vo.CardVo
----@return Module.World.Items.Hero
+---@return Game.Modules.World.Items.Hero
 function WorldContext:GetHeroByCard(cardInfo)
     for i = 1, #self.heroList do
         if self.heroList[i].ownerCardVo == cardInfo then
@@ -81,7 +81,7 @@ function WorldContext:GetHeroByCard(cardInfo)
     return nil
 end
 
----@param hero Module.World.Items.Hero
+---@param hero Game.Modules.World.Items.Hero
 function WorldContext:RemoveHero(hero)
     for i = 1, #self.heroList do
         if self.heroList[i] == hero then

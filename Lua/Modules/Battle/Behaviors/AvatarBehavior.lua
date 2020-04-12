@@ -8,15 +8,15 @@ local AutoMove = require('Game.Modules.Battle.Behaviors.AutoMove')
 local BaseBehavior = require('Game.Modules.Common.Behavior.BaseBehavior')
 
 ---@class Game.Modules.Battle.Behaviors.AvatarBehavior : Game.Modules.Common.Behavior.BaseBehavior
----@field avatar Game.Modules.Battle.Items.Avatar
----@field target Game.Modules.Battle.Items.Avatar
+---@field avatar Game.Modules.World.Items.Avatar
+---@field target Game.Modules.World.Items.Avatar
 ---@field autoMove Game.Modules.Battle.Behaviors.AutoMove
 ---@field currArea Game.Modules.Battle.Behaviors.BornArea
 local AvatarBehavior = class("Game.Modules.Battle.Behaviors.AvatarBehavior",BaseBehavior)
 
 local s_id = 1
 
----@param avatar Game.Modules.Battle.Items.Avatar
+---@param avatar Game.Modules.World.Items.Avatar
 function AvatarBehavior:Ctor(avatar)
     s_id = s_id + 1
     AvatarBehavior.super.Ctor(self, avatar.gameObject)
@@ -150,7 +150,7 @@ function AvatarBehavior:OnSkillEnd(behavior, skillInfo)
     self.startTime = 0
 end
 
----@param target Game.Modules.Battle.Items.Avatar
+---@param target Game.Modules.World.Items.Avatar
 ---@param skillInfo SkillInfo
 ---@param accountInfo AccountInfo
 function AvatarBehavior:OnAccountSkill(target, skillInfo, accountInfo)

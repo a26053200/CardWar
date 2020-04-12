@@ -8,20 +8,20 @@
 local BehaviorStrategyBase = require("Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase")
 
 ---@class Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy:Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase
----@field New fun(avatar : Game.Modules.Battle.Items.Avatar):Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy
----@field avatar Game.Modules.Battle.Items.Avatar
+---@field New fun(avatar : Game.Modules.World.Items.Avatar):Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy
+---@field avatar Game.Modules.World.Items.Avatar
 ---@field aiParam table<string, any> --AI参数
 ---@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
 ---@field canUseList table<number, Game.Modules.Battle.Vo.SkillVo>
 ---@field currSelectedSkill Game.Modules.Battle.Vo.SkillVo 当前被选中的技能
----@field lastTarget Game.Modules.Battle.Items.Avatar
+---@field lastTarget Game.Modules.World.Items.Avatar
 ---@field lastTargetPos UnityEngine.Vector3
 ---@field currTargetAttackNum number 当前目标被攻击的次数
 ---@field targetStartAttackTime number 当前目标被攻击的时间
 local GridBehaviorStrategy = class("Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy",BehaviorStrategyBase)
 
 
----@param avatar Game.Modules.Battle.Items.Avatar
+---@param avatar Game.Modules.World.Items.Avatar
 function GridBehaviorStrategy:Ctor(avatar)
     self.avatar = avatar
     self.skills = avatar.avatarVo.skills
@@ -32,7 +32,7 @@ function GridBehaviorStrategy:AutoSelectSkill()
     return GridBehaviorStrategy.super.AutoSelectSkill(self)
 end
 
----@return Game.Modules.Battle.Items.Avatar
+---@return Game.Modules.World.Items.Avatar
 function GridBehaviorStrategy:AutoSelectTarget()
     local opposeCamp = BattleUtils.GetOpposeCamp(self.avatar.avatarVo.camp) --对立阵营
     --首先攻击对位
@@ -48,7 +48,7 @@ function GridBehaviorStrategy:AutoSelectTarget()
 end
 
 --目标优先规则
----@return Game.Modules.Battle.Items.Avatar
+---@return Game.Modules.World.Items.Avatar
 function GridBehaviorStrategy:FetchTarget()
 
 end

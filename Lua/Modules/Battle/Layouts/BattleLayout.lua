@@ -84,7 +84,7 @@ function BattleLayout:Move(src, dst)
     end)
 end
 
----@param owner Game.Modules.Battle.Items.Avatar
+---@param owner Game.Modules.World.Items.Avatar
 ---@return Game.Modules.Battle.View.LayoutGrid
 function BattleLayout:GetLayoutGridByOwner(owner)
     local layoutGrids = self.gridLayoutMap[owner.avatarVo.camp]

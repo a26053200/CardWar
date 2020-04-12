@@ -5,7 +5,7 @@
 --- 多控制器相机，管理相机的多种控制器
 ---
 
-local AttachCamera = require("Module.Common.Widgets.AttachCamera")
+local AttachCamera = require("Game.Modules.Common.Components.AttachCamera")
 local Widget = require("Game.Modules.Common.Components.Widget")
 
 ---@class Module.Common.Widgets.MulitCameraCtrl : Game.Modules.Common.Components.Widget
@@ -30,7 +30,7 @@ function MulitCameraCtrl:DelayEnableTouch(delay)
     end)
 end
 
----@param target Game.Modules.Battle.Items.Avatar
+---@param target Game.Modules.World.Items.Avatar
 function MulitCameraCtrl:StartAttachTarget(target, smooth)
     self.target = target
     self.attachCamera:Attach(target)

@@ -15,10 +15,10 @@
 ---动态数据
 ---@field index number
 
-local SceneItemEvents = require("Module.World.Events.SceneItemEvents")
-local GridBattleEvent = require("Module.Battle.Events.GridBattleEvents")
-local GridWave = require("Module.Battle.Layouts.GridWave")
-local AreaBase = require("Module.World.Layouts.AreaBase")
+local BattleItemEvents = require("Game.Modules.Battle.Events.BattleItemEvents")
+local BattleEvent = require("Game.Modules.Battle.Events.BattleEvents")
+local GridWave = require("Game.Modules.Battle.Layouts.GridWave")
+local AreaBase = require("Game.Modules.World.Layouts.AreaBase")
 
 ---@class Game.Modules.Battle.Layouts.GridArea : Game.Modules.World.Layouts.AreaBase
 ---@field New fun(areaInfo:GridAreaInfo, checkPointData:CheckPointData):Game.Modules.Battle.Layouts.GridArea
@@ -29,7 +29,7 @@ local AreaBase = require("Module.World.Layouts.AreaBase")
 ---@field currWave Game.Modules.Battle.Layouts.GridWave
 ---@field areaPointObj UnityEngine.GameObject
 ---@field battleCmd Module.Battle.Cmd.BattleCmd
-local GridArea = class("Module.Battle.Layouts.GridArea", AreaBase)
+local GridArea = class("Game.Modules.Battle.Layouts.GridArea", AreaBase)
 
 ---@param areaInfo GridAreaInfo
 ---@param checkPointData CheckPointData
@@ -38,7 +38,7 @@ function GridArea:Ctor(areaInfo, checkPointData)
     self.areaInfo = areaInfo
     self.checkPointData = checkPointData
     self.waves = {}
-    self.battleCmd = vmgr:CreateCommand(require("Module.Battle.Cmd.BattleCmd"))
+    self.battleCmd = vmgr:CreateCommand(require("Game.Modules.Battle.Cmd.BattleCmd"))
 end
 
 --初始化该区域
@@ -66,7 +66,7 @@ function GridArea:Refresh()
     if self.isActive then
         return --重复激活
     end
-    AddEventListener(SceneItemEvents, SceneItemEvents.MonsterDead, self.OnMonsterDead, self)
+    AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnMonsterDead, self)
     self:_debug(("GridArea Ready to Refresh AreaId:" .. self.areaInfo.areaIndex))
     self:DoActive()
     --BattleUtils.CreateGrid(self.orgBornPoints, self.forward, self.context)
@@ -130,7 +130,7 @@ function GridArea:DoActive()
                 self.currWave = wave
                 lastWave = wave
                 if i == 1 then
-                    GridBattleEvent.Dispatch(GridBattleEvent.BattleStart)
+                    BattleEvent.Dispatch(BattleEvent.BattleStart)
                 end
             end
         end , self))
@@ -203,7 +203,7 @@ function GridArea:IsAllDeadOver()
     return allDead
 end
 
----@param event Module.World.Events.SceneItemEvents
+---@param event Game.Modules.World.Events.BattleItemEvents
 function GridArea:OnMonsterDead(event)
     if event and event.target then
         --local grid = self.context.battleLayout:GetLayoutGridByOwner(event.target)
@@ -212,7 +212,7 @@ function GridArea:OnMonsterDead(event)
 end
 
 function GridArea:Clear()
-    RemoveEventListener(SceneItemEvents, SceneItemEvents.MonsterDead, self.OnMonsterDead, self)
+    RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnMonsterDead, self)
 end
 
 return GridArea

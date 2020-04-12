@@ -4,13 +4,12 @@
 --- DateTime: 2019-05-18-23:22:49
 ---
 
-local SceneItemEvents = require("Module.World.Events.SceneItemEvents")
-local AttachCamera = require("Module.Common.Widgets.AttachCamera")
-local GridBattleBehavior = require("Module.Battle.Behaviors.GridBattleBehavior")
-local RoundBehavior = require("Module.Battle.Behaviors.RoundBehavior")
-local BattleEvents = require("Module.World.Events.BattleEvents")
-local GridBattleEvents = require("Module.Battle.Events.GridBattleEvents")
-local BattleBaseMdr = require("Module.Battle.View.BattleMdrBase")
+local BattleItemEvents = require("Game.Modules.Battle.Events.BattleItemEvents")
+local AttachCamera = require("Game.Modules.Common.Components.AttachCamera")
+local GridBattleBehavior = require("Game.Modules.Battle.Behaviors.GridBattleBehavior")
+local RoundBehavior = require("Game.Modules.Battle.Behaviors.RoundBehavior")
+local BattleEvents = require("Game.Modules.Battle.Events.BattleEvents")
+local BattleBaseMdr = require("Game.Modules.Battle.View.BattleMdrBase")
 ---@class Module.Battle.View.BattleGridMdr : Game.Modules.Battle.View.BattleMdrBase
 ---@field battleModel Game.Modules.Battle.Model.BattleModel
 ---@field battleService Game.Modules.Battle.Service.BattleService
@@ -22,12 +21,12 @@ end
 
 function BattleMdr:RegisterListeners()
     BattleMdr.super.RegisterListeners(self)
-    AddEventListener(GridBattleEvents, GridBattleEvents.BattleStart, self.OnGridBattleStart, self)
-    AddEventListener(GridBattleEvents, GridBattleEvents.BattlePause, self.OnBattlePause, self)
-    AddEventListener(GridBattleEvents, GridBattleEvents.BattleResume, self.OnBattleResume, self)
-    AddEventListener(GridBattleEvents, GridBattleEvents.AllMonsterDeadOver, self.OnAllMonsterDeadOver, self)
-    AddEventListener(SceneItemEvents, SceneItemEvents.MonsterDead, self.OnMonsterDead, self)
-    AddEventListener(SceneItemEvents, SceneItemEvents.MonsterBorn, self.OnMonsterBorn, self)
+    AddEventListener(BattleEvents, BattleEvents.BattleStart, self.OnGridBattleStart, self)
+    AddEventListener(BattleEvents, BattleEvents.BattlePause, self.OnBattlePause, self)
+    AddEventListener(BattleEvents, BattleEvents.BattleResume, self.OnBattleResume, self)
+    AddEventListener(BattleEvents, BattleEvents.AllMonsterDeadOver, self.OnAllMonsterDeadOver, self)
+    AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnMonsterDead, self)
+    AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemBorn, self.OnMonsterBorn, self)
 end
 
 ---@param event Game.Modules.Battle.Events.BattleEvents
@@ -40,14 +39,14 @@ function BattleMdr:OnBattleResume(event)
     self.roundBehavior:Resume()
 end
 
----@param event Module.World.Events.SceneItemEvents
+---@param event Game.Modules.World.Events.BattleItemEvents
 function BattleMdr:OnMonsterBorn(event)
     if event.target.avatarInfo.quality == MonsterQuality.Boss then
 
     end
 end
 
----@param event Module.World.Events.SceneItemEvents
+---@param event Game.Modules.World.Events.BattleItemEvents
 function BattleMdr:OnMonsterDead(event)
     if event.target.avatarInfo.quality == MonsterQuality.Boss then
         self.context.battleLayout:SetAllGridVisible(Camp.Def,false)
@@ -141,11 +140,11 @@ function BattleMdr:OnBattleStart()
 end
 
 function BattleMdr:OnRemove()
-    RemoveEventListener(GridBattleEvents, GridBattleEvents.BattleStart, self.OnGridBattleStart, self)
-    RemoveEventListener(GridBattleEvents, GridBattleEvents.BattlePause, self.OnBattlePause, self)
-    RemoveEventListener(GridBattleEvents, GridBattleEvents.AllMonsterDeadOver, self.OnAllMonsterDeadOver, self)
-    RemoveEventListener(SceneItemEvents, SceneItemEvents.MonsterDead, self.OnMonsterDead, self)
-    RemoveEventListener(SceneItemEvents, SceneItemEvents.MonsterBorn, self.OnMonsterBorn, self)
+    RemoveEventListener(BattleEvents, BattleEvents.BattleStart, self.OnGridBattleStart, self)
+    RemoveEventListener(BattleEvents, BattleEvents.BattlePause, self.OnBattlePause, self)
+    RemoveEventListener(BattleEvents, BattleEvents.AllMonsterDeadOver, self.OnAllMonsterDeadOver, self)
+    RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnMonsterDead, self)
+    RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemBorn, self.OnMonsterBorn, self)
 
     if self.roundBehavior then
         self.roundBehavior:Dispose()

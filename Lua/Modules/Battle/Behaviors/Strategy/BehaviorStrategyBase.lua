@@ -8,20 +8,20 @@
 local LuaObject = require("Core.LuaObject")
 
 ---@class Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase:LuaObject
----@field New fun(avatar : Game.Modules.Battle.Items.Avatar)
----@field avatar Game.Modules.Battle.Items.Avatar
+---@field New fun(avatar : Game.Modules.World.Items.Avatar)
+---@field avatar Game.Modules.World.Items.Avatar
 ---@field aiParam table<string, any> --AI参数
 ---@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
 ---@field canUseList table<number, Game.Modules.Battle.Vo.SkillVo>
 ---@field currSelectedSkill Game.Modules.Battle.Vo.SkillVo 当前被选中的技能
----@field lastTarget Game.Modules.Battle.Items.Avatar
+---@field lastTarget Game.Modules.World.Items.Avatar
 ---@field lastTargetPos Vector3
 ---@field currTargetAttackNum number 当前目标被攻击的次数
 ---@field targetStartAttackTime number 当前目标被攻击的时间
 local BehaviorStrategyBase = class("Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase",LuaObject)
 
 
----@param avatar Game.Modules.Battle.Items.Avatar
+---@param avatar Game.Modules.World.Items.Avatar
 function BehaviorStrategyBase:Ctor(avatar)
     self.avatar = avatar
     self.skills = avatar.avatarVo.skills
@@ -100,19 +100,19 @@ function BehaviorStrategyBase:SetNecessarySkill(skillIndex)
 
 end
 
----@return Game.Modules.Battle.Items.Avatar
+---@return Game.Modules.World.Items.Avatar
 function BehaviorStrategyBase:AutoSelectTarget()
 
 end
 
 --目标优先规则
----@return Game.Modules.Battle.Items.Avatar
+---@return Game.Modules.World.Items.Avatar
 function BehaviorStrategyBase:FetchTarget()
 
 end
 
 --目标是否需要跟换
----@return Game.Modules.Battle.Items.Avatar
+---@return Game.Modules.World.Items.Avatar
 function BehaviorStrategyBase:CheckTargetNeedChange()
 
 end

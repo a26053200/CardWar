@@ -9,7 +9,7 @@ local BaseBehavior = require('Game.Modules.Common.Behavior.BaseBehavior')
 ---@class Game.Modules.Battle.Behaviors.AutoMove : Game.Modules.Common.Behavior.BaseBehavior
 ---@field New fun() : Game.Modules.Battle.Behaviors.AutoMove
 ---@field areaInfo AreaInfo
----@field avatar Game.Modules.Battle.Items.Avatar
+---@field avatar Game.Modules.World.Items.Avatar
 ---@field grid AStar.Grid
 ---@field overCallback Handler
 ---@field stepCallback Handler
@@ -17,7 +17,7 @@ local BaseBehavior = require('Game.Modules.Common.Behavior.BaseBehavior')
 ---@field lastDistance number 上一次距离目标点距离
 local AutoMove = class("Game.Modules.Battle.Behaviors.AutoMove",BaseBehavior)
 
----@param avatar Game.Modules.Battle.Items.Avatar
+---@param avatar Game.Modules.World.Items.Avatar
 function AutoMove:Ctor(avatar)
     AutoMove.super.Ctor(self, avatar.gameObject)
     self.avatar = avatar

@@ -54,7 +54,7 @@ function AStarUtils.GetNeighbourNodes(grid, node, r)
 end
 
 -- 获取空格子
----@param src Game.Modules.Battle.Items.Avatar
+---@param src Game.Modules.World.Items.Avatar
 ---@param anodes table<number, AroundNode>
 ---@return table<number, AroundNode>
 function AStarUtils.GetDistanceNodes(src, anodes, distance)
@@ -69,7 +69,7 @@ function AStarUtils.GetDistanceNodes(src, anodes, distance)
 end
 
 -- 获取空格子
----@param src Game.Modules.Battle.Items.Avatar
+---@param src Game.Modules.World.Items.Avatar
 ---@param nodes table<number, AroundNode>
 ---@return AroundNode
 --function AStarUtils.GetAroundEmptyNode(nodes)
@@ -84,7 +84,7 @@ end
 --end
 
 -- 获取目标点数组最近的格子节点
----@param src Game.Modules.Battle.Items.Avatar
+---@param src Game.Modules.World.Items.Avatar
 ---@param nodes table<number, AroundNode>
 ---@return AroundNode
 function AStarUtils.GetAroundNearestNode(src, nodes)
@@ -114,7 +114,7 @@ function AStarUtils.GetAroundNearestNode(src, nodes)
 end
 
 -- 获取目标点数组最近的格子节点
----@param src Game.Modules.Battle.Items.Avatar
+---@param src Game.Modules.World.Items.Avatar
 ---@param points table<number, Framework.AroundPoint>
 ---@return Framework.AroundPoint
 function AStarUtils.GetAroundNearestPoint(src, points)
@@ -176,7 +176,7 @@ function AStarUtils.GetAroundNearestNodePos(src, nodes)
 end
 
 -- 获取目标点数组最远的格子节点
----@param src Game.Modules.Battle.Items.Avatar
+---@param src Game.Modules.World.Items.Avatar
 ---@param nodes table<number, AStar.Node>
 ---@return AroundNode
 function AStarUtils.GetAroundFarestNode(src, nodes)

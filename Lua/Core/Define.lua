@@ -43,7 +43,7 @@ Screen = UnityEngine.Screen
 edp = EventDispatcher.New() --全局事件派发器
 ListViewEvent = require("Betel.UI.ListViewEvent")
 BaseList = require("Betel.UI.BaseList")
---ListExtend = require("Module.Common.View.ListExtend") ---@type Module.Common.View.ListExtend
+--ListExtend = require("Game.Modules.Common.View.ListExtend") ---@type Module.Common.View.ListExtend
 ListItemRenderer = require("Betel.UI.ListItemRenderer")
 
 --- Global Events
@@ -89,11 +89,11 @@ FRAME_TIME = 1 / Application.targetFrameRate
 
 -- --------------- [ 项目自定义 ] --------------- --
 
---World = require("Module.World.World")
---BattleUtils = require("Module.Battle.Utils.BattleUtils")
---Plot = require("Module.Plot.Scripts.Plot")
---GuideLine = require("Module.Common.Effect.GuideLine")
---PerformancePlayer = require("Module.World.Performances.PerformancePlayer")
+--World = require("Game.Modules.World.World")
+--BattleUtils = require("Game.Modules.Battle.Utils.BattleUtils")
+--Plot = require("Game.Modules.Plot.Scripts.Plot")
+--GuideLine = require("Game.Modules.Common.Effect.GuideLine")
+--PerformancePlayer = require("Game.Modules.World.Performances.PerformancePlayer")
 
 ---Utils
 Convert     = require("Game.Modules.Common.Utils.Convert")
@@ -103,14 +103,14 @@ Math3D      = require("Game.Modules.Common.Utils.Math3D")
 File        = require("Game.Modules.Common.Utils.File")
 Tool        = require("Game.Modules.Common.Utils.Tool")
 TimeConvert = require("Game.Modules.Common.Utils.TimeConvert")
-PoolFactory = require("Game.Modules.Common.Utils.Pools.PoolFactory")
+PoolFactory = require("Game.Modules.Common.Pools.PoolFactory")
 BezierUtils = require("Game.Modules.Common.Utils.BezierUtils")
 
 ---Config
 --Config = require("Game.Data.Config")
 GameConst = require("Game.Config.GameConsts")
---StrategyConsts = require("Module.World.Behaviors.Strategy.StrategyConsts")
---BehaviorUtils = require("Module.World.Behaviors.BehaviorUtils")
+--StrategyConsts = require("Game.Modules.World.Behaviors.Strategy.StrategyConsts")
+--BehaviorUtils = require("Game.Modules.World.Behaviors.BehaviorUtils")
 --Language = require("Game.Data.Languages." .. Config.language)
 
 ---Static Data
@@ -136,19 +136,19 @@ CheckPointConfig    = require("Game.Data.CheckPointConfig")
 
 
 ---3rd
---AStarUtils = require("Module.Common.AStarUtils")
---MoveUtils = require("Module.Common.MoveUtils")
---GridUtils = require("Module.Common.GridUtils")
+--AStarUtils = require("Game.Modules.Common.AStarUtils")
+--MoveUtils = require("Game.Modules.Common.MoveUtils")
+--GridUtils = require("Game.Modules.Common.GridUtils")
 --Live2D = require("live2d.Live2D")
 --Live2D.init();
 
 
 ---对象池
---PoolVoProxy     = require("Module.Common.Pools.PoolVoProxy")
---HeroVoPool      = PoolVoProxy.New("Module.World.Vo.HeroVo")
+--PoolVoProxy     = require("Game.Modules.Common.Pools.PoolVoProxy")
+--HeroVoPool      = PoolVoProxy.New("Game.Modules.World.Vo.HeroVo")
 --MonsterVoPool   = PoolVoProxy.New("Module.World.Vo.MonsterVo")
 --SkillVoPool     = PoolVoProxy.New("Game.Modules.Battle.Vo.SkillVo")
 --AttributePool    = PoolVoProxy.New("Module.World.Vo.Attribute")
---Icon = require("Module.Common.Icon.Icon")
---Star = require("Module.Common.Star.Star")
---WorldIcon = require("Module.Common.Icon.WorldIcon")
+--Icon = require("Game.Modules.Common.Icon.Icon")
+--Star = require("Game.Modules.Common.Star.Star")
+--WorldIcon = require("Game.Modules.Common.Icon.WorldIcon")

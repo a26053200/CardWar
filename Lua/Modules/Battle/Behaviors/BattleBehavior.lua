@@ -55,7 +55,7 @@ end
 --获取某阵营所有单位
 ---@param camp Camp
 ---@param includeDead boolean 是否包含死亡单位
----@return List | table<number, Game.Modules.Battle.Items.Avatar>
+---@return List | table<number, Game.Modules.World.Items.Avatar>
 function BattleBehavior:GetCampAvatarList(camp, includeDead)
     if camp == Camp.Atk then
         local heroList = self.context.heroList

@@ -7,9 +7,9 @@
 
 
 local BattleLayout = require("Game.Modules.Battle.Layouts.BattleLayout")
-local BattleEvents = require("Module.World.Events.BattleEvents")
-local WorldContext = require("Module.World.Contexts.WorldContext")
-local PoolProxy = require("Module.Common.Pools.AssetPoolProxy")
+local BattleEvents = require("Game.Modules.World.Events.BattleEvents")
+local WorldContext = require("Game.Modules.World.Contexts.WorldContext")
+local PoolProxy = require("Game.Modules.Common.Pools.AssetPoolProxy")
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.Battle.View.BattleMdrBase : Game.Core.Ioc.BaseMediator
 ---@field battleModel Game.Modules.Battle.Model.BattleModel

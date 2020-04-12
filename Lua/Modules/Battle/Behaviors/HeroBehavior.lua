@@ -9,10 +9,10 @@ local AvatarBehavior = require('Game.Modules.Battle.Behaviors.AvatarBehavior')
 
 ---@class Game.Modules.Battle.Behaviors.HeroBehavior : Game.Modules.Battle.Behaviors.AvatarBehavior
 ---@field New fun() : Game.Modules.Battle.Behaviors.HeroBehavior
----@field hero Game.Modules.Battle.Items.Hero
+---@field hero Game.Modules.World.Items.Hero
 local HeroBehavior = class("Game.Modules.Battle.Behaviors.HeroBehavior",AvatarBehavior)
 
----@param hero Game.Modules.Battle.Items.Hero
+---@param hero Game.Modules.World.Items.Hero
 function HeroBehavior:Ctor(hero)
     self.hero = hero
     HeroBehavior.super.Ctor(self, hero)

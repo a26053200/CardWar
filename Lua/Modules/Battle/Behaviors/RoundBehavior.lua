@@ -5,18 +5,18 @@
 --- 回合制。计算谁先攻击；回合时间的暂停的继续
 ---
 
-local GridBattleEvent = require("Module.Battle.Events.GridBattleEvents")
-local BaseBehavior = require("Module.Common.Behavior.BaseBehavior")
+local BattleEvent = require("Game.Modules.Battle.Events.BattleEvents")
+local BaseBehavior = require("Game.Modules.Common.Behavior.BaseBehavior")
 
 ---@class Module.Battle.Behaviors.RoundBehavior : Game.Modules.Common.Behavior.BaseBehavior
 ---@field New fun(scene:Module.World.Scene.BattleScene):Module.Battle.Behaviors.RoundBehavior
----@field currArea Module.Battle.Layouts.GridArea
+---@field currArea Game.Modules.Battle.Layouts.GridArea
 ---@field context WorldContext
----@field currRoundAvatar Game.Modules.Battle.Items.Avatar 当前回合的Avatar
+---@field currRoundAvatar Game.Modules.World.Items.Avatar 当前回合的Avatar
 ---@field totalAttackNum number
 ---@field isRoundOver boolean
 ---@field isPause boolean
----@field attackSortList List | table<number, Game.Modules.Battle.Items.Avatar>
+---@field attackSortList List | table<number, Game.Modules.World.Items.Avatar>
 ---@field waitAttackOver boolean
 local RoundBehavior = class("Module.Battle.Behaviors.GridBattleBehavior",BaseBehavior)
 
@@ -90,7 +90,7 @@ function RoundBehavior:RoundProgress()
             while self.isPause do
                 coroutine.step(1)
             end
-            local currAvatar = self.attackSortList:Shift() ---@type Game.Modules.Battle.Items.Avatar
+            local currAvatar = self.attackSortList:Shift() ---@type Game.Modules.World.Items.Avatar
             if currAvatar and not currAvatar:IsDead() then
                 currAvatar:SetBehaviorEnabled(true)
                 self.waitAttackOver = true

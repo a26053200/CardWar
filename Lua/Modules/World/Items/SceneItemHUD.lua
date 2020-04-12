@@ -6,16 +6,16 @@
 
 local LuaMonoBehaviour = require('Betel.LuaMonoBehaviour')
 
----@class Game.Modules.Battle.Items.SceneItemHUD : Betel.LuaMonoBehaviour
----@field New fun(gameObject:UnityEngine.GameObject) : Game.Modules.Battle.Items.SceneItemHUD
----@field avatar Game.Modules.Battle.Items.Avatar
+---@class Game.Modules.World.Items.SceneItemHUD : Betel.LuaMonoBehaviour
+---@field New fun(gameObject:UnityEngine.GameObject) : Game.Modules.World.Items.SceneItemHUD
+---@field avatar Game.Modules.World.Items.Avatar
 ---@field hp UnityEngine.TextMesh
 ---@field name UnityEngine.TextMesh
-local SceneItemHUD = class("Game.Modules.Battle.Items.SceneItemHUD", LuaMonoBehaviour)
+local SceneItemHUD = class("Game.Modules.World.Items.SceneItemHUD", LuaMonoBehaviour)
 
 local Offset_Y = 2.1
 
----@param avatar Game.Modules.Battle.Items.Avatar
+---@param avatar Game.Modules.World.Items.Avatar
 function SceneItemHUD:Ctor(avatar)
     self.gameObject = Instantiate("Prefabs/Scene/SceneHUD.prefab",self.transform)
     SceneItemHUD.super.Ctor(self, self.gameObject)
