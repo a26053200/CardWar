@@ -13,16 +13,16 @@
 
 local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 
----@class Game.Modules.World.Layouts.AreaBase : Betel.LuaMonoBehaviour
+---@class Game.Modules.Battle.Layouts.AreaBase : Betel.LuaMonoBehaviour
 ---@field areaInfo AreaInfo
 ---@field context WorldContext
----@field waves table<number,Game.Modules.World.Layouts.WaveBase>  怪物每波刷新数据
----@field waveQueue table<number,Game.Modules.World.Layouts.WaveBase>  怪物每波刷新数据
----@field currWave Game.Modules.World.Layouts.WaveBase
+---@field waves table<number,Game.Modules.Battle.Layouts.WaveBase>  怪物每波刷新数据
+---@field waveQueue table<number,Game.Modules.Battle.Layouts.WaveBase>  怪物每波刷新数据
+---@field currWave Game.Modules.Battle.Layouts.WaveBase
 ---@field isRefreshOver boolean
 ---@field isBornOver boolean
 ---@field isActive boolean
-local AreaBase = class("Game.Modules.World.Layouts.AreaBase",LuaMonoBehaviour)
+local AreaBase = class("Game.Modules.Battle.Layouts.AreaBase",LuaMonoBehaviour)
 
 ---@param areaInfo AreaInfo
 function AreaBase:Ctor(areaInfo)

@@ -22,9 +22,9 @@ local BattleConfig = {}
 function BattleConfig.Get(checkPointName)
     if BattleConfig.Map == nil then
         BattleConfig.Map = {}
-        local data = require("Game.Data.Excel.GridBattle")
-        for i = 1, #data.db do
-            local battle = data.db[i]
+        local data = require("Game.Data.Excel.Battle")
+        for i = 1, #data do
+            local battle = data[i]
             if not battle.ignore then --排除被忽略的
                 local areas = BattleConfig.Map[battle.pid] ---@type table<number, GridAreaInfo>
                 if areas == nil then
@@ -36,7 +36,7 @@ function BattleConfig.Get(checkPointName)
                     areaInfo = {}
                     areaInfo.areaIndex = battle.areaIndex
                     areaInfo.type = battle.areaType
-                    areas[battle.areaId] = areaInfo
+                    areas[battle.areaIndex] = areaInfo
                 end
                 if areaInfo.waves == nil then
                     areaInfo.waves = {}

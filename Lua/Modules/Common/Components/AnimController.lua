@@ -10,16 +10,16 @@
 ---@field type string Int Float Boolean
 ---@field value number|boolean
 
-local Widget = require("Module.Common.Widgets.Widget")
+local Widget = require("Game.Modules.Common.Components.Widget")
 
----@class Module.Common.Widgets.AnimController : Module.Common.Widgets.Widget
+---@class Game.Modules.Common.Components.AnimController : Game.Modules.Common.Components.Widget
 ---@field New fun(gameObject:UnityEngine.GameObject)
 ---@field animator UnityEngine.Animator
 ---@field rac UnityEngine.RuntimeAnimatorController
 ---@field animLength table<number, number>
 ---@field callbackList table<number, Handler>
 ---@field currAnimName string
-local AnimController = class("Module.Common.AnimController", Widget)
+local AnimController = class("Game.Modules.Common.Components.AnimController", Widget)
 
 AnimController.ParamType =
 {

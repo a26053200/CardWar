@@ -6,10 +6,10 @@
 
 local BattleEvents = require("Module.World.Events.BattleEvents")
 local HeroBehavior = require("Module.World.Behaviors.HeroBehavior")
-local AvatarGridBehavior = require("Module.Battle.Behaviors.AvatarGridBehavior")
+local AvatarGridBehavior = require("Game.Modules.Battle.Behaviors.AvatarGridBehavior")
 local HeroStrategy = require("Module.World.Behaviors.Strategy.HeroStrategy")
 local GridHeroStrategy = require("Module.Battle.Behaviors.Strategy.GridHeroStrategy")
-local Avatar = require("Module.World.Items.Avatar")
+local Avatar = require("Game.Modules.World.Items.Avatar")
 
 ---@class Game.Modules.World.Items.Hero : Game.Modules.World.Items.Avatar
 ---@field New fun(heroInfo:Game.Modules.World.Vo.HeroVo, context:WorldContext):Game.Modules.World.Items.Hero

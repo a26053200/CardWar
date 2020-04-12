@@ -7,22 +7,21 @@
 
 
 local BattleLayout = require("Game.Modules.Battle.Layouts.BattleLayout")
-local BattleEvents = require("Game.Modules.World.Events.BattleEvents")
+local BattleEvents = require("Game.Modules.Battle.Events.BattleEvents")
 local WorldContext = require("Game.Modules.World.Contexts.WorldContext")
 local PoolProxy = require("Game.Modules.Common.Pools.AssetPoolProxy")
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.Battle.View.BattleMdrBase : Game.Core.Ioc.BaseMediator
 ---@field battleModel Game.Modules.Battle.Model.BattleModel
+---@field playerModel Game.Modules.Player.Model.PlayerModel
 ---@field battleService Game.Modules.Battle.Service.BattleService
 ---@field context WorldContext
 ---@field checkPointData CheckPointData
 local BattleMdrBase = class("Module.Battle.View.BattleMdrBase",BaseMediator)
 
 function BattleMdrBase:OnInit()
-    --黑屏
-    self.black = self.gameObject:GetImage("Black")
-    self.black.gameObject:SetActive(true)
-    self.black:DOFade(0,3)
+    self.battleModel.currCheckPointData = World.worldScene.currSubScene.checkPointData
+    self.battleModel.playerVo = self.playerModel.playerVo;
 
     self:InitCheckPointData()   --初始化关卡数据
     self:InitObjectPool()       --初始化对象池
@@ -42,12 +41,12 @@ function BattleMdrBase:InitCheckPointData()
     log("Init CheckPoint " .. self.battleModel.currCheckPointData.id)
     self.context = WorldContext.New(self.checkPointData.mode)
     self.battleModel.currentContext = self.context
-    self.context.currSubScene = World.battleScene
+    self.context.currSubScene = World.worldScene.currSubScene
     self.context.avatarRoot = self.context.currSubScene:CreateGameObject("AvatarRoot" .. self.context.id)
     --A*
-    self.context.grid = self.context.currSubScene:FindRootObjInSubScene("A*"):GetComponent(typeof(AStar.Grid))
-    self.context.gridGap = self.context.grid.nodeRadius * 2
-    self.context.grid.gameObject:SetActive(true)
+    --self.context.grid = self.context.currSubScene:FindRootObjInSubScene("A*"):GetComponent(typeof(AStar.Grid))
+    --self.context.gridGap = self.context.grid.nodeRadius * 2
+    --self.context.grid.gameObject:SetActive(true)
 end
 
 

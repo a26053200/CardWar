@@ -16,6 +16,7 @@ function LobbyScene:Ctor(subSceneInfo, unityScene)
 end
 
 function LobbyScene:OnEnterScene()
+    self:Show()
     vmgr:LoadView(ViewConfig.Navigation)
 end
 

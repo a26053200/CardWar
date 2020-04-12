@@ -13,12 +13,12 @@
 
 local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 
----@class Game.Modules.World.Layouts.WaveBase : Betel.LuaMonoBehaviour
+---@class Game.Modules.Battle.Layouts.WaveBase : Betel.LuaMonoBehaviour
 ---@field waveInfo WaveBaseInfo
 ---@field context WorldContext
 ---@field isActive boolean
----@field monsterList List | table<number, Game.Modules.World.Items.Avatar>
-local WaveBase = class("Game.Modules.World.Layouts.WaveBase",LuaMonoBehaviour)
+---@field itemList List | table<number, Game.Modules.World.Items.BattleItem>
+local WaveBase = class("Game.Modules.Battle.Layouts.WaveBase",LuaMonoBehaviour)
 
 ---@param waveInfo WaveBaseInfo
 function WaveBase:Ctor(waveInfo)

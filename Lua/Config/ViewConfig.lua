@@ -11,5 +11,5 @@ ViewConfig.Loading = {module = "Loading",name = "Loading",prefab = "Prefabs/UI/C
 ViewConfig.Joystick = {module = "Joystick",name = "Joystick",prefab = "Prefabs/UI/Common/Joystick.prefab",}
 ViewConfig.Battle = {module = "Battle",name = "Battle",prefab = "Prefabs/UI/Battle/Battle.prefab",}
 ViewConfig.BattleInfo = {module = "Battle",name = "BattleInfo",prefab = "Prefabs/UI/Battle/BattleInfo.prefab",}
-ViewConfig.Card = {name = "Card",}
+ViewConfig.Player = {name = "Player",}
 ViewConfig.Navigation = {name = "Navigation",module = "Lobby",prefab = "Prefabs/UI/Lobby/Navigation.prefab",}

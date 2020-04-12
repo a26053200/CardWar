@@ -5,7 +5,7 @@
 --- 行为策略
 ---
 
-local LuaObject = require("Core.LuaObject")
+local LuaObject = require("Betel.LuaObject")
 
 ---@class Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase:LuaObject
 ---@field New fun(avatar : Game.Modules.World.Items.Avatar)

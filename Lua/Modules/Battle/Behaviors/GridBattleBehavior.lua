@@ -8,9 +8,9 @@
 local BattleEvents = require("Game.Modules.Battle.Events.BattleEvents")
 local SceneItemEvents = require("Game.Modules.Battle.Events.BattleItemEvents")
 local GridArea = require("Game.Modules.Battle.Layouts.GridArea")
-local BattleBehavior = require("Game.Modules.World.Behaviors.BattleBehavior")
+local BattleBehavior = require("Game.Modules.Battle.Behaviors.BattleBehavior")
 
----@class Game.Modules.Battle.Behaviors.GridBattleBehavior : Module.World.Behaviors.BattleBehavior
+---@class Game.Modules.Battle.Behaviors.GridBattleBehavior : Game.Modules.Battle.Behaviors.BattleBehavior
 ---@field New fun(checkPointData:CheckPointData, context:WorldContext):Game.Modules.Battle.Behaviors.BattleBehavior
 ---@field areas table<number,Game.Modules.Battle.Layouts.GridArea>  刷新区域数据
 ---@field areaQueue List | table<number, Game.Modules.Battle.Layouts.GridArea>  刷新区域数据 刷新区域队列

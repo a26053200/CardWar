@@ -18,9 +18,9 @@
 local BattleItemEvents = require("Game.Modules.Battle.Events.BattleItemEvents")
 local BattleEvent = require("Game.Modules.Battle.Events.BattleEvents")
 local GridWave = require("Game.Modules.Battle.Layouts.GridWave")
-local AreaBase = require("Game.Modules.World.Layouts.AreaBase")
+local AreaBase = require("Game.Modules.Battle.Layouts.AreaBase")
 
----@class Game.Modules.Battle.Layouts.GridArea : Game.Modules.World.Layouts.AreaBase
+---@class Game.Modules.Battle.Layouts.GridArea : Game.Modules.Battle.Layouts.AreaBase
 ---@field New fun(areaInfo:GridAreaInfo, checkPointData:CheckPointData):Game.Modules.Battle.Layouts.GridArea
 ---@field areaInfo GridAreaInfo
 ---@field checkPointData CheckPointData
@@ -28,7 +28,6 @@ local AreaBase = require("Game.Modules.World.Layouts.AreaBase")
 ---@field orgBornPoints table<number, UnityEngine.Vector3> --原始出生位置
 ---@field currWave Game.Modules.Battle.Layouts.GridWave
 ---@field areaPointObj UnityEngine.GameObject
----@field battleCmd Module.Battle.Cmd.BattleCmd
 local GridArea = class("Game.Modules.Battle.Layouts.GridArea", AreaBase)
 
 ---@param areaInfo GridAreaInfo
@@ -38,7 +37,6 @@ function GridArea:Ctor(areaInfo, checkPointData)
     self.areaInfo = areaInfo
     self.checkPointData = checkPointData
     self.waves = {}
-    self.battleCmd = vmgr:CreateCommand(require("Game.Modules.Battle.Cmd.BattleCmd"))
 end
 
 --初始化该区域
@@ -108,17 +106,7 @@ function GridArea:DoActive()
                         end
                     end
                 end
-                local isPause = false
-                if wave.waveInfo.needPause then --暂停游戏
-                    vmgr:LoadView(ViewConfig.BossWarning)
-                    isPause = true
-                    self.battleCmd:Pause(function()
-                        isPause = false
-                    end)
-                end
-                while isPause do --等到暂停
-                    coroutine.step(1)
-                end
+
                 wave:Refresh(function()
                     self.isBornOver = true
                 end)
@@ -166,8 +154,8 @@ function GridArea:IsAllDead()
     local allDead = true
     for i = 1, #self.waves do
         local wave = self.waves[i]
-        for j = 1, wave.monsterList:Size() do
-            local monster = wave.monsterList[j] ---@type Module.World.Items.Monster
+        for j = 1, wave.itemList:Size() do
+            local monster = wave.itemList[j] ---@type Module.World.Items.Monster
             if not monster:IsDead() then
                 allDead = false
                 break;
@@ -189,8 +177,8 @@ function GridArea:IsAllDeadOver()
     local allDead = true
     for i = 1, #self.waves do
         local wave = self.waves[i]
-        for j = 1, wave.monsterList:Size() do
-            local monster = wave.monsterList[j] ---@type Module.World.Items.Monster
+        for j = 1, wave.itemList:Size() do
+            local monster = wave.itemList[j] ---@type Module.World.Items.Monster
             if not monster.deadOver then
                 allDead = false
                 break;

@@ -15,7 +15,7 @@ function NavigationMdr:OnInit()
 end
 
 function NavigationMdr:On_Click_Button()
-    World.EnterSubScene("pve_research_1_UH")
+    World.worldScene:EnterCheckPoint("battle_1_1")
 end
 
 return NavigationMdr

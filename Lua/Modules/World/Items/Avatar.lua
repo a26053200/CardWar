@@ -4,22 +4,19 @@
 --- DateTime: 2019/5/6 10:30
 ---
 
-local AnimController = require("Module.Common.Widgets.AnimController")
-local RendererItem = require("Module.World.Items.RendererItem")
+local AnimController = require("Game.Modules.Common.Components.AnimController")
+local RendererItem = require("Game.Modules.World.Items.RendererItem")
 
 ---@class Game.Modules.World.Items.Avatar : Game.Modules.World.Items.RendererItem
 ---@field avatarVo Game.Modules.World.Vo.AvatarVo
 ---@field avatarInfo AvatarInfo
 ---@field cc UnityEngine.CharacterController
----@field animCtrl Module.Common.Widgets.AnimController
+---@field animCtrl Game.Modules.Common.Components.AnimController
 ---@field soundGroup Game.Modules.Common.Sound.SoundGroup
 ---@field avatarBehavior Game.Modules.Battle.Behaviors.AvatarBehavior
 ---@field deadOver boolean  是否死亡结束,表示死亡动作播放完毕
 ---@field isBorn boolean 是否出生
 ---@field aiParam table<string, any>
----@field ownerCardVo Game.Modules.Card.Vo.CardVo 英雄所属卡
----@field layoutIndex number 布局索引 默认0 表示没有上场
----@field layoutGrid Game.Modules.Battle.View.LayoutGrid 所在布局格子
 local Avatar = class("Game.Modules.World.Items.Avatar", RendererItem)
 
 ---@param avatarVo Game.Modules.World.Vo.AvatarVo

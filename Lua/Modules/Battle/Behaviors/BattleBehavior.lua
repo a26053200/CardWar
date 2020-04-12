@@ -41,7 +41,7 @@ function BattleBehavior:CalPoolsNum(sceneData)
 end
 
 --获取当前区域
----@return Game.Modules.World.Layouts.AreaBase
+---@return Game.Modules.Battle.Layouts.AreaBase
 function BattleBehavior:GetCurrArea()
 
 end
@@ -58,7 +58,7 @@ end
 ---@return List | table<number, Game.Modules.World.Items.Avatar>
 function BattleBehavior:GetCampAvatarList(camp, includeDead)
     if camp == Camp.Atk then
-        local heroList = self.context.heroList
+        local heroList = self.context.battleItemList
         if not includeDead then
             local tempList = List.New()
             for i = 1, #heroList do
@@ -73,7 +73,7 @@ function BattleBehavior:GetCampAvatarList(camp, includeDead)
     else
         local tempList = List.New()
         if self:GetCurrArea() then
-            local monsterList = self:GetCurrArea().currWave.monsterList
+            local monsterList = self:GetCurrArea().currWave.itemList
             if not includeDead then
                 for i = 1, monsterList:Size() do
                     if not monsterList[i]:IsDead() then

@@ -62,10 +62,18 @@ local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@field battleService Game.Modules.Battle.Service.BattleService
 ---@field currentContext WorldContext
 ---@field currCheckPointData CheckPointData     当前关卡数据
+---@field playerVo Game.Modules.Player.Vo.PlayerVo    当前战斗的玩家
 local BattleModel = class("BattleModel",BaseModel)
 
 function BattleModel:Ctor()
     
+end
+
+function BattleModel:Clear()
+    self.currentContext = nil
+    self.currCheckPointData = nil
+    self.playerVo = nil
+    self.isEditBattleArrayComplete = false
 end
 
 return BattleModel

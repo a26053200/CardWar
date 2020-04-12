@@ -5,15 +5,15 @@
 --- 所有场景单位的基类
 ---
 
-local LuaObject = require("Core.LuaObject")
+local LuaObject = require("Betel.LuaObject")
 
----@class Game.Modules.World.Items.SceneItem : Core.LuaObject
+---@class Game.Modules.World.Items.SceneItem : Betel.LuaObject
 ---@field sid number 唯一id
 ---@field context WorldContext
 ---@field sceneItemVo Game.Modules.World.Vo.SceneItemVo
 ---@field gameObject UnityEngine.GameObject
 ---@field transform UnityEngine.Transform
-local SceneItem = class("Module.World.Items.SceneItem", LuaObject)
+local SceneItem = class("Game.Modules.World.Items.SceneItem", LuaObject)
 
 local S_ID = 0
 

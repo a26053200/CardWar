@@ -5,7 +5,7 @@
 --- 需要支持Unity相关操作的单位
 ---
 
-local SceneItem = require("Module.World.Items.SceneItem")
+local SceneItem = require("Game.Modules.World.Items.SceneItem")
 
 ---@class Game.Modules.World.Items.RendererItem : Game.Modules.World.Items.SceneItem
 ---@field renderObj UnityEngine.GameObject 用于渲染的Obj
@@ -13,7 +13,7 @@ local SceneItem = require("Module.World.Items.SceneItem")
 ---@field smrs table<number, UnityEngine.SkinnedMeshRenderer>
 ---@field bornPos UnityEngine.Vector3
 ---@field forward UnityEngine.Vector3
-local RendererItem = class("Module.World.Items.RendererItem", SceneItem)
+local RendererItem = class("Game.Modules.World.Items.RendererItem", SceneItem)
 
 function RendererItem:Ctor(sceneItemData)
     RendererItem.super.Ctor(self, sceneItemData)

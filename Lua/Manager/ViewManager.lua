@@ -8,6 +8,7 @@
 local LuaMonoBehaviour = require('Betel.LuaMonoBehaviour')
 local IocBootstrap = require("Game.Core.Ioc.IocBootstrap")
 ---@class Game.Manager.ViewManager : Betel.LuaMonoBehaviour
+---@field New():Game.Manager.ViewManager
 ---@field ioc Game.Core.Ioc.IocBootstrap
 ---@field scene Game.Modules.World.Scenes.Core.BaseScene
 ---@field viewCache table<string, Game.Core.Ioc.BaseMediator>

@@ -87,10 +87,10 @@ end
 
 function BattleMdr:StartBattle()
     BattleMdr.super.StartBattle(self)
-    self.context:CreateBattleHeroes(self.battleModel.playerVo.cards, Camp.Atk, CardState.GridBattle)
+    self.context:CreateBattleItems(self.battleModel.playerVo.cards, Camp.Atk, CardState.GridBattle)
 
-    for i = 1, #self.context.heroList do
-        local hero = self.context.heroList[i]
+    for i = 1, #self.context.battleItemList do
+        local hero = self.context.battleItemList[i]
         hero:CreateCC() --  创建碰撞体，接受点击事件
         hero:ResetAttr()
         --hero:SetRenderEnabled(true)

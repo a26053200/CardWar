@@ -6,11 +6,24 @@
 
 local BaseVo = require("Game.Core.BaseVo")
 ---@class Game.Modules.Card.Vo.CardVo : Game.Core.BaseVo
----@field New fun():Game.Modules.Card.Vo.CardVo
-local CardVo = class("Game.Modules.Card.Vo.CardVo",BaseVo)
+---@field New fun(cardName:string):Game.Modules.Card.Vo.CardVo
+---@field cardInfo CardInfo
+---@field avatarInfo AvatarInfo
+---@field inTeamIndex number 上阵位置
+---@field layoutIndex number 布局位置
+---@field inAdventureEvent boolean 正在探索冒险事件中
+---@field state CardState
+---@field isGet boolean 是否获得
+local CardVo = class("Module.Card.Vo.CardVo",BaseVo)
 
-function CardVo:Ctor()
-    
+---@param cardId number
+function CardVo:Ctor(cardId)
+    self.cardInfo = CardConfig.Get(cardId)
+    self.avatarInfo = AvatarConfig.Get(self.cardInfo.avatarName)
+    self.inTeamIndex = 0
+    self.layoutIndex = 0
+    self.state = CardState.Normal
+    self.inAdventureEvent = false
 end
 
 return CardVo

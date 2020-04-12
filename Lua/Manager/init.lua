@@ -4,9 +4,9 @@
 --- DateTime: 2018/6/20 16:21
 ---
 
-vmgr = require("Game.Manager.ViewManager").New()
-nmgr = require("Betel.Net.NetworkManager").New()
-preloading = require("Game.Manager.PreloadingManager").New()
+vmgr = require("Game.Manager.ViewManager").New() ---@type Game.Manager.ViewManager
+nmgr = require("Betel.Net.NetworkManager").New() ---@type Betel.Net.NetworkManager
+preloading = require("Game.Manager.PreloadingManager").New() ---@type Game.Manager.PreloadingManager
 
 P = nmgr.CreateProtocol --创建协议
 Action = require( "Game.Config.Action")

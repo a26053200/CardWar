@@ -21,6 +21,13 @@ function WorldScene:OnEnterScene()
     self:EnterSubScene("Lobby")
 end
 
+function WorldScene:EnterCheckPoint(checkPointName)
+    local checkPointData = CheckPointConfig.GetBattleSceneData(checkPointName)
+    self:EnterSubScene(checkPointData.level,function(subScene)
+        subScene:InitScene(checkPointData)
+    end)
+end
+
 function WorldScene:OnExitScene()
 
 end

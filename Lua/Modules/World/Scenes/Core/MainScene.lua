@@ -27,6 +27,7 @@ function MainScene:Init()
     vmgr:SetScene(self)
 end
 
+---@param callback fun(subScene:Game.Modules.World.Scenes.Core.SubScene)
 function MainScene:EnterSubScene(subLevel, callback)
     if self.currSubScene then
         if self.currSubScene.subSceneInfo.level == subLevel then
@@ -45,6 +46,7 @@ function MainScene:EnterSubScene(subLevel, callback)
     end
 end
 
+---@param callback fun(subScene:Game.Modules.World.Scenes.Core.SubScene)
 function MainScene:LoadSubLevel(subLevel, callback)
     if self.sceneInfo.subLevels == nil or self.sceneInfo.subLevels[subLevel] == nil then
         logError("There is no sub levels in this scene: "..subLevel)
@@ -56,6 +58,7 @@ function MainScene:LoadSubLevel(subLevel, callback)
             log("加载子场景完成:"..subSceneInfo.level)
             self.currSubSceneInfo = subSceneInfo
             self.currSubScene = subScene
+            UnityEngine.SceneManagement.SceneManager.SetActiveScene(subScene.unityScene)
             subScene:OnInitialize()
             subScene:OnEnterScene()
             if callback ~= nil then

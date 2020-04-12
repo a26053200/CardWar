@@ -6,9 +6,9 @@
 ---
 
 
-local LuaMonoBehaviour = require("Core.LuaMonoBehaviour")
+local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 
----@class Game.Modules.Battle.View.BattleLayout : Core.LuaMonoBehaviour
+---@class Game.Modules.Battle.View.BattleLayout : Betel.LuaMonoBehaviour
 ---@field New fun(context : WorldContext, areaObject : UnityEngine.GameObject):Game.Modules.Battle.View.BattleLayout
 ---@field context WorldContext
 ---@field areaPointObj UnityEngine.GameObject

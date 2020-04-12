@@ -123,8 +123,7 @@ end
 ---@return UnityEngine.GameObject
 function SubScene:GetLightObj()
     if self.lightObj == nil then
-        local lightObj = self:FindRootObjInSubScene("Directional Light")
-        self.lightObj = lightObj:FindChild(self.checkPointData.light)
+        self.lightObj = self:FindRootObjInSubScene("Directional Light")
         if isnull(self.lightObj) then
             logError(string.format("This scene [%s]'s Light must named with 'Directional Light' and set to root", self.subLevelName))
         end

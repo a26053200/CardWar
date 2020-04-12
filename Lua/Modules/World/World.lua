@@ -19,4 +19,21 @@ function World.EnterSubScene(subLevel, callback)
     World.worldScene:EnterSubScene(subLevel, callback)
 end
 
+---@return Game.Modules.Battle.Vo.BattleItemVo
+function World.CreateBattleItemVo(avatarName)
+    local vo = BattleItemVoPool:Get()---@type Game.Modules.Battle.Vo.BattleItemVo
+    vo:Init(avatarName)
+    return vo
+end
+
+---@param skillVo Module.World.Vo.SkillVo
+---@param attacker Game.Modules.World.Items.Avatar
+---@param account AccountInfo
+---@return Module.World.Contexts.AccountContext
+function World.CreateAccountContext(skillVo, attacker, account)
+    local accountContext = AccountContextPool:Get()---@type Module.World.Contexts.AccountContext
+    accountContext:Init(skillVo, attacker, account)
+    return accountContext
+end
+
 return World

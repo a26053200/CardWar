@@ -15,9 +15,27 @@ function BattleScene:Ctor(subSceneInfo, unityScene)
     BattleScene.super.Ctor(self, subSceneInfo, unityScene)
 end
 
-function SubScene:InitScene(checkPointData)
+function BattleScene:OnInitialize()
+
+end
+
+function BattleScene:InitScene(checkPointData)
     self.checkPointData = checkPointData
+    self:InitSubScene()
     self:Show()
+    vmgr:LoadView(ViewConfig.Battle)
+end
+
+---@return UnityEngine.GameObject
+function BattleScene:GetLightObj()
+    if self.lightObj == nil then
+        local lightObj = self:FindRootObjInSubScene("Directional Light")
+        if isnull(lightObj) then
+            logError(string.format("This scene [%s]'s Light must named with 'Directional Light' and set to root", self.subLevelName))
+        end
+        self.lightObj = lightObj:FindChild(self.checkPointData.light)
+    end
+    return self.lightObj
 end
 
 function BattleScene:OnExitScene()

@@ -15,10 +15,10 @@
 ---@field enterScript string  进入该区域触发的剧情
 ---@field exitScript string   离开该区域触发的剧情
 
-local Monster = require("Game.Modules.World.Items.Monster")
-local WaveBase = require("Game.Modules.World.Layouts.WaveBase")
+local BattleItem = require("Game.Modules.World.Items.BattleItem")
+local WaveBase = require("Game.Modules.Battle.Layouts.WaveBase")
 
----@class Game.Modules.Battle.Layouts.GridWave : Game.Modules.World.Layouts.WaveBase
+---@class Game.Modules.Battle.Layouts.GridWave : Game.Modules.Battle.Layouts.WaveBase
 ---@field New fun(waveInfo:GridWaveInfo, forward:UnityEngine.Vector3):Game.Modules.Battle.Layouts.GridWave
 ---@field forward UnityEngine.Vector3 朝向
 local GridWave = class("Game.Modules.Battle.Layouts.GridWave", WaveBase)
@@ -29,7 +29,7 @@ function GridWave:Ctor(waveInfo, forward)
     GridWave.super.Ctor(self)
     self.waveInfo = waveInfo
     self.forward = forward
-    self.monsterList = List.New()
+    self.itemList = List.New()
 end
 
 ---@param callback fun()
@@ -41,33 +41,31 @@ function GridWave:Refresh(callback)
             if wavePoint.delay > 0 then
                 coroutine.wait(wavePoint.delay)
             end
-            local monsterVo = World.CreateMonsterVo(wavePoint.avatarName)--克隆数据
-            if monsterVo.avatarInfo.avatarType == AvatarType.Monster then
-                monsterVo.camp = Camp.Def --所有怪物默认都是守方阵营
-                local monster = Monster.New(monsterVo, self.context)
-                local layoutGrid = self.context.battleLayout:GetGridByIndex(Camp.Def, wavePoint.grid)
-                monster:SetBornPos(layoutGrid.transform.position, self.forward)
-                layoutGrid:SetOwner(monster)
-                if wavePoint.bornMode == WaveBornMode.BornEffect then
-                    monster:Born()
+            local battleItemVo = World.CreateBattleItemVo(wavePoint.avatarName)--克隆数据
+            battleItemVo.camp = Camp.Def --所有怪物默认都是守方阵营
+            local battleItem = BattleItem.New(battleItemVo, self.context)
+            local layoutGrid = self.context.battleLayout:GetGridByIndex(Camp.Def, wavePoint.grid)
+            battleItem:SetBornPos(layoutGrid.transform.position, self.forward)
+            layoutGrid:SetOwner(battleItem)
+            if wavePoint.bornMode == WaveBornMode.BornEffect then
+                battleItem:Born()
+                coroutine.step()
+            elseif wavePoint.bornMode == WaveBornMode.WaitBorn then
+                local bornOver = false
+                battleItem:Born(function()
+                    bornOver = true
+                end)
+                while not bornOver do
                     coroutine.step()
-                elseif wavePoint.bornMode == WaveBornMode.WaitBorn then
-                    local bornOver = false
-                    monster:Born(function()
-                        bornOver = true
-                    end)
-                    while not bornOver do
-                        coroutine.step()
-                    end
-                else
-                    monster:OnBorn()
                 end
-                --monster:CreateHpBar()
-                monster:ResetAttr()
-                monster.isBorn = true
-                monster:SetRenderEnabled(true)
-                self.monsterList:Push(monster)
+            else
+                battleItem:OnBorn()
             end
+            --monster:CreateHpBar()
+            battleItem:ResetAttr()
+            battleItem.isBorn = true
+            battleItem:SetRenderEnabled(true)
+            self.itemList:Push(battleItem)
         end
         if callback then
             callback()
@@ -88,8 +86,8 @@ function GridWave:IsAllDead()
         return false
     end
     local allDead = true
-    for i = 1, self.monsterList:Size() do
-        local monster = self.monsterList[i] ---@type Module.World.Items.Monster
+    for i = 1, self.itemList:Size() do
+        local monster = self.itemList[i] ---@type Game.Modules.World.Items.BattleItem
         if not monster:IsDead() then
             allDead = false
             break;
@@ -104,8 +102,8 @@ function GridWave:IsAllDeadOver()
         return false
     end
     local allDead = true
-    for i = 1, self.monsterList:Size() do
-        local monster = self.monsterList[i] ---@type Module.World.Items.Monster
+    for i = 1, self.itemList:Size() do
+        local monster = self.itemList[i] ---@type Game.Modules.World.Items.BattleItem
         if not monster.deadOver then
             allDead = false
             break;

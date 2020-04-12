@@ -8,8 +8,8 @@ local MonsterStrategy = require("Module.World.Behaviors.Strategy.MonsterStrategy
 local GridMonsterStrategy = require("Module.Battle.Behaviors.Strategy.GridMonsterStrategy")
 local BattleItemEvents = require("Game.Modules.Battle.Events.BattleItemEvents")
 local MonsterBaseBehavior = require("Module.World.Behaviors.MonsterBaseBehavior")
-local AvatarGridBehavior = require("Module.Battle.Behaviors.AvatarGridBehavior")
-local Avatar = require("Module.World.Items.Avatar")
+local AvatarGridBehavior = require("Game.Modules.Battle.Behaviors.AvatarGridBehavior")
+local Avatar = require("Game.Modules.World.Items.Avatar")
 
 ---@class Module.World.Items.Monster : Game.Modules.World.Items.Avatar
 ---@field New fun(monsterInfo:Module.World.Vo.MonsterVo, context:WorldContext) : Module.World.Items.Monster

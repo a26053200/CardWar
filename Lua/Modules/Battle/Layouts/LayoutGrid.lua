@@ -5,8 +5,8 @@
 ---
 ---
 
-local LuaMonoBehaviour = require("Core.LuaMonoBehaviour")
----@class Game.Modules.Battle.View.LayoutGrid : Core.LuaMonoBehaviour
+local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
+---@class Game.Modules.Battle.View.LayoutGrid : Betel.LuaMonoBehaviour
 ---@field New fun(grid:UnityEngine.GameObject, index:number, forward:UnityEngine.Vector3):Game.Modules.Battle.View.LayoutGrid
 ---@field owner Game.Modules.World.Items.Avatar
 ---@field forward UnityEngine.Vector3
