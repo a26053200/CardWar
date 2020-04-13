@@ -21,7 +21,7 @@ local BattleMdrBase = class("Module.Battle.View.BattleMdrBase",BaseMediator)
 
 function BattleMdrBase:OnInit()
     self.battleModel.currCheckPointData = World.worldScene.currSubScene.checkPointData
-    self.battleModel.playerVo = self.playerModel.playerVo;
+    self.battleModel.playerVo = self.playerModel.myPlayerVo;
 
     self:InitCheckPointData()   --初始化关卡数据
     self:InitObjectPool()       --初始化对象池
@@ -54,13 +54,23 @@ end
 function BattleMdrBase:InitObjectPool()
     local poolObj = self.context.currSubScene:CreateGameObject("[Pool" .. self.context.id .. "]")
     self.context.pool = PoolProxy.New(poolObj)
-    local poolNumMap = self.context.pool:InitCheckPointObjectPool(self.checkPointData)
+    local poolNumMap = {} ---@type table<string,number> avatarName 和 数量的映射
+    if self.checkPointData.areas then
+        for i = 1, #self.checkPointData.areas do
+            local areaInfo =  self.checkPointData.areas[i]
+            for j = 1, #areaInfo.waves do
+                local waveInfo = areaInfo.waves[j]
+                for k = 1, #waveInfo.wavePoints do
+                    local pointInfo = waveInfo.wavePoints[k]
+                    PoolFactory.CalcPoolNumMap(poolNumMap, pointInfo.avatarName)
+                end
+            end
+        end
+    end
 
     for i = 1, #self.battleModel.playerVo.cards do
-        table.insert(poolNumMap, { [self.battleModel.playerVo.cards[i].cardInfo.avatarName] = 1})
+        poolNumMap[self.battleModel.playerVo.cards[i].cardInfo.avatarName] = 1
     end
-    table.insert(poolNumMap, { ["DropItem"] = 1})
-
     local poolsInfos = PoolFactory.CalcPoolInfoMap(poolNumMap)
     table.insert(poolsInfos,{prefabUrl = Prefabs.LayoutGrid, initNum = 18})
     self.context.pool:InitObjectPool(poolsInfos)

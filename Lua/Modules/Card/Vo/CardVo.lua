@@ -16,9 +16,9 @@ local BaseVo = require("Game.Core.BaseVo")
 ---@field isGet boolean 是否获得
 local CardVo = class("Module.Card.Vo.CardVo",BaseVo)
 
----@param cardId number
-function CardVo:Ctor(cardId)
-    self.cardInfo = CardConfig.Get(cardId)
+---@param cardName number
+function CardVo:Ctor(cardName)
+    self.cardInfo = CardConfig.Get(cardName)
     self.avatarInfo = AvatarConfig.Get(self.cardInfo.avatarName)
     self.inTeamIndex = 0
     self.layoutIndex = 0

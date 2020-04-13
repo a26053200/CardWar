@@ -6,7 +6,7 @@
 
 function Data.Get(id)
     if Data[id] == nil then
-        logError(string.Format('There is no id = %s data is table <Battle.xlsx>', id))
+        logError(string.format('There is no id = %s data is table <Battle.xlsx>', id))
         return nil
     else
         return Data[id]

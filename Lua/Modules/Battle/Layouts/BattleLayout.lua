@@ -13,7 +13,7 @@ local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 ---@field context WorldContext
 ---@field areaPointObj UnityEngine.GameObject
 ---@field checkPointData CheckPointData
----@field gridLayoutMap table<Camp, table<number, Game.Modules.Battle.View.LayoutGrid>>
+---@field gridLayoutMap table<Camp, table<number, Game.Modules.Battle.Layouts.LayoutGrid>>
 local BattleLayout = class("Game.Modules.Battle.View.BattleLayout", LuaMonoBehaviour)
 
 local Move_Duration = 0.3
@@ -46,7 +46,7 @@ end
 --创建布局格子
 ---@param areaPointObj UnityEngine.GameObject
 ---@param camp Camp
----@return table<number, Game.Modules.Battle.View.LayoutGrid>
+---@return table<number, Game.Modules.Battle.Layouts.LayoutGrid>
 function BattleLayout:CreateLayoutGrids(areaPointObj, camp)
     local forward = areaPointObj.transform.forward
     local dir = camp == Camp.Atk and -forward or forward
@@ -58,8 +58,8 @@ function BattleLayout:CreateLayoutGrids(areaPointObj, camp)
 end
 
 --交换
----@param src Game.Modules.Battle.View.LayoutGrid
----@param dst Game.Modules.Battle.View.LayoutGrid
+---@param src Game.Modules.Battle.Layouts.LayoutGrid
+---@param dst Game.Modules.Battle.Layouts.LayoutGrid
 function BattleLayout:Exchange(src, dst)
     local tempOwner = src.owner
     local sequence = self:CreateSequence()
@@ -72,8 +72,8 @@ function BattleLayout:Exchange(src, dst)
 end
 
 --移动
----@param src Game.Modules.Battle.View.LayoutGrid
----@param dst Game.Modules.Battle.View.LayoutGrid
+---@param src Game.Modules.Battle.Layouts.LayoutGrid
+---@param dst Game.Modules.Battle.Layouts.LayoutGrid
 function BattleLayout:Move(src, dst)
     local sequence = self:CreateSequence()
     sequence:Append(src.owner.transform:DOMove(dst.transform.position, Move_Duration))
@@ -85,7 +85,7 @@ function BattleLayout:Move(src, dst)
 end
 
 ---@param owner Game.Modules.World.Items.Avatar
----@return Game.Modules.Battle.View.LayoutGrid
+---@return Game.Modules.Battle.Layouts.LayoutGrid
 function BattleLayout:GetLayoutGridByOwner(owner)
     local layoutGrids = self.gridLayoutMap[owner.avatarVo.camp]
     for i = 1, #layoutGrids do
@@ -98,7 +98,7 @@ function BattleLayout:GetLayoutGridByOwner(owner)
 end
 
 ---@param ownerObj UnityEngine.GameObject
----@return Game.Modules.Battle.View.LayoutGrid
+---@return Game.Modules.Battle.Layouts.LayoutGrid
 function BattleLayout:GetLayoutGridByOwnerObj(ownerObj)
     for _, layoutGrids in pairs(self.gridLayoutMap) do
         for i = 1, #layoutGrids do
@@ -112,14 +112,14 @@ function BattleLayout:GetLayoutGridByOwnerObj(ownerObj)
 end
 
 ---@param camp Camp
----@return Game.Modules.Battle.View.LayoutGrid
+---@return Game.Modules.Battle.Layouts.LayoutGrid
 function BattleLayout:GetGridByIndex(camp, index)
     local layoutGrids = self.gridLayoutMap[camp]
     return layoutGrids[index]
 end
 
 ---@param camp Camp
----@return Game.Modules.Battle.View.LayoutGrid
+---@return Game.Modules.Battle.Layouts.LayoutGrid
 function BattleLayout:GetGridByLine(camp, index)
     local layoutGrids = self.gridLayoutMap[camp]
     local indexs = LayoutMap[index]
@@ -132,7 +132,7 @@ function BattleLayout:GetGridByLine(camp, index)
 end
 
 ---@param camp Camp
----@return Game.Modules.Battle.View.LayoutGrid
+---@return Game.Modules.Battle.Layouts.LayoutGrid
 function BattleLayout:GetFirstGrid(camp)
     local layoutGrids = self.gridLayoutMap[camp]
     for i = 1, #layoutGrids do
@@ -144,7 +144,7 @@ function BattleLayout:GetFirstGrid(camp)
 end
 
 ---@param camp Camp
----@return Game.Modules.Battle.View.LayoutGrid
+---@return Game.Modules.Battle.Layouts.LayoutGrid
 function BattleLayout:GetFirstEmptyGrid(camp)
     local layoutGrids = self.gridLayoutMap[camp]
     for i = 1, #layoutGrids do
@@ -157,7 +157,7 @@ end
 
 ---@param gridObj UnityEngine.GameObject
 ---@param camp Camp
----@return Game.Modules.Battle.View.LayoutGrid
+---@return Game.Modules.Battle.Layouts.LayoutGrid
 function BattleLayout:GetLayoutGrid(gridObj, camp)
     local layoutGrids = self.gridLayoutMap[camp]
     for i = 1, #layoutGrids do
@@ -183,7 +183,7 @@ function BattleLayout:SetGridVisible(camp, visible)
 end
 
 ---@param camp Camp
----@param except Game.Modules.Battle.View.LayoutGrid
+---@param except Game.Modules.Battle.Layouts.LayoutGrid
 function BattleLayout:OtherGridShine(camp, except)
     local layoutGrids = self.gridLayoutMap[camp]
     for i = 1, #layoutGrids do

@@ -5,7 +5,7 @@
 --- 资源对象池代理
 ---
 
-local ObjectPool = require("Game.Modules.Common.Pools.PoolObject")
+local AssetPool = require("Game.Modules.Common.Pools.AssetPool")
 
 ---@class Game.Modules.Common.Pools.AssetPoolProxy
 ---@field New fun(pool:string|UnityEngine.GameObject):Game.Modules.Common.Pools.AssetPoolProxy
@@ -25,40 +25,13 @@ function PoolProxy:Ctor(pool)
     self.objectPoolMap = {}
 end
 
---初始化关卡对象池
----@param checkPointData CheckPointData
----@return table<string,number>
-function PoolProxy:InitCheckPointObjectPool(checkPointData)
-    local poolNumMap = {} ---@type table<string,number> avatarName 和 数量的映射
-    if checkPointData.areas then
-        for i = 1, #checkPointData.areas do
-            local areaInfo =  checkPointData.areas[i]
-            local numMap = {}
-            for j = 1, #areaInfo.waves do
-                local waveInfo = areaInfo.waves[j]
-                for k = 1, #waveInfo.wavePoints do
-                    local pointInfo = waveInfo.wavePoints[k]
-                    if numMap[pointInfo.avatarName] == nil then
-                        numMap[pointInfo.avatarName] = 0
-                    end
-                    if pointInfo.maxNum then
-                        numMap[pointInfo.avatarName] = numMap[pointInfo.avatarName] + pointInfo.maxNum
-                    else
-                        numMap[pointInfo.avatarName] = numMap[pointInfo.avatarName] + 1
-                    end
-                end
-            end
-            table.insert(poolNumMap, numMap)
-        end
-    end
-    return poolNumMap
-end
 --初始化对象池
 ---@param poolsInfo table<number,PoolInfo>
 function PoolProxy:InitObjectPool(poolsInfo)
     for i = 1, #poolsInfo do
         if poolsInfo[i].avatarName then
             local avatarInfo = AvatarConfig.Get(poolsInfo[i].avatarName)
+            print(poolsInfo[i].initNum)
             self:InitObjectByPool(avatarInfo.prefabUrl, self.poolRoot.transform, poolsInfo[i].initNum, true)
         elseif poolsInfo[i].effectName then
             local effectInfo = EffectConfig.Get(poolsInfo[i].effectName)
@@ -79,7 +52,7 @@ function PoolProxy:InitObjectByPool(prefabUrl, parent, initNum, log)
     if pool then
         pool:ExpandPoolObjNum(initNum)
     else
-        pool = ObjectPool.New(prefabUrl, parent, initNum)
+        pool = AssetPool.New(prefabUrl, parent, initNum)
         self.objectPoolMap[prefabUrl] = pool
     end
     if log then

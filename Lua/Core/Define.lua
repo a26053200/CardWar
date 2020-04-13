@@ -89,8 +89,6 @@ FRAME_TIME = 1 / Application.targetFrameRate
 
 -- --------------- [ 项目自定义 ] --------------- --
 
---World = require("Game.Modules.World.World")
---BattleUtils = require("Game.Modules.Battle.Utils.BattleUtils")
 --Plot = require("Game.Modules.Plot.Scripts.Plot")
 --GuideLine = require("Game.Modules.Common.Effect.GuideLine")
 --PerformancePlayer = require("Game.Modules.World.Performances.PerformancePlayer")
@@ -105,6 +103,8 @@ Tool        = require("Game.Modules.Common.Utils.Tool")
 TimeConvert = require("Game.Modules.Common.Utils.TimeConvert")
 PoolFactory = require("Game.Modules.Common.Pools.PoolFactory")
 BezierUtils = require("Game.Modules.Common.Utils.BezierUtils")
+GridUtils   = require("Game.Modules.Common.Utils.GridUtils")
+BattleUtils = require("Game.Modules.Battle.Utils.BattleUtils")
 
 ---Config
 --Config = require("Game.Data.Config")
@@ -136,9 +136,8 @@ CardConfig          = require("Game.Data.CardConfig")
 
 
 ---3rd
---AStarUtils = require("Game.Modules.Common.AStarUtils")
---MoveUtils = require("Game.Modules.Common.MoveUtils")
---GridUtils = require("Game.Modules.Common.GridUtils")
+--AStarUtils = require("Game.Modules.Common.Utils.AStarUtils")
+--MoveUtils = require("Game.Modules.Common.Utils.MoveUtils")
 --Live2D = require("live2d.Live2D")
 --Live2D.init();
 

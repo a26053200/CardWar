@@ -17,7 +17,7 @@ local Avatar = require("Game.Modules.World.Items.Avatar")
 ---@field strategy Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase -- 策略
 ---@field ownerCardVo Game.Modules.Card.Vo.CardVo 英雄所属卡
 ---@field layoutIndex number 布局索引 默认0 表示没有上场
----@field layoutGrid Game.Modules.Battle.View.LayoutGrid 所在布局格子
+---@field layoutGrid Game.Modules.Battle.Layouts.LayoutGrid 所在布局格子
 local BattleItem = class("Game.Modules.World.Items.BattleItem", Avatar)
 
 ---@param battleItemVo Game.Modules.Battle.Vo.BattleItemVo

@@ -16,7 +16,7 @@ local BattleItem = require("Game.Modules.World.Items.BattleItem")
 ---@field pool Game.Modules.Common.Pools.AssetPoolProxy 对象池
 ---@field attachCamera Game.Modules.Common.Components.AttachCamera
 ---@field forward UnityEngine.Vector3 整个布局的朝向
----@field heroGridLayouts table<UnityEngine.GameObject, Game.Modules.Battle.View.LayoutGrid>
+---@field heroGridLayouts table<UnityEngine.GameObject, Game.Modules.Battle.Layouts.LayoutGrid>
 ---@field battleLayout Game.Modules.Battle.View.BattleLayout
 local WorldContext = class("WorldContext")
 

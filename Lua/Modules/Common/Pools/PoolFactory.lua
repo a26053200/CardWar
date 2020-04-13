@@ -12,36 +12,21 @@ local PoolFactory = {}
 --统计对象池
 ---@param poolNumMap table<string,number> avatarName 和 数量的映射
 ---@return table<number,PoolInfo>
+function PoolFactory.CalcPoolNumMap(poolNumMap, avatarName)
+    if poolNumMap[avatarName] == nil then
+        poolNumMap[avatarName] = 1
+    end
+end
+
+--统计对象池
+---@param poolNumMap table<string,number> avatarName 和 数量的映射
+---@return table<number,PoolInfo>
 function PoolFactory.CalcPoolInfoMap(poolNumMap)
     local poolInfoMap = {} ---@type table<number, PoolInfo>
-
-    --avatar数量 以最大刷怪数量为准
-    local avatarMaxNums = {}
-    for i = 1, #poolNumMap do
-        local nums = poolNumMap[i]
-        for avatarName, v in pairs(nums) do
-            if avatarMaxNums[avatarName] == nil then
-                avatarMaxNums[avatarName] = 0
-            end
-            if nums[avatarName] > avatarMaxNums[avatarName] then
-                avatarMaxNums[avatarName] = nums[avatarName]
-            end
-        end
+    for avatarName, v in pairs(poolNumMap) do
+        print("poolInfoMap " .. avatarName)
+        table.insert(poolInfoMap, { avatarName = avatarName, initNum = 1})
     end
-
-    --计算特效数量
-    local effectMaxNums = {}
-    for avatarName, avatarNum in pairs(avatarMaxNums) do
-        table.insert(poolInfoMap, { avatarName = avatarName, initNum = avatarNum})
-        local avatarInfo = AvatarConfig.Get(avatarName)
-        PoolFactory.GetAvatarPool(effectMaxNums,avatarInfo,avatarNum)
-    end
-    for effectName, v in pairs(effectMaxNums) do
-        table.insert(poolInfoMap, v)
-    end
-
-    -- 缓存一个害怕抖动特效
-    table.insert(poolInfoMap, {effectName = "fx_doudong", initNum = 1})
     return poolInfoMap
 end
 

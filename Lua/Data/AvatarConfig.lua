@@ -16,7 +16,7 @@ local AvatarConfig = {}
 ---@return AvatarInfo
 function AvatarConfig.Get(avatarName)
     if AvatarConfig.data == nil then
-        AvatarConfig.data = require("Game.Data.Excel.AvatarData")
+        AvatarConfig.data = require("Game.Data.Excel.Avatar")
     end
     --if AvatarConfig.skillData == nil then
     --    AvatarConfig.skillData = require("Game.Data.Excel.Skill")

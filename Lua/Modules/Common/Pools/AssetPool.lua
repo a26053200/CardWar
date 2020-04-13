@@ -4,21 +4,19 @@
 --- DateTime: 2018/11/15 15:42
 --- 资源对象池 (暂时没有限制最大数量,超过数量时会给与警告)
 ---
-local List = require("Core.List")
-
 
 ---@class Game.Modules.Common.Pools.AssetPool
 ---@field New fun(prefab:string|UnityEngine.GameObject, parent:UnityEngine.Transform, initNum:number):Game.Modules.Common.Pools.AssetPool
 ---@field pool List
 ---@field orgObj UnityEngine.GameObject
 ---@field isDisposed boolean 对象池是否被释放
-local ObjectPool = class("Game.Modules.Common.Pools.AssetPool")
+local AssetPool = class("Game.Modules.Common.Pools.AssetPool")
 
 --构造函数
 ---@param initNum number @ 初始话数量
 ---@param parent UnityEngine.Transform @ 对象预制路径
 ---@param prefab string | UnityEngine.GameObject @ 对象预制路径
-function ObjectPool:Ctor(prefab, parent, initNum)
+function AssetPool:Ctor(prefab, parent, initNum)
     self.isDisposed = false
     self.pool = List.New()
     self.parent = parent
@@ -36,7 +34,7 @@ function ObjectPool:Ctor(prefab, parent, initNum)
 end
 
 --池对象扩容
-function ObjectPool:ExpandPoolObj()
+function AssetPool:ExpandPoolObj()
     local itemObj = GameObject.Instantiate(self.orgObj)
     itemObj.name = self.orgObj.name
     itemObj.transform:SetParent(self.parent)
@@ -47,7 +45,7 @@ function ObjectPool:ExpandPoolObj()
 end
 
 --池对象扩容
-function ObjectPool:ExpandPoolObjNum(num)
+function AssetPool:ExpandPoolObjNum(num)
     self.initNum = self.initNum + num
     for i = 1, num do
         self:ExpandPoolObj()
@@ -57,7 +55,7 @@ end
 --回收对象
 ---@param obj UnityEngine.GameObject
 ---@return boolean
-function ObjectPool:Store(obj)
+function AssetPool:Store(obj)
     if self.isDisposed then
         logError(string.format("This pool %s had dispose!", self.orgObj.name));
         return false
@@ -84,7 +82,7 @@ end
 
 --获取池对象
 ---@return UnityEngine.GameObject
-function ObjectPool:Pop()
+function AssetPool:Pop()
     if self.isDisposed then
         logError(string.format("This pool %s had dispose!", self.orgObj.name));
         return
@@ -106,7 +104,7 @@ function ObjectPool:Pop()
 end
 
 --释放所有池对象
-function ObjectPool:Dispose()
+function AssetPool:Dispose()
     self.isDisposed = true
     for i = 1, self.pool:Size() do
         Destroy(self.pool[i])
@@ -114,4 +112,4 @@ function ObjectPool:Dispose()
     self.pool:Clear()
 end
 
-return ObjectPool
+return AssetPool
