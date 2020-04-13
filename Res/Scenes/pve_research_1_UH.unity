@@ -313,7 +313,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 25206247}
-  - component: {fileID: 25206248}
   m_Layer: 0
   m_Name: MonsterPoint_3
   m_TagString: Untagged
@@ -336,19 +335,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &25206248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448076, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25206246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &33838537
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,7 +569,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 43443998}
-  - component: {fileID: 43443999}
   m_Layer: 0
   m_Name: MonsterPoint_29
   m_TagString: Untagged
@@ -606,19 +591,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &43443999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439700, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 43443997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &44202374
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +601,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 44202375}
-  - component: {fileID: 44202376}
   m_Layer: 0
   m_Name: MonsterPoint_1
   m_TagString: Untagged
@@ -652,19 +623,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &44202376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439590, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 44202374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &47824955
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,7 +633,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 47824956}
-  - component: {fileID: 47824957}
   m_Layer: 0
   m_Name: MonsterPoint_4
   m_TagString: Untagged
@@ -698,19 +655,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &47824957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439812, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 47824955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &56812648
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,7 +665,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 56812649}
-  - component: {fileID: 56812650}
   m_Layer: 0
   m_Name: MonsterPoint_24
   m_TagString: Untagged
@@ -744,19 +687,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &56812650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439754, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56812648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &57163565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 436752, guid: 27ad44e3ed740a74abb5819d2e5b64d1,
@@ -821,7 +751,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 64108286}
-  - component: {fileID: 64108287}
   m_Layer: 0
   m_Name: MonsterPoint_26
   m_TagString: Untagged
@@ -844,19 +773,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &64108287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448196, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 64108285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &65817072
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,7 +783,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 65817073}
-  - component: {fileID: 65817074}
   m_Layer: 0
   m_Name: MonsterPoint_23
   m_TagString: Untagged
@@ -890,19 +805,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &65817074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448096, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 65817072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &69035288
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,7 +815,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 69035289}
-  - component: {fileID: 69035290}
   m_Layer: 0
   m_Name: MonsterPoint_5
   m_TagString: Untagged
@@ -936,19 +837,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &69035290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439816, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69035288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &70369700
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,7 +847,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 70369701}
-  - component: {fileID: 70369702}
   m_Layer: 0
   m_Name: MonsterPoint_37
   m_TagString: Untagged
@@ -982,19 +869,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &70369702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439770, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70369700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &72636355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1554,7 +1428,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 112396824}
-  - component: {fileID: 112396825}
   m_Layer: 0
   m_Name: MonsterPoint_7
   m_TagString: Untagged
@@ -1577,19 +1450,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &112396825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439552, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112396823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &114558106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1604,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 116052520}
-  - component: {fileID: 116052521}
   m_Layer: 0
   m_Name: MonsterPoint_26
   m_TagString: Untagged
@@ -1767,19 +1626,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &116052521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439736, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116052519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &123107130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,7 +1636,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 123107131}
-  - component: {fileID: 123107132}
   m_Layer: 0
   m_Name: MonsterPoint_15
   m_TagString: Untagged
@@ -1813,19 +1658,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &123107132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448184, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123107130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &138060913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,7 +1762,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139153543}
-  - component: {fileID: 139153544}
   m_Layer: 0
   m_Name: MonsterPoint_17
   m_TagString: Untagged
@@ -1954,19 +1785,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &139153544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448100, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139153542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &139727010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,7 +1795,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139727011}
-  - component: {fileID: 139727012}
   m_Layer: 0
   m_Name: MonsterPoint_13
   m_TagString: Untagged
@@ -2000,19 +1817,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &139727012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439608, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139727010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &140638769
 GameObject:
   m_ObjectHideFlags: 0
@@ -2023,7 +1827,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 140638770}
-  - component: {fileID: 140638771}
   m_Layer: 0
   m_Name: MonsterPoint_3
   m_TagString: Untagged
@@ -2046,19 +1849,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &140638771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439622, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 140638769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &152367528
 GameObject:
   m_ObjectHideFlags: 0
@@ -2474,7 +2264,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 168283276}
-  - component: {fileID: 168283277}
   m_Layer: 0
   m_Name: MonsterPoint_9
   m_TagString: Untagged
@@ -2497,19 +2286,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &168283277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439636, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168283275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &185063531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2892,7 +2668,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 214390374}
-  - component: {fileID: 214390375}
   m_Layer: 0
   m_Name: MonsterPoint_34
   m_TagString: Untagged
@@ -2915,19 +2690,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &214390375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 214390373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &214972493
 GameObject:
   m_ObjectHideFlags: 0
@@ -2938,7 +2700,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 214972494}
-  - component: {fileID: 214972495}
   m_Layer: 0
   m_Name: MonsterPoint_20
   m_TagString: Untagged
@@ -2961,19 +2722,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &214972495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439822, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 214972493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &215550752
 GameObject:
   m_ObjectHideFlags: 0
@@ -3066,7 +2814,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 216040955}
-  - component: {fileID: 216040956}
   m_Layer: 0
   m_Name: MonsterPoint_5
   m_TagString: Untagged
@@ -3089,19 +2836,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &216040956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448118, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216040954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &221310320
 GameObject:
   m_ObjectHideFlags: 0
@@ -3276,7 +3010,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 236068439}
-  - component: {fileID: 236068440}
   m_Layer: 0
   m_Name: MonsterPoint_17
   m_TagString: Untagged
@@ -3299,19 +3032,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &236068440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448208, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 236068438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &237644409
 GameObject:
   m_ObjectHideFlags: 0
@@ -3404,7 +3124,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 240794940}
-  - component: {fileID: 240794941}
   m_Layer: 0
   m_Name: MonsterPoint_12
   m_TagString: Untagged
@@ -3427,19 +3146,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &240794941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439808, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240794939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &242215130
 GameObject:
   m_ObjectHideFlags: 0
@@ -3450,7 +3156,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 242215131}
-  - component: {fileID: 242215132}
   m_Layer: 0
   m_Name: MonsterPoint_14
   m_TagString: Untagged
@@ -3473,19 +3178,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &242215132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439712, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 242215130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &243753471
 GameObject:
   m_ObjectHideFlags: 0
@@ -3497,7 +3189,6 @@ GameObject:
   m_Component:
   - component: {fileID: 243753472}
   - component: {fileID: 243753474}
-  - component: {fileID: 243753473}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -3520,19 +3211,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &243753473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474446, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243753471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &243753474
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3739,7 +3417,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 254277934}
-  - component: {fileID: 254277935}
   m_Layer: 0
   m_Name: MonsterPoint_21
   m_TagString: Untagged
@@ -3762,19 +3439,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &254277935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254277933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &256850770
 GameObject:
   m_ObjectHideFlags: 0
@@ -3785,7 +3449,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 256850771}
-  - component: {fileID: 256850772}
   m_Layer: 0
   m_Name: MonsterPoint_17
   m_TagString: Untagged
@@ -3808,19 +3471,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &256850772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439714, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256850770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &256878074
 GameObject:
   m_ObjectHideFlags: 0
@@ -4003,7 +3653,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 259194068}
-  - component: {fileID: 259194069}
   m_Layer: 0
   m_Name: MonsterPoint_12
   m_TagString: Untagged
@@ -4026,19 +3675,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &259194069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439630, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259194067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &259804307
 GameObject:
   m_ObjectHideFlags: 0
@@ -5216,7 +4852,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 308364176}
-  - component: {fileID: 308364177}
   m_Layer: 0
   m_Name: MonsterPoint_2
   m_TagString: Untagged
@@ -5239,19 +4874,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &308364177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439722, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 308364175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &309392403
 GameObject:
   m_ObjectHideFlags: 0
@@ -5391,7 +5013,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 319426738}
-  - component: {fileID: 319426739}
   m_Layer: 0
   m_Name: MonsterPoint_13
   m_TagString: Untagged
@@ -5414,19 +5035,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &319426739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439628, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319426737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &324055177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 436494, guid: a9b83f4fb198fce48af1ccfde7221b6e,
@@ -5725,7 +5333,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 342617099}
-  - component: {fileID: 342617100}
   m_Layer: 0
   m_Name: MonsterPoint_10
   m_TagString: Untagged
@@ -5748,19 +5355,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &342617100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448218, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342617098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &351264265 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 431210, guid: 2f1aee826450b13408fcecce53b6a789,
@@ -6092,7 +5686,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 375529352}
-  - component: {fileID: 375529353}
   m_Layer: 0
   m_Name: MonsterPoint_11
   m_TagString: Untagged
@@ -6115,19 +5708,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &375529353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448138, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375529351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &378204089
 GameObject:
   m_ObjectHideFlags: 0
@@ -6138,7 +5718,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 378204090}
-  - component: {fileID: 378204091}
   m_Layer: 0
   m_Name: MonsterPoint_11
   m_TagString: Untagged
@@ -6161,19 +5740,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &378204091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448216, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378204089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &383072113
 GameObject:
   m_ObjectHideFlags: 0
@@ -6185,7 +5751,6 @@ GameObject:
   m_Component:
   - component: {fileID: 383072114}
   - component: {fileID: 383072116}
-  - component: {fileID: 383072115}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -6208,19 +5773,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &383072115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474338, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383072113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &383072116
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6481,7 +6033,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 407796789}
-  - component: {fileID: 407796790}
   m_Layer: 0
   m_Name: MonsterPoint_10
   m_TagString: Untagged
@@ -6504,19 +6055,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &407796790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448146, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407796788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &409338802
 GameObject:
   m_ObjectHideFlags: 0
@@ -6762,7 +6300,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 417149336}
-  - component: {fileID: 417149337}
   m_Layer: 0
   m_Name: MonsterPoint_23
   m_TagString: Untagged
@@ -6785,19 +6322,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &417149337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417149335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &428047670
 GameObject:
   m_ObjectHideFlags: 0
@@ -6808,7 +6332,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 428047671}
-  - component: {fileID: 428047672}
   m_Layer: 0
   m_Name: MonsterPoint_3
   m_TagString: Untagged
@@ -6831,19 +6354,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &428047672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439756, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428047670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &434019166
 GameObject:
   m_ObjectHideFlags: 0
@@ -6888,7 +6398,6 @@ GameObject:
   m_Component:
   - component: {fileID: 461389558}
   - component: {fileID: 461389560}
-  - component: {fileID: 461389559}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -6911,19 +6420,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &461389559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474416, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461389557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &461389560
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6948,7 +6444,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 464757449}
-  - component: {fileID: 464757450}
   m_Layer: 0
   m_Name: MonsterPoint_33
   m_TagString: Untagged
@@ -6971,19 +6466,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &464757450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 464757448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &467012257
 GameObject:
   m_ObjectHideFlags: 0
@@ -6994,7 +6476,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 467012258}
-  - component: {fileID: 467012259}
   m_Layer: 0
   m_Name: MonsterPoint_17
   m_TagString: Untagged
@@ -7017,19 +6498,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &467012259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448120, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 467012257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &467580225
 GameObject:
   m_ObjectHideFlags: 0
@@ -7040,7 +6508,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 467580226}
-  - component: {fileID: 467580227}
   m_Layer: 0
   m_Name: MonsterPoint_22
   m_TagString: Untagged
@@ -7063,19 +6530,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &467580227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439798, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 467580225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &475329637
 GameObject:
   m_ObjectHideFlags: 0
@@ -7264,6 +6718,97 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &485677669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 485677671}
+  - component: {fileID: 485677670}
+  m_Layer: 0
+  m_Name: 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!108 &485677670
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485677669}
+  m_Enabled: 1
+  serializedVersion: 9
+  m_Type: 1
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 15872
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 1
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &485677671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485677669}
+  m_LocalRotation: {x: 0.028769327, y: -0.9418196, z: 0.32429498, w: 0.08355197}
+  m_LocalPosition: {x: 0, y: 6.91, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1660848556}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 38, y: -169.86101, z: 0}
 --- !u!1 &494415509
 GameObject:
   m_ObjectHideFlags: 0
@@ -8269,7 +7814,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 546373574}
-  - component: {fileID: 546373575}
   m_Layer: 0
   m_Name: MonsterPoint_28
   m_TagString: Untagged
@@ -8292,19 +7836,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &546373575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448104, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 546373573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &550607659
 GameObject:
   m_ObjectHideFlags: 0
@@ -8409,7 +7940,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 553358858}
-  - component: {fileID: 553358859}
   m_Layer: 0
   m_Name: MonsterPoint_19
   m_TagString: Untagged
@@ -8432,19 +7962,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &553358859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439728, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 553358857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &561688092
 GameObject:
   m_ObjectHideFlags: 0
@@ -8549,7 +8066,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 564254026}
-  - component: {fileID: 564254027}
   m_Layer: 0
   m_Name: MonsterPoint_18
   m_TagString: Untagged
@@ -8572,19 +8088,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &564254027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448170, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564254025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &570619232
 GameObject:
   m_ObjectHideFlags: 0
@@ -8595,7 +8098,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 570619233}
-  - component: {fileID: 570619234}
   m_Layer: 0
   m_Name: MonsterPoint_14
   m_TagString: Untagged
@@ -8618,19 +8120,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &570619234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448160, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 570619232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &571071653
 GameObject:
   m_ObjectHideFlags: 0
@@ -8641,7 +8130,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 571071654}
-  - component: {fileID: 571071655}
   m_Layer: 0
   m_Name: MonsterPoint_4
   m_TagString: Untagged
@@ -8664,19 +8152,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &571071655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448092, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571071653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &575172263
 GameObject:
   m_ObjectHideFlags: 0
@@ -8687,7 +8162,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 575172264}
-  - component: {fileID: 575172265}
   m_Layer: 0
   m_Name: MonsterPoint_22
   m_TagString: Untagged
@@ -8710,19 +8184,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &575172265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575172263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &576033042
 GameObject:
   m_ObjectHideFlags: 0
@@ -8734,7 +8195,6 @@ GameObject:
   m_Component:
   - component: {fileID: 576033043}
   - component: {fileID: 576033045}
-  - component: {fileID: 576033044}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -8757,19 +8217,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &576033044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11492402, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576033042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &576033045
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8936,7 +8383,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 585279763}
-  - component: {fileID: 585279764}
   m_Layer: 0
   m_Name: MonsterPoint_16
   m_TagString: Untagged
@@ -8959,19 +8405,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &585279764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448082, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 585279762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &598683575
 GameObject:
   m_ObjectHideFlags: 0
@@ -9136,7 +8569,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 625405360}
-  - component: {fileID: 625405361}
   m_Layer: 0
   m_Name: MonsterPoint_1
   m_TagString: Untagged
@@ -9159,19 +8591,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &625405361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439820, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625405359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &627434422
 GameObject:
   m_ObjectHideFlags: 0
@@ -9898,7 +9317,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 664056896}
-  - component: {fileID: 664056897}
   m_Layer: 0
   m_Name: MonsterPoint_2
   m_TagString: Untagged
@@ -9921,19 +9339,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &664056897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439606, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 664056895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &666063191
 GameObject:
   m_ObjectHideFlags: 0
@@ -10038,7 +9443,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 667420102}
-  - component: {fileID: 667420103}
   m_Layer: 0
   m_Name: MonsterPoint_27
   m_TagString: Untagged
@@ -10061,19 +9465,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &667420103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439788, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667420101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &669510697
 GameObject:
   m_ObjectHideFlags: 0
@@ -10264,7 +9655,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 673307703}
-  - component: {fileID: 673307704}
   m_Layer: 0
   m_Name: MonsterPoint_11
   m_TagString: Untagged
@@ -10287,19 +9677,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &673307704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439708, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673307702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &676450942
 GameObject:
   m_ObjectHideFlags: 0
@@ -10404,7 +9781,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 680156663}
-  - component: {fileID: 680156664}
   m_Layer: 0
   m_Name: MonsterPoint_1
   m_TagString: Untagged
@@ -10427,19 +9803,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &680156664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448134, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680156662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &689718507
 GameObject:
   m_ObjectHideFlags: 0
@@ -10904,7 +10267,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 717848213}
-  - component: {fileID: 717848214}
   m_Layer: 0
   m_Name: MonsterPoint_7
   m_TagString: Untagged
@@ -10927,19 +10289,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &717848214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439520, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 717848212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &723417468
 GameObject:
   m_ObjectHideFlags: 0
@@ -11186,7 +10535,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 730896623}
-  - component: {fileID: 730896624}
   m_Layer: 0
   m_Name: MonsterPoint_5
   m_TagString: Untagged
@@ -11209,19 +10557,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &730896624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439776, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730896622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &733399577
 GameObject:
   m_ObjectHideFlags: 0
@@ -11326,7 +10661,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 737543171}
-  - component: {fileID: 737543172}
   m_Layer: 0
   m_Name: MonsterPoint_18
   m_TagString: Untagged
@@ -11349,19 +10683,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &737543172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439780, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737543170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &751351008
 GameObject:
   m_ObjectHideFlags: 0
@@ -11373,7 +10694,6 @@ GameObject:
   m_Component:
   - component: {fileID: 751351009}
   - component: {fileID: 751351011}
-  - component: {fileID: 751351010}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -11396,19 +10716,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &751351010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11492412, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751351008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &751351011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11626,7 +10933,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 762428798}
-  - component: {fileID: 762428799}
   m_Layer: 0
   m_Name: MonsterPoint_38
   m_TagString: Untagged
@@ -11649,19 +10955,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &762428799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762428797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &763707257
 GameObject:
   m_ObjectHideFlags: 0
@@ -11789,6 +11082,75 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1001 &780003304
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1922827970405183309, guid: bb03e39c76b46b947b2a1f1edbfadb58,
+        type: 3}
+      propertyPath: m_Name
+      value: LayoutGrid
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922827970405183306, guid: bb03e39c76b46b947b2a1f1edbfadb58,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 34.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922827970405183306, guid: bb03e39c76b46b947b2a1f1edbfadb58,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922827970405183306, guid: bb03e39c76b46b947b2a1f1edbfadb58,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -30.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922827970405183306, guid: bb03e39c76b46b947b2a1f1edbfadb58,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922827970405183306, guid: bb03e39c76b46b947b2a1f1edbfadb58,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922827970405183306, guid: bb03e39c76b46b947b2a1f1edbfadb58,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922827970405183306, guid: bb03e39c76b46b947b2a1f1edbfadb58,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922827970405183306, guid: bb03e39c76b46b947b2a1f1edbfadb58,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922827970405183306, guid: bb03e39c76b46b947b2a1f1edbfadb58,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922827970405183306, guid: bb03e39c76b46b947b2a1f1edbfadb58,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922827970405183306, guid: bb03e39c76b46b947b2a1f1edbfadb58,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb03e39c76b46b947b2a1f1edbfadb58, type: 3}
 --- !u!1 &791103681
 GameObject:
   m_ObjectHideFlags: 0
@@ -11846,7 +11208,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 791427190}
-  - component: {fileID: 791427191}
   m_Layer: 0
   m_Name: MonsterPoint_10
   m_TagString: Untagged
@@ -11869,19 +11230,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &791427191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448086, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 791427189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &792234462
 GameObject:
   m_ObjectHideFlags: 0
@@ -11939,7 +11287,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 802119351}
-  - component: {fileID: 802119352}
   m_Layer: 0
   m_Name: MonsterPoint_11
   m_TagString: Untagged
@@ -11962,19 +11309,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &802119352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439724, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 802119350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &803654638
 GameObject:
   m_ObjectHideFlags: 0
@@ -12161,7 +11495,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 805179276}
-  - component: {fileID: 805179277}
   m_Layer: 0
   m_Name: MonsterPoint_12
   m_TagString: Untagged
@@ -12184,19 +11517,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &805179277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448190, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805179275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &809489283
 GameObject:
   m_ObjectHideFlags: 0
@@ -12207,7 +11527,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 809489284}
-  - component: {fileID: 809489285}
   m_Layer: 0
   m_Name: MonsterPoint_38
   m_TagString: Untagged
@@ -12230,19 +11549,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &809489285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439740, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 809489283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &811555484
 GameObject:
   m_ObjectHideFlags: 0
@@ -12331,7 +11637,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 819027258}
-  - component: {fileID: 819027259}
   m_Layer: 0
   m_Name: MonsterPoint_17
   m_TagString: Untagged
@@ -12354,19 +11659,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &819027259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448182, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819027257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &823560111
 GameObject:
   m_ObjectHideFlags: 0
@@ -12377,7 +11669,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 823560112}
-  - component: {fileID: 823560113}
   m_Layer: 0
   m_Name: MonsterPoint_8
   m_TagString: Untagged
@@ -12400,19 +11691,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &823560113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439568, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823560111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &832476214
 GameObject:
   m_ObjectHideFlags: 0
@@ -12604,7 +11882,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 843064817}
-  - component: {fileID: 843064818}
   m_Layer: 0
   m_Name: MonsterPoint_9
   m_TagString: Untagged
@@ -12627,19 +11904,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &843064818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439774, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 843064816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &846340536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12895,7 +12159,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 858849657}
-  - component: {fileID: 858849658}
   m_Layer: 0
   m_Name: MonsterPoint_13
   m_TagString: Untagged
@@ -12918,19 +12181,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &858849658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439638, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858849656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &866787104
 GameObject:
   m_ObjectHideFlags: 0
@@ -12941,7 +12191,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 866787105}
-  - component: {fileID: 866787106}
   m_Layer: 0
   m_Name: MonsterPoint_25
   m_TagString: Untagged
@@ -12964,19 +12213,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &866787106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439660, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 866787104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &868046897
 GameObject:
   m_ObjectHideFlags: 0
@@ -13221,7 +12457,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 882046386}
-  - component: {fileID: 882046387}
   m_Layer: 0
   m_Name: MonsterPoint_16
   m_TagString: Untagged
@@ -13244,19 +12479,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &882046387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439734, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 882046385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &884741976
 GameObject:
   m_ObjectHideFlags: 0
@@ -13582,7 +12804,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 909123717}
-  - component: {fileID: 909123718}
   m_Layer: 0
   m_Name: MonsterPoint_3
   m_TagString: Untagged
@@ -13605,19 +12826,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &909123718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439692, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 909123716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &911684343
 GameObject:
   m_ObjectHideFlags: 0
@@ -13628,7 +12836,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 911684344}
-  - component: {fileID: 911684345}
   m_Layer: 0
   m_Name: MonsterPoint_4
   m_TagString: Untagged
@@ -13651,19 +12858,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &911684345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448090, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 911684343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &914131679
 GameObject:
   m_ObjectHideFlags: 0
@@ -13674,7 +12868,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 914131680}
-  - component: {fileID: 914131681}
   m_Layer: 0
   m_Name: MonsterPoint_9
   m_TagString: Untagged
@@ -13697,19 +12890,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &914131681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448166, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 914131679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &914309636
 GameObject:
   m_ObjectHideFlags: 0
@@ -13720,7 +12900,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 914309637}
-  - component: {fileID: 914309638}
   m_Layer: 0
   m_Name: MonsterPoint_10
   m_TagString: Untagged
@@ -13743,19 +12922,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &914309638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439610, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 914309636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &921180582
 GameObject:
   m_ObjectHideFlags: 0
@@ -14127,7 +13293,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 939148324}
-  - component: {fileID: 939148325}
   m_Layer: 0
   m_Name: MonsterPoint_9
   m_TagString: Untagged
@@ -14150,19 +13315,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &939148325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439684, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 939148323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &951246233
 GameObject:
   m_ObjectHideFlags: 0
@@ -14237,7 +13389,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 955199623}
-  - component: {fileID: 955199624}
   m_Layer: 0
   m_Name: MonsterPoint_32
   m_TagString: Untagged
@@ -14260,19 +13411,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &955199624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448096, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955199622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &956946898
 GameObject:
   m_ObjectHideFlags: 0
@@ -14283,7 +13421,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 956946899}
-  - component: {fileID: 956946900}
   m_Layer: 0
   m_Name: MonsterPoint_16
   m_TagString: Untagged
@@ -14306,19 +13443,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &956946900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439632, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956946898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &957528400
 GameObject:
   m_ObjectHideFlags: 0
@@ -14423,7 +13547,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 958077476}
-  - component: {fileID: 958077477}
   m_Layer: 0
   m_Name: MonsterPoint_8
   m_TagString: Untagged
@@ -14446,19 +13569,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &958077477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439592, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 958077475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &961389705
 GameObject:
   m_ObjectHideFlags: 0
@@ -14469,7 +13579,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 961389706}
-  - component: {fileID: 961389707}
   m_Layer: 0
   m_Name: MonsterPoint_19
   m_TagString: Untagged
@@ -14492,19 +13601,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &961389707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448206, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 961389705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &964030485
 GameObject:
   m_ObjectHideFlags: 0
@@ -14517,7 +13613,7 @@ GameObject:
   - component: {fileID: 964030486}
   - component: {fileID: 964030487}
   m_Layer: 0
-  m_Name: Directional light
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14531,13 +13627,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964030485}
-  m_LocalRotation: {x: 0.32062227, y: -0.16418758, z: 0.056534354, w: 0.93115395}
-  m_LocalPosition: {x: -1, y: -59.7, z: -0.099998474}
+  m_LocalRotation: {x: 0.028769327, y: -0.9418196, z: 0.32429498, w: 0.08355197}
+  m_LocalPosition: {x: 0, y: 6.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 1660848556}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 38, y: -169.86101, z: 0}
 --- !u!108 &964030487
 Light:
   m_ObjectHideFlags: 0
@@ -14869,6 +13965,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973547605}
   m_Mesh: {fileID: 4300010, guid: c438ff2f6573e2544a63d71170fff587, type: 3}
+--- !u!1001 &977895678
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_Name
+      value: Villager_B_Boy
+      objectReference: {fileID: 0}
+    - target: {fileID: 100050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 33.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -35.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1abcd43b811eeab4da3a6af7d7b3e68a, type: 3}
 --- !u!1 &983651753
 GameObject:
   m_ObjectHideFlags: 0
@@ -15335,7 +14492,6 @@ GameObject:
   m_Component:
   - component: {fileID: 990599584}
   - component: {fileID: 990599586}
-  - component: {fileID: 990599585}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -15358,19 +14514,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &990599585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474352, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990599583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &990599586
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15671,7 +14814,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1015850512}
-  - component: {fileID: 1015850513}
   m_Layer: 0
   m_Name: MonsterPoint_7
   m_TagString: Untagged
@@ -15694,19 +14836,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1015850513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439806, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015850511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1023443327
 GameObject:
   m_ObjectHideFlags: 0
@@ -16083,7 +15212,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1052777705}
-  - component: {fileID: 1052777706}
   m_Layer: 0
   m_Name: MonsterPoint_35
   m_TagString: Untagged
@@ -16106,19 +15234,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1052777706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1052777704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1055134861
 GameObject:
   m_ObjectHideFlags: 0
@@ -16296,7 +15411,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1077066457}
-  - component: {fileID: 1077066458}
   m_Layer: 0
   m_Name: MonsterPoint_25
   m_TagString: Untagged
@@ -16319,19 +15433,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1077066458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077066456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1080263722
 GameObject:
   m_ObjectHideFlags: 0
@@ -16530,7 +15631,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1093436918}
-  - component: {fileID: 1093436919}
   m_Layer: 0
   m_Name: MonsterPoint_7
   m_TagString: Untagged
@@ -16553,19 +15653,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1093436919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439676, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093436917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1096108481
 GameObject:
   m_ObjectHideFlags: 0
@@ -16576,7 +15663,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1096108482}
-  - component: {fileID: 1096108483}
   m_Layer: 0
   m_Name: MonsterPoint_16
   m_TagString: Untagged
@@ -16599,19 +15685,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1096108483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448142, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1096108481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1104279175
 GameObject:
   m_ObjectHideFlags: 0
@@ -16889,7 +15962,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1120163458}
-  - component: {fileID: 1120163459}
   m_Layer: 0
   m_Name: MonsterPoint_36
   m_TagString: Untagged
@@ -16912,19 +15984,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1120163459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439788, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1120163457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1120610166
 GameObject:
   m_ObjectHideFlags: 0
@@ -16935,7 +15994,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1120610167}
-  - component: {fileID: 1120610168}
   m_Layer: 0
   m_Name: MonsterPoint_2
   m_TagString: Untagged
@@ -16958,19 +16016,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1120610168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439574, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1120610166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1124273525
 GameObject:
   m_ObjectHideFlags: 0
@@ -16981,7 +16026,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1124273526}
-  - component: {fileID: 1124273527}
   m_Layer: 0
   m_Name: MonsterPoint_29
   m_TagString: Untagged
@@ -17004,19 +16048,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1124273527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439770, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124273525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1127340208
 GameObject:
   m_ObjectHideFlags: 0
@@ -17027,7 +16058,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1127340209}
-  - component: {fileID: 1127340210}
   m_Layer: 0
   m_Name: MonsterPoint_9
   m_TagString: Untagged
@@ -17050,19 +16080,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1127340210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448122, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127340208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1148776279
 GameObject:
   m_ObjectHideFlags: 0
@@ -17168,7 +16185,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1148869518}
   - component: {fileID: 1148869520}
-  - component: {fileID: 1148869519}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -17191,19 +16207,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1148869519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11452464, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1148869517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1148869520
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17228,7 +16231,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1153365784}
-  - component: {fileID: 1153365785}
   m_Layer: 0
   m_Name: MonsterPoint_21
   m_TagString: Untagged
@@ -17251,19 +16253,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1153365785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439740, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1153365783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1154868603
 GameObject:
   m_ObjectHideFlags: 0
@@ -17418,7 +16407,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1160203681}
   - component: {fileID: 1160203683}
-  - component: {fileID: 1160203682}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -17441,19 +16429,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1160203682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474394, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160203680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1160203683
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17478,7 +16453,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1160341879}
-  - component: {fileID: 1160341880}
   m_Layer: 0
   m_Name: MonsterPoint_2
   m_TagString: Untagged
@@ -17501,19 +16475,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1160341880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439544, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160341878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1166312206
 GameObject:
   m_ObjectHideFlags: 0
@@ -17524,7 +16485,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1166312207}
-  - component: {fileID: 1166312208}
   m_Layer: 0
   m_Name: MonsterPoint_30
   m_TagString: Untagged
@@ -17547,19 +16507,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1166312208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448080, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1166312206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1171715121
 GameObject:
   m_ObjectHideFlags: 0
@@ -17909,7 +16856,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1190588794}
-  - component: {fileID: 1190588795}
   m_Layer: 0
   m_Name: MonsterPoint_39
   m_TagString: Untagged
@@ -17932,19 +16878,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1190588795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190588793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1196502904
 GameObject:
   m_ObjectHideFlags: 0
@@ -18004,7 +16937,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1199267902}
   - component: {fileID: 1199267904}
-  - component: {fileID: 1199267903}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -18027,19 +16959,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1199267903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474400, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199267901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1199267904
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18064,7 +16983,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1199427996}
-  - component: {fileID: 1199427997}
   m_Layer: 0
   m_Name: MonsterPoint_3
   m_TagString: Untagged
@@ -18087,19 +17005,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1199427997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439748, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199427995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1200696543
 GameObject:
   m_ObjectHideFlags: 0
@@ -18110,7 +17015,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1200696544}
-  - component: {fileID: 1200696545}
   m_Layer: 0
   m_Name: MonsterPoint_6
   m_TagString: Untagged
@@ -18133,19 +17037,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1200696545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439576, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1200696543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1202150876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 436752, guid: 27ad44e3ed740a74abb5819d2e5b64d1,
@@ -18162,7 +17053,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1207033710}
-  - component: {fileID: 1207033711}
   m_Layer: 0
   m_Name: MonsterPoint_14
   m_TagString: Untagged
@@ -18185,19 +17075,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1207033711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439634, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1207033709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1210164563
 GameObject:
   m_ObjectHideFlags: 0
@@ -18599,7 +17476,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1237680564}
-  - component: {fileID: 1237680565}
   m_Layer: 0
   m_Name: MonsterPoint_18
   m_TagString: Untagged
@@ -18622,19 +17498,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1237680565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448212, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1237680563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1239599360
 GameObject:
   m_ObjectHideFlags: 0
@@ -18645,7 +17508,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1239599361}
-  - component: {fileID: 1239599362}
   m_Layer: 0
   m_Name: MonsterPoint_19
   m_TagString: Untagged
@@ -18668,19 +17530,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1239599362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439796, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239599360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1244878643
 GameObject:
   m_ObjectHideFlags: 0
@@ -18691,7 +17540,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1244878644}
-  - component: {fileID: 1244878645}
   m_Layer: 0
   m_Name: MonsterPoint_19
   m_TagString: Untagged
@@ -18714,19 +17562,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1244878645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439686, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244878643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1247584423
 GameObject:
   m_ObjectHideFlags: 0
@@ -18737,7 +17572,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1247584424}
-  - component: {fileID: 1247584425}
   m_Layer: 0
   m_Name: MonsterPoint_24
   m_TagString: Untagged
@@ -18760,19 +17594,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1247584425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1247584423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1250541613
 GameObject:
   m_ObjectHideFlags: 0
@@ -18783,7 +17604,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1250541614}
-  - component: {fileID: 1250541615}
   m_Layer: 0
   m_Name: MonsterPoint_6
   m_TagString: Untagged
@@ -18806,19 +17626,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1250541615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448106, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1250541613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1253569171
 GameObject:
   m_ObjectHideFlags: 0
@@ -19040,7 +17847,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1257050115}
-  - component: {fileID: 1257050116}
   m_Layer: 0
   m_Name: MonsterPoint_6
   m_TagString: Untagged
@@ -19063,19 +17869,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1257050116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448192, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257050114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1259532349
 GameObject:
   m_ObjectHideFlags: 0
@@ -19243,7 +18036,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1288682217}
-  - component: {fileID: 1288682218}
   m_Layer: 0
   m_Name: MonsterPoint_8
   m_TagString: Untagged
@@ -19266,19 +18058,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1288682218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439554, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288682216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1303146724
 GameObject:
   m_ObjectHideFlags: 0
@@ -19289,7 +18068,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1303146725}
-  - component: {fileID: 1303146726}
   m_Layer: 0
   m_Name: MonsterPoint_36
   m_TagString: Untagged
@@ -19312,19 +18090,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1303146726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303146724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1307557735
 GameObject:
   m_ObjectHideFlags: 0
@@ -19335,7 +18100,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307557736}
-  - component: {fileID: 1307557737}
   m_Layer: 0
   m_Name: MonsterPoint_5
   m_TagString: Untagged
@@ -19358,19 +18122,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1307557737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439536, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307557735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1308636966
 GameObject:
   m_ObjectHideFlags: 0
@@ -19838,7 +18589,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1324966827}
-  - component: {fileID: 1324966828}
   m_Layer: 0
   m_Name: MonsterPoint_15
   m_TagString: Untagged
@@ -19861,19 +18611,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1324966828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448084, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1324966826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1329244153
 GameObject:
   m_ObjectHideFlags: 0
@@ -19962,7 +18699,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1331081115}
-  - component: {fileID: 1331081116}
   m_Layer: 0
   m_Name: MonsterPoint_3
   m_TagString: Untagged
@@ -19985,19 +18721,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1331081116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448158, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1331081114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1333540561
 GameObject:
   m_ObjectHideFlags: 0
@@ -20008,7 +18731,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1333540562}
-  - component: {fileID: 1333540563}
   m_Layer: 0
   m_Name: MonsterPoint_12
   m_TagString: Untagged
@@ -20031,19 +18753,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1333540563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439800, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333540561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1334234152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20434,7 +19143,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1339736173}
   - component: {fileID: 1339736175}
-  - component: {fileID: 1339736174}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -20457,19 +19165,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1339736174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474376, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339736172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1339736175
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20588,7 +19283,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1353766069}
-  - component: {fileID: 1353766070}
   m_Layer: 0
   m_Name: MonsterPoint_12
   m_TagString: Untagged
@@ -20611,19 +19305,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1353766070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448130, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1353766068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1354692097
 GameObject:
   m_ObjectHideFlags: 0
@@ -20634,7 +19315,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1354692098}
-  - component: {fileID: 1354692099}
   m_Layer: 0
   m_Name: MonsterPoint_30
   m_TagString: Untagged
@@ -20657,19 +19337,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1354692099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439650, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354692097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1356958350
 GameObject:
   m_ObjectHideFlags: 0
@@ -20763,7 +19430,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1363619916}
   - component: {fileID: 1363619918}
-  - component: {fileID: 1363619917}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -20786,19 +19452,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1363619917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11492518, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363619915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1363619918
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20823,7 +19476,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1374803282}
-  - component: {fileID: 1374803283}
   m_Layer: 0
   m_Name: MonsterPoint_1
   m_TagString: Untagged
@@ -20846,19 +19498,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1374803283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439540, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1374803281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1379546837
 GameObject:
   m_ObjectHideFlags: 0
@@ -21029,7 +19668,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1380116437}
-  - component: {fileID: 1380116438}
   m_Layer: 0
   m_Name: MonsterPoint_31
   m_TagString: Untagged
@@ -21052,19 +19690,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1380116438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439754, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1380116436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1381427681
 GameObject:
   m_ObjectHideFlags: 0
@@ -21075,7 +19700,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381427682}
-  - component: {fileID: 1381427683}
   m_Layer: 0
   m_Name: MonsterPoint_1
   m_TagString: Untagged
@@ -21098,19 +19722,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1381427683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439772, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1381427681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1383616476
 GameObject:
   m_ObjectHideFlags: 0
@@ -21324,7 +19935,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1391881055}
-  - component: {fileID: 1391881056}
   m_Layer: 0
   m_Name: MonsterPoint_31
   m_TagString: Untagged
@@ -21347,19 +19957,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1391881056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439650, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1391881054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1394663025
 GameObject:
   m_ObjectHideFlags: 0
@@ -21445,6 +20042,97 @@ MonoBehaviour:
   color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   radius: 1
   arrow: 1
+--- !u!1 &1397258318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1397258320}
+  - component: {fileID: 1397258319}
+  m_Layer: 0
+  m_Name: 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!108 &1397258319
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397258318}
+  m_Enabled: 1
+  serializedVersion: 9
+  m_Type: 1
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 15872
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 1
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1397258320
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397258318}
+  m_LocalRotation: {x: 0.028769327, y: -0.9418196, z: 0.32429498, w: 0.08355197}
+  m_LocalPosition: {x: 0, y: 6.91, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1660848556}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 38, y: -169.86101, z: 0}
 --- !u!1 &1399095178
 GameObject:
   m_ObjectHideFlags: 0
@@ -21503,7 +20191,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1414347229}
-  - component: {fileID: 1414347230}
   m_Layer: 0
   m_Name: MonsterPoint_19
   m_TagString: Untagged
@@ -21526,19 +20213,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1414347230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439672, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1414347228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1415955119
 GameObject:
   m_ObjectHideFlags: 0
@@ -21650,7 +20324,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1418795952}
   - component: {fileID: 1418795954}
-  - component: {fileID: 1418795953}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -21673,19 +20346,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1418795953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474454, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418795951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1418795954
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21840,7 +20500,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1426581837}
-  - component: {fileID: 1426581838}
   m_Layer: 0
   m_Name: MonsterPoint_34
   m_TagString: Untagged
@@ -21863,19 +20522,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1426581838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439798, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426581836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1428020834
 GameObject:
   m_ObjectHideFlags: 0
@@ -22062,7 +20708,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1433381115}
-  - component: {fileID: 1433381116}
   m_Layer: 0
   m_Name: MonsterPoint_18
   m_TagString: Untagged
@@ -22085,19 +20730,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1433381116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439738, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433381114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1434438173
 GameObject:
   m_ObjectHideFlags: 0
@@ -22296,7 +20928,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1435349440}
-  - component: {fileID: 1435349441}
   m_Layer: 0
   m_Name: MonsterPoint_14
   m_TagString: Untagged
@@ -22319,19 +20950,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1435349441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439758, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1435349439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1450737550
 GameObject:
   m_ObjectHideFlags: 0
@@ -22342,7 +20960,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1450737551}
-  - component: {fileID: 1450737552}
   m_Layer: 0
   m_Name: MonsterPoint_13
   m_TagString: Untagged
@@ -22365,19 +20982,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1450737552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439720, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450737550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1451009588
 GameObject:
   m_ObjectHideFlags: 0
@@ -22388,7 +20992,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1451009589}
-  - component: {fileID: 1451009590}
   m_Layer: 0
   m_Name: MonsterPoint_4
   m_TagString: Untagged
@@ -22411,19 +21014,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1451009590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439778, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1451009588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1452124306
 GameObject:
   m_ObjectHideFlags: 0
@@ -22483,7 +21073,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1456225906}
   - component: {fileID: 1456225908}
-  - component: {fileID: 1456225907}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -22506,19 +21095,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1456225907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11452454, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1456225905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1456225908
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22591,7 +21167,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1468197251}
-  - component: {fileID: 1468197252}
   m_Layer: 0
   m_Name: MonsterPoint_2
   m_TagString: Untagged
@@ -22614,19 +21189,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1468197252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439664, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1468197250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1470587723
 GameObject:
   m_ObjectHideFlags: 0
@@ -22637,7 +21199,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1470587724}
-  - component: {fileID: 1470587725}
   m_Layer: 0
   m_Name: MonsterPoint_30
   m_TagString: Untagged
@@ -22660,19 +21221,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1470587725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470587723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1474239948
 GameObject:
   m_ObjectHideFlags: 0
@@ -22925,7 +21473,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1488970920}
   - component: {fileID: 1488970922}
-  - component: {fileID: 1488970921}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -22948,19 +21495,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1488970921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11492404, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1488970919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1488970922
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23079,7 +21613,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1500642904}
-  - component: {fileID: 1500642905}
   m_Layer: 0
   m_Name: MonsterPoint_23
   m_TagString: Untagged
@@ -23102,19 +21635,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1500642905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439780, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500642903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1500989706
 GameObject:
   m_ObjectHideFlags: 0
@@ -23125,7 +21645,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1500989707}
-  - component: {fileID: 1500989708}
   m_Layer: 0
   m_Name: MonsterPoint_39
   m_TagString: Untagged
@@ -23148,19 +21667,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1500989708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448080, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500989706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1509627704 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 402536, guid: 8d7c638513d97804fa77d90b4b2e1315,
@@ -23271,7 +21777,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1519914006}
-  - component: {fileID: 1519914007}
   m_Layer: 0
   m_Name: MonsterPoint_28
   m_TagString: Untagged
@@ -23294,19 +21799,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1519914007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448136, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1519914005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1520936656
 GameObject:
   m_ObjectHideFlags: 0
@@ -23318,7 +21810,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1520936657}
   - component: {fileID: 1520936659}
-  - component: {fileID: 1520936658}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -23341,19 +21832,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1520936658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474442, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520936656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1520936659
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23460,7 +21938,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1526828290}
-  - component: {fileID: 1526828291}
   m_Layer: 0
   m_Name: MonsterPoint_16
   m_TagString: Untagged
@@ -23483,19 +21960,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1526828291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439566, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1526828289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1527701820
 GameObject:
   m_ObjectHideFlags: 0
@@ -23588,7 +22052,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1530812775}
-  - component: {fileID: 1530812776}
   m_Layer: 0
   m_Name: MonsterPoint_6
   m_TagString: Untagged
@@ -23611,19 +22074,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1530812776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448186, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530812774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1531802459
 GameObject:
   m_ObjectHideFlags: 0
@@ -23634,7 +22084,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1531802460}
-  - component: {fileID: 1531802461}
   m_Layer: 0
   m_Name: MonsterPoint_40
   m_TagString: Untagged
@@ -23657,19 +22106,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1531802461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1531802459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1532980132
 GameObject:
   m_ObjectHideFlags: 0
@@ -23680,7 +22116,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1532980133}
-  - component: {fileID: 1532980134}
   m_Layer: 0
   m_Name: MonsterPoint_27
   m_TagString: Untagged
@@ -23703,19 +22138,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1532980134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1532980132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1536241980
 GameObject:
   m_ObjectHideFlags: 0
@@ -24466,7 +22888,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1575227833}
-  - component: {fileID: 1575227834}
   m_Layer: 0
   m_Name: MonsterPoint_33
   m_TagString: Untagged
@@ -24489,19 +22910,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1575227834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439736, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1575227832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1579253634
 GameObject:
   m_ObjectHideFlags: 0
@@ -24700,7 +23108,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1582937830}
-  - component: {fileID: 1582937831}
   m_Layer: 0
   m_Name: MonsterPoint_7
   m_TagString: Untagged
@@ -24723,19 +23130,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1582937831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439744, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582937829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1583153244 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 436494, guid: a9b83f4fb198fce48af1ccfde7221b6e,
@@ -24982,7 +23376,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1594967978}
-  - component: {fileID: 1594967979}
   m_Layer: 0
   m_Name: MonsterPoint_17
   m_TagString: Untagged
@@ -25005,19 +23398,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1594967979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439662, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1594967977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1595424847
 GameObject:
   m_ObjectHideFlags: 0
@@ -25374,6 +23754,67 @@ MonoBehaviour:
   color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   radius: 1
   arrow: 1
+--- !u!1001 &1609793720
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_Name
+      value: micro_dragon
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 34.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -35.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8be2d2ef2aa2fc847a119f28a0d878ad, type: 3}
 --- !u!1 &1613782326
 GameObject:
   m_ObjectHideFlags: 0
@@ -25384,7 +23825,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1613782327}
-  - component: {fileID: 1613782328}
   m_Layer: 0
   m_Name: MonsterPoint_7
   m_TagString: Untagged
@@ -25407,19 +23847,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1613782328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439658, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613782326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1622111814
 GameObject:
   m_ObjectHideFlags: 0
@@ -25430,7 +23857,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1622111815}
-  - component: {fileID: 1622111816}
   m_Layer: 0
   m_Name: MonsterPoint_4
   m_TagString: Untagged
@@ -25453,19 +23879,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1622111816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439604, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1622111814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1627568374 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 431210, guid: 2f1aee826450b13408fcecce53b6a789,
@@ -25482,7 +23895,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1630294839}
-  - component: {fileID: 1630294840}
   m_Layer: 0
   m_Name: MonsterPoint_15
   m_TagString: Untagged
@@ -25505,19 +23917,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1630294840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448132, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630294838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1630978715
 GameObject:
   m_ObjectHideFlags: 0
@@ -25670,7 +24069,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1637248256}
-  - component: {fileID: 1637248257}
   m_Layer: 0
   m_Name: MonsterPoint_6
   m_TagString: Untagged
@@ -25693,19 +24091,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1637248257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439588, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637248255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1645027532
 GameObject:
   m_ObjectHideFlags: 0
@@ -25858,7 +24243,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1647316514}
-  - component: {fileID: 1647316515}
   m_Layer: 0
   m_Name: MonsterPoint_2
   m_TagString: Untagged
@@ -25881,19 +24265,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1647316515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439586, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1647316513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1647993019
 GameObject:
   m_ObjectHideFlags: 0
@@ -25905,7 +24276,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1647993020}
   - component: {fileID: 1647993022}
-  - component: {fileID: 1647993021}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -25928,19 +24298,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1647993021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11492488, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1647993019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1647993022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26043,7 +24400,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1654428732}
-  - component: {fileID: 1654428733}
   m_Layer: 0
   m_Name: MonsterPoint_28
   m_TagString: Untagged
@@ -26066,19 +24422,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1654428733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1654428731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1658123219
 GameObject:
   m_ObjectHideFlags: 0
@@ -26127,6 +24470,39 @@ MonoBehaviour:
   color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   radius: 1
   arrow: 1
+--- !u!1 &1660848555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1660848556}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1660848556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660848555}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 964030486}
+  - {fileID: 1397258320}
+  - {fileID: 485677671}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1662467731
 GameObject:
   m_ObjectHideFlags: 0
@@ -26137,7 +24513,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1662467732}
-  - component: {fileID: 1662467733}
   m_Layer: 0
   m_Name: MonsterPoint_11
   m_TagString: Untagged
@@ -26160,19 +24535,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1662467733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439660, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662467731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1667512788
 GameObject:
   m_ObjectHideFlags: 0
@@ -26183,7 +24545,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1667512789}
-  - component: {fileID: 1667512790}
   m_Layer: 0
   m_Name: MonsterPoint_11
   m_TagString: Untagged
@@ -26206,19 +24567,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1667512790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448172, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1667512788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1670459636
 GameObject:
   m_ObjectHideFlags: 0
@@ -26826,6 +25174,7 @@ GameObject:
   - component: {fileID: 1696747973}
   - component: {fileID: 1696747972}
   - component: {fileID: 1696747971}
+  - component: {fileID: 1696747974}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -26891,13 +25240,36 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696747970}
-  m_LocalRotation: {x: 0.10644189, y: 0.88045895, z: -0.23591831, w: 0.39724648}
-  m_LocalPosition: {x: 21.9, y: 5.9, z: -21}
+  m_LocalRotation: {x: 0.09904579, y: 0.8923991, z: -0.23911764, w: 0.3696439}
+  m_LocalPosition: {x: 26.783903, y: 5.74, z: -27.773903}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 30, y: 131.432, z: 0}
+--- !u!114 &1696747974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696747970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd99cbce178eeb843b2e310456c940f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachMinDistance: 0.1
+  isAttaching: 1
+  isSmooth: 0
+  tagCamera: {fileID: 1696747972}
+  target: {fileID: 2191521443925583066}
+  targetPos: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0, z: 0}
+  updateSpeed: 0.1
+  noShake: 0
+  radius: 11
+  angle: {x: 30, y: 135, z: 0}
 --- !u!1 &1699128375
 GameObject:
   m_ObjectHideFlags: 0
@@ -26908,7 +25280,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1699128376}
-  - component: {fileID: 1699128377}
   m_Layer: 0
   m_Name: MonsterPoint_20
   m_TagString: Untagged
@@ -26931,19 +25302,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1699128377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448196, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1699128375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1701690067
 GameObject:
   m_ObjectHideFlags: 0
@@ -26954,7 +25312,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1701690068}
-  - component: {fileID: 1701690069}
   m_Layer: 0
   m_Name: MonsterPoint_35
   m_TagString: Untagged
@@ -26977,19 +25334,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1701690069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448104, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701690067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1704689108
 GameObject:
   m_ObjectHideFlags: 0
@@ -27242,7 +25586,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1713663460}
-  - component: {fileID: 1713663461}
   m_Layer: 0
   m_Name: MonsterPoint_10
   m_TagString: Untagged
@@ -27265,19 +25608,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1713663461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439548, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1713663459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1715661698
 GameObject:
   m_ObjectHideFlags: 0
@@ -27528,7 +25858,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1722332713}
-  - component: {fileID: 1722332714}
   m_Layer: 0
   m_Name: MonsterPoint_14
   m_TagString: Untagged
@@ -27551,19 +25880,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1722332714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439626, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722332712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1727934231
 GameObject:
   m_ObjectHideFlags: 0
@@ -27621,7 +25937,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1728339718}
-  - component: {fileID: 1728339719}
   m_Layer: 0
   m_Name: MonsterPoint_24
   m_TagString: Untagged
@@ -27644,19 +25959,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1728339719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439686, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1728339717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1728565413
 GameObject:
   m_ObjectHideFlags: 0
@@ -27761,7 +26063,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1731778365}
-  - component: {fileID: 1731778366}
   m_Layer: 0
   m_Name: MonsterPoint_25
   m_TagString: Untagged
@@ -27784,19 +26085,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1731778366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439760, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1731778364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1733210404
 GameObject:
   m_ObjectHideFlags: 0
@@ -28494,7 +26782,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1759683423}
-  - component: {fileID: 1759683424}
   m_Layer: 0
   m_Name: MonsterPoint_18
   m_TagString: Untagged
@@ -28517,19 +26804,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1759683424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439546, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759683422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1761024265
 GameObject:
   m_ObjectHideFlags: 0
@@ -28682,7 +26956,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1780683914}
-  - component: {fileID: 1780683915}
   m_Layer: 0
   m_Name: MonsterPoint_8
   m_TagString: Untagged
@@ -28705,19 +26978,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1780683915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439602, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780683913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1781604912
 GameObject:
   m_ObjectHideFlags: 0
@@ -28945,7 +27205,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1788070690}
   - component: {fileID: 1788070692}
-  - component: {fileID: 1788070691}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -28968,19 +27227,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1788070691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11492460, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1788070689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1788070692
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29099,7 +27345,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1794705818}
-  - component: {fileID: 1794705819}
   m_Layer: 0
   m_Name: MonsterPoint_10
   m_TagString: Untagged
@@ -29122,19 +27367,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1794705819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448174, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794705817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1795297645
 GameObject:
   m_ObjectHideFlags: 0
@@ -29192,7 +27424,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1802970654}
-  - component: {fileID: 1802970655}
   m_Layer: 0
   m_Name: MonsterPoint_15
   m_TagString: Untagged
@@ -29215,19 +27446,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1802970655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439762, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802970653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1806481543
 GameObject:
   m_ObjectHideFlags: 0
@@ -29287,7 +27505,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1813969527}
   - component: {fileID: 1813969529}
-  - component: {fileID: 1813969528}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -29310,19 +27527,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1813969528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474390, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813969526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1813969529
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29753,7 +27957,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1831951184}
-  - component: {fileID: 1831951185}
   m_Layer: 0
   m_Name: MonsterPoint_13
   m_TagString: Untagged
@@ -29776,19 +27979,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1831951185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439612, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831951183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1832034278
 GameObject:
   m_ObjectHideFlags: 0
@@ -29799,7 +27989,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1832034279}
-  - component: {fileID: 1832034280}
   m_Layer: 0
   m_Name: MonsterPoint_21
   m_TagString: Untagged
@@ -29822,19 +28011,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1832034280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448208, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1832034278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1833001198
 GameObject:
   m_ObjectHideFlags: 0
@@ -29882,7 +28058,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1833635237}
-  - component: {fileID: 1833635238}
   m_Layer: 0
   m_Name: MonsterPoint_15
   m_TagString: Untagged
@@ -29905,19 +28080,6 @@ Transform:
   m_Father: {fileID: 1733210405}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1833635238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439564, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1833635236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1835871961
 GameObject:
   m_ObjectHideFlags: 0
@@ -29960,7 +28122,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1836183936}
-  - component: {fileID: 1836183937}
   m_Layer: 0
   m_Name: MonsterPoint_16
   m_TagString: Untagged
@@ -29983,19 +28144,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1836183937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448136, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836183935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1838465917
 GameObject:
   m_ObjectHideFlags: 0
@@ -30288,7 +28436,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1862986753}
-  - component: {fileID: 1862986754}
   m_Layer: 0
   m_Name: MonsterPoint_9
   m_TagString: Untagged
@@ -30311,19 +28458,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1862986754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439526, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1862986752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1865931284
 GameObject:
   m_ObjectHideFlags: 0
@@ -30334,7 +28468,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1865931285}
-  - component: {fileID: 1865931286}
   m_Layer: 0
   m_Name: MonsterPoint_40
   m_TagString: Untagged
@@ -30357,19 +28490,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1865931286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439760, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865931284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1870897399
 GameObject:
   m_ObjectHideFlags: 0
@@ -30380,7 +28500,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1870897400}
-  - component: {fileID: 1870897401}
   m_Layer: 0
   m_Name: MonsterPoint_26
   m_TagString: Untagged
@@ -30403,19 +28522,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1870897401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870897399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1874820755
 GameObject:
   m_ObjectHideFlags: 0
@@ -30602,7 +28708,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1888129829}
-  - component: {fileID: 1888129830}
   m_Layer: 0
   m_Name: MonsterPoint_8
   m_TagString: Untagged
@@ -30625,19 +28730,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1888129830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439718, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888129828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1892452709 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 436494, guid: a9b83f4fb198fce48af1ccfde7221b6e,
@@ -30854,7 +28946,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1917690747}
-  - component: {fileID: 1917690748}
   m_Layer: 0
   m_Name: MonsterPoint_6
   m_TagString: Untagged
@@ -30877,19 +28968,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1917690748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448072, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917690746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1921406473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31288,7 +29366,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1947401779}
   - component: {fileID: 1947401781}
-  - component: {fileID: 1947401780}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -31311,19 +29388,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1947401780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11492550, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1947401778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1947401781
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31499,7 +29563,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1958120958}
-  - component: {fileID: 1958120959}
   m_Layer: 0
   m_Name: MonsterPoint_20
   m_TagString: Untagged
@@ -31522,19 +29585,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1958120959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958120957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1959306230
 GameObject:
   m_ObjectHideFlags: 0
@@ -31733,7 +29783,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1964569049}
-  - component: {fileID: 1964569050}
   m_Layer: 0
   m_Name: MonsterPoint_5
   m_TagString: Untagged
@@ -31756,19 +29805,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1964569050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439562, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964569048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1973122247
 GameObject:
   m_ObjectHideFlags: 0
@@ -31956,7 +29992,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1978494447}
   - component: {fileID: 1978494449}
-  - component: {fileID: 1978494448}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -31979,19 +30014,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1978494448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474424, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978494446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1978494449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32064,7 +30086,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1982410148}
-  - component: {fileID: 1982410149}
   m_Layer: 0
   m_Name: MonsterPoint_8
   m_TagString: Untagged
@@ -32087,19 +30108,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1982410149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439694, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982410147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1986393605
 GameObject:
   m_ObjectHideFlags: 0
@@ -32142,7 +30150,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1989093836}
-  - component: {fileID: 1989093837}
   m_Layer: 0
   m_Name: MonsterPoint_4
   m_TagString: Untagged
@@ -32165,19 +30172,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1989093837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439680, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989093835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1989384832
 GameObject:
   m_ObjectHideFlags: 0
@@ -32188,7 +30182,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1989384833}
-  - component: {fileID: 1989384834}
   m_Layer: 0
   m_Name: MonsterPoint_27
   m_TagString: Untagged
@@ -32211,19 +30204,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1989384834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439762, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989384832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1990460475
 GameObject:
   m_ObjectHideFlags: 0
@@ -32602,7 +30582,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1998657064}
-  - component: {fileID: 1998657065}
   m_Layer: 0
   m_Name: MonsterPoint_15
   m_TagString: Untagged
@@ -32625,19 +30604,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1998657065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439768, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998657063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2009337931
 GameObject:
   m_ObjectHideFlags: 0
@@ -32648,7 +30614,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2009337932}
-  - component: {fileID: 2009337933}
   m_Layer: 0
   m_Name: MonsterPoint_22
   m_TagString: Untagged
@@ -32671,19 +30636,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2009337933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439628, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009337931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2010850834
 GameObject:
   m_ObjectHideFlags: 0
@@ -32695,7 +30647,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2010850835}
   - component: {fileID: 2010850837}
-  - component: {fileID: 2010850836}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -32718,19 +30669,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2010850836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474348, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2010850834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &2010850837
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32897,7 +30835,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2025537989}
   - component: {fileID: 2025537991}
-  - component: {fileID: 2025537990}
   m_Layer: 20
   m_Name: PlayerCameraDir
   m_TagString: Untagged
@@ -32920,19 +30857,6 @@ Transform:
   m_Father: {fileID: 1588786340}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2025537990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11474372, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2025537988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b2d9863a57d5244a3470a4d015c45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &2025537991
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33039,7 +30963,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2036523509}
-  - component: {fileID: 2036523510}
   m_Layer: 0
   m_Name: MonsterPoint_20
   m_TagString: Untagged
@@ -33062,19 +30985,6 @@ Transform:
   m_Father: {fileID: 1904072299}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2036523510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448144, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2036523508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2036754283
 GameObject:
   m_ObjectHideFlags: 0
@@ -33085,7 +30995,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2036754284}
-  - component: {fileID: 2036754285}
   m_Layer: 0
   m_Name: _SceneRoot
   m_TagString: Untagged
@@ -33113,19 +31022,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2036754285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11492436, guid: f6d38bc83d44d0e43ae265d910efd03b,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2036754283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bd77409136e5cb4f87e8c6ad677dc38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2042221402
 GameObject:
   m_ObjectHideFlags: 0
@@ -33277,7 +31173,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2043800173}
-  - component: {fileID: 2043800174}
   m_Layer: 0
   m_Name: MonsterPoint_32
   m_TagString: Untagged
@@ -33300,19 +31195,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2043800174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2043800172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2044005323
 GameObject:
   m_ObjectHideFlags: 0
@@ -33323,7 +31205,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2044005324}
-  - component: {fileID: 2044005325}
   m_Layer: 0
   m_Name: MonsterPoint_29
   m_TagString: Untagged
@@ -33346,19 +31227,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2044005325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044005323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2047586208
 GameObject:
   m_ObjectHideFlags: 0
@@ -33369,7 +31237,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2047586209}
-  - component: {fileID: 2047586210}
   m_Layer: 0
   m_Name: MonsterPoint_12
   m_TagString: Untagged
@@ -33392,19 +31259,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2047586210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439700, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047586208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2053497336
 GameObject:
   m_ObjectHideFlags: 0
@@ -33746,7 +31600,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2058572246}
-  - component: {fileID: 2058572247}
   m_Layer: 0
   m_Name: MonsterPoint_31
   m_TagString: Untagged
@@ -33769,19 +31622,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2058572247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058572245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2060727802
 GameObject:
   m_ObjectHideFlags: 0
@@ -33886,7 +31726,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2061020463}
-  - component: {fileID: 2061020464}
   m_Layer: 0
   m_Name: MonsterPoint_20
   m_TagString: Untagged
@@ -33909,19 +31748,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2061020464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439646, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061020462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2065986600
 GameObject:
   m_ObjectHideFlags: 0
@@ -34251,7 +32077,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2088970750}
-  - component: {fileID: 2088970751}
   m_Layer: 0
   m_Name: MonsterPoint_1
   m_TagString: Untagged
@@ -34274,19 +32099,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2088970751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439580, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088970749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2095555385
 GameObject:
   m_ObjectHideFlags: 0
@@ -34297,7 +32109,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2095555386}
-  - component: {fileID: 2095555387}
   m_Layer: 0
   m_Name: MonsterPoint_14
   m_TagString: Untagged
@@ -34320,19 +32131,6 @@ Transform:
   m_Father: {fileID: 951246234}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2095555387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439650, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095555385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2101256315
 GameObject:
   m_ObjectHideFlags: 0
@@ -34390,7 +32188,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2102068158}
-  - component: {fileID: 2102068159}
   m_Layer: 0
   m_Name: MonsterPoint_37
   m_TagString: Untagged
@@ -34413,19 +32210,6 @@ Transform:
   m_Father: {fileID: 78763063}
   m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2102068159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439810, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102068157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2103904855
 GameObject:
   m_ObjectHideFlags: 0
@@ -34436,7 +32220,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2103904856}
-  - component: {fileID: 2103904857}
   m_Layer: 0
   m_Name: MonsterPoint_13
   m_TagString: Untagged
@@ -34459,19 +32242,6 @@ Transform:
   m_Father: {fileID: 886867064}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2103904857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11448210, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103904855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2105759593
 GameObject:
   m_ObjectHideFlags: 0
@@ -35423,7 +33193,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2140906592}
-  - component: {fileID: 2140906593}
   m_Layer: 0
   m_Name: MonsterPoint_5
   m_TagString: Untagged
@@ -35446,19 +33215,6 @@ Transform:
   m_Father: {fileID: 1058725514}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2140906593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11439528, guid: a26a08eab33cb914e987c40f29feb7db,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2140906591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066e516503259504a9396aaa5b8ae4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2145681515
 GameObject:
   m_ObjectHideFlags: 0
@@ -35568,17 +33324,17 @@ PrefabInstance:
     - target: {fileID: 2191521443754440331, guid: 40f7e7b8c913223499f5c1d185dcdc8d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.7177536
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2191521443754440331, guid: 40f7e7b8c913223499f5c1d185dcdc8d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.51453
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2191521443754440331, guid: 40f7e7b8c913223499f5c1d185dcdc8d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.4396515
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2191521443754440331, guid: 40f7e7b8c913223499f5c1d185dcdc8d,
         type: 3}
@@ -35603,7 +33359,7 @@ PrefabInstance:
     - target: {fileID: 2191521443754440331, guid: 40f7e7b8c913223499f5c1d185dcdc8d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2191521443754440331, guid: 40f7e7b8c913223499f5c1d185dcdc8d,
         type: 3}
@@ -35620,5 +33376,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 472228164, guid: 40f7e7b8c913223499f5c1d185dcdc8d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 33.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 472228164, guid: 40f7e7b8c913223499f5c1d185dcdc8d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -34.51
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40f7e7b8c913223499f5c1d185dcdc8d, type: 3}
+--- !u!1 &2191521443925583066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 472228163, guid: 40f7e7b8c913223499f5c1d185dcdc8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191521443925583065}
+  m_PrefabAsset: {fileID: 0}

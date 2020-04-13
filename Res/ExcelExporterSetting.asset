@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ExcelExporterSetting
   m_EditorClassIdentifier: 
   excelFolders:
-  - Assets/Excel/
+  - Assets/../Excel/
   excelPattern: '*.xlsx'
   outputPath: Assets/Lua/Game/Data/Excel/
