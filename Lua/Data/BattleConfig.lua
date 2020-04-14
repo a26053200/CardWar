@@ -31,7 +31,7 @@ function BattleConfig.Get(checkPointName)
                     areas = {}
                     BattleConfig.Map[battle.pid] = areas
                 end
-                local areaInfo = areas[battle.areaId] ---@type GridAreaInfo
+                local areaInfo = areas[battle.areaIndex] ---@type GridAreaInfo
                 if areaInfo == nil then
                     areaInfo = {}
                     areaInfo.areaIndex = battle.areaIndex
@@ -52,12 +52,12 @@ function BattleConfig.Get(checkPointName)
                 if waveInfo.wavePoints == nil then
                     waveInfo.wavePoints = {} ---@type table<number,WavePointInfo>
                 end
-
-                table.insert(waveInfo.wavePoints, {
-                    bornMode = battle.bornMode,
-                    --delay = battle.delay,
-                    grid = battle.grid,
-                    avatarName = battle.avatarName,})
+                local pointInfo = {}---@type WavePointInfo
+                pointInfo.bornMode = battle.bornMode
+                --pointInfo.delay = battle.delay
+                pointInfo.grid = battle.grid
+                pointInfo.avatarName = battle.avatarName
+                table.insert(waveInfo.wavePoints, pointInfo)
             end
         end
     end

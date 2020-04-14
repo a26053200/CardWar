@@ -8,10 +8,58 @@ local SceneItemVo = require("Game.Modules.World.Vo.SceneItemVo")
 ---@class Game.Modules.World.Vo.AvatarVo : Game.Modules.World.Vo.SceneItemVo
 ---@field New fun():Game.Modules.World.Vo.AvatarVo
 ---@field avatarInfo AvatarInfo
+---@field avatarInfo AvatarInfo
+---@field level number
+---@field camp Camp 阵营 所属阵营
+---@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
+---@field curHp number
+---@field maxHp number
 local AvatarVo = class("Game.Modules.World.Vo.AvatarVo",SceneItemVo)
 
 function AvatarVo:Ctor()
     
+end
+
+---@param avatarName string
+function AvatarVo:Init(avatarName)
+    self.avatarInfo = AvatarConfig.Get(avatarName)
+    if not StringUtil.IsEmpty(self.avatarInfo.skills) then
+        local split = string.split(self.avatarInfo.skills, ",")
+        for i = 1, #split do
+            local skill = SkillVoPool:Get() ---@type Game.Modules.Battle.Vo.SkillVo
+            skill:Init(split[i])
+            if skill.skillInfo.skillType == SkillType.Normal then
+                self.normalSkill = skill
+            end
+            --计算攻击范围
+            if skill.skillInfo.maxDistance == 0 then
+                skill.range = self.avatarInfo.range
+            else
+                skill.range = skill.skillInfo.minDistance + (skill.skillInfo.maxDistance - skill.skillInfo.minDistance) * 0.5
+            end
+            table.insert(self.skills, skill)
+
+        end
+        --挖矿技能
+        if isString(self.avatarInfo.skillDig) and not StringUtil.IsEmpty(self.avatarInfo.skillDig) then
+            self.skillDig = SkillVoPool:Get() ---@type Game.Modules.Battle.Vo.SkillVo
+            self.skillDig:Init(self.avatarInfo.skillDig)
+        end
+    end
+    self.level = 0
+    self.curHp = 0
+    self.maxHp = 0
+end
+
+function AvatarVo:Dispose()
+    for i = 1, #self.skills do
+        self.skills[i]:Dispose()
+        SkillVoPool:Store(self.skills[i])
+    end
+    self.skills = {}
+    self.curHp = 0
+    self.maxHp = 0
+    --AttributePool:Store(self.totalAttribute)
 end
 
 return AvatarVo

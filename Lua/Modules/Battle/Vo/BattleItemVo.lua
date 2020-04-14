@@ -7,15 +7,19 @@
 local AvatarVo = require("Game.Modules.World.Vo.AvatarVo")
 ---@class Game.Modules.Battle.Vo.BattleItemVo : Game.Modules.World.Vo.AvatarVo
 ---@field New fun():Game.Modules.Battle.Vo.BattleItemVo
----@field level number
----@field camp Camp 阵营 所属阵营
----@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
----@field curHp number
----@field maxHp number
+
 local BattleItemVo = class("Game.Modules.Battle.Vo.BattleItemVo",AvatarVo)
 
 function BattleItemVo:Ctor()
     
+end
+
+function BattleItemVo:Init(avatarName)
+    BattleItemVo.super.Init(self, avatarName)
+end
+
+function BattleItemVo:Dispose()
+    BattleItemVo.super.Dispose(self)
 end
 
 return BattleItemVo

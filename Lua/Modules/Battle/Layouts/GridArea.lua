@@ -40,9 +40,7 @@ function GridArea:Ctor(areaInfo, checkPointData)
 end
 
 --初始化该区域
----@param areaPointObj UnityEngine.GameObject
-function GridArea:InitArea(areaPointObj)
-    self.areaPointObj = areaPointObj
+function GridArea:InitArea()
     --local totalNum = 0
     for i = 1, #self.areaInfo.waves do
         --local waveInfo = self.areaInfo.waves[i]
@@ -52,7 +50,7 @@ function GridArea:InitArea(areaPointObj)
             --waveInfo.wavePoints[j].num = num
             --totalNum = totalNum + num
         --end
-        local wave = GridWave.New(self.areaInfo.waves[i], -areaPointObj.transform.forward)
+        local wave = GridWave.New(self.areaInfo.waves[i])
         wave.context = self.context
         self.waves[i] = wave
     end

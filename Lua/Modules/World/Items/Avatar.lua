@@ -51,9 +51,7 @@ function Avatar:OnRenderObjInit()
 
     self:ResetAttr()
     --self:CreateHpBar()
-    self:InitSomething()
-
-    self:EnterState(StateName.StandBy)
+    --self:InitSomething()
 end
 
 function Avatar:CreateCC()

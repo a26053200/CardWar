@@ -31,13 +31,10 @@ function GridBattleBehavior:CreateBattle()
     for i = 1, #self.checkPointData.areas do
         local areaInfo =  self.checkPointData.areas[i] ---@type GridAreaInfo
         areaInfo.index = i
-        if areaInfo.type == AreaType.Normal or
-                areaInfo.type == AreaType.Boss then
-            local area = GridArea.New(areaInfo, self.checkPointData)
-            area.context = self.context
-            area:InitArea(self.context.layoutObjects[areaInfo.pos])
-            table.insert(self.areas, area)
-        end
+        local area = GridArea.New(areaInfo, self.checkPointData)
+        area.context = self.context
+        area:InitArea()
+        table.insert(self.areas, area)
     end
     self:NewQueue()
     self:GetCurrArea():Refresh()

@@ -80,9 +80,9 @@ World = require("Game.Modules.World.World")
 FRAME_TIME = 1 / Application.targetFrameRate
 
 -- [声音系统]
---SoundPlayer = require("Game.Modules.Common.Sound.SoundPlayer").New()
---SoundConfig = require("Game.Data.SoundConfig")
---SoundPlayer:Init()
+SoundPlayer = require("Game.Modules.Common.Sound.SoundPlayer").New()
+SoundConfig = require("Game.Data.SoundConfig")
+SoundPlayer:Init()
 --
 
 --
@@ -147,7 +147,7 @@ PoolObjectProxy = require("Game.Modules.Common.Pools.PoolObjectProxy")
 BattleItemVoPool    = PoolObjectProxy.New("Game.Modules.Battle.Vo.BattleItemVo")
 --HeroVoPool      = PoolObjectProxy.New("Game.Modules.World.Vo.HeroVo")
 --MonsterVoPool   = PoolObjectProxy.New("Module.World.Vo.MonsterVo")
---SkillVoPool     = PoolObjectProxy.New("Game.Modules.Battle.Vo.SkillVo")
+SkillVoPool     = PoolObjectProxy.New("Game.Modules.Battle.Vo.SkillVo")
 --AttributePool    = PoolObjectProxy.New("Module.World.Vo.Attribute")
 --Icon = require("Game.Modules.Common.Icon.Icon")
 --Star = require("Game.Modules.Common.Star.Star")

@@ -4,8 +4,6 @@
 --- DateTime: 2019/5/6 11:56
 ---
 
-
-
 local Widget = require("Game.Modules.Common.Components.Widget")
 
 ---@class Game.Modules.Common.Components.AttachCamera : Game.Modules.Common.Components.Widget
@@ -16,13 +14,6 @@ local Widget = require("Game.Modules.Common.Components.Widget")
 ---@field orgTarget UnityEngine.GameObject
 local AttachCamera = class("Game.Modules.Common.Components.AttachCamera", Widget)
 
-local ZOOM_LEVEL =
-{
-    {radius = 30, angle = 5},
-    {radius = 15, angle = 20},
-    {radius = 36, angle = 45},
-    {radius = 24, angle = 38},
-}
 ---@param camera UnityEngine.Camera
 function AttachCamera:Ctor(camera, radius, angle, offset)
     AttachCamera.super.Ctor(self,camera.gameObject)

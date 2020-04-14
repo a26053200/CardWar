@@ -4,7 +4,6 @@
 --- DateTime: 2018/11/22 16:33
 ---
 
-local SoundConfig = require("Data.SoundConfig")
 local SoundGroup = require("Game.Modules.Common.Sound.SoundGroup")
 local LuaObject = require("Betel.LuaObject")
 
@@ -16,7 +15,15 @@ local SoundPlayer = class("Game.Modules.Common.Sound.SoundPlayer", LuaObject)
 
 local Default_Group = "[Group_Default]"
 
-SoundPlayer.SoundType = SoundType
+SoundType =
+{
+    UI  = "UI",
+    BGM = "BGM",
+    EFFECT = "EFFECT",
+    _3D = "3D",
+    VOICE = "VOICE",
+    SPECIAL = "SPECIAL",
+}
 
 function SoundPlayer:Ctor()
     self.soundMap = {}

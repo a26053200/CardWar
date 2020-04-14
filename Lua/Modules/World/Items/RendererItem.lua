@@ -37,8 +37,6 @@ function RendererItem:SetBornPos(pos, forward)
         self.transform.forward = forward
     end
     self.transform.position = pos
-    self:UpdateNode()
-    --self:UpdateAroundPos()
 end
 
 function RendererItem:BackToBorn()

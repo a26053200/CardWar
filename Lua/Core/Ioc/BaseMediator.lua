@@ -159,13 +159,4 @@ function BaseMediator:OnRemove()
 
 end
 
---调试
-function BaseMediator:_debug(msg)
-    if self.gameObject then
-        print(string.format("<color=#0F9783FF>[%s]</color>\n<color=#FFFFFFFF>%s</color>",self.gameObject.name,msg))
-    else
-        print(string.format("<color=#0F9783FF>[%s]</color>\n<color=#FFFFFFFF>%s</color>",self.__classname,msg))
-    end
-end
-
 return BaseMediator

@@ -11,6 +11,9 @@
 ---@field callback Handler
 local BattleEvents = {}
 
+--进入场景
+BattleEvents.EnterScene    = "GridBattle_EnterScene"
+
 --开始战斗
 BattleEvents.BattleStart    = "GridBattle_BattleStart"
 

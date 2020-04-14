@@ -149,15 +149,6 @@ Prefabs =
     LayoutGrid = "Prefabs/Common/LayoutGrid.prefab",--布阵的格子
 }
 
-SoundType =
-{
-    UI  = "UI",
-    BGM = "BGM",
-    EFFECT = "EFFECT",
-    _3D = "3D",
-    VOICE = "VOICE",
-    SPECIAL = "SPECIAL",
-}
 
 BubbleType =
 {

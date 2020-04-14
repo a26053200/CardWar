@@ -20,32 +20,28 @@ local WaveBase = require("Game.Modules.Battle.Layouts.WaveBase")
 
 ---@class Game.Modules.Battle.Layouts.GridWave : Game.Modules.Battle.Layouts.WaveBase
 ---@field New fun(waveInfo:GridWaveInfo, forward:UnityEngine.Vector3):Game.Modules.Battle.Layouts.GridWave
----@field forward UnityEngine.Vector3 朝向
 local GridWave = class("Game.Modules.Battle.Layouts.GridWave", WaveBase)
 
 ---@param waveInfo GridWaveInfo
----@param forward UnityEngine.Vector3 朝向
-function GridWave:Ctor(waveInfo, forward)
+function GridWave:Ctor(waveInfo)
     GridWave.super.Ctor(self)
     self.waveInfo = waveInfo
-    self.forward = forward
     self.itemList = List.New()
 end
 
 ---@param callback fun()
 function GridWave:Refresh(callback)
     self:StartCoroutine(function()
-        local duration = 1 / #self.waveInfo.wavePoints
         for i = 1, #self.waveInfo.wavePoints do
             local wavePoint = self.waveInfo.wavePoints[i]
-            if wavePoint.delay > 0 then
-                coroutine.wait(wavePoint.delay)
-            end
+            --if wavePoint.delay > 0 then
+            --    coroutine.wait(wavePoint.delay)
+            --end
             local battleItemVo = World.CreateBattleItemVo(wavePoint.avatarName)--克隆数据
             battleItemVo.camp = Camp.Def --所有怪物默认都是守方阵营
             local battleItem = BattleItem.New(battleItemVo, self.context)
             local layoutGrid = self.context.battleLayout:GetGridByIndex(Camp.Def, wavePoint.grid)
-            battleItem:SetBornPos(layoutGrid.transform.position, self.forward)
+            battleItem:SetBornPos(layoutGrid.transform.position, layoutGrid.forward)
             layoutGrid:SetOwner(battleItem)
             if wavePoint.bornMode == WaveBornMode.BornEffect then
                 battleItem:Born()
@@ -65,6 +61,7 @@ function GridWave:Refresh(callback)
             battleItem:ResetAttr()
             battleItem.isBorn = true
             battleItem:SetRenderEnabled(true)
+            self:_debug(string.format("Refresh %d/%d", i,#self.waveInfo.wavePoints))
             self.itemList:Push(battleItem)
         end
         if callback then

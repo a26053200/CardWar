@@ -1,7 +1,7 @@
 ﻿local Data = {
-    [1] = {id = 1, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", avatarName = "micro_dragon", grid = 13},
-    [2] = {id = 2, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", avatarName = "micro_dragon", grid = 13},
-    [3] = {id = 3, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", avatarName = "micro_dragon", grid = 13},
+    [1] = {id = 1, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", avatarName = "micro_dragon", grid = 1},
+    [2] = {id = 2, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", avatarName = "micro_dragon", grid = 2},
+    [3] = {id = 3, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", avatarName = "micro_dragon", grid = 3},
 }
 
 function Data.Get(id)

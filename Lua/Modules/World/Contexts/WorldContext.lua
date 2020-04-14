@@ -8,15 +8,14 @@ local BattleItem = require("Game.Modules.World.Items.BattleItem")
 
 ---@class WorldContext
 ---@field New fun()
+---@field mode string
 ---@field id number
 ---@field currSubScene Game.Modules.World.Scenes.Core.SubScene  当前子场景
 ---@field battleBehavior Game.Modules.Battle.Behaviors.BattleBehavior    战场行为
----@field battleItemList table<number, Game.Modules.World.Items.Hero>
+---@field battleItemList table<number, Game.Modules.World.Items.BattleItem>
 ---@field avatarRoot UnityEngine.GameObject
 ---@field pool Game.Modules.Common.Pools.AssetPoolProxy 对象池
 ---@field attachCamera Game.Modules.Common.Components.AttachCamera
----@field forward UnityEngine.Vector3 整个布局的朝向
----@field heroGridLayouts table<UnityEngine.GameObject, Game.Modules.Battle.Layouts.LayoutGrid>
 ---@field battleLayout Game.Modules.Battle.View.BattleLayout
 local WorldContext = class("WorldContext")
 
@@ -25,6 +24,7 @@ local Sid = 1
 function WorldContext:Ctor(mode)
     self.id = Sid
     Sid = Sid + 1
+    self.mode = mode
     self.battleItemList = {}
     self.dropList = List.New()
 end
@@ -34,33 +34,25 @@ end
 ---@param cards table<number, Game.Modules.Card.Vo.CardVo> 卡牌
 ---@param state CardState
 function WorldContext:CreateBattleItems(cards, camp, state)
-    local teamLeader
     for i = 1, #cards do
         local card = cards[i]
         if state == nil or card.state == state then
-            local hero = self:CreateBattleItem(card, camp)
-            if hero.heroInfo.isLeader then
-                teamLeader = hero
-            end
-            table.insert(self.battleItemList, hero)
-            hero.layoutIndex = card.layoutIndex
+            local battleItem = self:CreateBattleItem(card, camp)
+            table.insert(self.battleItemList, battleItem)
+            battleItem.layoutIndex = card.layoutIndex
         end
     end
-    for _, hero in ipairs(self.battleItemList) do
-        hero.leader = teamLeader
-    end
-    self.leaderHero = teamLeader
 end
 
 ---@param card Game.Modules.Card.Vo.CardVo 卡牌
 function WorldContext:CreateBattleItem(card, camp)
-    local heroVo = World.CreateHeroVo(card.cardInfo.avatarName)
-    heroVo.camp = camp
-    heroVo.isLeader = card.layoutIndex == 1
-    heroVo.index = card.layoutIndex
-    local hero = BattleItem.New(heroVo, self)
-    hero.ownerCardVo = card
-    return hero
+    local battleItemVo = World.CreateBattleItemVo(card.cardInfo.avatarName)
+    battleItemVo.camp = camp
+    battleItemVo.isLeader = card.layoutIndex == 1
+    battleItemVo.index = card.layoutIndex
+    local battleItem = BattleItem.New(battleItemVo, self)
+    battleItem.ownerCardVo = card
+    return battleItem
 end
 
 ---@param hero Game.Modules.World.Items.BattleItem

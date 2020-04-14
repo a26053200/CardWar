@@ -30,7 +30,7 @@ end
 
 --重置属性
 function BattleItem:ResetAttr()
-    local maxHp = math.random(self.avatarInfo.hp_min, self.avatarInfo.hp_max)
+    local maxHp = math.random(100,100)
     self.battleItemVo.curHp = maxHp
     self.battleItemVo.maxHp = maxHp
 end

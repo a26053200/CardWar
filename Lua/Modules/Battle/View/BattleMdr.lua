@@ -94,8 +94,12 @@ function BattleMdr:StartBattle()
         hero:CreateCC() --  创建碰撞体，接受点击事件
         hero:ResetAttr()
         --hero:SetRenderEnabled(true)
-        hero:UpdateNode()
+        --hero:UpdateNode()
         --hero:SetBehaviorEnabled(true)
+        local grid = self.context.battleLayout:GetGridByIndex(Camp.Atk, hero.layoutIndex)
+        hero:SetBornPos(grid.transform.position, grid.forward)
+        hero:Born()
+        grid:SetOwner(hero)
     end
 
     self.context.attachCamera = AttachCamera.New(self.context.currSubScene:GetCamera(),
@@ -106,6 +110,7 @@ function BattleMdr:StartBattle()
     self.context.attachCamera:StopAttach()
     self.context.attachCamera:Reset()
     self.context.battleBehavior:GetCurrArea():Active()
+    self.context.attachCamera:StartAttach()
 
     self:StartCoroutine(function()
         local currArea = self.context.battleBehavior:GetCurrArea()
@@ -115,9 +120,9 @@ function BattleMdr:StartBattle()
         end
         coroutine.wait(0.2)
         self.context.attachCamera:AttachPos(self.context.battleLayout.areaPointObj.transform.position)
-        vmgr:LoadView(ViewConfig.BattleArrayEditor)--布阵
+        --vmgr:LoadView(ViewConfig.BattleArrayEditor)--布阵
         coroutine.step(1)
-        self.context.attachCamera:StartAttach()
+
         --等待布局结束
         while not self.battleModel.isEditBattleArrayComplete do
             coroutine.step(1)
