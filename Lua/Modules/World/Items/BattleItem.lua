@@ -46,14 +46,7 @@ end
 
 function BattleItem:OnRenderObjInit()
     BattleItem.super.OnRenderObjInit(self)
-    --self:SetBehaviorEnabled(true)
-    --if self.context.mode == BattleMode.Idle then
-    --    self:SetLayer(Layers.Name.Monster)
-    --elseif self.context.mode == BattleMode.Grid then
-    --    self:SetLayer(Layers.Name.Monster)
-    --else
-    --    self:SetLayer(Layers.Name.Monster)
-    --end
+    self:SetLayer(Layers.Name.BattleItem)
 end
 
 --出生效果

@@ -12,32 +12,21 @@ Layers.Layer = {
     Default                 = 0,
     UI                      = 5,
     SceneUI                 = 8,
-    Chapter                 = 9,
-    Hero                    = 10,
-    NPC                     = 11,
-    Monster                 = 12,
-    Building                = 20,
-    Plant                   = 21,
-    Road                    = 22,
-    Unwalk                  = 23,
-    Live2D                  = 24,
-    MiniScene               = 25,
+    BattleItem              = 9,
+    --Hero                    = 10,
+    Building                = 11,
+    Road                    = 12,
+    Unwalk                  = 20,
 }
 
 Layers.Name = {
     Default                 = "Default",
     UI                      = "UI",
     SceneUI                 = "SceneUI",
-    Chapter                 = "Chapter",
-    Hero                    = "Hero",
-    NPC                     = "NPC",
-    Monster                 = "Monster",
+    BattleItem              = "BattleItem",
     Building                = "Building",
-    Plant                   = "Plant",
     Road                    = "Road",
     Unwalk                  = "Unwalk",
-    Live2D                  = "Live2D",
-    MiniScene               = "MiniScene",
 }
 
 ---@param name string
@@ -93,8 +82,8 @@ function Layers.SceneUI()
     return Layers.GetLayerInt(Layers.Name.SceneUI)
 end
 
-function Layers.Chapter()
-    return Layers.GetLayerInt(Layers.Name.Chapter)
+function Layers.BattleItem()
+    return Layers.GetLayerInt(Layers.Name.BattleItem)
 end
 
 return Layers
