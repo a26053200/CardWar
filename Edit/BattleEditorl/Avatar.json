@@ -1,0 +1,4 @@
+﻿{
+    "micro_dragon": {"id": "micro_dragon", "name": "Micro Dragon", "type": "", "hudOffset": "0,0,0", "prefabUrl": "Models/Dragon/Prefabs/micro_dragon.prefab"},
+    "Villager_B_Boy": {"id": "Villager_B_Boy", "name": "Villager", "type": "", "hudOffset": "0,0,0", "prefabUrl": "Models/villarger_B_Boy/Prefabs/Villager_B_Boy.prefab"},
+}
