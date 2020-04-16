@@ -15,7 +15,7 @@
 ---@field enterScript string  进入该区域触发的剧情
 ---@field exitScript string   离开该区域触发的剧情
 
-local BattleItem = require("Game.Modules.World.Items.BattleItem")
+local BattleUnit = require("Game.Modules.World.Items.BattleUnit")
 local WaveBase = require("Game.Modules.Battle.Layouts.WaveBase")
 
 ---@class Game.Modules.Battle.Layouts.GridWave : Game.Modules.Battle.Layouts.WaveBase
@@ -37,9 +37,9 @@ function GridWave:Refresh(callback)
             --if wavePoint.delay > 0 then
             --    coroutine.wait(wavePoint.delay)
             --end
-            local battleItemVo = World.CreateBattleItemVo(wavePoint.avatarName)--克隆数据
+            local battleItemVo = World.CreateBattleUnitVo(wavePoint.battleUnit)--克隆数据
             battleItemVo.camp = Camp.Def --所有怪物默认都是守方阵营
-            local battleItem = BattleItem.New(battleItemVo, self.context)
+            local battleItem = BattleUnit.New(battleItemVo, self.context)
             local layoutGrid = self.context.battleLayout:GetGridByIndex(Camp.Def, wavePoint.grid)
             battleItem:SetBornPos(layoutGrid.transform.position, layoutGrid.forward)
             layoutGrid:SetOwner(battleItem)
@@ -84,7 +84,7 @@ function GridWave:IsAllDead()
     end
     local allDead = true
     for i = 1, self.itemList:Size() do
-        local monster = self.itemList[i] ---@type Game.Modules.World.Items.BattleItem
+        local monster = self.itemList[i] ---@type Game.Modules.World.Items.BattleUnit
         if not monster:IsDead() then
             allDead = false
             break;
@@ -100,7 +100,7 @@ function GridWave:IsAllDeadOver()
     end
     local allDead = true
     for i = 1, self.itemList:Size() do
-        local monster = self.itemList[i] ---@type Game.Modules.World.Items.BattleItem
+        local monster = self.itemList[i] ---@type Game.Modules.World.Items.BattleUnit
         if not monster.deadOver then
             allDead = false
             break;

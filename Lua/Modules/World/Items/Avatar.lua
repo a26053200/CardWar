@@ -100,6 +100,10 @@ function Avatar:SetRenderEnabled(enabled)
 end
 
 function Avatar:PlayIdle()
+    self.animCtrl:PlayAnim(self.avatarInfo.animBorn)
+end
+
+function Avatar:PlayIdle()
     self.animCtrl:PlayAnim(self.avatarInfo.animIdle)
 end
 
@@ -132,6 +136,10 @@ function Avatar:PlayRoll(speed)
 
     local length = self.animCtrl:GetAnimLength(self.avatarInfo.animRoll)
     return length / (speed or 1)
+end
+
+function Avatar:PlayWin()
+    self.animCtrl:PlayAnim(self.avatarInfo.animWin)
 end
 
 function Avatar:JumpTo(destPos, callback, duration)

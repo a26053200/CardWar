@@ -10,17 +10,17 @@ local BattleItemEvents = require("Game.Modules.Battle.Events.BattleItemEvents")
 local AvatarGridBehavior = require("Game.Modules.Battle.Behaviors.AvatarGridBehavior")
 local Avatar = require("Game.Modules.World.Items.Avatar")
 
----@class Game.Modules.World.Items.BattleItem : Game.Modules.World.Items.Avatar
----@field New fun(monsterInfo:Game.Modules.Battle.Vo.BattleItemVo, context:WorldContext) : Module.World.Items.Monster
----@field battleItemVo Game.Modules.Battle.Vo.BattleItemVo
+---@class Game.Modules.World.Items.BattleUnit : Game.Modules.World.Items.Avatar
+---@field New fun(monsterInfo:Game.Modules.Battle.Vo.BattleUnitVo, context:WorldContext) : Module.World.Items.Monster
+---@field battleItemVo Game.Modules.Battle.Vo.BattleUnitVo
 ---@field behavior Game.Modules.Battle.Behaviors.GridBattleBehavior
 ---@field strategy Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase -- 策略
 ---@field ownerCardVo Game.Modules.Card.Vo.CardVo 英雄所属卡
 ---@field layoutIndex number 布局索引 默认0 表示没有上场
 ---@field layoutGrid Game.Modules.Battle.Layouts.LayoutGrid 所在布局格子
-local BattleItem = class("Game.Modules.World.Items.BattleItem", Avatar)
+local BattleItem = class("Game.Modules.World.Items.BattleUnit", Avatar)
 
----@param battleItemVo Game.Modules.Battle.Vo.BattleItemVo
+---@param battleItemVo Game.Modules.Battle.Vo.BattleUnitVo
 ---@param context WorldContext
 function BattleItem:Ctor(battleItemVo, context)
     self:SetContext(context)

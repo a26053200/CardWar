@@ -17,7 +17,7 @@ local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 ---@field waveInfo WaveBaseInfo
 ---@field context WorldContext
 ---@field isActive boolean
----@field itemList List | table<number, Game.Modules.World.Items.BattleItem>
+---@field itemList List | table<number, Game.Modules.World.Items.BattleUnit>
 local WaveBase = class("Game.Modules.Battle.Layouts.WaveBase",LuaMonoBehaviour)
 
 ---@param waveInfo WaveBaseInfo

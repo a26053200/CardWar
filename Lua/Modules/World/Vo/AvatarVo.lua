@@ -4,16 +4,16 @@
 --- DateTime: 2020-04-12-18:19:57
 ---
 
-local SceneItemVo = require("Game.Modules.World.Vo.SceneItemVo")
----@class Game.Modules.World.Vo.AvatarVo : Game.Modules.World.Vo.SceneItemVo
+local SceneItemVo = require("Game.Modules.World.Vo.SceneUnitVo")
+---@class Game.Modules.World.Vo.AvatarVo : Game.Modules.World.Vo.SceneUnitVo
 ---@field New fun():Game.Modules.World.Vo.AvatarVo
----@field avatarInfo AvatarInfo
 ---@field avatarInfo AvatarInfo
 ---@field level number
 ---@field camp Camp 阵营 所属阵营
 ---@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
 ---@field curHp number
 ---@field maxHp number
+---@field normalSkill Game.Modules.Battle.Vo.SkillVo
 local AvatarVo = class("Game.Modules.World.Vo.AvatarVo",SceneItemVo)
 
 function AvatarVo:Ctor()
@@ -31,24 +31,10 @@ function AvatarVo:Init(avatarName)
             if skill.skillInfo.skillType == SkillType.Normal then
                 self.normalSkill = skill
             end
-            --计算攻击范围
-            if skill.skillInfo.maxDistance == 0 then
-                skill.range = self.avatarInfo.range
-            else
-                skill.range = skill.skillInfo.minDistance + (skill.skillInfo.maxDistance - skill.skillInfo.minDistance) * 0.5
-            end
             table.insert(self.skills, skill)
-
-        end
-        --挖矿技能
-        if isString(self.avatarInfo.skillDig) and not StringUtil.IsEmpty(self.avatarInfo.skillDig) then
-            self.skillDig = SkillVoPool:Get() ---@type Game.Modules.Battle.Vo.SkillVo
-            self.skillDig:Init(self.avatarInfo.skillDig)
         end
     end
-    self.level = 0
-    self.curHp = 0
-    self.maxHp = 0
+
 end
 
 function AvatarVo:Dispose()

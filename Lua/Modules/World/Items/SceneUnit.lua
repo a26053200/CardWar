@@ -7,17 +7,17 @@
 
 local LuaObject = require("Betel.LuaObject")
 
----@class Game.Modules.World.Items.SceneItem : Betel.LuaObject
+---@class Game.Modules.World.Items.SceneUnit : Betel.LuaObject
 ---@field sid number 唯一id
 ---@field context WorldContext
----@field sceneItemVo Game.Modules.World.Vo.SceneItemVo
+---@field sceneItemVo Game.Modules.World.Vo.SceneUnitVo
 ---@field gameObject UnityEngine.GameObject
 ---@field transform UnityEngine.Transform
-local SceneItem = class("Game.Modules.World.Items.SceneItem", LuaObject)
+local SceneItem = class("Game.Modules.World.Items.SceneUnit", LuaObject)
 
 local S_ID = 0
 
----@param sceneItemData Game.Modules.World.Vo.SceneItemVo
+---@param sceneItemData Game.Modules.World.Vo.SceneUnitVo
 function SceneItem:Ctor(sceneItemData)
     SceneItem.super.Ctor(self)
     self.sceneItemVo = sceneItemData

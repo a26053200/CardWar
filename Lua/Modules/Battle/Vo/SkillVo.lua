@@ -4,13 +4,35 @@
 --- DateTime: 2020-04-12-00:50:19
 ---
 
-local BaseVo = require("Game.Core.BaseVo")
----@class Game.Modules.Battle.Vo.SkillVo : Game.Core.BaseVo
----@field New fun():Game.Modules.Battle.Vo.SkillVo
-local SkillVo = class("Game.Modules.Battle.Vo.SkillVo",BaseVo)
+local PoolObject = require("Game.Modules.Common.Pools.PoolObject")
+---@class Game.Modules.Battle.Vo.SkillVo : Game.Modules.Common.Pools.PoolObject
+---@field New fun(skillName:string):Game.Modules.Battle.Vo.SkillVo
+---@field skillInfo SkillInfo
+---@field active boolean
+---@field startTime number
+---@field canUseCount number 当前可使用次数
+---@field useCount number 使用次数
+---@field isNecessary boolean 必然被触发的
+local SkillVo = class("Game.Modules.Battle.Vo.SkillVo",PoolObject)
 
 function SkillVo:Ctor()
-    
+
+end
+
+function SkillVo:Init(skillName)
+    self.skillInfo = SkillConfig.Get(skillName)
+    self.active = true
+    self.startTime = 0
+    self.canUseCount = self.skillInfo.canUseCount
+    self.useCount = 0
+end
+
+function SkillVo:Dispose()
+    self.skillInfo = nil
+    self.active = false
+    self.startTime = 0
+    self.canUseCount = 0
+    self.useCount = 0
 end
 
 return SkillVo

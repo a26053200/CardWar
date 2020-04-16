@@ -12,7 +12,6 @@ local PoolVo = require("Game.Modules.Common.Pools.PoolObject")
 ---@field targetList table<number, Game.Modules.World.Items.Avatar> 目标
 ---@field accountTargetList table<number, Game.Modules.World.Items.Avatar> 已经被结算的目标
 ---@field account AccountInfo
----@field effect Game.Modules.World.Items.EffectItem --特效结算
 local AccountContext = class("Module.World.Contexts.AccountContext", PoolVo)
 
 local Sid = 1
@@ -35,9 +34,9 @@ end
 --开始
 function AccountContext:Start()
     if self.avatar.context.mode == BattleMode.Grid then
-        local oppseCamp = BattleUtils.GetOppseCamp(self.avatar.avatarVo.camp) --对立阵营
-        self.targetList = self.avatar.context.battleLayout:GetTargetList(oppseCamp, self.account.gridSelect)
-        self.avatar.context.battleLayout:SetAttackSelect(oppseCamp, self.account.gridSelect, true)
+        local opposeCamp = BattleUtils.GetOpposeCamp(self.avatar.avatarVo.camp) --对立阵营
+        self.targetList = self.avatar.context.battleLayout:GetTargetList(opposeCamp, self.account.gridSelect)
+        self.avatar.context.battleLayout:SetAttackSelect(opposeCamp, self.account.gridSelect, true)
     end
 end
 
@@ -140,7 +139,7 @@ end
 --结束
 function AccountContext:End()
     if self.avatar.context.mode == BattleMode.Grid then
-        local oppseCamp = BattleUtils.GetOppseCamp(self.avatar.avatarVo.camp) --对立阵营
+        local oppseCamp = BattleUtils.GetOpposeCamp(self.avatar.avatarVo.camp) --对立阵营
         self.avatar.context.battleLayout:SetAttackSelect(oppseCamp, self.account.gridSelect, false)
     end
     self:Dispose()

@@ -5,9 +5,9 @@
 --- 需要支持Unity相关操作的单位
 ---
 
-local SceneItem = require("Game.Modules.World.Items.SceneItem")
+local SceneItem = require("Game.Modules.World.Items.SceneUnit")
 
----@class Game.Modules.World.Items.RendererItem : Game.Modules.World.Items.SceneItem
+---@class Game.Modules.World.Items.RendererItem : Game.Modules.World.Items.SceneUnit
 ---@field renderObj UnityEngine.GameObject 用于渲染的Obj
 ---@field collider UnityEngine.Collider
 ---@field smrs table<number, UnityEngine.SkinnedMeshRenderer>

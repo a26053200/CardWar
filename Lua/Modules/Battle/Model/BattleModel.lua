@@ -5,21 +5,10 @@
 ---
 
 --场景单位信息
----@class SceneItemInfo
+---@class SceneUnitInfo
 ---@field id string|number
 ---@field prefabUrl string
 ---@field scale number
-
---技能
----@class SkillInfo
----@field animName string
----@field accounts table<number, AccountInfo>
-
---结算
----@class AccountInfo
----@field percent number
----@field shakeCamera ShakeCamera
----@field baseAttr BaseAttribute
 
 --相机震动
 ---@class ShakeCamera

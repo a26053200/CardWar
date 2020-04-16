@@ -8,7 +8,7 @@
 --刷新点
 ---@class WavePointInfo
 ---@class ignore boolean 是否忽略
----@field avatarName string     刷新模型
+---@field battleUnit string     刷新模型
 ---@field grid number           所在格子
 ---@field minNum number         最小刷新数量
 ---@field maxNum number         最大刷新数量
@@ -56,7 +56,7 @@ function BattleConfig.Get(checkPointName)
                 pointInfo.bornMode = battle.bornMode
                 --pointInfo.delay = battle.delay
                 pointInfo.grid = battle.grid
-                pointInfo.avatarName = battle.avatarName
+                pointInfo.battleUnit = battle.avatarName
                 table.insert(waveInfo.wavePoints, pointInfo)
             end
         end

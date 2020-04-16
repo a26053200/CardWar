@@ -4,7 +4,7 @@
 --- DateTime: 2020/4/10 23:37
 ---
 
-local BattleItem = require("Game.Modules.World.Items.BattleItem")
+local BattleUnit = require("Game.Modules.World.Items.BattleUnit")
 
 ---@class WorldContext
 ---@field New fun()
@@ -12,7 +12,7 @@ local BattleItem = require("Game.Modules.World.Items.BattleItem")
 ---@field id number
 ---@field currSubScene Game.Modules.World.Scenes.Core.SubScene  当前子场景
 ---@field battleBehavior Game.Modules.Battle.Behaviors.BattleBehavior    战场行为
----@field battleItemList table<number, Game.Modules.World.Items.BattleItem>
+---@field battleItemList table<number, Game.Modules.World.Items.BattleUnit>
 ---@field avatarRoot UnityEngine.GameObject
 ---@field pool Game.Modules.Common.Pools.AssetPoolProxy 对象池
 ---@field attachCamera Game.Modules.Common.Components.AttachCamera
@@ -46,23 +46,23 @@ end
 
 ---@param card Game.Modules.Card.Vo.CardVo 卡牌
 function WorldContext:CreateBattleItem(card, camp)
-    local battleItemVo = World.CreateBattleItemVo(card.cardInfo.avatarName)
+    local battleItemVo = World.CreateBattleUnitVo(card.cardInfo.avatarName)
     battleItemVo.camp = camp
     battleItemVo.isLeader = card.layoutIndex == 1
     battleItemVo.index = card.layoutIndex
-    local battleItem = BattleItem.New(battleItemVo, self)
+    local battleItem = BattleUnit.New(battleItemVo, self)
     battleItem.ownerCardVo = card
     return battleItem
 end
 
----@param hero Game.Modules.World.Items.BattleItem
+---@param hero Game.Modules.World.Items.BattleUnit
 function WorldContext:AddBattleItem(hero)
     table.insert(self.battleItemList, hero)
     hero.layoutIndex = hero.ownerCardVo.layoutIndex
 end
 
 ---@param cardInfo Game.Modules.Card.Vo.CardVo
----@return Game.Modules.World.Items.BattleItem
+---@return Game.Modules.World.Items.BattleUnit
 function WorldContext:GetBattleItemByCard(cardInfo)
     for i = 1, #self.battleItemList do
         if self.battleItemList[i].ownerCardVo == cardInfo then

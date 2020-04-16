@@ -62,7 +62,7 @@ function BattleMdrBase:InitObjectPool()
                 local waveInfo = areaInfo.waves[j]
                 for k = 1, #waveInfo.wavePoints do
                     local pointInfo = waveInfo.wavePoints[k]
-                    PoolFactory.CalcPoolNumMap(poolNumMap, pointInfo.avatarName)
+                    PoolFactory.CalcPoolNumMap(poolNumMap, pointInfo.battleUnit)
                 end
             end
         end

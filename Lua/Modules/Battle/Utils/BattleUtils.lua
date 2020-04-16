@@ -70,7 +70,7 @@ end
 --获取对立阵营
 ---@param camp Camp
 ---@return Camp
-function BattleUtils.GetOppseCamp(camp)
+function BattleUtils.GetOpposeCamp(camp)
     if camp == nil then
         logError("Camp is nil")
     end

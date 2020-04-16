@@ -1,4 +1,5 @@
-﻿local Data = {
+﻿-- Battle 2020/4/17 0:04:07
+local Data = {
     [1] = {id = 1, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", avatarName = "micro_dragon", grid = 1},
     [2] = {id = 2, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", avatarName = "micro_dragon", grid = 2},
     [3] = {id = 3, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", avatarName = "micro_dragon", grid = 3},

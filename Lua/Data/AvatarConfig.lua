@@ -6,10 +6,16 @@
 
 
 --Avatar基础属性
----@class AvatarInfo : SceneItemInfo
+---@class AvatarInfo : SceneUnitInfo
 ---@field name string
 ---@field type number
 ---@field hudOffset UnityEngine.Vector3
+---@field skills string
+---@field animBorn string --登场动作
+---@field animIdle string --待机动作
+---@field animDead string --死亡动作
+---@field animRun string --行走动作
+---@field animWin string --胜利动作
 
 local AvatarConfig = {}
 
@@ -18,22 +24,14 @@ function AvatarConfig.Get(avatarName)
     if AvatarConfig.data == nil then
         AvatarConfig.data = require("Game.Data.Excel.Avatar")
     end
-    --if AvatarConfig.skillData == nil then
-    --    AvatarConfig.skillData = require("Game.Data.Excel.Skill")
-    --end
-    --if AvatarConfig.dropData == nil then
-    --    AvatarConfig.dropData = require("Game.Data.Excel.DropItem")
-    --end
     local info = AvatarConfig.data.Get(avatarName) ---@type AvatarInfo
     if info == nil then
         logError(string.format("There is not avatar info named %s!", avatarName))
     end
-
     if isString(info.hudOffset) then
         local hudOffset = info.hudOffset
         info.hudOffset = Tool.ToVector3(hudOffset)
     end
-
     return info
 end
 
