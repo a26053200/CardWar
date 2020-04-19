@@ -16,3 +16,5 @@ MonoBehaviour:
   - Assets/../Excel/
   excelPattern: '*.xlsx'
   outputPath: Assets/Lua/Game/Data/Excel/
+  jsonOutputPath: Assets/Edit/BattleEditorl/
+  fileList: []
