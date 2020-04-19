@@ -33,4 +33,15 @@ function AccountCtrl:AccountProgress(animInfo, accountCallback)
     self:CreateDelay(animInfo.accountPoint * (animLength / animInfo.animSpeed), accountCallback)
 end
 
+---@param animInfo AnimInfo
+---@param accounts table<number, AccountInfo>
+function AccountCtrl:MultiAccountProgress(animInfo, accounts, accountCallback)
+    local animLength = self.battleUnit.animCtrl:GetAnimLength(animInfo.animName)
+    for i = 1, #accounts do
+        self:CreateDelay(accounts[i].accountPoint * (animLength / animInfo.animSpeed), function()
+            accountCallback(accounts[i])
+        end)
+    end
+end
+
 return AccountCtrl

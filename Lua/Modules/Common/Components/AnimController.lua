@@ -76,6 +76,7 @@ function AnimController:PlayAnim(animName,callback, speed, crossFade)
         end
         self.animator:Update(0) --强制切换,方便获取动作时长
     end
+    --self.avatar:_debug("play anim " .. animName)
     speed = speed == nil and 1 or speed
     if callback then
         local length = self:GetAnimLength(animName)

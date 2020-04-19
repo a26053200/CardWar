@@ -99,7 +99,7 @@ function Avatar:SetRenderEnabled(enabled)
     end
 end
 
-function Avatar:PlayIdle()
+function Avatar:PlayBorn()
     self.animCtrl:PlayAnim(self.avatarInfo.animBorn)
 end
 
@@ -119,8 +119,8 @@ function Avatar:PlayRun(animSpeed)
     self.animCtrl:PlayAnim(self.avatarInfo.animRun, nil, animSpeed)
 end
 
-function Avatar:PlayHit(callback)
-
+function Avatar:PlayHit()
+    self.animCtrl:PlayAnim(self.avatarInfo.animHit)
 end
 
 function Avatar:PlayDead()

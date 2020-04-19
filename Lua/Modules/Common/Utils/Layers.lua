@@ -33,8 +33,8 @@ Layers.Name = {
 function Layers.GetLayerInt(name)
     if Layers["_"..name] == nil then
         Layers["_"..name] = LayerMask.NameToLayer(name)
-        --print("测试输出:".. name);
-        --print("测试输出:".. LayerMask.NameToLayer(name));
+        print("测试输入Layer:".. name);
+        print("测试输出Layer:".. LayerMask.NameToLayer(name));
     end
     return Layers["_"..name]
 end

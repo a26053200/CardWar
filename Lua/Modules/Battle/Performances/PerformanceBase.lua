@@ -20,7 +20,7 @@ local PerformanceBase = class("Game.Modules.Battle.Performances.PerformanceBase"
 function PerformanceBase:Ctor(battleUnit, performanceInfo)
     self.battleUnit = battleUnit
     self.performanceInfo = performanceInfo
-    self.battleUnit:_debug("Play Performance " .. performanceInfo.id)
+    --self.battleUnit:_debug("Play Performance " .. performanceInfo.id)
     PerformanceBase.super.Ctor(self, battleUnit.gameObject)
 end
 

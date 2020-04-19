@@ -32,7 +32,7 @@ end
 
 ---@return Game.Modules.World.Items.Avatar
 function GridBehaviorStrategy:AutoSelectTarget()
-    local opposeCamp = BattleUtils.GetOpposeCamp(self.battleUnit.battleItemVo.camp) --对立阵营
+    local opposeCamp = BattleUtils.GetOpposeCamp(self.battleUnit.battleUnitVo.camp) --对立阵营
     --首先攻击对位
     local targetGrid = self.battleUnit.context.battleLayout:GetGridByCol(opposeCamp, self.battleUnit.layoutIndex)
     if targetGrid == nil then --再现在最表面的

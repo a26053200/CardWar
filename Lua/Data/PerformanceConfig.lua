@@ -14,11 +14,12 @@
 ---@class PerformanceInfo
 ---@field id string                     id
 ---@field intrc string                  描述
+---@field accountType AccountType
 ---@field animInfo AnimInfo   结算动作
 ---@field effect string                 开始特效
 ---@field shake string      开始特效
 ---@field type string       类型
----@field gridSelect string
+---@field gridSelect GridSelectType
 ---@field interval number   效果触发间隔
 ---@field duration number   持续时间
 ---@field delay number      延时

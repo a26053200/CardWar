@@ -8,7 +8,11 @@ local AvatarVo = require("Game.Modules.World.Vo.AvatarVo")
 ---@class Game.Modules.Battle.Vo.BattleUnitVo : Game.Modules.World.Vo.AvatarVo
 ---@field New fun():Game.Modules.Battle.Vo.BattleUnitVo
 ---@field battleUnitInfo BattleUnitInfo
+---@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
+---@field normalSkill Game.Modules.Battle.Vo.SkillVo
 ---@field camp Camp 阵营 所属阵营
+---@field atk number
+---@field def number
 ---@field curHp number
 ---@field maxHp number
 ---@field curAnger number
@@ -17,6 +21,7 @@ local BattleUnitVo = class("Game.Modules.Battle.Vo.BattleUnitVo",AvatarVo)
 
 function BattleUnitVo:Ctor()
     BattleUnitVo.super:Ctor(self)
+    self.skills = {}
 end
 
 function BattleUnitVo:Init(battleUnitName)
@@ -42,12 +47,13 @@ function BattleUnitVo:Reset()
     self.level = 0
     self.curHp = self.battleUnitInfo.maxHp
     self.maxHp = self.battleUnitInfo.maxHp
-    self.curAnger = self.battleUnitInfo.maxAnger
+    self.curAnger = 0
     self.maxAnger = self.battleUnitInfo.maxAnger
 end
 
 function BattleUnitVo:Dispose()
     BattleUnitVo.super.Dispose(self)
+    self.skills = {}
     self.battleUnitInfo = nil
     self.normalSkill = nil
     self.level = 0

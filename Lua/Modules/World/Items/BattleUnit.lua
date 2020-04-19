@@ -5,6 +5,7 @@
 --- 战斗单位
 ---
 
+local SceneUnitHUD = require("Game.Modules.World.Items.SceneUnitHUD")
 local PerformancePlayer = require("Game.Modules.Battle.Performances.PerformancePlayer")
 local AccountCtrl = require("Game.Modules.Battle.Components.AccountCtrl")
 local GridBehaviorStrategy = require("Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy")
@@ -14,7 +15,7 @@ local Avatar = require("Game.Modules.World.Items.Avatar")
 
 ---@class Game.Modules.World.Items.BattleUnit : Game.Modules.World.Items.Avatar
 ---@field New fun(monsterInfo:Game.Modules.Battle.Vo.BattleUnitVo, context:WorldContext) : Module.World.Items.Monster
----@field battleItemVo Game.Modules.Battle.Vo.BattleUnitVo
+---@field battleUnitVo Game.Modules.Battle.Vo.BattleUnitVo
 ---@field behavior Game.Modules.Battle.Behaviors.GridBattleBehavior
 ---@field strategy Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase -- 策略
 ---@field accountCtrl Game.Modules.Battle.Components.AccountCtrl
@@ -28,13 +29,13 @@ local BattleItem = class("Game.Modules.World.Items.BattleUnit", Avatar)
 ---@param context WorldContext
 function BattleItem:Ctor(battleItemVo, context)
     self:SetContext(context)
-    self.battleItemVo = battleItemVo
+    self.battleUnitVo = battleItemVo
     BattleItem.super.Ctor(self, battleItemVo)
 end
 
 --重置属性
 function BattleItem:ResetAttr()
-    self.battleItemVo:Reset()
+    self.battleUnitVo:Reset()
 end
 
 function BattleItem:LoadObject()
@@ -52,11 +53,19 @@ function BattleItem:OnRenderObjInit()
 
     self.accountCtrl = AccountCtrl.New(self)
     self.performancePlayer = PerformancePlayer.New(self)
+
+    self.hud = SceneUnitHUD.New(self)
+end
+
+function BattleItem:SetHudVisible(visible)
+    if self.hud then
+        self.hud.gameObject:SetActive(visible)
+    end
 end
 
 --出生效果
 function BattleItem:Born(callback)
-    self:PlayIdle()
+    self:PlayBorn()
     self:SetRenderEnabled(true)
     self:OnBorn(callback)
 end
@@ -95,6 +104,11 @@ function BattleItem:SetBehaviorEnabled(enabled)
     else
         self.behavior:Stop()
     end
+end
+
+---@param hurtInfo HurtInfo
+function BattleItem:DoHurt(hurtInfo)
+
 end
 
 function BattleItem:OnDeadOver()
@@ -145,8 +159,8 @@ function BattleItem:Dispose()
     if self.effectWidget then
         self.effectWidget:Dispose()
     end
-    self.battleItemVo:Dispose()
-    self.battleItemVo = nil
+    self.battleUnitVo:Dispose()
+    self.battleUnitVo = nil
     --if self.gameObject.transform.childCount > 0 then
     --    logError("You must recovery the renderObj")
     --end

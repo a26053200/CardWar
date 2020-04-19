@@ -15,6 +15,8 @@
 ---@field cost number
 ---@field atk number
 ---@field def number
+---@field crit number
+---@field critPow number
 ---@field maxHp number
 ---@field maxAnger number
 ---@field speed number

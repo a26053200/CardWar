@@ -11,6 +11,7 @@ local PerformanceBase = require("Game.Modules.Battle.Performances.PerformanceBas
 ---@field accountContextList table<number, Game.Modules.World.Contexts.AccountContext>
 ---@field accounts table<number, AccountInfo>
 ---@field accountCount number
+---@field animCount number
 local Standard = class("Game.Modules.Battle.Performances.Standard", PerformanceBase)
 
 function Standard:Ctor(battleUnit, performanceInfo)
@@ -18,6 +19,7 @@ function Standard:Ctor(battleUnit, performanceInfo)
     self.sequenceOver = false
     self.accountContextList = {}
     self.accountCount = 0
+    self.animCount = 0
 end
 
 ---@param sequence DG.Tweening.Sequence
@@ -28,7 +30,7 @@ function Standard:OnBeginPerformance(sequence)
 
     self:StartCoroutine(function()
         self.accounts = self.performanceInfo.accounts
-        self:TargetSelect()
+        self:OnProcessStart()
         for i = 1, self.performanceInfo.times do
             self:Process()
             coroutine.wait(self.performanceInfo.interval)
@@ -36,37 +38,74 @@ function Standard:OnBeginPerformance(sequence)
         while self.accountCount < self.performanceInfo.times * #self.accounts do
             coroutine.step(1)
         end
+        while self.animCount < self.performanceInfo.times do
+            coroutine.step(1)
+        end
         self.sequenceOver = true
+        self:OnProcessEnd()
     end)
     return true
 end
 
 --开始
-function Standard:TargetSelect()
+function Standard:OnProcessStart()
+    self.battleUnit:SetHudVisible(false)
     self.opposeCamp = BattleUtils.GetOpposeCamp(self.battleUnit.avatarVo.camp) --对立阵营
     self.targetGridList = GridUtils.GetGrids(self.performanceInfo.gridSelect,self.opposeCamp, self.battleUnit)
-    self.targetList = self.battleUnit.context.battleLayout:GetTargetList(self.opposeCamp, self.targetGridList)
     self.battleUnit.context.battleLayout:SetAttackSelect(self.opposeCamp, self.targetGridList, true)
+    local targetList = self.battleUnit.context.battleLayout:GetTargetList(self.opposeCamp, self.targetGridList)
+    local firstTarget = targetList[1]
+    local tagPos = GridUtils.GetTargetAttackPoint(firstTarget.gameObject,self.battleUnit.context.checkPointData.layoutGridSize)
+    if self.performanceInfo.gridSelect == GridSelectType.All then
+        tagPos = self.battleUnit.context.battleLayout.center
+    end
+    local moveOver = false
+    self.battleUnit:PlayRun()
+    self.battleUnit.transform:DOMove(tagPos, FRAME_TIME * 3):OnComplete(function()
+        self.battleUnit:PlayIdle()
+        moveOver = true
+    end)
+    while not moveOver  do
+        coroutine.step(1)
+    end
 end
 
 function Standard:Process()
-    self.battleUnit:PlayIdle()
-    self.battleUnit.accountCtrl:AccountProgress(self.performanceInfo.animInfo,function()
-        for i = 1, #self.accounts do
-            local account = self.accounts[i]
-            local accountContext = World.CreateAccountContext(self.skillVo, self.battleUnit, account)
-            --local effect = self.avatar.effectWidget:Play(self.skillVo.skillInfo.effect,nil, nil , startPosList[i])
-            --effect.tagPos = destPosList[i]
-            --effect.minDistance = 0
-            --accountContext.effect = effect
-            accountContext:Start(self.performanceInfo.gridSelect)
-            accountContext:ExecuteAccount()
-            self.accountCount = self.accountCount + 1
-            table.insert(self.accountContextList, accountContext)
-            --self.lastEffect = effect
-        end
-    end)
-    self.battleUnit.animCtrl:PlayAnimInfo(self.performanceInfo.animInfo)
+    if self.performanceInfo.accountType == AccountType.Single then
+        --self.battleUnit:PlayIdle()
+        self.battleUnit.accountCtrl:AccountProgress(self.performanceInfo.animInfo,function()
+            for i = 1, #self.accounts do
+                self:DoAccount(self.accounts[i])
+            end
+        end)
+    else
+        ---@param account AccountInfo
+        self.battleUnit.accountCtrl:MultiAccountProgress(self.performanceInfo.animInfo, self.accounts, function(account)
+            self:DoAccount(account)
+        end)
+    end
+    self.battleUnit.animCtrl:PlayAnimInfo(self.performanceInfo.animInfo,Handler.New(function()
+        self.animCount = self.animCount + 1
+    end))
+end
+
+
+---@param account AccountInfo
+function Standard:DoAccount(account)
+    local accountContext = World.CreateAccountContext(self.skillVo, self.battleUnit, account)
+    --local effect = self.avatar.effectWidget:Play(self.skillVo.skillInfo.effect,nil, nil , startPosList[i])
+    --effect.tagPos = destPosList[i]
+    --effect.minDistance = 0
+    --accountContext.effect = effect
+    accountContext:Start(self.performanceInfo.gridSelect)
+    accountContext:ExecuteAccount()
+    self.accountCount = self.accountCount + 1
+    table.insert(self.accountContextList, accountContext)
+    --self.lastEffect = effect
+end
+
+function Standard:OnProcessEnd()
+
 end
 
 --重写阻塞函数
@@ -83,6 +122,7 @@ function Standard:Dispose()
     for i = 1, #self.accountContextList do
         self.accountContextList[i]:End()
     end
+    self.battleUnit:SetHudVisible(true)
     self.battleUnit.context.battleLayout:SetAttackSelect(self.opposeCamp, self.targetGridList, false)
 end
 

@@ -6,45 +6,69 @@
 
 local LuaMonoBehaviour = require('Betel.LuaMonoBehaviour')
 
----@class Game.Modules.World.Items.SceneItemHUD : Betel.LuaMonoBehaviour
----@field New fun(gameObject:UnityEngine.GameObject) : Game.Modules.World.Items.SceneItemHUD
----@field avatar Game.Modules.World.Items.Avatar
----@field hp UnityEngine.TextMesh
----@field name UnityEngine.TextMesh
-local SceneItemHUD = class("Game.Modules.World.Items.SceneItemHUD", LuaMonoBehaviour)
+---@class Game.Modules.World.Items.SceneUnitHUD : Betel.LuaMonoBehaviour
+---@field New fun(avatar:Game.Modules.World.Items.BattleUnit) : Game.Modules.World.Items.SceneUnitHUD
+---@field battleUnit Game.Modules.World.Items.BattleUnit
+---@field battleItemVo Game.Modules.Battle.Vo.BattleUnitVo
+---@field hpText UnityEngine.UI.Text
+---@field hpMain UnityEngine.UI.Image
+---@field hpSub UnityEngine.UI.Image
+---@field agMain UnityEngine.UI.Image
+---@field agSub UnityEngine.UI.Image
+---@field worldCamera UnityEngine.Camera
+---@field uiLayerRect UnityEngine.RectTransform
+local SceneItemHUD = class("Game.Modules.World.Items.SceneUnitHUD", LuaMonoBehaviour)
 
-local Offset_Y = 2.1
+local Offset = Vector3.New(0,110,0)
 
----@param avatar Game.Modules.World.Items.Avatar
-function SceneItemHUD:Ctor(avatar)
-    self.gameObject = Instantiate("Prefabs/Scene/SceneHUD.prefab",self.transform)
+---@param battleUnit Game.Modules.World.Items.BattleUnit
+function SceneItemHUD:Ctor(battleUnit)
+    self.uiLayer = vmgr:GetUILayer(UILayer.LAYER_SCENE)
+    self.uiLayerRect = self.uiLayer.gameObject:GetRect()
+    self.gameObject = Instantiate("Prefabs/UI/Battle/BattleUnitHUD.prefab",self.uiLayer)
     SceneItemHUD.super.Ctor(self, self.gameObject)
-    self.avatar = avatar
+    Layers.SetLayer(self.gameObject, Layers.UI())
+    self.transform.localPosition = Vector3.zero
+    self.transform.localEulerAngles = Vector3.zero
+    self.transform.localScale = Vector3.one
+    self.battleUnit = battleUnit
+    self.worldCamera = battleUnit.context.currSubScene:GetCamera()
+    self.battleItemVo = self.battleUnit.battleUnitVo
+    --AddEventListener(Event.Update, self.Update, self)
+    self:AddLuaMonoBehaviour(self.gameObject,"SceneItemHUD")
+
     self:Init()
-    AddEventListener(Event.Update, self.Update, self)
 end
 
 function SceneItemHUD:Init()
-    self.hp = GetText3D(self.gameObject:FindChild("hp"))
-    self.name = GetText3D(self.gameObject:FindChild("name"))
-    self.hud = Hud.New(self.avatar.avatarInfo.name,1)
-    self.hud.transform:SetParent(self.transform)
-    self.hud.transform.gameObject:ResetTransform()
+    self.hpText = self.gameObject:GetText("Text")
+    self.hpMain = self.gameObject:GetImage("HpBar/main")
+    self.hpSub = self.gameObject:GetImage("HpBar/sub")
+    self.agMain = self.gameObject:GetImage("AgBar/main")
+    self.agSub = self.gameObject:GetImage("AgBar/sub")
+    --self.name = GetText3D(self.gameObject:FindChild("name"))
+    --self.hud = Hud.New(self.battleUnit.avatarInfo.name,1)
+    --self.hud.transform:SetParent(self.transform)
+    --self.hud.transform.gameObject:ResetTransform()
     self:Update()
 end
 
 function SceneItemHUD:Update()
-    local attr = self.avatar.avatarInfo.attr
-    self.hud:UpdateHud(Mathf.Max(0, attr.hp / attr.hpMax))
-    --self.hp.text = attr.hp .. "/" .. attr.hpMax
-    --self.name.text =  self.avatar.avatarInfo.name
-    self.transform.position = self.avatar.transform.position + Vector3.New(0,Offset_Y,0)
+    self.hpText.text = self.battleItemVo.curHp .. "/" .. self.battleItemVo.maxHp
+    local hpPer = Mathf.Max(0, self.battleItemVo.curHp / self.battleItemVo.maxHp)
+    local agPer = Mathf.Max(0, self.battleItemVo.curAnger / self.battleItemVo.maxAnger)
+    self.hpMain.fillAmount = hpPer
+    self.hpSub.fillAmount = agPer
+    self.hpMain.fillAmount = hpPer
+    self.agSub.fillAmount = agPer
+    local tagPos = Convert.WorldPosToCanvasLocalPosition(self.battleUnit.transform.position, self.worldCamera, vmgr.uiCanvas, self.uiLayerRect)
+    self.transform.localPosition = tagPos + Offset
 end
 
 function SceneItemHUD:Dispose()
     SceneItemHUD.super.Dispose(self)
     destroy(self.gameObject)
-    RemoveEventListener(Event.Update, self.Update, self)
+    --RemoveEventListener(Event.Update, self.Update, self)
 end
 
 return SceneItemHUD

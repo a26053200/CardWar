@@ -340,6 +340,7 @@ MonsterQuality =
     Boss = 3, --Boss
 }
 
+---@class AccountType
 AccountType =
 {
     Multi = "Multi",  --AOE

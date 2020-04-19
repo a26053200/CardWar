@@ -1,4 +1,4 @@
-﻿-- Battle 2020/4/19 16:54:32
+﻿-- Battle 2020/4/20 0:20:49
 local Data = {}
 Data.table = {    [1] = {id = 1, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "micro_dragon", grid = 1},
     [2] = {id = 2, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "micro_dragon", grid = 2},

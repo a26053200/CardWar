@@ -16,7 +16,8 @@
 ---@field animDead string --死亡动作
 ---@field animRun string --行走动作
 ---@field animWin string --胜利动作
-
+---@field animHit string --受击动作
+---
 local AvatarConfig = {}
 
 ---@return AvatarInfo

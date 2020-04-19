@@ -12,6 +12,9 @@
 ---@field type string
 ---@field performance string
 ---@field priority number
+---@field damageAdd number
+---@field crit number
+---@field critPow number
 ---@field targetSelectType string
 ---@field triggerCondition string
 ---@field triggerConditionParam string

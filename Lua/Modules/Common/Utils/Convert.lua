@@ -73,7 +73,7 @@ end
 ---@param uiCanvas UnityEngine.Canvas  UICanvas
 ---@param parentRect UnityEngine.RectTransform 父容器
 ---@return UnityEngine.Vector2
-function Convert.WorldPosToCanvasLocalPostion(worldPos, worldCamera, uiCanvas, parentRect)
+function Convert.WorldPosToCanvasLocalPosition(worldPos, worldCamera, uiCanvas, parentRect)
     parentRect = parentRect == nil and vmgr:GetUILayer(UILayer.LAYER_TOP).gameObject:GetRect() or parentRect
     local screenPos = worldCamera:WorldToScreenPoint(worldPos)
     screenPos = Vector2.New(screenPos.x,screenPos.y)

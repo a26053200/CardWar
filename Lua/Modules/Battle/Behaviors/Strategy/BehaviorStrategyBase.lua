@@ -23,7 +23,7 @@ local BehaviorStrategyBase = class("Game.Modules.Battle.Behaviors.Strategy.Behav
 ---@param battleUnit Game.Modules.World.Items.BattleUnit
 function BehaviorStrategyBase:Ctor(battleUnit)
     self.battleUnit = battleUnit
-    self.skills = battleUnit.avatarVo.skills
+    self.skills = battleUnit.battleUnitVo.skills
     self.currTargetAttackNum = 0
     self.aiParam = Tool.String2Map(self.battleUnit.avatarInfo.aiParam)
     self.canUseList = List.New()
@@ -55,7 +55,7 @@ function BehaviorStrategyBase:AutoSelectSkill()
                 if skill.skillInfo.triggerCondition == SkillTriggerCondition.CD then -- CD
                     self.canUseList:Add(skill)
                 elseif skill.skillInfo.triggerCondition == SkillTriggerCondition.FullAnger then -- 满怒气
-                    if self.battleUnit.battleItemVo.curAnger >= self.battleUnit.battleItemVo.maxAnger then
+                    if self.battleUnit.battleUnitVo.curAnger >= self.battleUnit.battleUnitVo.maxAnger then
                         self.canUseList:Add(skill)
                     end
                 elseif skill.skillInfo.triggerCondition == SkillTriggerCondition.Prop then -- 触发概率

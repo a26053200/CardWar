@@ -211,7 +211,7 @@ function BattleLayout:GetOwnerGridNum(camp)
 end
 
 ---@param camp Camp
----@param selectGrids table<number, number>
+---@param selectGrids table<number, Game.Modules.World.Items.Avatar>
 function BattleLayout:GetTargetList(camp, selectGrids)
     local targetList = {}
     local layoutGrids = self.gridLayoutMap[camp]

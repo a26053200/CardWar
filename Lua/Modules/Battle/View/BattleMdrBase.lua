@@ -41,6 +41,7 @@ function BattleMdrBase:InitCheckPointData()
     log("Init CheckPoint " .. self.battleModel.currCheckPointData.id)
     self.context = WorldContext.New(self.checkPointData.mode)
     self.battleModel.currentContext = self.context
+    self.context.checkPointData = self.battleModel.currCheckPointData
     self.context.currSubScene = World.worldScene.currSubScene
     self.context.avatarRoot = self.context.currSubScene:CreateGameObject("AvatarRoot" .. self.context.id)
     --A*

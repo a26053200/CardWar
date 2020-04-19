@@ -10,6 +10,7 @@ local BattleUnit = require("Game.Modules.World.Items.BattleUnit")
 ---@field New fun()
 ---@field mode string
 ---@field id number
+---@field checkPointData CheckPointData
 ---@field currSubScene Game.Modules.World.Scenes.Core.SubScene  当前子场景
 ---@field battleBehavior Game.Modules.Battle.Behaviors.BattleBehavior    战场行为
 ---@field battleItemList table<number, Game.Modules.World.Items.BattleUnit>

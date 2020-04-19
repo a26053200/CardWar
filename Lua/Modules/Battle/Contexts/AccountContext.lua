@@ -5,6 +5,19 @@
 --- 攻击结算上下文
 ---
 
+--伤害信息
+---@class HurtInfo
+---@field atker Game.Modules.World.Items.BattleUnit
+---@field defer Game.Modules.World.Items.BattleUnit
+---@field isHelpful boolean
+---@field dam number     伤害
+---@field critDam number 暴击伤害
+---@field atk number     攻击
+---@field def number     防御
+---@field crit number    暴击倍数
+---@field miss boolean 是否命中
+---@field acc number
+
 local PoolVo = require("Game.Modules.Common.Pools.PoolObject")
 ---@class Game.Modules.World.Contexts.AccountContext : Game.Modules.Common.Pools.PoolObject
 ---@field New fun():Game.Modules.World.Contexts.AccountContext
@@ -51,51 +64,52 @@ function AccountContext:HasAccount(target)
     return self.accountTargetList:Contain(target)
 end
 --结算
----@param target Game.Modules.World.Items.Avatar
+---@param target Game.Modules.World.Items.BattleUnit
 function AccountContext:OnAccount(target)
-    target:_debug("target is be account")
+    --target:_debug("target is be account")
+
     self.accountTargetList:Add(target)
-    --self:DamageAccount(self.skillVo, self.account, target)
+    self:DamageAccount(self.skillVo, self.account, target)
     --检查目标是否死亡
     --self.battleUint.accountWidget:OnCheckDead(self.skillVo,target)
 end
 
 --最终伤害结算
----@param target Game.Modules.World.Items.Avatar
+---@param target Game.Modules.World.Items.BattleUnit
 ---@param skillVo Game.Modules.Battle.Vo.SkillVo
 ---@param account AccountInfo
 function AccountContext:DamageAccount(skillVo, account, target)
     --是否增益结算 例如加血  上buff等
     local isHelpful = account.targetMode == TargetMode.Self or account.targetMode == TargetMode.Friend
-    local skillInfo = skillVo.skillInfo
+    local battleUnitVo = self.battleUnit.battleUnitVo
     local avatarAtk = 0
     local minDam = 0
     if account.targetMode == TargetMode.Enemy
             --or account.targetMode == TargetMode.AOE
             or account.targetMode == TargetMode.Pos then
-        avatarAtk = self.battleUnit.avatarInfo.atk
+        avatarAtk = battleUnitVo.battleUnitInfo.atk
         minDam = 1
     end
     local hurtInfo = {} ---@type HurtInfo
     hurtInfo.atker = self.battleUnit
     hurtInfo.target = target
     hurtInfo.isHelpful = isHelpful
-    hurtInfo.atk = math.random(account.minAtk, account.maxAtk) --浮动攻击
-    hurtInfo.def = target and target.avatarInfo.def or 0
-    local crit = account.crit + self.battleUnit.avatarInfo.crit -- 技能本身的暴击率与自身暴击率相加
-    hurtInfo.crit = (math.random() <= crit) and account.critPower or 1 --暴击
-    hurtInfo.dam = math.max(minDam, math.floor((hurtInfo.atk + avatarAtk - hurtInfo.def) * hurtInfo.crit)) --简单计算:伤害 - 防御
+    hurtInfo.atk = avatarAtk + avatarAtk * (skillVo.skillInfo.damageAdd + account.damageAdd)
+    hurtInfo.def = target and target.battleUnitVo.battleUnitInfo.def or 0
+    local crit = skillVo.skillInfo.crit + battleUnitVo.battleUnitInfo.crit -- 技能本身的暴击率与自身暴击率相加
+    hurtInfo.crit = (math.random() <= crit) and battleUnitVo.battleUnitInfo.critPower or 1 --暴击
+    hurtInfo.dam = math.max(minDam, math.floor((hurtInfo.atk - hurtInfo.def) * hurtInfo.crit)) --简单计算:伤害 - 防御
     hurtInfo.acc = math.random() --命中率
     local isMiss = false
     --计算闪避
-    local signet = target.signetMap[self.battleUnit.sid .. "_" .. skillInfo.id]
-    if hurtInfo.acc > self.battleUnit.avatarInfo.acc
-            or signet == SignetType.Dodge then
-        isMiss = true
-    end
-    if signet ~= nil then
-        target.performancePlayer:Play(account.signetPerformance,nil,self.battleUnit, account)
-    end
+    --local signet = target.signetMap[self.battleUnit.sid .. "_" .. skillInfo.id]
+    --if hurtInfo.acc > self.battleUnit.avatarInfo.acc
+    --        or signet == SignetType.Dodge then
+    --    isMiss = true
+    --end
+    --if signet ~= nil then
+    --    target.performancePlayer:Play(account.signetPerformance,nil,self.battleUnit, account)
+    --end
 
     if isMiss then
         hurtInfo.miss = true
@@ -108,15 +122,16 @@ function AccountContext:DamageAccount(skillVo, account, target)
     hurtInfo.miss = false
     if target then
         if isHelpful then
-            target.avatarVo.curHp = math.min(target.avatarVo.curHp + hurtInfo.dam, target.avatarVo.maxHp)
+            target.battleUnitVo.curHp = math.min(target.battleUnitVo.curHp + hurtInfo.dam, target.battleUnitVo.maxHp)
             target:DoHurt(hurtInfo)
         else
-            target.avatarVo.curHp = math.max(0,target.avatarVo.curHp - hurtInfo.dam)
+            target.battleUnitVo.curHp = math.max(0,target.battleUnitVo.curHp - hurtInfo.dam)
             target:DoHurt(hurtInfo)
+            target:PlayIdle()
             target:PlayHit()
-            target.soundGroup:Play(skillInfo.hitSound)
+            --target.soundGroup:Play(skillInfo.hitSound)
         end
-        self:DisplayHurt(target, skillInfo, account)
+        --self:DisplayHurt(target, skillInfo, account)
     else
         --无目标结算
     end

@@ -9,13 +9,10 @@ local SceneItemVo = require("Game.Modules.World.Vo.SceneUnitVo")
 ---@field New fun():Game.Modules.World.Vo.AvatarVo
 ---@field avatarInfo AvatarInfo
 ---@field level number
----@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
-
----@field normalSkill Game.Modules.Battle.Vo.SkillVo
 local AvatarVo = class("Game.Modules.World.Vo.AvatarVo",SceneItemVo)
 
 function AvatarVo:Ctor()
-    self.skills = {}
+
 end
 
 ---@param avatarName string
@@ -24,14 +21,7 @@ function AvatarVo:Init(avatarName)
 end
 
 function AvatarVo:Dispose()
-    for i = 1, #self.skills do
-        self.skills[i]:Dispose()
-        SkillVoPool:Store(self.skills[i])
-    end
-    self.skills = {}
-    self.curHp = 0
-    self.maxHp = 0
-    --AttributePool:Store(self.totalAttribute)
+
 end
 
 return AvatarVo

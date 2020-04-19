@@ -21,7 +21,7 @@ function AvatarGridBehavior:Ctor(battleUnit)
     local name = self.battleUnit.gameObject.name
     self:AppendBehavior(self:MoveToArea(),      name .. " AvatarGridBehavior MoveToArea")
     self:AppendBehavior(self:SelectSkill(),    name .. " AvatarGridBehavior SearchTarget")
-    self:AppendBehavior(self:MoveToTarget(),    name .. " AvatarGridBehavior MoveToTarget")
+    --self:AppendBehavior(self:MoveToTarget(),    name .. " AvatarGridBehavior MoveToTarget")
     self:AppendBehavior(self:AttackOnce(),     name .. " AvatarGridBehavior AttackOnce")
 end
 
@@ -70,34 +70,6 @@ function AvatarGridBehavior:SelectSkill()
     return behavior
 end
 
-function AvatarGridBehavior:MoveToTarget()
-    local behavior = self:CreateSubBehavior()
-    behavior:AppendState(function ()
-        --self:_debug("AvatarGridBehavior MoveToTarget")
-        local skill = self.battleUnit.strategy.currSelectedSkill
-        if skill == nil then --无需移动即可攻击
-            self:OnMoveToTargetEnd(true)
-        else
-            local tagPos
-            --if skill.skillInfo.targetSelectType == TargetSelectType.All then
-                tagPos = self.battleUnit.context.battleLayout.center
-            --else
-
-            --end
-            self.battleUnit:PlayRun()
-            self.battleUnit.transform:DOMove(tagPos, FRAME_TIME * 3):OnComplete(function()
-                self.battleUnit:PlayIdle()
-                self:OnMoveToTargetEnd(true)
-            end)
-        end
-    end)
-    return behavior
-end
-
-function AvatarGridBehavior:OnMoveToTargetEnd(success)
-    self.stateMachine:NextState()
-end
-
 function AvatarGridBehavior:AttackOnce()
     local behavior = self:CreateSubBehavior()
     behavior:AppendState(function()
@@ -138,7 +110,7 @@ function AvatarGridBehavior:OnSkillUse(behavior, skill)
     --if target and target.layoutGrid then
     --    target.layoutGrid:SetAttackSelect(true)
     --end
-    self.battleUnit:_debug(string.format("use skill:[%s]",skill.skillInfo.name))
+    --self.battleUnit:_debug(string.format("use skill:[%s]",skill.skillInfo.name))
     self.battleUnit.accountCtrl:Account(skill,
             Handler.New(function()
                 behavior:NextState()
