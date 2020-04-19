@@ -7,10 +7,14 @@
 
 ---@class SkillInfo
 ---@field id string
+---@field owner string
 ---@field name string
----@field type number
+---@field type string
 ---@field performance string
-
+---@field priority number
+---@field targetSelectType string
+---@field triggerCondition string
+---@field triggerConditionParam string
 local SkillConfig = {}
 
 ---@return SkillInfo
@@ -21,6 +25,37 @@ function SkillConfig.Get(name)
     local info = SkillConfig.data.Get(name) ---@type SkillInfo
     if info == nil then
         logError(string.format("There is not skill info named %s!", name))
+    end
+
+    return info
+end
+
+---@param battleUnitName string
+---@return table<number, SkillInfo>
+function SkillConfig.GetList(battleUnitName)
+    if SkillConfig.map == nil then
+        local map = require("Game.Data.Excel.Skill")
+        SkillConfig.map = map
+        ---@param skillInfo SkillInfo
+        for _, skillInfo in pairs(map.table) do
+            --促发条件
+            local triggerCondition = skillInfo.triggerCondition
+            local condition = string.split(triggerCondition, "|")
+            skillInfo.triggerCondition = condition[1]
+            skillInfo.triggerConditionParam = condition[2]
+
+
+            local list = map[skillInfo.owner]
+            if list == nil then
+                list = {}
+                map[skillInfo.owner] = list
+            end
+            table.insert(list, skillInfo)
+        end
+    end
+    local info = SkillConfig.map[battleUnitName] ---@type table<number, SkillInfo>
+    if info == nil then
+        logError(string.format("There is not skill list info named %s!", battleUnitName))
     end
     return info
 end

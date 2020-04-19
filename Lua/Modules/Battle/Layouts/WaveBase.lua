@@ -11,14 +11,14 @@
 ---@field areaId number 分组id
 ---@field type string 类型 boss , normal
 
-local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
+local BaseBehavior = require("Game.Modules.Common.Behavior.BaseBehavior")
 
----@class Game.Modules.Battle.Layouts.WaveBase : Betel.LuaMonoBehaviour
+---@class Game.Modules.Battle.Layouts.WaveBase : Game.Modules.Common.Behavior.BaseBehavior
 ---@field waveInfo WaveBaseInfo
 ---@field context WorldContext
 ---@field isActive boolean
 ---@field itemList List | table<number, Game.Modules.World.Items.BattleUnit>
-local WaveBase = class("Game.Modules.Battle.Layouts.WaveBase",LuaMonoBehaviour)
+local WaveBase = class("Game.Modules.Battle.Layouts.WaveBase",BaseBehavior)
 
 ---@param waveInfo WaveBaseInfo
 function WaveBase:Ctor(waveInfo)

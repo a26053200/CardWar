@@ -35,4 +35,27 @@ function GridUtils.GetTargetAttackPoint(target, range)
     return target.transform.position + target.transform.forward * range
 end
 
+
+--获取可以攻击目标的点
+---@param gridSelectType GridSelectType
+---@param attacker Game.Modules.World.Items.BattleUnit
+---@param camp Camp
+---@return table<number, number>
+function GridUtils.GetGrids(gridSelectType, camp, attacker)
+    local curColIndexs = LayoutIndex2Col[attacker.layoutIndex]
+    local firstTarget = attacker.context.battleLayout:GetFirstGridByIndexs(camp, curColIndexs)
+    local rowIndexs = LayoutIndex2Row[firstTarget.index]
+    if gridSelectType == GridSelectType.Current then
+        return curColIndexs
+    elseif gridSelectType == GridSelectType.Col then
+        return curColIndexs
+    elseif gridSelectType == GridSelectType.Current then
+        return rowIndexs
+    elseif gridSelectType == GridSelectType.All then
+        return LayoutMapAll
+    else
+        return curColIndexs
+    end
+end
+
 return GridUtils

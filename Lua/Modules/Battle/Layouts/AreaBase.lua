@@ -11,10 +11,10 @@
 ---@field areaId number 分组id
 ---@field type string 类型 boss , normal
 
-local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
+local BaseBehavior = require("Game.Modules.Common.Behavior.BaseBehavior")
 
----@class Game.Modules.Battle.Layouts.AreaBase : Betel.LuaMonoBehaviour
----@field areaInfo AreaInfo
+---@class Game.Modules.Battle.Layouts.AreaBase : Game.Modules.Common.Behavior.BaseBehavior
+---@field areaInfo AreaBaseInfo
 ---@field context WorldContext
 ---@field waves table<number,Game.Modules.Battle.Layouts.WaveBase>  怪物每波刷新数据
 ---@field waveQueue table<number,Game.Modules.Battle.Layouts.WaveBase>  怪物每波刷新数据
@@ -22,7 +22,7 @@ local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 ---@field isRefreshOver boolean
 ---@field isBornOver boolean
 ---@field isActive boolean
-local AreaBase = class("Game.Modules.Battle.Layouts.AreaBase",LuaMonoBehaviour)
+local AreaBase = class("Game.Modules.Battle.Layouts.AreaBase",BaseBehavior)
 
 ---@param areaInfo AreaInfo
 function AreaBase:Ctor(areaInfo)

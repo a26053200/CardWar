@@ -9,32 +9,18 @@ local SceneItemVo = require("Game.Modules.World.Vo.SceneUnitVo")
 ---@field New fun():Game.Modules.World.Vo.AvatarVo
 ---@field avatarInfo AvatarInfo
 ---@field level number
----@field camp Camp 阵营 所属阵营
 ---@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
----@field curHp number
----@field maxHp number
+
 ---@field normalSkill Game.Modules.Battle.Vo.SkillVo
 local AvatarVo = class("Game.Modules.World.Vo.AvatarVo",SceneItemVo)
 
 function AvatarVo:Ctor()
-    
+    self.skills = {}
 end
 
 ---@param avatarName string
 function AvatarVo:Init(avatarName)
     self.avatarInfo = AvatarConfig.Get(avatarName)
-    if not StringUtil.IsEmpty(self.avatarInfo.skills) then
-        local split = string.split(self.avatarInfo.skills, ",")
-        for i = 1, #split do
-            local skill = SkillVoPool:Get() ---@type Game.Modules.Battle.Vo.SkillVo
-            skill:Init(split[i])
-            if skill.skillInfo.skillType == SkillType.Normal then
-                self.normalSkill = skill
-            end
-            table.insert(self.skills, skill)
-        end
-    end
-
 end
 
 function AvatarVo:Dispose()

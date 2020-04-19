@@ -29,8 +29,8 @@ function RoundBehavior:Ctor(context)
     self:AppendBehavior(self:RoundEnd(),        "AvatarGridBehavior RoundEnd")
     self.context = context
 
-    AddEventListener(GridBattleEvent, GridBattleEvent.ExitAttack, self.OnExitAttack, self)
-    AddEventListener(GridBattleEvent, GridBattleEvent.BattlePause, self.OnBattlePause, self)
+    AddEventListener(BattleEvent, BattleEvent.ExitAttack, self.OnExitAttack, self)
+    AddEventListener(BattleEvent, BattleEvent.BattlePause, self.OnBattlePause, self)
     self.isRoundOver = true
 end
 
@@ -135,8 +135,8 @@ end
 
 function RoundBehavior:Dispose()
     RoundBehavior.super.Dispose(self)
-    RemoveEventListener(GridBattleEvent, GridBattleEvent.ExitAttack, self.OnExitAttack, self)
-    RemoveEventListener(GridBattleEvent, GridBattleEvent.BattlePause, self.OnBattlePause, self)
+    RemoveEventListener(BattleEvent, BattleEvent.ExitAttack, self.OnExitAttack, self)
+    RemoveEventListener(BattleEvent, BattleEvent.BattlePause, self.OnBattlePause, self)
 end
 
 return RoundBehavior

@@ -19,20 +19,23 @@ function SkillVo:Ctor()
 
 end
 
-function SkillVo:Init(skillName)
-    self.skillInfo = SkillConfig.Get(skillName)
+---@param skillInfo SkillInfo
+function SkillVo:Init(skillInfo)
+    self.skillInfo = skillInfo
     self.active = true
+    self:Reset()
+end
+
+function SkillVo:Reset()
     self.startTime = 0
-    self.canUseCount = self.skillInfo.canUseCount
+    self.canUseCount = 0
     self.useCount = 0
 end
 
 function SkillVo:Dispose()
     self.skillInfo = nil
     self.active = false
-    self.startTime = 0
-    self.canUseCount = 0
-    self.useCount = 0
+    self:Reset()
 end
 
 return SkillVo

@@ -142,6 +142,9 @@ function AnimController:GetAnimLength(animName)
         self.animator.speed = 1
         self.animator:Update(0) --强制切换,方便获取动作时长
         self.animLength[animName] = self.animator:GetCurrentAnimatorStateInfo(0).length
+        if self.animLength[animName] == 0 then
+            logError("error anim len:" .. animName)
+        end
     end
     return self.animLength[animName]
 end
@@ -274,7 +277,11 @@ function AnimController:ParaCure(orgPos, destPos, height, duration)
     return sequence
 end
 
-
+--动作进度
+---@param animInfo AnimInfo
+function AnimController:PlayAnimInfo(animInfo, animOverCallback)
+    self:PlayAnim(animInfo.animName, animOverCallback, animInfo.animSpeed,0.1)
+end
 
 function AnimController:Clear()
     self.callbackList = {}

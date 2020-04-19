@@ -18,9 +18,11 @@
 ---@field effect string                 开始特效
 ---@field shake string      开始特效
 ---@field type string       类型
+---@field gridSelect string
 ---@field interval number   效果触发间隔
 ---@field duration number   持续时间
 ---@field delay number      延时
+---@field times number      次数
 ---@field param string      表现相关参数
 
 local PerformanceConfig = {}
@@ -39,6 +41,22 @@ function PerformanceConfig.Get(name)
     end
     if isString(info.animInfo) then
         info.animInfo = PerformanceConfig.animData.Get(info.animInfo)
+    end
+
+    --技能结算信息
+    local accounts = info.accounts
+    if isString(accounts) then
+        info.accounts = {}
+        local accountsSplit = string.split(accounts, ",")
+        for i = 1, #accountsSplit do
+            if not StringUtil.IsEmpty(accountsSplit[i]) then
+                local accountInfo = AccountConfig.Get(accountsSplit[i]);
+                if isString(accountInfo.param) then
+                    accountInfo.param = Tool.String2Map(accountInfo.param)
+                end
+                table.insert(info.accounts, accountInfo)
+            end
+        end
     end
     return info
 end

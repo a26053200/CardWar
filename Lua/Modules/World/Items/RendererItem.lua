@@ -44,7 +44,6 @@ function RendererItem:BackToBorn()
     if self.forward then
         self.transform.forward = self.forward
     end
-    self:UpdateNode()
 end
 
 function RendererItem:OnRenderObjInit()
@@ -72,9 +71,9 @@ end
 --调试
 function RendererItem:_debug(msg)
     if self.gameObject then
-        print(string.format("<color=#3A9BF8FF>[%s]</color>\n<color=#FFFFFFFF>%s</color>",self.gameObject.name,msg))
+        print(string.format("\n<color=#3A9BF8FF>[%s]</color><color=#FFFFFFFF>%s</color>",self.gameObject.name,msg))
     else
-        print(string.format("<color=#3A9BF8FF>[%s]</color>\n<color=#FFFFFFFF>%s</color>",self.__classname,msg))
+        print(string.format("\n<color=#3A9BF8FF>[%s]</color><color=#FFFFFFFF>%s</color>",self.__classname,msg))
     end
 end
 

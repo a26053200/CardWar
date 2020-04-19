@@ -19,7 +19,7 @@ local CardVo = class("Module.Card.Vo.CardVo",BaseVo)
 ---@param cardName number
 function CardVo:Ctor(cardName)
     self.cardInfo = CardConfig.Get(cardName)
-    self.avatarInfo = AvatarConfig.Get(self.cardInfo.avatarName)
+    self.avatarInfo = AvatarConfig.Get(self.cardInfo.battleUnit)
     self.inTeamIndex = 0
     self.layoutIndex = 0
     self.state = CardState.Normal

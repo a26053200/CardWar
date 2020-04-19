@@ -46,7 +46,7 @@ end
 
 ---@param card Game.Modules.Card.Vo.CardVo 卡牌
 function WorldContext:CreateBattleItem(card, camp)
-    local battleItemVo = World.CreateBattleUnitVo(card.cardInfo.avatarName)
+    local battleItemVo = World.CreateBattleUnitVo(card.cardInfo.battleUnit)
     battleItemVo.camp = camp
     battleItemVo.isLeader = card.layoutIndex == 1
     battleItemVo.index = card.layoutIndex

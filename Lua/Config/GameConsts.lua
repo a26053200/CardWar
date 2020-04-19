@@ -512,12 +512,5 @@ PieceItemType =
     Normal =  "Normal",      -- 正常资源类型
 }
 
----@class GridSelectType
-GridSelectType = {
-    Line_Col_147 = {1, 4, 7},
-    Line_Col_258 = {2, 5, 6},
-    Line_Col_369 = {3, 6, 9},
-    All = {1,2,3,4,5,6,7,8,9},
-}
 local GameConst = {}
 return GameConst

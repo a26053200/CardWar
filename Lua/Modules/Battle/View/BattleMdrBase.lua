@@ -69,7 +69,7 @@ function BattleMdrBase:InitObjectPool()
     end
 
     for i = 1, #self.battleModel.playerVo.cards do
-        poolNumMap[self.battleModel.playerVo.cards[i].cardInfo.avatarName] = 1
+        poolNumMap[self.battleModel.playerVo.cards[i].cardInfo.battleUnit] = 1
     end
     local poolsInfos = PoolFactory.CalcPoolInfoMap(poolNumMap)
     table.insert(poolsInfos,{prefabUrl = Prefabs.LayoutGrid, initNum = 18})

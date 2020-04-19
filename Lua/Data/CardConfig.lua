@@ -7,7 +7,7 @@
 ---@class CardInfo
 ---@field id string
 ---@field name string
----@field avatarName string
+---@field battleUnit string
 ---@field rarity number
 ---@field star number
 ---@field level number

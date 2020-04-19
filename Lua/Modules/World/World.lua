@@ -30,9 +30,9 @@ end
 ---@param skillVo Game.Modules.Battle.Vo.SkillVo
 ---@param attacker Game.Modules.World.Items.Avatar
 ---@param account AccountInfo
----@return Module.World.Contexts.AccountContext
+---@return Game.Modules.World.Contexts.AccountContext
 function World.CreateAccountContext(skillVo, attacker, account)
-    local accountContext = AccountContextPool:Get()---@type Module.World.Contexts.AccountContext
+    local accountContext = AccountContextPool:Get()---@type Game.Modules.World.Contexts.AccountContext
     accountContext:Init(skillVo, attacker, account)
     return accountContext
 end

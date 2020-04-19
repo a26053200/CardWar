@@ -122,12 +122,12 @@ function BattleMdr:StartBattle()
         self.context.attachCamera:AttachPos(self.context.battleLayout.areaPointObj.transform.position)
         --vmgr:LoadView(ViewConfig.BattleArrayEditor)--布阵
         coroutine.step(1)
-
         --等待布局结束
-        while not self.battleModel.isEditBattleArrayComplete do
-            coroutine.step(1)
-        end
+        --while not self.battleModel.isEditBattleArrayComplete do
+        --    coroutine.step(1)
+        --end
         self:OnBattleStart()
+        log("Battle Start")
     end)
 end
 

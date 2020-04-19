@@ -9,18 +9,19 @@
 ---@field id string
 ---@field name string
 ---@field type number
----@field performance string
+---@field gridSelect string
+---@field targetMode string
 
 local AccountConfig = {}
 
----@return SkillInfo
+---@return AccountInfo
 function AccountConfig.Get(name)
     if AccountConfig.data == nil then
         AccountConfig.data = require("Game.Data.Excel.Account")
     end
-    local info = AccountConfig.data.Get(name) ---@type SkillInfo
+    local info = AccountConfig.data.Get(name) ---@type AccountInfo
     if info == nil then
-        logError(string.format("There is not account anfo named %s!", name))
+        logError(string.format("There is not account info named %s!", name))
     end
     return info
 end

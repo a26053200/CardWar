@@ -9,7 +9,6 @@ local BehaviorStrategyBase = require("Game.Modules.Battle.Behaviors.Strategy.Beh
 
 ---@class Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy:Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase
 ---@field New fun(avatar : Game.Modules.World.Items.Avatar):Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy
----@field avatar Game.Modules.World.Items.Avatar
 ---@field aiParam table<string, any> --AI参数
 ---@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
 ---@field canUseList table<number, Game.Modules.Battle.Vo.SkillVo>
@@ -23,8 +22,7 @@ local GridBehaviorStrategy = class("Game.Modules.Battle.Behaviors.Strategy.GridB
 
 ---@param avatar Game.Modules.World.Items.Avatar
 function GridBehaviorStrategy:Ctor(avatar)
-    self.avatar = avatar
-    self.skills = avatar.avatarVo.skills
+    GridBehaviorStrategy.super.Ctor(self, avatar)
 end
 
 ---@return Game.Modules.Battle.Vo.SkillVo
@@ -34,11 +32,11 @@ end
 
 ---@return Game.Modules.World.Items.Avatar
 function GridBehaviorStrategy:AutoSelectTarget()
-    local opposeCamp = BattleUtils.GetOpposeCamp(self.avatar.avatarVo.camp) --对立阵营
+    local opposeCamp = BattleUtils.GetOpposeCamp(self.battleUnit.battleItemVo.camp) --对立阵营
     --首先攻击对位
-    local targetGrid = self.avatar.context.battleLayout:GetGridByLine(opposeCamp, self.avatar.layoutIndex)
+    local targetGrid = self.battleUnit.context.battleLayout:GetGridByCol(opposeCamp, self.battleUnit.layoutIndex)
     if targetGrid == nil then --再现在最表面的
-        targetGrid = self.avatar.context.battleLayout:GetFirstGrid(opposeCamp)
+        targetGrid = self.battleUnit.context.battleLayout:GetFirstGrid(opposeCamp)
     end
     if targetGrid then
         return targetGrid.owner

@@ -6,14 +6,14 @@
 ---
 
 ---@class Game.Modules.Common.Pools.PoolObjectProxy
----@field New fun():Game.Modules.Common.Pools.PoolObjectProxy
+---@field New fun(class:table):Game.Modules.Common.Pools.PoolObjectProxy
 ---@field list Iterator 列表
 ---@field pool List 对象池
 local PoolObjectProxy = class("Game.Modules.Common.Pools.PoolObjectProxy")
 
----@param className table
-function PoolObjectProxy:Ctor(className)
-    self.voClass = require(className)
+---@param class table
+function PoolObjectProxy:Ctor(class)
+    self.voClass = class
     self.list = Iterator.New()
     self.pool = List.New()
 end

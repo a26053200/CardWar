@@ -5,6 +5,8 @@
 --- 战斗单位
 ---
 
+local PerformancePlayer = require("Game.Modules.Battle.Performances.PerformancePlayer")
+local AccountCtrl = require("Game.Modules.Battle.Components.AccountCtrl")
 local GridBehaviorStrategy = require("Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy")
 local BattleItemEvents = require("Game.Modules.Battle.Events.BattleItemEvents")
 local AvatarGridBehavior = require("Game.Modules.Battle.Behaviors.AvatarGridBehavior")
@@ -15,6 +17,8 @@ local Avatar = require("Game.Modules.World.Items.Avatar")
 ---@field battleItemVo Game.Modules.Battle.Vo.BattleUnitVo
 ---@field behavior Game.Modules.Battle.Behaviors.GridBattleBehavior
 ---@field strategy Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase -- 策略
+---@field accountCtrl Game.Modules.Battle.Components.AccountCtrl
+---@field performancePlayer Game.Modules.Battle.Performances.PerformancePlayer
 ---@field ownerCardVo Game.Modules.Card.Vo.CardVo 英雄所属卡
 ---@field layoutIndex number 布局索引 默认0 表示没有上场
 ---@field layoutGrid Game.Modules.Battle.Layouts.LayoutGrid 所在布局格子
@@ -30,9 +34,7 @@ end
 
 --重置属性
 function BattleItem:ResetAttr()
-    local maxHp = math.random(100,100)
-    self.battleItemVo.curHp = maxHp
-    self.battleItemVo.maxHp = maxHp
+    self.battleItemVo:Reset()
 end
 
 function BattleItem:LoadObject()
@@ -47,6 +49,9 @@ end
 function BattleItem:OnRenderObjInit()
     BattleItem.super.OnRenderObjInit(self)
     self:SetLayer(Layers.Name.BattleItem)
+
+    self.accountCtrl = AccountCtrl.New(self)
+    self.performancePlayer = PerformancePlayer.New(self)
 end
 
 --出生效果

@@ -22,7 +22,7 @@ local BattleConfig = {}
 function BattleConfig.Get(checkPointName)
     if BattleConfig.Map == nil then
         BattleConfig.Map = {}
-        local data = require("Game.Data.Excel.Battle")
+        local data = require("Game.Data.Excel.Battle").table
         for i = 1, #data do
             local battle = data[i]
             if not battle.ignore then --排除被忽略的
@@ -56,7 +56,7 @@ function BattleConfig.Get(checkPointName)
                 pointInfo.bornMode = battle.bornMode
                 --pointInfo.delay = battle.delay
                 pointInfo.grid = battle.grid
-                pointInfo.battleUnit = battle.avatarName
+                pointInfo.battleUnit = battle.battleUnit
                 table.insert(waveInfo.wavePoints, pointInfo)
             end
         end

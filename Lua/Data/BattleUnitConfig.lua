@@ -24,7 +24,7 @@ local BattleItemConfig = {}
 ---@return AvatarInfo
 function BattleItemConfig.Get(avatarName)
     if BattleItemConfig.data == nil then
-        BattleItemConfig.data = require("Game.Data.Excel.Avatar")
+        BattleItemConfig.data = require("Game.Data.Excel.BattleUnit")
     end
     local info = BattleItemConfig.data.Get(avatarName) ---@type AvatarInfo
     if info == nil then

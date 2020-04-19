@@ -9,18 +9,18 @@ local BattleEvent = require("Game.Modules.Battle.Events.BattleEvents")
 local BaseBehavior = require("Game.Modules.Battle.Behaviors.BattleBehavior")
 
 ---@class Game.Modules.Battle.Behaviors.AvatarGridBehavior : Game.Modules.Common.Behavior.BaseBehavior
----@field avatar Game.Modules.World.Items.Avatar
+---@field battleUnit Game.Modules.World.Items.BattleUnit
 ---@field target Game.Modules.World.Items.Avatar
 ---@field currArea Game.Modules.Battle.Layouts.GridArea
 local AvatarGridBehavior = class("Game.Modules.Battle.Behaviors.AvatarGridBehavior",BaseBehavior)
 
----@param avatar Game.Modules.World.Items.Avatar
-function AvatarGridBehavior:Ctor(avatar)
-    AvatarGridBehavior.super.Ctor(self, avatar.gameObject)
-    self.avatar = avatar
-    local name = self.avatar.gameObject.name
+---@param battleUnit Game.Modules.World.Items.BattleUnit
+function AvatarGridBehavior:Ctor(battleUnit)
+    AvatarGridBehavior.super.Ctor(self, battleUnit.gameObject)
+    self.battleUnit = battleUnit
+    local name = self.battleUnit.gameObject.name
     self:AppendBehavior(self:MoveToArea(),      name .. " AvatarGridBehavior MoveToArea")
-    self:AppendBehavior(self:SearchTarget(),    name .. " AvatarGridBehavior SearchTarget")
+    self:AppendBehavior(self:SelectSkill(),    name .. " AvatarGridBehavior SearchTarget")
     self:AppendBehavior(self:MoveToTarget(),    name .. " AvatarGridBehavior MoveToTarget")
     self:AppendBehavior(self:AttackOnce(),     name .. " AvatarGridBehavior AttackOnce")
 end
@@ -44,7 +44,7 @@ function AvatarGridBehavior:MoveToArea()
     local behavior = self:CreateSubBehavior()
     behavior:AppendState(function()
         --self:_debug("AvatarGridBehavior MoveToArea")
-        local currArea = self.avatar.context.battleBehavior:GetCurrArea()
+        local currArea = self.battleUnit.context.battleBehavior:GetCurrArea()
         if self.currArea ~= nil and self.currArea == currArea then
             --self:_debug("Area not change")
         else
@@ -56,22 +56,15 @@ function AvatarGridBehavior:MoveToArea()
     return behavior
 end
 
-function AvatarGridBehavior:SearchTarget()
+function AvatarGridBehavior:SelectSkill()
     local behavior = self:CreateSubBehavior()
     behavior:AppendState(function()
-        --self:_debug("AvatarGridBehavior SearchTarget")
+        --self:_debug("AvatarGridBehavior SelectSkill")
     end, function()
-        --self:_debug("AvatarGridBehavior SearchTarget")
+        --self:_debug("AvatarGridBehavior SelectSkill")
         if self.currArea and self.currArea.isActive then
-            self.avatar.strategy:AutoSelectSkill()
-            if self.avatar.strategy.currSelectedSkill then
-                self.target, self.targetPos = self.avatar.strategy:AutoSelectTarget()
-                if self:isTargetAttackValid() then
-                    --self:_debug("HeroBehavior SearchTarget")
-                    --self.hero.strategy:AutoSelectSkill(true)--根据目标再选择一次技能
-                    self.stateMachine:NextState()
-                end
-            end
+            self.battleUnit.strategy:AutoSelectSkill()
+            self.stateMachine:NextState()
         end
     end)
     return behavior
@@ -80,27 +73,22 @@ end
 function AvatarGridBehavior:MoveToTarget()
     local behavior = self:CreateSubBehavior()
     behavior:AppendState(function ()
-        local target = self.target
-        if self:isTargetValid() then
-            --self:_debug("AvatarGridBehavior MoveToTarget")
-            if target == self.avatar then --目标就是自己 无需移动
-                self:OnMoveToTargetEnd(true)
-            else
-                local skill = self.avatar.strategy.currSelectedSkill
-                if skill == nil or skill.skillInfo.minDistance > 1 then --无需移动即可攻击
-                    self:OnMoveToTargetEnd(true)
-                else
-                    local tagPos = GridUtils.GetTargetAttackPoint(target, 1)
-                    self.avatar:PlayRun()
-                    self.avatar.transform:DOMove(tagPos, FRAME_TIME * 3):OnComplete(function()
-                        self.avatar:PlayIdle()
-                        self:OnMoveToTargetEnd(true)
-                    end)
-                end
-            end
+        --self:_debug("AvatarGridBehavior MoveToTarget")
+        local skill = self.battleUnit.strategy.currSelectedSkill
+        if skill == nil then --无需移动即可攻击
+            self:OnMoveToTargetEnd(true)
         else
-            --logError("AvatarGridBehavior MoveToTarget. taeget is error")
-            self.stateMachine:NextState()
+            local tagPos
+            --if skill.skillInfo.targetSelectType == TargetSelectType.All then
+                tagPos = self.battleUnit.context.battleLayout.center
+            --else
+
+            --end
+            self.battleUnit:PlayRun()
+            self.battleUnit.transform:DOMove(tagPos, FRAME_TIME * 3):OnComplete(function()
+                self.battleUnit:PlayIdle()
+                self:OnMoveToTargetEnd(true)
+            end)
         end
     end)
     return behavior
@@ -112,104 +100,77 @@ end
 
 function AvatarGridBehavior:AttackOnce()
     local behavior = self:CreateSubBehavior()
-    self:AttackStart(behavior)
-    self:AppendSkill(behavior)
+    behavior:AppendState(function()
+        --self:_debug("AvatarGridBehavior AttackStart")
+        BattleEvent.DispatchItemEvent(BattleEvent.EnterAttack, self.battleUnit)
+        self:AppendSkill(behavior)
+    end)
     self:AttackEnd(behavior)
     return behavior
 end
 
-
---一轮攻击开始
----@param behavior Game.Modules.Common.Behavior.BaseBehavior
-function AvatarGridBehavior:AttackStart(behavior)
-    behavior:AppendState(function()
-        --self:_debug("AvatarGridBehavior AttackStart")
-        GridBattleEvent.DispatchItemEvent(GridBattleEvent.EnterAttack, self.avatar)
-        if not self:isTargetAttackValid() then --如果目标不能不攻击
-            self:OnTargetError(self.target)
-            self.target = nil
-            self.targetPos = nil
-            self:NextState()
-        else
-            behavior:NextState()
-        end
-    end)
-end
-
 ---@param behavior Game.Modules.Common.Behavior.BaseBehavior
 function AvatarGridBehavior:AppendSkill(behavior)
-    behavior:AppendState(function ()
-        local skill = self.avatar.strategy.currSelectedSkill
-        self.avatar.strategy.currSelectedSkill = nil
-        if skill == nil then
-            self:_debug("当前没有可以使用的技能")
-            behavior:NextState()
-            return
-        end
-        local canUse = true
-        --self:_debug(string.format("use skill type:%s, trigger:%s",skillInfo.skillType,skillInfo.triggerCondition))
-        local target, targetPos = self.target, self.targetPos
-        --local canUse = self:IsSkillCanUse(target, skillInfo)
-        if not self:isTargetAttackValid() then --如果目标或者本身死亡,直接下一个状态
-            if skill.skillInfo.targetMode == TargetMode.Enemy
-                    or skill.skillInfo.targetMode == TargetMode.Friend then --如果技能需要目标
-                canUse = false
-                self:OnTargetError(target)
-                behavior:NextState() --不可使用
-            end
-        end
-        if canUse then
-            self.avatar:EnterState(StateName.Attacking)
-            self:OnSkillUse(behavior, target, targetPos, skill)
-        else
-            behavior:NextState()
-        end
-    end)
+    local skill = self.battleUnit.strategy.currSelectedSkill
+    self.battleUnit.strategy.currSelectedSkill = nil
+    if skill == nil then
+        self:_debug("当前没有可以使用的技能")
+        behavior:NextState()
+        return
+    end
+    local canUse = true
+    if canUse then
+        --self.battleUnit:EnterState(StateName.Attacking)
+        self:OnSkillUse(behavior, skill)
+    else
+        behavior:NextState()
+    end
 end
 
 --技能释放
 ---@param behavior Game.Modules.Common.Behavior.BaseBehavior
 ---@param target Game.Modules.World.Items.Avatar
 ---@param skill Game.Modules.Battle.Vo.SkillVo
-function AvatarGridBehavior:OnSkillUse(behavior, target, targetPos, skill)
+function AvatarGridBehavior:OnSkillUse(behavior, skill)
     skill.startTime = Time.time --是否成功开始计时
     skill.useCount = skill.useCount + 1
     -- 伤害结算
-    if target and target.layoutGrid then
-        target.layoutGrid:SetAttackSelect(true)
-    end
-    self.avatar.accountWidget:Account(target, targetPos, skill,
+    --if target and target.layoutGrid then
+    --    target.layoutGrid:SetAttackSelect(true)
+    --end
+    self.battleUnit:_debug(string.format("use skill:[%s]",skill.skillInfo.name))
+    self.battleUnit.accountCtrl:Account(skill,
             Handler.New(function()
                 behavior:NextState()
-                --self:_debug(string.format("[%s:%s] time:%s",self.avatar.gameObject.name, skillInfo.animName, (Time.time - time)))
+
             end, self))
     -- 技能名展示
-    if self.avatar.avatarInfo.avatarType == AvatarType.Hero
+    if self.battleUnit.avatarInfo.avatarType == AvatarType.Hero
             and skill.skillInfo.skillType == SkillType.Skill
             and not StringUtil.IsEmpty(skill.skillInfo.name) then
-        self.avatar:ShowSkillNameFly(skill.skillInfo.name)
+        self.battleUnit:ShowSkillNameFly(skill.skillInfo.name)
     end
 end
 
 --一轮攻击结束
 ---@param behavior Game.Modules.Common.Behavior.BaseBehavior
 function AvatarGridBehavior:AttackEnd(behavior)
-    if self.avatar.avatarInfo.attackInterval and self.avatar.avatarInfo.attackInterval > 0 then
+    if self.battleUnit.avatarInfo.attackInterval and self.battleUnit.avatarInfo.attackInterval > 0 then
         --攻击间隔
         behavior:AppendState(function()
-            self.avatar:PlayIdle()
+            self.battleUnit:PlayIdle()
             behavior:NextState()
         end)
-        behavior:AppendInterval(self.avatar.avatarInfo.attackInterval)
+        behavior:AppendInterval(self.battleUnit.avatarInfo.attackInterval)
     end
     behavior:AppendState(function()
-        self:_debug("AvatarGridBehavior AttackOnce Over")
-        self.avatar:PlayIdle()
-        GridBattleEvent.DispatchItemEvent(GridBattleEvent.ExitAttack, self.avatar)
-        if self.target.layoutGrid then
+        --self:_debug("AvatarGridBehavior AttackOnce Over")
+        self.battleUnit:PlayIdle()
+        BattleEvent.DispatchItemEvent(BattleEvent.ExitAttack, self.battleUnit)
+        if self.target and self.target.layoutGrid then
             self.target.layoutGrid:SetAttackSelect(false)
         end
-        self.avatar:BackToBorn()
+        self.battleUnit:BackToBorn()
         self:Stop()
     end)
 end

@@ -12,30 +12,20 @@ local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 ---@field New fun(context : WorldContext, areaObject : UnityEngine.GameObject):Game.Modules.Battle.View.BattleLayout
 ---@field context WorldContext
 ---@field areaPointObj UnityEngine.GameObject
+---@field center UnityEngine.Vector3
 ---@field checkPointData CheckPointData
 ---@field gridLayoutMap table<Camp, table<number, Game.Modules.Battle.Layouts.LayoutGrid>>
 local BattleLayout = class("Game.Modules.Battle.View.BattleLayout", LuaMonoBehaviour)
 
 local Move_Duration = 0.3
 
-local LayoutMap =
-{
-    [1] = {1,4,9},
-    [2] = {2,5,8},
-    [3] = {3,6,7},
-    [4] = {1,4,9},
-    [5] = {2,5,8},
-    [6] = {3,6,7},
-    [7] = {1,4,9},
-    [8] = {2,5,8},
-    [9] = {3,6,7},
-}
 
 ---@param context WorldContext
 ---@param areaObject UnityEngine.GameObject
 function BattleLayout:Ctor(context, areaObject)
     self.context = context
     self.areaPointObj = areaObject
+    self.center = areaObject.transform.position
     self.checkPointData = self.context.currSubScene.checkPointData
     self.gridLayoutMap = {}
 
@@ -120,9 +110,21 @@ end
 
 ---@param camp Camp
 ---@return Game.Modules.Battle.Layouts.LayoutGrid
-function BattleLayout:GetGridByLine(camp, index)
+function BattleLayout:GetGridByCol(camp, index)
     local layoutGrids = self.gridLayoutMap[camp]
-    local indexs = LayoutMap[index]
+    local indexs = LayoutIndex2Col[index]
+    for i = 1, #indexs do
+        if layoutGrids[indexs[i]].owner ~= nil then
+            return layoutGrids[indexs[i]]
+        end
+    end
+    return nil
+end
+
+---@param camp Camp
+---@return Game.Modules.Battle.Layouts.LayoutGrid
+function BattleLayout:GetFirstGridByIndexs(camp, indexs)
+    local layoutGrids = self.gridLayoutMap[camp]
     for i = 1, #indexs do
         if layoutGrids[indexs[i]].owner ~= nil then
             return layoutGrids[indexs[i]]
@@ -249,6 +251,16 @@ function BattleLayout:SetAllGridVisible(camp, visible)
     for i = 1, #layoutGrids do
         layoutGrids[i]:SetVisible(visible)
     end
+end
+
+--开始
+---@param camp Camp
+---@param gridSelect GridSelectType
+---@param attacker Game.Modules.World.Items.BattleUnit
+function BattleLayout:ShowSelectGrids(camp, gridSelect, attacker)
+    self.targetGridList = GridUtils.GetGrids(gridSelect,camp, attacker)
+    self.targetList = self.battleUint.context.battleLayout:GetTargetList(self.opposeCamp, self.targetGridList)
+    self.battleUint.context.battleLayout:SetAttackSelect(self.opposeCamp, self.targetGridList, true)
 end
 
 -- 获取前方一排距离

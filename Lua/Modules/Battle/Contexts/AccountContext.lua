@@ -6,13 +6,13 @@
 ---
 
 local PoolVo = require("Game.Modules.Common.Pools.PoolObject")
----@class Module.World.Contexts.AccountContext : Game.Modules.Common.Pools.PoolObject
----@field New fun():Module.World.Contexts.AccountContext
----@field avatar Game.Modules.World.Items.Avatar 攻击者
----@field targetList table<number, Game.Modules.World.Items.Avatar> 目标
----@field accountTargetList table<number, Game.Modules.World.Items.Avatar> 已经被结算的目标
+---@class Game.Modules.World.Contexts.AccountContext : Game.Modules.Common.Pools.PoolObject
+---@field New fun():Game.Modules.World.Contexts.AccountContext
+---@field battleUnit Game.Modules.World.Items.BattleUnit 攻击者
+---@field targetList table<number, Game.Modules.World.Items.BattleUnit> 目标
+---@field accountTargetList table<number, Game.Modules.World.Items.BattleUnit> 已经被结算的目标
 ---@field account AccountInfo
-local AccountContext = class("Module.World.Contexts.AccountContext", PoolVo)
+local AccountContext = class("Game.Modules.World.Contexts.AccountContext", PoolVo)
 
 local Sid = 1
 
@@ -26,23 +26,24 @@ end
 function AccountContext:Init(skillVo, attacker, account)
     self.id = Sid
     Sid = Sid + 1
-    self.avatar = attacker
+    self.battleUnit = attacker
     self.account = account
     self.skillVo = skillVo
 end
 
 --开始
-function AccountContext:Start()
-    if self.avatar.context.mode == BattleMode.Grid then
-        local opposeCamp = BattleUtils.GetOpposeCamp(self.avatar.avatarVo.camp) --对立阵营
-        self.targetList = self.avatar.context.battleLayout:GetTargetList(opposeCamp, self.account.gridSelect)
-        self.avatar.context.battleLayout:SetAttackSelect(opposeCamp, self.account.gridSelect, true)
-    end
+function AccountContext:Start(gridSelect)
+    gridSelect = gridSelect or self.account.gridSelect
+    local opposeCamp = BattleUtils.GetOpposeCamp(self.battleUnit.avatarVo.camp) --对立阵营
+    local targetGridList = GridUtils.GetGrids(gridSelect, opposeCamp, self.battleUnit)
+    self.targetList = self.battleUnit.context.battleLayout:GetTargetList(opposeCamp, targetGridList)
 end
 
 --过程
-function AccountContext:UpdateProgress()
-
+function AccountContext:ExecuteAccount()
+    for i = 1, #self.targetList do
+        self:OnAccount(self.targetList[i])
+    end
 end
 
 --是否被结算过
@@ -52,10 +53,11 @@ end
 --结算
 ---@param target Game.Modules.World.Items.Avatar
 function AccountContext:OnAccount(target)
+    target:_debug("target is be account")
     self.accountTargetList:Add(target)
-    self:DamageAccount(self.skillVo, self.account, target)
+    --self:DamageAccount(self.skillVo, self.account, target)
     --检查目标是否死亡
-    self.avatar.accountWidget:OnCheckDead(self.skillVo,target)
+    --self.battleUint.accountWidget:OnCheckDead(self.skillVo,target)
 end
 
 --最终伤害结算
@@ -71,28 +73,28 @@ function AccountContext:DamageAccount(skillVo, account, target)
     if account.targetMode == TargetMode.Enemy
             --or account.targetMode == TargetMode.AOE
             or account.targetMode == TargetMode.Pos then
-        avatarAtk = self.avatar.avatarInfo.atk
+        avatarAtk = self.battleUnit.avatarInfo.atk
         minDam = 1
     end
     local hurtInfo = {} ---@type HurtInfo
-    hurtInfo.atker = self.avatar
+    hurtInfo.atker = self.battleUnit
     hurtInfo.target = target
     hurtInfo.isHelpful = isHelpful
     hurtInfo.atk = math.random(account.minAtk, account.maxAtk) --浮动攻击
     hurtInfo.def = target and target.avatarInfo.def or 0
-    local crit = account.crit + self.avatar.avatarInfo.crit -- 技能本身的暴击率与自身暴击率相加
+    local crit = account.crit + self.battleUnit.avatarInfo.crit -- 技能本身的暴击率与自身暴击率相加
     hurtInfo.crit = (math.random() <= crit) and account.critPower or 1 --暴击
     hurtInfo.dam = math.max(minDam, math.floor((hurtInfo.atk + avatarAtk - hurtInfo.def) * hurtInfo.crit)) --简单计算:伤害 - 防御
     hurtInfo.acc = math.random() --命中率
     local isMiss = false
     --计算闪避
-    local signet = target.signetMap[self.avatar.sid .. "_" .. skillInfo.id]
-    if hurtInfo.acc > self.avatar.avatarInfo.acc
+    local signet = target.signetMap[self.battleUnit.sid .. "_" .. skillInfo.id]
+    if hurtInfo.acc > self.battleUnit.avatarInfo.acc
             or signet == SignetType.Dodge then
         isMiss = true
     end
     if signet ~= nil then
-        target.performancePlayer:Play(account.signetPerformance,nil,self.avatar, account)
+        target.performancePlayer:Play(account.signetPerformance,nil,self.battleUnit, account)
     end
 
     if isMiss then
@@ -125,7 +127,7 @@ end
 ---@param skillInfo SkillInfo
 ---@param account AccountInfo
 function AccountContext:DisplayHurt(target, skillInfo, account)
-    target.performancePlayer:Play(account.targetPerformance,nil,self.avatar)
+    target.performancePlayer:Play(account.targetPerformance,nil,self.battleUnit)
     --buff 计算
     if not StringUtil.IsEmpty(account.buffer) then
         target.bufferWidget:Add(account.buffer)
@@ -138,10 +140,6 @@ end
 
 --结束
 function AccountContext:End()
-    if self.avatar.context.mode == BattleMode.Grid then
-        local oppseCamp = BattleUtils.GetOpposeCamp(self.avatar.avatarVo.camp) --对立阵营
-        self.avatar.context.battleLayout:SetAttackSelect(oppseCamp, self.account.gridSelect, false)
-    end
     self:Dispose()
 end
 

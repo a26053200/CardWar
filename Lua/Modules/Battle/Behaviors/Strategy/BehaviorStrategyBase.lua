@@ -9,24 +9,23 @@ local LuaObject = require("Betel.LuaObject")
 
 ---@class Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase:LuaObject
 ---@field New fun(avatar : Game.Modules.World.Items.Avatar)
----@field avatar Game.Modules.World.Items.Avatar
+---@field battleUnit Game.Modules.World.Items.BattleUnit
 ---@field aiParam table<string, any> --AI参数
 ---@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
 ---@field canUseList table<number, Game.Modules.Battle.Vo.SkillVo>
 ---@field currSelectedSkill Game.Modules.Battle.Vo.SkillVo 当前被选中的技能
 ---@field lastTarget Game.Modules.World.Items.Avatar
----@field lastTargetPos Vector3
 ---@field currTargetAttackNum number 当前目标被攻击的次数
 ---@field targetStartAttackTime number 当前目标被攻击的时间
 local BehaviorStrategyBase = class("Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase",LuaObject)
 
 
----@param avatar Game.Modules.World.Items.Avatar
-function BehaviorStrategyBase:Ctor(avatar)
-    self.avatar = avatar
-    self.skills = avatar.avatarVo.skills
+---@param battleUnit Game.Modules.World.Items.BattleUnit
+function BehaviorStrategyBase:Ctor(battleUnit)
+    self.battleUnit = battleUnit
+    self.skills = battleUnit.avatarVo.skills
     self.currTargetAttackNum = 0
-    self.aiParam = Tool.String2Map(self.avatar.avatarInfo.aiParam)
+    self.aiParam = Tool.String2Map(self.battleUnit.avatarInfo.aiParam)
     self.canUseList = List.New()
 end
 
@@ -55,36 +54,24 @@ function BehaviorStrategyBase:AutoSelectSkill()
             elseif skill.skillInfo.cd == 0 or skill.startTime == 0 or Time.time - skill.startTime > skill.skillInfo.cd then
                 if skill.skillInfo.triggerCondition == SkillTriggerCondition.CD then -- CD
                     self.canUseList:Add(skill)
-                elseif skill.skillInfo.triggerCondition == SkillTriggerCondition.AttackNum then -- 普攻次数
-                    if self.avatar.avatarVo.normalSkill.useCount >= tonumber(skill.skillInfo.triggerConditionParam) then
-                        --self:_debug("attack num select skill. num:" .. skillInfo.id)
+                elseif skill.skillInfo.triggerCondition == SkillTriggerCondition.FullAnger then -- 满怒气
+                    if self.battleUnit.battleItemVo.curAnger >= self.battleUnit.battleItemVo.maxAnger then
                         self.canUseList:Add(skill)
                     end
-                elseif skill.skillInfo.triggerCondition == SkillTriggerCondition.AttackProb then -- 触发概率
+                elseif skill.skillInfo.triggerCondition == SkillTriggerCondition.Prop then -- 触发概率
                     local prob = math.random()
                     if prob <= tonumber(skill.skillInfo.triggerConditionParam) then
                         self.canUseList:Add(skill)
                     end
-                    --elseif skillInfo.triggerCondition == SkillTriggerCondition.TargetDistance then -- 和目标间的距离
-                    --    if hasTarget and self.lastTarget then
-                    --        local distance = Vector3.Distance(self.avatar.transform.position, self.lastTarget.transform.position)
-                    --        if distance > tonumber(skillInfo.triggerConditionParam) then
-                    --            self.canUseList:Add(skillInfo)
-                    --        end
-                    --    end
                 end
             end
         end
     end
     if self.canUseList:Size() > 0 then
         self.canUseList:Sort(compFunc)
-        if self.canUseList[1].skillInfo.triggerCondition == SkillTriggerCondition.AttackNum then -- 普攻次数
-            --print("reset normal attack num")
-            self.avatar.avatarVo.normalSkill.useCount = 0 --重置普攻次数
-        end
         self.canUseList[1].isNecessary = false
         self.currSelectedSkill = self.canUseList[1]
-        --self.avatar:_debug(self.currSelectedSkill.id)
+        --self.battleUnit:_debug(self.currSelectedSkill.id)
         --这里暂时默认这个技能肯定被触发了,做一些初始操作
         self.currTargetAttackNum = self.currTargetAttackNum + 1
     else

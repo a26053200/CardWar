@@ -8,7 +8,7 @@
 --布局格子
 ---@class GridLayoutInfo
 ---@field grid UnityEngine.GameObject
----@field owner Module.World.Items.Avatar
+---@field owner Game.Modules.World.Items.BattleUnit
 ---@field mat UnityEngine.Material
 ---@field index number
 
@@ -17,7 +17,7 @@ local BattleUtils = {}
 
 
 --目标的有效性
----@param target Module.World.Items.Avatar
+---@param target Game.Modules.World.Items.BattleUnit
 function BattleUtils.TargetValid(target)
     if target and not target:IsDead() and not isnull(target.gameObject) then
         return true
@@ -27,7 +27,7 @@ function BattleUtils.TargetValid(target)
 end
 
 --目标的是否符合被结算的有效性
----@param target Module.World.Items.Avatar
+---@param target Game.Modules.World.Items.BattleUnit
 function BattleUtils.TargetAccountValid(target)
     if target and not isnull(target.gameObject) and target.isBorn then
         return true
@@ -37,7 +37,7 @@ function BattleUtils.TargetAccountValid(target)
 end
 
 --目标的是否符合被攻击的有效性
----@param target Module.World.Items.Avatar
+---@param target Game.Modules.World.Items.BattleUnit
 function BattleUtils.TargetAttackValid(target)
     if BattleUtils.TargetValid(target) and target.isBorn and target.avatarInfo.avatarType ~= AvatarType.Collect then
         return true
