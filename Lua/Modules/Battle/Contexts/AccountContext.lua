@@ -47,12 +47,12 @@ end
 --开始
 function AccountContext:Start(gridSelect)
     gridSelect = gridSelect or self.account.gridSelect
-    local opposeCamp = BattleUtils.GetOpposeCamp(self.battleUnit.avatarVo.camp) --对立阵营
-    local targetGridList = GridUtils.GetGrids(gridSelect, opposeCamp, self.battleUnit)
-    self.targetList = self.battleUnit.context.battleLayout:GetTargetList(opposeCamp, targetGridList)
+    local targetCamp = BattleUtils.GetTargetCamp(gridSelect, self.battleUnit) --对立阵营
+    local targetGridList = GridUtils.GetTargetCampAndGrids(gridSelect, targetCamp, self.battleUnit)
+    self.targetList = self.battleUnit.context.battleLayout:GetTargetList(targetCamp, targetGridList)
 end
 
---过程
+--统一结算
 function AccountContext:ExecuteAccount()
     for i = 1, #self.targetList do
         self:OnAccount(self.targetList[i])
@@ -63,7 +63,8 @@ end
 function AccountContext:HasAccount(target)
     return self.accountTargetList:Contain(target)
 end
---结算
+
+--单个目标结算
 ---@param target Game.Modules.World.Items.BattleUnit
 function AccountContext:OnAccount(target)
     --target:_debug("target is be account")
@@ -71,7 +72,7 @@ function AccountContext:OnAccount(target)
     self.accountTargetList:Add(target)
     self:DamageAccount(self.skillVo, self.account, target)
     --检查目标是否死亡
-    --self.battleUint.accountWidget:OnCheckDead(self.skillVo,target)
+    self.battleUnit.accountCtrl:OnCheckDead(self.skillVo, target)
 end
 
 --最终伤害结算

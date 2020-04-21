@@ -58,7 +58,7 @@ function BehaviorStrategyBase:AutoSelectSkill()
                     if self.battleUnit.battleUnitVo.curAnger >= self.battleUnit.battleUnitVo.maxAnger then
                         self.canUseList:Add(skill)
                     end
-                elseif skill.skillInfo.triggerCondition == SkillTriggerCondition.Prop then -- 触发概率
+                elseif skill.skillInfo.triggerCondition == SkillTriggerCondition.Prob then -- 触发概率
                     local prob = math.random()
                     if prob <= tonumber(skill.skillInfo.triggerConditionParam) then
                         self.canUseList:Add(skill)

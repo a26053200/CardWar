@@ -80,10 +80,10 @@ end
 --所有怪物死亡
 function GridBattleBehavior:OnCurrAreaAllDead()
     self.lastArea = self:GetCurrArea()
-    self:_debug("当前区域所有怪物死亡 areaId:" .. self.lastArea.areaInfo.areaId)
+    self:_debug("当前区域所有怪物死亡 areaId:" .. self.lastArea.areaInfo.areaIndex)
     self:NextArea()
     if self:GetCurrArea() then
-        self:_debug("下一个区域 areaId:" .. self:GetCurrArea().areaInfo.areaId)
+        self:_debug("下一个区域 areaId:" .. self:GetCurrArea().areaInfo.areaIndex)
         self:GetCurrArea():Refresh()
     else --没有下个区域,战斗结束
         --等待所有目标的死亡动画都播放完毕
@@ -102,9 +102,9 @@ end
 --所有怪物死亡结束
 function GridBattleBehavior:OnCurrAreaAllDeadOver()
     if self.lastArea then
-        self:_debug("清除上一区域怪 areaId:" .. self.lastArea.areaInfo.areaId)
+        self:_debug("清除上一区域怪 areaId:" .. self.lastArea.areaInfo.areaIndex)
         self.lastArea:Clear()
-        self:_debug("当前区域所有怪物死亡结束 areaId:" .. self.lastArea.areaInfo.areaId)
+        self:_debug("当前区域所有怪物死亡结束 areaId:" .. self.lastArea.areaInfo.areaIndex)
         BattleEvents.Dispatch(BattleEvents.AllMonsterDeadOver)
     end
 end

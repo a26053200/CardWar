@@ -6,7 +6,7 @@
 ---
 
 local BattleEvent = require("Game.Modules.Battle.Events.BattleEvents")
-local BaseBehavior = require("Game.Modules.Battle.Behaviors.BattleBehavior")
+local BaseBehavior = require("Game.Modules.Common.Behavior.BaseBehavior")
 
 ---@class Game.Modules.Battle.Behaviors.AvatarGridBehavior : Game.Modules.Common.Behavior.BaseBehavior
 ---@field battleUnit Game.Modules.World.Items.BattleUnit

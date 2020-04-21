@@ -1,4 +1,4 @@
-﻿-- Card 2020/4/20 0:20:49
+﻿-- Card 2020/4/22 0:55:16
 local Data = {}
 Data.table = {    [100001] = {id = 100001, name = "村民", type = "", battleUnit = "Villager_B_Boy", star = 1, level = 1, rarity = 1, rarityLabel = "SR"},
     [100002] = {id = 100002, name = "村民", type = "", battleUnit = "Villager_B_Boy", star = 1, level = 1, rarity = 1, rarityLabel = "SR"},

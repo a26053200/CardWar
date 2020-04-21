@@ -8,7 +8,7 @@
 
 --刷怪区域数据
 ---@class AreaBaseInfo
----@field areaId number 分组id
+---@field areaIndex number 分组索引
 ---@field type string 类型 boss , normal
 
 local BaseBehavior = require("Game.Modules.Common.Behavior.BaseBehavior")

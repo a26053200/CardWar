@@ -49,25 +49,7 @@ end
 
 --开始
 function Standard:OnProcessStart()
-    self.battleUnit:SetHudVisible(false)
-    self.opposeCamp = BattleUtils.GetOpposeCamp(self.battleUnit.avatarVo.camp) --对立阵营
-    self.targetGridList = GridUtils.GetGrids(self.performanceInfo.gridSelect,self.opposeCamp, self.battleUnit)
-    self.battleUnit.context.battleLayout:SetAttackSelect(self.opposeCamp, self.targetGridList, true)
-    local targetList = self.battleUnit.context.battleLayout:GetTargetList(self.opposeCamp, self.targetGridList)
-    local firstTarget = targetList[1]
-    local tagPos = GridUtils.GetTargetAttackPoint(firstTarget.gameObject,self.battleUnit.context.checkPointData.layoutGridSize)
-    if self.performanceInfo.gridSelect == GridSelectType.All then
-        tagPos = self.battleUnit.context.battleLayout.center
-    end
-    local moveOver = false
-    self.battleUnit:PlayRun()
-    self.battleUnit.transform:DOMove(tagPos, FRAME_TIME * 3):OnComplete(function()
-        self.battleUnit:PlayIdle()
-        moveOver = true
-    end)
-    while not moveOver  do
-        coroutine.step(1)
-    end
+
 end
 
 function Standard:Process()
@@ -122,8 +104,7 @@ function Standard:Dispose()
     for i = 1, #self.accountContextList do
         self.accountContextList[i]:End()
     end
-    self.battleUnit:SetHudVisible(true)
-    self.battleUnit.context.battleLayout:SetAttackSelect(self.opposeCamp, self.targetGridList, false)
+
 end
 
 return Standard

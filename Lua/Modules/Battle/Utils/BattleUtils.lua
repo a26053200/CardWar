@@ -81,4 +81,18 @@ function BattleUtils.GetOpposeCamp(camp)
     end
 end
 
+
+--获取可以攻击目标的点
+---@param gridSelectType GridSelectType
+---@param attacker Game.Modules.World.Items.BattleUnit
+---@return Camp
+function BattleUtils.GetTargetCamp(gridSelectType, attacker)
+    local targetCamp
+    if string.find(gridSelectType, GridSelectType.Friend) then
+        targetCamp = attacker.avatarVo.camp --友方阵营
+    else
+        targetCamp = BattleUtils.GetOpposeCamp(attacker.avatarVo.camp) --对立阵营
+    end
+    return targetCamp
+end
 return BattleUtils

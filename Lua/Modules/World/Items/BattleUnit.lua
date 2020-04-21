@@ -113,22 +113,14 @@ end
 
 function BattleItem:OnDeadOver()
     self.deadOver = true
+    self:Dispose()
 end
 
 function BattleItem:OnDead()
     BattleItem.super.OnDead(self)
-    --if self.animCtrl then
-    --    self.animCtrl:Clear()
-    --end
-    if self.behavior then
-        self.behavior:Dispose()
-    end
-    if self.cc then
-        self.cc.enabled = false
-    end
-    --if self.effectWidget then
-    --    self.effectWidget:RemoveSingCircle()
-    --end
+
+    self:Clean()
+
     self:_debug("BattleItem:OnDead " .. self.gameObject.name )
     local event = {}
     event.type = BattleItemEvents.BattleItemDead
@@ -137,6 +129,13 @@ function BattleItem:OnDead()
     if self.layoutGrid then
         self.layoutGrid:ClearOwner()
     end
+    self:PlayDead(Handler.New(function()
+        self:OnDeadOver()
+    end))
+end
+
+function Avatar:PlayDead(callback)
+    self.animCtrl:PlayAnim(self.avatarInfo.animDead, callback)
 end
 
 --回收
@@ -150,17 +149,36 @@ function BattleItem:Recovery()
     pool:Store(self.renderObj)
 end
 
+function BattleItem:Clean()
+    if self.behavior then
+        self.behavior:Dispose()
+        self.behavior = nil
+    end
+    if self.hud then
+        self.hud:Dispose()
+        self.hud = nil
+    end
+    if self.battleUnitVo then
+        self.battleUnitVo:Dispose()
+        self.battleUnitVo = nil
+    end
+    if self.cc then
+        self.cc.enabled = false
+    end
+end
+
 function BattleItem:Dispose()
     self:Recovery()
     BattleItem.super.Dispose(self)
-    if self.behavior then
-        self.behavior:Dispose()
+    self:Clean()
+
+    if self.animCtrl then
+        self.animCtrl:Dispose()
+        self.animCtrl = nil
     end
-    if self.effectWidget then
-        self.effectWidget:Dispose()
-    end
-    self.battleUnitVo:Dispose()
-    self.battleUnitVo = nil
+    --if self.effectWidget then
+    --    self.effectWidget:RemoveSingCircle()
+    --end
     --if self.gameObject.transform.childCount > 0 then
     --    logError("You must recovery the renderObj")
     --end

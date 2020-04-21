@@ -39,23 +39,39 @@ end
 --获取可以攻击目标的点
 ---@param gridSelectType GridSelectType
 ---@param attacker Game.Modules.World.Items.BattleUnit
----@param camp Camp
 ---@return table<number, number>
-function GridUtils.GetGrids(gridSelectType, camp, attacker)
-    local curColIndexs = LayoutIndex2Col[attacker.layoutIndex]
-    local firstTarget = attacker.context.battleLayout:GetFirstGridByIndexs(camp, curColIndexs)
-    local rowIndexs = LayoutIndex2Row[firstTarget.index]
-    if gridSelectType == GridSelectType.Current then
-        return curColIndexs
-    elseif gridSelectType == GridSelectType.Col then
-        return curColIndexs
-    elseif gridSelectType == GridSelectType.Current then
-        return rowIndexs
-    elseif gridSelectType == GridSelectType.All then
-        return LayoutMapAll
-    else
-        return curColIndexs
+function GridUtils.GetTargetCampAndGrids(gridSelectType, targetCamp, attacker)
+    if attacker.layoutIndex == nil or  attacker.layoutIndex == 0 then
+        print(123123)
     end
+    local selectGrids
+    local curColIndexs = LayoutIndex2Col[attacker.layoutIndex]
+    local firstTarget = attacker.context.battleLayout:GetFirstGridByIndexs(targetCamp, curColIndexs)
+    if not firstTarget then
+        firstTarget = attacker.context.battleLayout:GetFirstGrid(targetCamp)
+    end
+    if gridSelectType == GridSelectType.Current then
+        selectGrids = {}
+        if firstTarget then
+            table.insert(selectGrids, firstTarget.index)
+        end
+    elseif gridSelectType == GridSelectType.Col then
+        selectGrids = curColIndexs
+    elseif gridSelectType == GridSelectType.Row then
+        selectGrids = {}
+        if firstTarget then
+            selectGrids = LayoutIndex2Row[firstTarget.index]
+        end
+    elseif gridSelectType == GridSelectType.All then
+        selectGrids = LayoutMapAll
+    elseif gridSelectType == GridSelectType.Friend_All then
+        selectGrids = LayoutMapAll
+    elseif gridSelectType == GridSelectType.Friend_Lowest then
+        selectGrids = LayoutMapAll
+    else
+        logError("unknown select type " .. gridSelectType)
+    end
+    return selectGrids
 end
 
 return GridUtils

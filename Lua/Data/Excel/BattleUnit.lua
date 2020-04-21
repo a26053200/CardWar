@@ -1,4 +1,4 @@
-﻿-- BattleUnit 2020/4/20 0:20:49
+﻿-- BattleUnit 2020/4/22 0:55:16
 local Data = {}
 Data.table = {    ["micro_dragon"] = {id = "micro_dragon", name = "Micro Dragon", avatarName = "micro_dragon", type = "Monster", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 1000, maxAnger = 100, speed = 60},
     ["Villager_B_Boy"] = {id = "Villager_B_Boy", name = "Villager", avatarName = "Villager_B_Boy", type = "Hero", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 1000, maxAnger = 100, speed = 60},

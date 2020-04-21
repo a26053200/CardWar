@@ -67,7 +67,7 @@ end
 
 function SceneItemHUD:Dispose()
     SceneItemHUD.super.Dispose(self)
-    destroy(self.gameObject)
+    Destroy(self.gameObject)
     --RemoveEventListener(Event.Update, self.Update, self)
 end
 

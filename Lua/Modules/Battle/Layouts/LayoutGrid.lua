@@ -8,7 +8,7 @@
 local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 ---@class Game.Modules.Battle.Layouts.LayoutGrid : Betel.LuaMonoBehaviour
 ---@field New fun(grid:UnityEngine.GameObject, index:number, forward:UnityEngine.Vector3):Game.Modules.Battle.Layouts.LayoutGrid
----@field owner Game.Modules.World.Items.Avatar
+---@field owner Game.Modules.World.Items.BattleUnit
 ---@field forward UnityEngine.Vector3
 ---@field gridMat UnityEngine.Material
 ---@field selectMat UnityEngine.Material

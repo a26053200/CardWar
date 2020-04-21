@@ -7,8 +7,7 @@
 
 
 --刷怪区域数据
----@class GridAreaInfo
----@field areaIndex number 分组id
+---@class GridAreaInfo : AreaBaseInfo
 ---@field type string 类型 boss , normal
 ---@field waves table<number,GridWaveInfo>
 ---@field pos number        区域中心点

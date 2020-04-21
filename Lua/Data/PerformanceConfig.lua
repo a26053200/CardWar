@@ -45,20 +45,7 @@ function PerformanceConfig.Get(name)
     end
 
     --技能结算信息
-    local accounts = info.accounts
-    if isString(accounts) then
-        info.accounts = {}
-        local accountsSplit = string.split(accounts, ",")
-        for i = 1, #accountsSplit do
-            if not StringUtil.IsEmpty(accountsSplit[i]) then
-                local accountInfo = AccountConfig.Get(accountsSplit[i]);
-                if isString(accountInfo.param) then
-                    accountInfo.param = Tool.String2Map(accountInfo.param)
-                end
-                table.insert(info.accounts, accountInfo)
-            end
-        end
-    end
+    info.accounts = AccountConfig.GetList(info.id)
     return info
 end
 

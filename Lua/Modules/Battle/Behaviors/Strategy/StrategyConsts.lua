@@ -38,15 +38,9 @@ TargetFirstOrder =
 ---@class GridSelectType
 GridSelectType =
 {
-    Current = "Current",
-    Col = "Col",
-    Row = "Row",
-    All = "All",
-}
-
----@class TargetSelectType
-TargetSelectType =
-{
+    Friend = "Friend",
+    Friend_Lowest = "Friend_Lowest",
+    Friend_All = "Friend_All",
     Current = "Current",
     Col = "Col",
     Row = "Row",
@@ -71,14 +65,11 @@ LayoutIndex2Row =
     [2] = {1,2,3},
     [3] = {1,2,3},
     [4] = {4,5,6},
-    [4] = {4,5,6},
-    [4] = {4,5,6},
+    [5] = {4,5,6},
+    [6] = {4,5,6},
     [7] = {7,8,9},
     [8] = {7,8,9},
     [9] = {7,8,9},
 }
 
-LayoutMapAll =
-{
-    {1,2,3,4,5,6,7,8,9}
-}
+LayoutMapAll = {1,2,3,4,5,6,7,8,9}

@@ -229,8 +229,12 @@ end
 function BattleLayout:SetAttackSelect(camp, selectGrids, select)
     local layoutGrids = self.gridLayoutMap[camp]
     for i = 1, #selectGrids do
-        if layoutGrids[selectGrids[i]].owner ~= nil then
-            layoutGrids[selectGrids[i]]:SetAttackSelect(select)
+        if selectGrids[i] and layoutGrids[selectGrids[i]] then
+            if layoutGrids[selectGrids[i]].owner ~= nil then
+                layoutGrids[selectGrids[i]]:SetAttackSelect(select)
+            end
+        else
+            print("=====================")
         end
     end
     return nil

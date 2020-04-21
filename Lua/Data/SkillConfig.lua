@@ -15,7 +15,7 @@
 ---@field damageAdd number
 ---@field crit number
 ---@field critPow number
----@field targetSelectType string
+---@field targetMode string
 ---@field triggerCondition string
 ---@field triggerConditionParam string
 local SkillConfig = {}

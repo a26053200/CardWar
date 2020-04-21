@@ -8,6 +8,7 @@
 ---@class AccountInfo
 ---@field id string
 ---@field name string
+---@field group string 所属分组
 ---@field type number
 ---@field gridSelect string
 ---@field targetMode string
@@ -15,6 +16,33 @@
 ---@field damageAdd number
 
 local AccountConfig = {}
+
+---@param group string
+---@return table<number, AccountInfo>
+function AccountConfig.GetList(group)
+    if AccountConfig.map == nil then
+        local map = require("Game.Data.Excel.Account")
+        AccountConfig.map = map
+        ---@param info AccountInfo
+        for _, info in pairs(map.table) do
+            if isString(info.param) then
+                info.param = Tool.String2Map(info.param)
+            end
+            local list = map[info.group]
+            if list == nil then
+                list = {}
+                map[info.group] = list
+            end
+            table.insert(list, info)
+        end
+    end
+    local list = AccountConfig.map[group] ---@type table<number, AccountInfo>
+    if list == nil then
+        list = {}
+        logError(string.format("There is not account list info named %s!", group))
+    end
+    return list
+end
 
 ---@return AccountInfo
 function AccountConfig.Get(name)
@@ -24,6 +52,9 @@ function AccountConfig.Get(name)
     local info = AccountConfig.data.Get(name) ---@type AccountInfo
     if info == nil then
         logError(string.format("There is not account info named %s!", name))
+    end
+    if isString(info.param) then
+        info.param = Tool.String2Map(info.param)
     end
     return info
 end

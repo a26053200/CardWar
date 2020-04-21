@@ -69,7 +69,7 @@ function BattleMdr:OnAllMonsterDeadOver()
     self:StartCoroutine(function()
         coroutine.step(1)
         --战斗结算画面
-        vmgr:LoadView(ViewConfig.BattleRstTest)
+        --vmgr:LoadView(ViewConfig.BattleRstTest)
     end)
 end
 

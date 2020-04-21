@@ -56,6 +56,7 @@ end
 
 function Avatar:CreateCC()
     self.cc = self.gameObject:GetOrAddComponent(typeof(UnityEngine.CharacterController))
+    self.cc.enabled = true
     self.cc.slopeLimit = 45
     self.cc.stepOffset = 0.3
     self.cc.skinWidth = 0.08
@@ -123,8 +124,8 @@ function Avatar:PlayHit()
     self.animCtrl:PlayAnim(self.avatarInfo.animHit)
 end
 
-function Avatar:PlayDead()
-
+function Avatar:PlayDead(callback)
+    self.animCtrl:PlayAnim(self.avatarInfo.animDead, callback)
 end
 
 function Avatar:PlaySing()
@@ -182,12 +183,14 @@ end
 function Avatar:Dispose()
     if self.animCtrl then
         self.animCtrl:Dispose()
+        self.animCtrl = nil
     end
     --if self.effectWidget then
     --    self.effectWidget:Dispose()
     --end
     if self.soundGroup then
         self.soundGroup:Dispose()
+        self.soundGroup = nil
     end
     Avatar.super.Dispose(self)
 end
