@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,11 +19,37 @@ namespace BattleEditor
 
         private const string SettingPath = "Assets/Edit/BattleEditorSetting.asset";
         private BattleEditorSetting _setting;
+
+        private static readonly string[] PanelLabels = new[] {"Avatar Editor", "Avatar Editor", "Avatar Editor", "Avatar Editor"};
+
         private void Init()
         {
             if (!File.Exists(SettingPath))
                 EditUtility.CreateAsset<BattleEditorSetting>(SettingPath);
             _setting = AssetDatabase.LoadAssetAtPath<BattleEditorSetting>(SettingPath);
+        }
+
+        private List<ExcelReader.FieldColVo> battleUnitList;
+        private void OnGUI()
+        {
+            if (battleUnitList == null)
+            {
+                if(GUILayout.Button("Test"))
+                {
+                    var reader = new ExcelReader();
+                    battleUnitList = reader.GetExcelFieldList(Application.dataPath + _setting.BattleUnitExcelPath);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < battleUnitList[0].ValueList.Count; i++)
+                {
+                    if (GUILayout.Button(battleUnitList[0].ValueList[i]))
+                    {
+                        
+                    }
+                }
+            }
         }
     }
 }
