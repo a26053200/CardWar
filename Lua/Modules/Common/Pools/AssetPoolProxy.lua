@@ -29,9 +29,9 @@ end
 ---@param poolsInfo table<number,PoolInfo>
 function PoolProxy:InitObjectPool(poolsInfo)
     for i = 1, #poolsInfo do
-        if poolsInfo[i].avatarName then
-            local avatarInfo = AvatarConfig.Get(poolsInfo[i].avatarName)
-            print(poolsInfo[i].initNum)
+        if poolsInfo[i].battleUnitId then
+            local battleInfo = BattleUnitConfig.Get(poolsInfo[i].battleUnitId)
+            local avatarInfo = AvatarConfig.Get(battleInfo.avatarName)
             self:InitObjectByPool(avatarInfo.prefabUrl, self.poolRoot.transform, poolsInfo[i].initNum, true)
         elseif poolsInfo[i].effectName then
             local effectInfo = EffectConfig.Get(poolsInfo[i].effectName)

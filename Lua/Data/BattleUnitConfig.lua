@@ -23,12 +23,12 @@
 
 local BattleItemConfig = {}
 
----@return AvatarInfo
+---@return BattleUnitInfo
 function BattleItemConfig.Get(avatarName)
     if BattleItemConfig.data == nil then
         BattleItemConfig.data = require("Game.Data.Excel.BattleUnit")
     end
-    local info = BattleItemConfig.data.Get(avatarName) ---@type AvatarInfo
+    local info = BattleItemConfig.data.Get(avatarName) ---@type BattleUnitInfo
     if info == nil then
         logError(string.format("There is not avatar info named %s!", avatarName))
     end

@@ -55,7 +55,7 @@ end
 function BattleMdrBase:InitObjectPool()
     local poolObj = self.context.currSubScene:CreateGameObject("[Pool" .. self.context.id .. "]")
     self.context.pool = PoolProxy.New(poolObj)
-    local poolNumMap = {} ---@type table<string,number> avatarName 和 数量的映射
+    local battleUnitList = List.New() ---@type List | table<number,number> avatarName
     if self.checkPointData.areas then
         for i = 1, #self.checkPointData.areas do
             local areaInfo =  self.checkPointData.areas[i]
@@ -63,16 +63,21 @@ function BattleMdrBase:InitObjectPool()
                 local waveInfo = areaInfo.waves[j]
                 for k = 1, #waveInfo.wavePoints do
                     local pointInfo = waveInfo.wavePoints[k]
-                    PoolFactory.CalcPoolNumMap(poolNumMap, pointInfo.battleUnit)
+                    if not battleUnitList:Contain(pointInfo.battleUnit) then
+                        battleUnitList:Add(pointInfo.battleUnit)
+                    end
                 end
             end
         end
     end
 
     for i = 1, #self.battleModel.playerVo.cards do
-        poolNumMap[self.battleModel.playerVo.cards[i].cardInfo.battleUnit] = 1
+        local battleUnit = self.battleModel.playerVo.cards[i].cardInfo.battleUnit
+        if not battleUnitList:Contain(battleUnit) then
+            battleUnitList:Add(battleUnit)
+        end
     end
-    local poolsInfos = PoolFactory.CalcPoolInfoMap(poolNumMap)
+    local poolsInfos = PoolFactory.CalcPoolInfoMap(battleUnitList)
     table.insert(poolsInfos,{prefabUrl = Prefabs.LayoutGrid, initNum = 18})
     self.context.pool:InitObjectPool(poolsInfos)
 end

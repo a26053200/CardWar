@@ -19,13 +19,13 @@ function PoolFactory.CalcPoolNumMap(poolNumMap, avatarName)
 end
 
 --统计对象池
----@param poolNumMap table<string,number> avatarName 和 数量的映射
+---@param poolNumMap List | table<string,string> avatarName 和 数量的映射
 ---@return table<number,PoolInfo>
 function PoolFactory.CalcPoolInfoMap(poolNumMap)
     local poolInfoMap = {} ---@type table<number, PoolInfo>
-    for avatarName, v in pairs(poolNumMap) do
-        print("poolInfoMap " .. avatarName)
-        table.insert(poolInfoMap, { avatarName = avatarName, initNum = 1})
+    for i = 1, poolNumMap:Size() do
+        print("poolInfoMap " .. poolNumMap[i])
+        table.insert(poolInfoMap, { battleUnitId = poolNumMap[i], initNum = 1})
     end
     return poolInfoMap
 end
