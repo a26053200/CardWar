@@ -11,33 +11,14 @@ namespace BattleEditor
 {
     public class ExcelReader
     {
-        public class FieldType
+        private string xlsxPath;
+        private XSSFWorkbook xssfWorkbook;
+        private string className;
+
+        public void LoadExcelFile(string path)
         {
-            public const string String = "string";
-            public const string Number = "number";
-            public const string Bool = "bool";
-        }
-        public class FieldColVo
-        {
-            public string fieldName { get; private set; }//字段名
-            public string fieldComment { get; private set; }//字段注释
-            public readonly string FieldType;//字段类型
-            public List<string> ValueList;
-            public FieldColVo(string fieldName, string fieldType, string fieldComment)
-            {
-                this.fieldComment   = fieldComment;
-                this.fieldName      = fieldName;
-                if (string.IsNullOrEmpty(fieldType))
-                    this.FieldType = ExcelReader.FieldType.String;
-                else
-                    this.FieldType = fieldType.ToLowerInvariant();
-            }
-        }
-        public List<FieldColVo> GetExcelFieldList(string xlsxPath)
-        {
-            string className = Path.GetFileNameWithoutExtension(xlsxPath);
-            //读取excel文件
-            XSSFWorkbook xssfWorkbook = null;
+            xlsxPath = path;
+            className = Path.GetFileNameWithoutExtension(xlsxPath);
             try
             {
                 using (FileStream file = new FileStream(xlsxPath, FileMode.Open, FileAccess.ReadWrite))
@@ -46,9 +27,10 @@ namespace BattleEditor
             catch (System.Exception e)
             {
                 Debug.LogError("Excel Error: " + xlsxPath + " : " + e.Message);
-                return null;
             }
-
+        }
+        public List<FieldColVo> GetExcelFieldList()
+        {
             ISheet sheet = xssfWorkbook.GetSheetAt(0);// 第一张表
             IEnumerator rows = sheet.GetRowEnumerator();
             if (!rows.MoveNext())
@@ -66,10 +48,7 @@ namespace BattleEditor
 
             for (int i = 0; i < fieldRow.LastCellNum; i++)
             {
-                ICell fieldCell = fieldRow.GetCell(i);
-                ICell fileTypeCell = fileTypeRow.GetCell(i);
-                ICell commentCell = commentRow.GetCell(i);
-                FieldColVo fieldVo = new FieldColVo(fieldCell.ToString() ,fileTypeCell.ToString(), commentCell.ToString());
+                FieldColVo fieldVo = new FieldColVo(fieldRow.GetCell(i) ,fileTypeRow.GetCell(i), commentRow.GetCell(i));
                 fieldList.Add(fieldVo);
             }
             //分析数据
@@ -130,7 +109,8 @@ namespace BattleEditor
                         return null;
                     }
                     ParserValue(fieldVo, cellValueString);
-                    Debug.Log(cellValueString);
+                    fieldVo.cellList.Add(cell);
+                    //Debug.Log(cellValueString);
                 }
             }
             return fieldList;
@@ -138,25 +118,70 @@ namespace BattleEditor
         
         private void ParserValue(FieldColVo fieldVo, string stringValue = null)
         {//获取当前格子的值
-            if (fieldVo.ValueList == null)
-                fieldVo.ValueList = new List<string>();
             if (stringValue == null)
             {
-                if (fieldVo.FieldType == FieldType.String)
-                    fieldVo.ValueList.Add("");
-                else if (fieldVo.FieldType == FieldType.Number)
-                    fieldVo.ValueList.Add("0");
-                else if (fieldVo.FieldType == FieldType.Bool)
-                    fieldVo.ValueList.Add("false");
+                if (fieldVo.fieldType == FieldType.String)
+                    fieldVo.valueList.Add("");
+                else if (fieldVo.fieldType == FieldType.Number)
+                    fieldVo.valueList.Add("0");
+                else if (fieldVo.fieldType == FieldType.Bool)
+                    fieldVo.valueList.Add("false");
                 else
-                    fieldVo.ValueList.Add("");
+                    fieldVo.valueList.Add("");
             }
             else
             {
-                if (fieldVo.FieldType == FieldType.Bool)
-                    fieldVo.ValueList.Add(stringValue.ToLowerInvariant());
+                if (fieldVo.fieldType == FieldType.Bool)
+                    fieldVo.valueList.Add(stringValue.ToLowerInvariant());
                 else
-                    fieldVo.ValueList.Add(stringValue);
+                    fieldVo.valueList.Add(stringValue);
+            }
+        }
+
+        public void Save()
+        {
+            try
+            {
+                FileStream fs = File.OpenWrite(xlsxPath);
+                xssfWorkbook.Write(fs);//向打开的这个Excel文件中写入表单并保存。  
+                fs.Close();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
+            }
+        }
+
+        //根据数据类型设置不同类型的cell
+        public static void SetCellValue(ICell cell, object obj)
+        {
+            if (obj is int)
+            {
+                cell.SetCellValue((int)obj);
+            }
+            else if (obj is double)
+            {
+                cell.SetCellValue((double)obj);
+            }
+            else if (obj.GetType() == typeof(IRichTextString))
+            {
+                cell.SetCellValue((IRichTextString)obj);
+            }
+            else if (obj is string)
+            {
+                cell.SetCellValue(obj.ToString());
+            }
+            else if (obj is DateTime)
+            {
+                cell.SetCellValue((DateTime)obj);
+            }
+            else if (obj is bool)
+            {
+                cell.SetCellValue((bool)obj);
+            }
+            else
+            {
+                cell.SetCellValue(obj.ToString());
             }
         }
     }
