@@ -83,8 +83,12 @@ end
 
 -- 设置必要技能
 ---@return Game.Modules.Battle.Vo.SkillVo
-function BehaviorStrategyBase:SetNecessarySkill(skillIndex)
-
+function BehaviorStrategyBase:SetNecessarySkill(skillName)
+    for i = 1, #self.skills do
+        if self.skills[i].skillInfo.id == skillName then
+            self.skills[i].isNecessary = true
+        end
+    end
 end
 
 ---@return Game.Modules.World.Items.Avatar

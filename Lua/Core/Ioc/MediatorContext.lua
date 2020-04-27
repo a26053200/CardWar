@@ -21,6 +21,7 @@ end
 
 function MediatorContext:Launch()
     --TODO
+	self.binder:Bind(require("Game.Modules.Battle.View.BattleEditorMdr")):To(ViewConfig.BattleEditor.name)
 	self.binder:Bind(require("Game.Modules.Battle.View.BattleInfoMdr")):To(ViewConfig.BattleInfo.name)
 	self.binder:Bind(require("Game.Modules.Battle.View.BattleMdr")):To(ViewConfig.Battle.name)
 	self.binder:Bind(require("Game.Modules.Joystick.View.JoystickMdr")):To(ViewConfig.Joystick.name)
@@ -32,6 +33,7 @@ function MediatorContext:Launch()
 	self.binder:Bind(require("Game.Modules.Login.View.RoleCreateMdr")):To(ViewConfig.RoleCreate.name)
 	self.binder:Bind(require("Game.Modules.Login.View.RoleSelectMdr")):To(ViewConfig.RoleSelect.name)
 	self.binder:Bind(require("Game.Modules.Login.View.ServerListMdr")):To(ViewConfig.ServerList.name)
+	self.binder:Bind(require("Game.Modules.Player.View.PlayerInfoMdr")):To(ViewConfig.PlayerInfo.name)
 	self.binder:Bind(require("Game.Modules.Role.View.RoleInfoMdr")):To(ViewConfig.RoleInfo.name)
 	self.binder:Bind(require("Game.Modules.World.View.WorldMdr")):To(ViewConfig.World.name)
     --TODO

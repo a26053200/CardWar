@@ -144,8 +144,8 @@ function BaseBehavior:NextState()
     self.fastLusBehavior:NextState()
 end
 
---调试
-function BaseBehavior:isRuning()
+--运行
+function BaseBehavior:isRunning()
     return self.stateMachine.isRunning
 end
 

@@ -1,4 +1,4 @@
-﻿-- Account 2020/4/22 22:57:03
+﻿-- Account 2020/4/28 0:50:27
 local Data = {}
 Data.table = {    ["Villager_B_Boy_atk1"] = {id = "Villager_B_Boy_atk1", name = "普通攻击", group = "Villager_B_Boy_atk", type = "", targetMode = "Enemy", gridSelect = "Current", accountPoint = 0.24, damageAdd = 0.1},
     ["Villager_B_Boy_atk2"] = {id = "Villager_B_Boy_atk2", name = "普通攻击", group = "Villager_B_Boy_atk", type = "", targetMode = "Enemy", gridSelect = "Current", accountPoint = 0.45, damageAdd = 0.2},

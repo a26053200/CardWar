@@ -1,4 +1,4 @@
-﻿-- Anim 2020/4/22 22:57:03
+﻿-- Anim 2020/4/28 0:50:27
 local Data = {}
 Data.table = {    ["Villager_B_Boy_atk"] = {id = "Villager_B_Boy_atk", animName = "Combo", animSpeed = 1, accountPoint = 0.5, animEffect = ""},
     ["Villager_B_Boy_skill"] = {id = "Villager_B_Boy_skill", animName = "Skill", animSpeed = 1, accountPoint = 0.5, animEffect = ""},

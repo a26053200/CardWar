@@ -105,6 +105,7 @@ PoolFactory = require("Game.Modules.Common.Pools.PoolFactory")
 BezierUtils = require("Game.Modules.Common.Utils.BezierUtils")
 GridUtils   = require("Game.Modules.Common.Utils.GridUtils")
 BattleUtils = require("Game.Modules.Battle.Utils.BattleUtils")
+LuaReflectHelper = require("Game.Modules.Common.Utils.LuaReflectHelper")
 
 ---Config
 --Config = require("Game.Data.Config")

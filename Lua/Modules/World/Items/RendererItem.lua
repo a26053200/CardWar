@@ -87,7 +87,7 @@ function RendererItem:_debugError(msg)
 end
 
 function RendererItem:Dispose()
-
+    RendererItem.super:Dispose()
 end
 
 return RendererItem

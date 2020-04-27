@@ -40,9 +40,8 @@ function GridWave:Refresh(callback)
             local battleItemVo = World.CreateBattleUnitVo(wavePoint.battleUnit)--克隆数据
             battleItemVo.camp = Camp.Def --所有怪物默认都是守方阵营
             local battleItem = BattleUnit.New(battleItemVo, self.context)
-            local layoutGrid = self.context.battleLayout:GetGridByIndex(Camp.Def, wavePoint.grid)
+            local layoutGrid = self.context.battleLayout:AddUnit(battleItem,Camp.Def, wavePoint.grid)
             battleItem:SetBornPos(layoutGrid.transform.position, layoutGrid.forward)
-            layoutGrid:SetOwner(battleItem)
             if wavePoint.bornMode == WaveBornMode.BornEffect then
                 battleItem:Born()
                 coroutine.step()

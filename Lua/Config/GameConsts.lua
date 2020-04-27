@@ -512,6 +512,14 @@ PieceItemType =
     Boom = "Boom",      -- 爆炸类型碎片，销毁不增加资源
     Normal =  "Normal",      -- 正常资源类型
 }
+--PieceItem类型
 
+--回合模式
+---@class RoundMode
+RoundMode =
+{
+    Auto = "Auto",      --自动
+    Manual = "Manual",  --手动
+}
 local GameConst = {}
 return GameConst

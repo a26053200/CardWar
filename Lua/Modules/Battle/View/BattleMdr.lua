@@ -87,30 +87,17 @@ end
 
 function BattleMdr:StartBattle()
     BattleMdr.super.StartBattle(self)
-    self.context:CreateBattleItems(self.battleModel.playerVo.cards, Camp.Atk, CardState.GridBattle)
-
-    for i = 1, #self.context.battleItemList do
-        local hero = self.context.battleItemList[i]
-        hero:CreateCC() --  创建碰撞体，接受点击事件
-        hero:ResetAttr()
-        --hero:SetRenderEnabled(true)
-        --hero:UpdateNode()
-        --hero:SetBehaviorEnabled(true)
-        local grid = self.context.battleLayout:GetGridByIndex(Camp.Atk, hero.layoutIndex)
-        hero:SetBornPos(grid.transform.position, grid.forward)
-        hero:Born()
-        grid:SetOwner(hero)
-    end
+    --self.context:CreateBattleItems(self.battleModel.playerVo.cards, Camp.Atk, CardState.GridBattle)
 
     self.context.attachCamera = AttachCamera.New(self.context.currSubScene:GetCamera(),
             self.checkPointData.cameraDistance, self.checkPointData.cameraAngle,self.checkPointData.cameraOffset)
     self.context.currSubScene:GetCamera().enabled = true
-    BattleEvents.Dispatch(BattleEvents.EnterScene)
     self.context.attachCamera:AttachPos(self.context.battleLayout.areaPointObj.transform.position)
     self.context.attachCamera:StopAttach()
     self.context.attachCamera:Reset()
     self.context.battleBehavior:GetCurrArea():Active()
     self.context.attachCamera:StartAttach()
+    BattleEvents.Dispatch(BattleEvents.EnterScene)
 
     self:StartCoroutine(function()
         local currArea = self.context.battleBehavior:GetCurrArea()
@@ -133,14 +120,7 @@ end
 
 function BattleMdr:OnBattleStart()
     self.roundBehavior = RoundBehavior.New(self.context)
-    if self.battleModel.currCheckPointData.type == CheckPointType.Resource then
-        self.info.transform:DOLocalMoveY(340,0.5)
-        self:ShowBossInfoEffect(function()
-            self.roundBehavior:Play()
-        end)
-    else
-        self.roundBehavior:Play()
-    end
+    --self.roundBehavior:RoundStart(RoundMode.Auto)
     self.context.currSubScene:SetAllColliderEnable(false)
 end
 

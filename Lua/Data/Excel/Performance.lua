@@ -1,4 +1,4 @@
-﻿-- Performance 2020/4/22 22:57:03
+﻿-- Performance 2020/4/28 0:50:27
 local Data = {}
 Data.table = {    ["Villager_B_Boy_atk"] = {id = "Villager_B_Boy_atk", name = "普通攻击", type = "Standard", gridSelect = "Current", accountType = "Multi", animInfo = "Villager_B_Boy_atk", duration = 0, interval = 0, delay = 0, times = 1, param = "", shake = ""},
     ["Villager_B_Boy_skill1"] = {id = "Villager_B_Boy_skill1", name = "技能1", type = "Standard", gridSelect = "Col", accountType = "Single", animInfo = "Villager_B_Boy_skill", duration = 0, interval = 0, delay = 0, times = 1, param = "", shake = ""},

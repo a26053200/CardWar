@@ -28,13 +28,15 @@ function BattleUnitVo:Init(battleUnitName)
     self.battleUnitInfo = BattleUnitConfig.Get(battleUnitName)
     BattleUnitVo.super.Init(self, self.battleUnitInfo.avatarName)
     local skillInfoList = SkillConfig.GetList(battleUnitName)
-    for i = 1, #skillInfoList do
-        local skill = SkillVoPool:Get() ---@type Game.Modules.Battle.Vo.SkillVo
-        skill:Init(skillInfoList[i])
-        if skill.skillInfo.skillType == SkillType.Normal then
-            self.normalSkill = skill
+    if skillInfoList then
+        for i = 1, #skillInfoList do
+            local skill = SkillVoPool:Get() ---@type Game.Modules.Battle.Vo.SkillVo
+            skill:Init(skillInfoList[i])
+            if skill.skillInfo.skillType == SkillType.Normal then
+                self.normalSkill = skill
+            end
+            table.insert(self.skills, skill)
         end
-        table.insert(self.skills, skill)
     end
     self:Reset()
 end

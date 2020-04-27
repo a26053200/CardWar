@@ -52,7 +52,7 @@ function AccountCtrl:OnAccountBegin(skillVo)
             tagPos = GridUtils.GetTargetAttackPoint(target.gameObject,self.battleUnit.context.checkPointData.layoutGridSize)
         elseif performanceInfo.gridSelect == GridSelectType.Col then
             tagPosGrids = LayoutIndex2Col[self.battleUnit.layoutIndex]
-            local targetGrid = self.battleUnit.context.battleLayout:GetGridByIndex(self.targetCamp, tagPosGrids[1])
+            local targetGrid = self.battleUnit.context.battleLayout:GetLayoutGridByIndex(self.targetCamp, tagPosGrids[1])
             tagPos = targetGrid.transform.position + -self.battleUnit.transform.forward * self.battleUnit.context.checkPointData.layoutGridSize
         elseif performanceInfo.gridSelect == GridSelectType.All
                 or performanceInfo.gridSelect == GridSelectType.Friend_Lowest

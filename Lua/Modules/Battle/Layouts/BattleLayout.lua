@@ -74,6 +74,20 @@ function BattleLayout:Move(src, dst)
     end)
 end
 
+
+---@param unit Game.Modules.World.Items.BattleUnit
+---@param camp Camp
+---@return Game.Modules.Battle.Layouts.LayoutGrid
+function BattleLayout:AddUnit(unit, camp, layoutIndex)
+    local grid = self:GetLayoutGridByIndex(camp, layoutIndex)
+    grid:SetOwner(unit)
+    unit:SetBornPos(grid.transform.position, grid.forward)
+    unit:CreateCC() --  创建碰撞体，接受点击事件
+    unit:ResetAttr()
+    unit:Born()
+    return grid
+end
+
 ---@param owner Game.Modules.World.Items.Avatar
 ---@return Game.Modules.Battle.Layouts.LayoutGrid
 function BattleLayout:GetLayoutGridByOwner(owner)
@@ -103,7 +117,7 @@ end
 
 ---@param camp Camp
 ---@return Game.Modules.Battle.Layouts.LayoutGrid
-function BattleLayout:GetGridByIndex(camp, index)
+function BattleLayout:GetLayoutGridByIndex(camp, index)
     local layoutGrids = self.gridLayoutMap[camp]
     return layoutGrids[index]
 end
@@ -149,9 +163,10 @@ end
 ---@return Game.Modules.Battle.Layouts.LayoutGrid
 function BattleLayout:GetFirstEmptyGrid(camp)
     local layoutGrids = self.gridLayoutMap[camp]
+    local len = #layoutGrids
     for i = 1, #layoutGrids do
-        if layoutGrids[i].owner == nil then
-            return layoutGrids[i]
+        if layoutGrids[len - i + 1].owner == nil then
+            return layoutGrids[len - i + 1]
         end
     end
     return nil

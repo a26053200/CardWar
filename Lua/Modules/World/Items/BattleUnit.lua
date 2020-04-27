@@ -14,7 +14,7 @@ local AvatarGridBehavior = require("Game.Modules.Battle.Behaviors.AvatarGridBeha
 local Avatar = require("Game.Modules.World.Items.Avatar")
 
 ---@class Game.Modules.World.Items.BattleUnit : Game.Modules.World.Items.Avatar
----@field New fun(monsterInfo:Game.Modules.Battle.Vo.BattleUnitVo, context:WorldContext) : Module.World.Items.Monster
+---@field New fun(battleUnitVo:Game.Modules.Battle.Vo.BattleUnitVo, context:WorldContext) : Module.World.Items.Monster
 ---@field battleUnitVo Game.Modules.Battle.Vo.BattleUnitVo
 ---@field behavior Game.Modules.Battle.Behaviors.GridBattleBehavior
 ---@field strategy Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase -- 策略
@@ -25,12 +25,12 @@ local Avatar = require("Game.Modules.World.Items.Avatar")
 ---@field layoutGrid Game.Modules.Battle.Layouts.LayoutGrid 所在布局格子
 local BattleItem = class("Game.Modules.World.Items.BattleUnit", Avatar)
 
----@param battleItemVo Game.Modules.Battle.Vo.BattleUnitVo
+---@param battleUnitVo Game.Modules.Battle.Vo.BattleUnitVo
 ---@param context WorldContext
-function BattleItem:Ctor(battleItemVo, context)
+function BattleItem:Ctor(battleUnitVo, context)
     self:SetContext(context)
-    self.battleUnitVo = battleItemVo
-    BattleItem.super.Ctor(self, battleItemVo)
+    self.battleUnitVo = battleUnitVo
+    BattleItem.super.Ctor(self, battleUnitVo)
 end
 
 --重置属性
@@ -53,6 +53,7 @@ function BattleItem:OnRenderObjInit()
 
     self.accountCtrl = AccountCtrl.New(self)
     self.performancePlayer = PerformancePlayer.New(self)
+    self.strategy = GridBehaviorStrategy.New(self)
 
     self.hud = SceneUnitHUD.New(self)
 end
@@ -65,6 +66,7 @@ end
 
 --出生效果
 function BattleItem:Born(callback)
+    LuaReflectHelper.PushVo(self, self.battleUnitVo)
     self:PlayBorn()
     self:SetRenderEnabled(true)
     self:OnBorn(callback)
@@ -89,7 +91,7 @@ end
 
 function BattleItem:SetBehaviorEnabled(enabled)
     if not self.behavior then
-        self.strategy = GridBehaviorStrategy.New(self)
+
         self.behavior = AvatarGridBehavior.New(self)
     end
     if enabled then
@@ -128,6 +130,7 @@ function BattleItem:OnDead()
     BattleItemEvents.Dispatch(event)
     if self.layoutGrid then
         self.layoutGrid:ClearOwner()
+        self.layoutGrid = nil
     end
     self:PlayDead(Handler.New(function()
         self:OnDeadOver()
@@ -176,6 +179,7 @@ function BattleItem:Dispose()
         self.animCtrl:Dispose()
         self.animCtrl = nil
     end
+
     --if self.effectWidget then
     --    self.effectWidget:RemoveSingCircle()
     --end

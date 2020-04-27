@@ -12,3 +12,6 @@ ViewConfig.Joystick = {module = "Joystick",name = "Joystick",prefab = "Prefabs/U
 ViewConfig.Battle = {module = "Battle",name = "Battle",prefab = "Prefabs/UI/Battle/Battle.prefab",}
 ViewConfig.BattleInfo = {module = "Battle",name = "BattleInfo",prefab = "Prefabs/UI/Battle/BattleInfo.prefab",}
 ViewConfig.Navigation = {name = "Navigation",module = "Lobby",prefab = "Prefabs/UI/Lobby/Navigation.prefab",}
+ViewConfig.BattleEditor = {name = "BattleEditor",module = "Battle",prefab = "Prefabs/UI/Battle/BattleEditor.prefab",}
+ViewConfig.Player = {name = "Player",}
+ViewConfig.PlayerInfo = {name = "PlayerInfo",module = "Player",}

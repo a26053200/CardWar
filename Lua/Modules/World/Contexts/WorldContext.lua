@@ -15,6 +15,7 @@ local BattleUnit = require("Game.Modules.World.Items.BattleUnit")
 ---@field battleBehavior Game.Modules.Battle.Behaviors.BattleBehavior    战场行为
 ---@field battleItemList table<number, Game.Modules.World.Items.BattleUnit>
 ---@field avatarRoot UnityEngine.GameObject
+---@field luaReflect Framework.LuaReflect
 ---@field pool Game.Modules.Common.Pools.AssetPoolProxy 对象池
 ---@field attachCamera Game.Modules.Common.Components.AttachCamera
 ---@field battleLayout Game.Modules.Battle.View.BattleLayout
@@ -30,6 +31,36 @@ function WorldContext:Ctor(mode)
     self.dropList = List.New()
 end
 
+function WorldContext:CreateAvatarRoot()
+    self.avatarRoot = self.currSubScene:CreateGameObject("AvatarRoot" .. self.id)
+    self.luaReflect = self.avatarRoot:AddComponent(typeof(Framework.LuaReflect))
+    self.luaReflect:PushLuaFunction("AddBattleUnit",handler(self, self.AddBattleUnit))
+    self.luaReflect:PushLuaFunction("RemoveBattleUnit",handler(self, self.RemoveBattleUnit))
+end
+
+function WorldContext:AddBattleUnit(camp, battleUnit)
+    local emptyGrid = self.battleLayout:GetFirstEmptyGrid(camp)
+    if emptyGrid then
+        local layoutIndex = emptyGrid.index
+        local battleItem = self:CreateBattleItem(camp, battleUnit, layoutIndex)
+        self.battleLayout:AddUnit(battleItem, camp, layoutIndex)
+    else
+        logError("There is no empty grid")
+    end
+end
+
+function WorldContext:RemoveBattleUnit(camp, index)
+    local grid = self.battleLayout:GetLayoutGridByIndex(camp, index)
+    if grid then
+        if grid.owner then
+            grid.owner:Dispose()
+        end
+        grid:ClearOwner()
+    else
+        logError("There is no empty grid")
+    end
+end
+
 --创建可以战斗的单位
 ---@param camp Camp 所属阵营
 ---@param cards table<number, Game.Modules.Card.Vo.CardVo> 卡牌
@@ -38,57 +69,24 @@ function WorldContext:CreateBattleItems(cards, camp, state)
     for i = 1, #cards do
         local card = cards[i]
         if state == nil or card.state == state then
-            local battleItem = self:CreateBattleItem(card, camp)
-            table.insert(self.battleItemList, battleItem)
-            battleItem.layoutIndex = card.layoutIndex
+            local battleItem = self:CreateBattleItem(camp, card.cardInfo.battleUnit, card.layoutIndex)
+            battleItem.ownerCardVo = card
+            self.battleLayout:AddUnit(battleItem, camp, card.layoutIndex)
         end
     end
 end
 
 ---@param card Game.Modules.Card.Vo.CardVo 卡牌
-function WorldContext:CreateBattleItem(card, camp)
-    local battleItemVo = World.CreateBattleUnitVo(card.cardInfo.battleUnit)
+function WorldContext:CreateBattleItem(camp, battleUnit, layoutIndex)
+    local battleItemVo = World.CreateBattleUnitVo(battleUnit)
     battleItemVo.camp = camp
-    battleItemVo.isLeader = card.layoutIndex == 1
-    battleItemVo.index = card.layoutIndex
+    battleItemVo.isLeader = layoutIndex == 1
+    battleItemVo.index = layoutIndex
     local battleItem = BattleUnit.New(battleItemVo, self)
-    battleItem.ownerCardVo = card
     return battleItem
 end
 
----@param hero Game.Modules.World.Items.BattleUnit
-function WorldContext:AddBattleItem(hero)
-    table.insert(self.battleItemList, hero)
-    hero.layoutIndex = hero.ownerCardVo.layoutIndex
-end
-
----@param cardInfo Game.Modules.Card.Vo.CardVo
----@return Game.Modules.World.Items.BattleUnit
-function WorldContext:GetBattleItemByCard(cardInfo)
-    for i = 1, #self.battleItemList do
-        if self.battleItemList[i].ownerCardVo == cardInfo then
-            return self.battleItemList[i]
-        end
-    end
-    --logError("There is no hero with card:" .. cardInfo.cardInfo.avatarName)
-    return nil
-end
-
----@param hero Game.Modules.World.Items.Hero
-function WorldContext:RemoveBattleItem(hero)
-    for i = 1, #self.battleItemList do
-        if self.battleItemList[i] == hero then
-            self.battleItemList[i]:Dispose()
-            table.remove(self.battleItemList, i)
-            break
-        end
-    end
-end
-
 function WorldContext:Dispose()
-    for i = 1, #self.battleItemList do
-        self.battleItemList[i]:Dispose()
-    end
     if self.battleBehavior then
         self.battleBehavior:Dispose()
     end
@@ -99,7 +97,6 @@ function WorldContext:Dispose()
         self.pool:Dispose()
     end
 
-    self.battleItemList = nil
     Destroy(self.avatarRoot)
     self.avatarRoot = nil
 end

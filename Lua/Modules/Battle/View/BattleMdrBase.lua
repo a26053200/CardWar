@@ -43,7 +43,7 @@ function BattleMdrBase:InitCheckPointData()
     self.battleModel.currentContext = self.context
     self.context.checkPointData = self.battleModel.currCheckPointData
     self.context.currSubScene = World.worldScene.currSubScene
-    self.context.avatarRoot = self.context.currSubScene:CreateGameObject("AvatarRoot" .. self.context.id)
+    self.context:CreateAvatarRoot()
     --A*
     --self.context.grid = self.context.currSubScene:FindRootObjInSubScene("A*"):GetComponent(typeof(AStar.Grid))
     --self.context.gridGap = self.context.grid.nodeRadius * 2

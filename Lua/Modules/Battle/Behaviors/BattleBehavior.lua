@@ -51,46 +51,24 @@ function BattleBehavior:NextArea()
 
 end
 
-
 --获取某阵营所有单位
 ---@param camp Camp
 ---@param includeDead boolean 是否包含死亡单位
----@return List | table<number, Game.Modules.World.Items.Avatar>
+---@return List | table<number, Game.Modules.World.Items.BattleUnit>
 function BattleBehavior:GetCampAvatarList(camp, includeDead)
-    if camp == Camp.Atk then
-        local heroList = self.context.battleItemList
-        if not includeDead then
-            local tempList = List.New()
-            for i = 1, #heroList do
-                if not heroList[i]:IsDead() and heroList[i].layoutIndex ~= 0 then
-                    tempList:Add(heroList[i])
-                end
+    local gridList = self.context.battleLayout.gridLayoutMap[camp] ---@type table<number, Game.Modules.Battle.Layouts.LayoutGrid>
+    local tempList = List.New()
+    for i = 1, #gridList do
+        if gridList[i].owner then
+            local checkDead = includeDead and true or (not gridList[i].owner:IsDead())
+            if checkDead and gridList[i].owner.layoutIndex ~= 0 then
+                tempList:Add(gridList[i].owner)
             end
-            return tempList
-        else
-            return List.New(heroList)
-        end
-    else
-        local tempList = List.New()
-        if self:GetCurrArea() then
-            local monsterList = self:GetCurrArea().currWave.itemList
-            if not includeDead then
-                for i = 1, monsterList:Size() do
-                    if not monsterList[i]:IsDead() then
-                        tempList:Add(monsterList[i])
-                    end
-                end
-                return tempList
-            else
-                return monsterList
-            end
-        else
-            return tempList
         end
     end
+    return tempList
 end
 
---回到起点
 function BattleBehavior:Clear()
     self:_debug("强制清场")
     if self:GetCurrArea() then

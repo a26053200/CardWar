@@ -9,7 +9,7 @@ local BattleEvent = require("Game.Modules.Battle.Events.BattleEvents")
 local BaseBehavior = require("Game.Modules.Common.Behavior.BaseBehavior")
 
 ---@class Module.Battle.Behaviors.RoundBehavior : Game.Modules.Common.Behavior.BaseBehavior
----@field New fun(scene:Module.World.Scene.BattleScene):Module.Battle.Behaviors.RoundBehavior
+---@field New fun(context:WorldContext):Module.Battle.Behaviors.RoundBehavior
 ---@field currArea Game.Modules.Battle.Layouts.GridArea
 ---@field context WorldContext
 ---@field currRoundAvatar Game.Modules.World.Items.Avatar 当前回合的Avatar
@@ -18,6 +18,10 @@ local BaseBehavior = require("Game.Modules.Common.Behavior.BaseBehavior")
 ---@field isPause boolean
 ---@field attackSortList List | table<number, Game.Modules.World.Items.Avatar>
 ---@field waitAttackOver boolean
+---@field mode RoundMode
+---@field manualCamp Camp 手动模式攻击的阵营
+---@field manualLayoutIndex number 手动模式攻击索引
+---@field manualSkillName string 手动模式使用的技能
 local RoundBehavior = class("Module.Battle.Behaviors.GridBattleBehavior",BaseBehavior)
 
 ---@param context WorldContext
@@ -32,12 +36,57 @@ function RoundBehavior:Ctor(context)
     AddEventListener(BattleEvent, BattleEvent.ExitAttack, self.OnExitAttack, self)
     AddEventListener(BattleEvent, BattleEvent.BattlePause, self.OnBattlePause, self)
     self.isRoundOver = true
+    self.attackSortList = List.New()
+    --手动开启一轮攻击
+    self.context.luaReflect:PushLuaFunction("ManualAttack",handler(self, self.ManualAttack))
 end
 
 ---@param event Game.Modules.Battle.Events.BattleEvents
 function RoundBehavior:OnBattlePause(event)
     if self.currRoundAvatar then
         self.currRoundAvatar:SetBehaviorEnabled(false)
+    end
+end
+
+---@param mode RoundMode
+function RoundBehavior:RoundStart(mode)
+    self.mode = mode
+end
+
+--手动模式
+---@param camp Camp
+---@param layoutIndex number
+function RoundBehavior:ManualAttack(camp, layoutIndex, skillName)
+    if self:isRunning() then
+        print("isRunning")
+    else
+        self.manualCamp = camp
+        self.manualLayoutIndex = layoutIndex
+        self.skillName = skillName
+        self:RoundStart(RoundMode.Manual)
+        self.loop = false
+        self:Play()
+    end
+end
+
+--重置攻击队列
+function RoundBehavior:ResetAttackSortArray()
+    self.attackSortList:Clear()
+    if self.mode == RoundMode.Auto then
+        --测试时，随机攻击顺序
+        local tempList = List.New()
+        tempList:Concat(self.context.battleBehavior:GetCampAvatarList(Camp.Atk))
+        tempList:Concat(self.context.battleBehavior:GetCampAvatarList(Camp.Def))
+        self.totalAttackNum = tempList:Size()
+        local randoms = Tool.GetRandomArray(self.totalAttackNum)
+        for i = 1, #randoms do
+            self.attackSortList:Add(tempList[randoms[i]])
+        end
+    else
+        self.totalAttackNum = 1
+        local grid = self.context.battleLayout:GetLayoutGridByIndex(self.manualCamp,self.manualLayoutIndex)
+        grid.owner.strategy:SetNecessarySkill(self.manualSkillName)
+        self.attackSortList:Add(grid.owner)
     end
 end
 
@@ -63,16 +112,7 @@ function RoundBehavior:RoundStart()
         if self.isRoundOver then
             self.isRoundOver = false
             self:_debug("RoundBehavior RoundStart")
-            --测试时，随机攻击顺序
-            local tempList = List.New()
-            tempList:Concat(self.context.battleBehavior:GetCampAvatarList(Camp.Atk))
-            tempList:Concat(self.context.battleBehavior:GetCampAvatarList(Camp.Def))
-            self.totalAttackNum = tempList:Size()
-            local randoms = Tool.GetRandomArray(self.totalAttackNum)
-            self.attackSortList = List.New()
-            for i = 1, #randoms do
-                self.attackSortList:Add(tempList[randoms[i]])
-            end
+            self:ResetAttackSortArray()
         end
         self:NextState()
     end)
@@ -114,7 +154,12 @@ function RoundBehavior:RoundEnd()
             self:_debug("RoundBehavior RoundEnd")
         end
         self.currRoundAvatar = nil
-        self:NextState()
+        if self.loop then
+            self:NextState()
+        else
+            self.isRoundOver = true
+            self:Stop()
+        end
     end)
     return behavior
 end

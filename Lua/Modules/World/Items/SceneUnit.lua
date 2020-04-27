@@ -10,16 +10,17 @@ local LuaObject = require("Betel.LuaObject")
 ---@class Game.Modules.World.Items.SceneUnit : Betel.LuaObject
 ---@field sid number 唯一id
 ---@field context WorldContext
+---@field luaReflect Framework.LuaReflect
 ---@field sceneItemVo Game.Modules.World.Vo.SceneUnitVo
 ---@field gameObject UnityEngine.GameObject
 ---@field transform UnityEngine.Transform
-local SceneItem = class("Game.Modules.World.Items.SceneUnit", LuaObject)
+local SceneUnit = class("Game.Modules.World.Items.SceneUnit", LuaObject)
 
 local S_ID = 0
 
 ---@param sceneItemData Game.Modules.World.Vo.SceneUnitVo
-function SceneItem:Ctor(sceneItemData)
-    SceneItem.super.Ctor(self)
+function SceneUnit:Ctor(sceneItemData)
+    SceneUnit.super.Ctor(self)
     self.sceneItemVo = sceneItemData
     if self.sceneItemVo.sid == nil then
         S_ID = S_ID + 1
@@ -27,42 +28,47 @@ function SceneItem:Ctor(sceneItemData)
     end
     self.sid = self.sceneItemVo.sid
 
-    self.gameObject = GameObject.New("SceneItem_" .. self.sid)
+    self.gameObject = GameObject.New("SceneUnit_" .. self.sid)
     self.transform = self.gameObject.transform
     self:OnInitialize()
+
+    self.luaReflect = self.gameObject:AddComponent(typeof(Framework.LuaReflect))
     --self:EnableDestroyListener()
 end
 
 ---@param context WorldContext
-function SceneItem:SetContext(context)
+function SceneUnit:SetContext(context)
     self.context = context
 end
 
-function SceneItem:SetParent()
+function SceneUnit:SetParent()
 
 end
 
-function SceneItem:OnInitialize()
+function SceneUnit:OnInitialize()
 
 end
 
 --回收
-function SceneItem:Recovery()
+function SceneUnit:Recovery()
 
 end
 
 --释放资源
-function SceneItem:Dispose()
+function SceneUnit:Dispose()
+    if self.luaReflect then
+        self.luaReflect:Dispose()
+        self.luaReflect = nil
+    end
+end
+
+function SceneUnit:Destroy()
 
 end
 
-function SceneItem:Destroy()
-
-end
-
-function SceneItem:OnDestroy()
-    SceneItem.super.OnDestroy(self)
+function SceneUnit:OnDestroy()
+    SceneUnit.super.OnDestroy(self)
 end
 
 
-return SceneItem
+return SceneUnit
