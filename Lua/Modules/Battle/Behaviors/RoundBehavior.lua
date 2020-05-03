@@ -62,7 +62,7 @@ function RoundBehavior:ManualAttack(camp, layoutIndex, skillName)
     else
         self.manualCamp = camp
         self.manualLayoutIndex = layoutIndex
-        self.skillName = skillName
+        self.manualSkillName = skillName
         self:RoundStart(RoundMode.Manual)
         self.loop = false
         self:Play()

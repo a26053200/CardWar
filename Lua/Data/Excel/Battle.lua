@@ -1,4 +1,4 @@
-﻿-- Battle 2020/4/28 0:50:27
+﻿-- Battle Last Edit By:zheng
 local Data = {}
 Data.table = {    [1] = {id = 1, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Micro_Dragon_Test", grid = 1},
     [2] = {id = 2, pid = "battle_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Micro_Dragon_Test", grid = 2},

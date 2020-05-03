@@ -27,7 +27,7 @@ function SkillConfig.Get(name)
     end
     local info = SkillConfig.data.Get(name) ---@type SkillInfo
     if info == nil then
-        logError(string.format("There is not skill info named %s!", name))
+        --logError(string.format("There is not skill info named %s!", name))
     end
 
     return info
@@ -58,7 +58,7 @@ function SkillConfig.GetList(battleUnitName)
     end
     local info = SkillConfig.map[battleUnitName] ---@type table<number, SkillInfo>
     if info == nil then
-        logError(string.format("There is not skill list info named %s!", battleUnitName))
+        --logError(string.format("There is not skill list info named %s!", battleUnitName))
     end
     return info
 end

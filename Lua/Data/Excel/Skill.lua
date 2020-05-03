@@ -1,4 +1,4 @@
-﻿-- Skill 2020/4/28 0:50:27
+﻿-- Skill Last Edit By:zheng
 local Data = {}
 Data.table = {    ["Villager_B_Boy_atk"] = {id = "Villager_B_Boy_atk", owner = "Villager_B_Boy", name = "普通攻击", type = "Normal", triggerCondition = "CD|0", cd = 0, priority = 1, damageAdd = 1, crit = 0, critPow = 0, performance = "Villager_B_Boy_atk"},
     ["Villager_B_Boy_skill1"] = {id = "Villager_B_Boy_skill1", owner = "Villager_B_Boy", name = "技能", type = "Skill", triggerCondition = "Prob|0.3", cd = 2, priority = 2, damageAdd = 1, crit = 0, critPow = 0, performance = "Villager_B_Boy_skill1"},

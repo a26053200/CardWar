@@ -33,4 +33,24 @@ function LuaReflectHelper.PushVo(unit, battleUnitVo)
     end
 end
 
+---@param unit Game.Modules.World.Items.BattleUnit
+---@param jsonData string
+function LuaReflectHelper.JsonToLua(unit, key, jsonData)
+    if unit.luaReflect then
+        if key == Key.BattleUnitInfo then
+            unit.battleUnitVo.battleUnitInfo = json.decode(jsonData)
+        elseif key == Key.Avatar then
+            unit.battleUnitVo.avatarInfo = json.decode(jsonData)
+        elseif key == Key.Skill then
+            local skillInfo = json.decode(jsonData)
+            for i = 1, #unit.battleUnitVo.skills do
+                if skillInfo.id == unit.battleUnitVo.skills[i].skillInfo.id then
+                    unit.battleUnitVo.skills[i].skillInfo = skillInfo
+                    break;
+                end
+            end
+        end
+    end
+end
+
 return LuaReflectHelper

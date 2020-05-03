@@ -98,7 +98,7 @@ function AccountContext:DamageAccount(skillVo, account, target)
     hurtInfo.atk = avatarAtk + avatarAtk * (skillVo.skillInfo.damageAdd + account.damageAdd)
     hurtInfo.def = target and target.battleUnitVo.battleUnitInfo.def or 0
     local crit = skillVo.skillInfo.crit + battleUnitVo.battleUnitInfo.crit -- 技能本身的暴击率与自身暴击率相加
-    hurtInfo.crit = (math.random() <= crit) and battleUnitVo.battleUnitInfo.critPower or 1 --暴击
+    hurtInfo.crit = (math.random() <= crit) and battleUnitVo.battleUnitInfo.critPow or 1 --暴击
     hurtInfo.dam = math.max(minDam, math.floor((hurtInfo.atk - hurtInfo.def) * hurtInfo.crit)) --简单计算:伤害 - 防御
     hurtInfo.acc = math.random() --命中率
     local isMiss = false
@@ -121,6 +121,7 @@ function AccountContext:DamageAccount(skillVo, account, target)
         return
     end
     hurtInfo.miss = false
+    print("dam:" .. hurtInfo.dam)
     if target then
         if isHelpful then
             target.battleUnitVo.curHp = math.min(target.battleUnitVo.curHp + hurtInfo.dam, target.battleUnitVo.maxHp)
