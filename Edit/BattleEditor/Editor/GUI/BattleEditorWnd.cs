@@ -19,7 +19,7 @@ namespace BattleEditor
             wnd.position = rect;
         }
 
-        private string[] Camp = new[] {"Atk", "Def"};
+        private readonly string[] _camp = {"Atk", "Def"};
         private const string SettingPath = "Assets/Edit/BattleEditorSetting.asset";
         private BattleEditorSetting _setting;
 
@@ -30,28 +30,17 @@ namespace BattleEditor
         private void Init()
         {
             if (_setting == null)
-            {
-                if (!File.Exists(SettingPath))
-                    EditUtility.CreateAsset<BattleEditorSetting>(SettingPath);
-                _setting = AssetDatabase.LoadAssetAtPath<BattleEditorSetting>(SettingPath);
-                
-            }
+                _setting = BattleEditorUtility.LoadSetting(SettingPath);
         }
 
         private void OnFocus()
         {
-            Debug.Log("OnEnable");
+//            Debug.Log("OnEnable");
             Init();
             WaitBattleStart();
         }
 
-        private void LoadAllExcel()
-        {
-            if (Directory.Exists(Application.dataPath + _setting.ExcelFileFolder))
-            {
-                excelFileList = new List<string>(Directory.GetFiles(Application.dataPath + _setting.ExcelFileFolder, "*.xlsx", SearchOption.AllDirectories));
-            }
-        }
+        
         private void WaitBattleStart()
         {
             if (!_luaReflect)
@@ -85,7 +74,7 @@ namespace BattleEditor
                     EditorGUILayout.BeginHorizontal();
 //                    foreach (var camp in Camp)
                     {
-                        var camp = Camp[0];
+                        var camp = _camp[0];
                         EditorGUILayout.BeginVertical();
                         EditorGUILayout.LabelField(camp);
                         if(_luaReflectDict.TryGetValue(camp, out List<LuaReflect> list))
@@ -102,10 +91,10 @@ namespace BattleEditor
                     EditorGUILayout.EndHorizontal();
                 }
 
-                if (GUILayout.Button("Add Atk" + Camp[0]))
+                if (GUILayout.Button("Add Atk" + _camp[0]))
                 {
-                    BattleUnitEditorWnd wnd = BattleUnitEditorWnd.Create(this, _luaReflect, _setting.BattleUnitExcelPath);
-                    wnd.camp = Camp[0];
+                    ListEditorWnd wnd = ListEditorWnd.Create(this, _luaReflect, _setting.battleUnitExcelPath);
+                    wnd.onRowSelect = delegate(string battleUnit, int index) { AddBattle(battleUnit); };
                 }
             }
         }
@@ -132,19 +121,31 @@ namespace BattleEditor
             var skillJsonArray = luaReflect.jsonArrayMap["Skill"];
             for (int i = 0; i < skillJsonArray.Count; i++)
             {
-                var skill = skillJsonArray[i];
+                var skillId = skillJsonArray[i]["id"];
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField(skill["id"].ToString());
+                EditorGUILayout.LabelField(skillId.ToString());
                 if (GUILayout.Button("Edit"))
                 {
-                    
+                    RowEditorWnd wnd = RowEditorWnd.Create(this, luaReflect, _setting.skillExcelPath);
+                    wnd.rowIndex = wnd.GetRowIndex("id", skillId.ToString());
+                    wnd.outputPath = $"{_setting.outputPath}/{Path.GetFileNameWithoutExtension(_setting.skillExcelPath)}.lua";
                 }
                 if (GUILayout.Button("Test"))
                 {
-                    ManualAttack(camp, luaReflect.keyValueMap["layoutIndex"], skill["id"].ToString());
+                    ManualAttack(camp, luaReflect.keyValueMap["layoutIndex"], skillId.ToString());
                 }
                 EditorGUILayout.EndHorizontal();
             }
+        }
+        
+        private void AddBattle(string battleUnit)
+        {
+            var luaFunc = _luaReflect.luaFuncDict["AddBattleUnit"];
+            luaFunc.BeginPCall();
+            luaFunc.Push("Atk");
+            luaFunc.Push(battleUnit);
+            luaFunc.PCall();
+            luaFunc.EndPCall();
         }
 
         /// 手动攻击

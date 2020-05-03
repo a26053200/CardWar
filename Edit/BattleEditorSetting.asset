@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844699d51881467ba2d7ecde01bbd328, type: 3}
   m_Name: BattleEditorSetting
   m_EditorClassIdentifier: 
-  BattleUnitExcelPath: /../Excel/BattleUnit.xlsx
+  excelFolder: /../Excel/
+  outputPath: Assets/Lua/Game/Data/Excel/
+  battleUnitExcelPath: /../Excel/BattleUnit.xlsx
+  skillExcelPath: /../Excel/Skill.xlsx

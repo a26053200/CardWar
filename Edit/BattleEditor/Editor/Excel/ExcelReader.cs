@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using NPOI.SS.UserModel;
@@ -11,9 +12,11 @@ namespace BattleEditor
 {
     public class ExcelReader
     {
-        private string xlsxPath;
+        public string xlsxPath;
         private XSSFWorkbook xssfWorkbook;
         private string className;
+        private DataTable _dataTable;
+        public DataTable dataTable { get{return _dataTable;}}
 
         public void LoadExcelFile(string path)
         {
@@ -28,35 +31,43 @@ namespace BattleEditor
             {
                 Debug.LogError("Excel Error: " + xlsxPath + " : " + e.Message);
             }
+            GetExcelFieldList();
         }
-        public List<FieldColVo> GetExcelFieldList()
+        private void GetExcelFieldList()
         {
             ISheet sheet = xssfWorkbook.GetSheetAt(0);// 第一张表
             IEnumerator rows = sheet.GetRowEnumerator();
             if (!rows.MoveNext())
             {
                 Debug.LogError("字段行不存在! 表： " + className);
-                return null;
+                return;
             }
+            _dataTable = new DataTable();
+            
             IRow fieldRow = (XSSFRow)rows.Current;// 字段行
             rows.MoveNext();
             IRow fileTypeRow = (XSSFRow)rows.Current;// 字段类型行
             rows.MoveNext();
             IRow commentRow = (XSSFRow)rows.Current;// 字段描述行
-
-            List<FieldColVo> fieldList = new List<FieldColVo>();//字段列表
-
+            DataRow fieldDataRow =_dataTable.NewRow();
+            DataRow fieldTypeDataRow =_dataTable.NewRow();
+            DataRow commentDataRow =_dataTable.NewRow();
+            
             for (int i = 0; i < fieldRow.LastCellNum; i++)
             {
-                FieldColVo fieldVo = new FieldColVo(fieldRow.GetCell(i) ,fileTypeRow.GetCell(i), commentRow.GetCell(i));
-                fieldList.Add(fieldVo);
+                _dataTable.Columns.Add(fieldRow.GetCell(i).StringCellValue);  
+                //fieldDataRow[i] = fieldRow.GetCell(i).StringCellValue;
+                fieldTypeDataRow[i] = fileTypeRow.GetCell(i).StringCellValue;
+                commentDataRow[i] = commentRow.GetCell(i).StringCellValue;
             }
+            _dataTable.Rows.Add(fieldTypeDataRow);
+            _dataTable.Rows.Add(commentDataRow);
             //分析数据
             ICell cell;//格子
             IRow row;
             int srcRowNum = 0;
             int tempCount = 0;
-            
+            DataRow dataRow;
             while (rows.MoveNext())
             {
                 tempCount++;
@@ -72,11 +83,10 @@ namespace BattleEditor
                 //这一行的每一列
                 //dataRowNum++;
                 srcRowNum++;
-                for (int i = 0; i < fieldList.Count; i++)
+                dataRow = _dataTable.NewRow();
+                for (int i = 0; i < _dataTable.Columns.Count; i++)
                 {
-                    FieldColVo fieldVo = fieldList[i];
                     cell = row.GetCell(i);
-                    var cellValueString = string.Empty;
                     try
                     {
                         if (cell.CellType == CellType.Formula)//格子含有计算公式
@@ -84,57 +94,35 @@ namespace BattleEditor
                             switch (cell.CachedFormulaResultType)
                             {
                                 case CellType.Boolean:
-                                    cellValueString = cell.BooleanCellValue.ToString();
+                                    dataRow[i] = cell.BooleanCellValue.ToString();
                                     break;
                                 case CellType.Error:
-                                    cellValueString = cell.ErrorCellValue.ToString();
+                                    dataRow[i] = cell.ErrorCellValue.ToString();
                                     break;
                                 case CellType.Numeric:
-                                    cellValueString = cell.NumericCellValue.ToString(CultureInfo.InvariantCulture);
+                                    dataRow[i] = cell.NumericCellValue.ToString(CultureInfo.InvariantCulture);
                                     break;
                                 case CellType.String:
-                                    cellValueString = cell.StringCellValue;
+                                    dataRow[i] = cell.StringCellValue;
                                     break;
                                 default:
-                                    cellValueString = cell.ToString();
+                                    dataRow[i] = cell.ToString();
                                     break;
                             }
                         }
                         else
-                            cellValueString = cell.ToString();//直接取值
+                        {
+                            dataRow[i] = cell.ToString();
+                        }
                     }
                     catch (Exception e)
                     {
                         Debug.LogError(e.Message + "\n Row:" + cell.RowIndex + " Col:" + cell.ColumnIndex);
-                        return null;
+                        return;
                     }
-                    ParserValue(fieldVo, cellValueString);
-                    fieldVo.cellList.Add(cell);
                     //Debug.Log(cellValueString);
                 }
-            }
-            return fieldList;
-        }
-        
-        private void ParserValue(FieldColVo fieldVo, string stringValue = null)
-        {//获取当前格子的值
-            if (stringValue == null)
-            {
-                if (fieldVo.fieldType == FieldType.String)
-                    fieldVo.valueList.Add("");
-                else if (fieldVo.fieldType == FieldType.Number)
-                    fieldVo.valueList.Add("0");
-                else if (fieldVo.fieldType == FieldType.Bool)
-                    fieldVo.valueList.Add("false");
-                else
-                    fieldVo.valueList.Add("");
-            }
-            else
-            {
-                if (fieldVo.fieldType == FieldType.Bool)
-                    fieldVo.valueList.Add(stringValue.ToLowerInvariant());
-                else
-                    fieldVo.valueList.Add(stringValue);
+                _dataTable.Rows.Add(dataRow);
             }
         }
 
@@ -142,6 +130,8 @@ namespace BattleEditor
         {
             try
             {
+                if(File.Exists(xlsxPath))
+                    File.Delete(xlsxPath);
                 FileStream fs = File.OpenWrite(xlsxPath);
                 xssfWorkbook.Write(fs);//向打开的这个Excel文件中写入表单并保存。  
                 fs.Close();
@@ -152,16 +142,109 @@ namespace BattleEditor
             }
         }
 
-        //根据数据类型设置不同类型的cell
-        public static void SetCellValue(ICell cell, object obj)
+        public void Dispose()
         {
+            xssfWorkbook?.Clear();
+        }
+        public bool SaveDataTableToExcel()  
+        {  
+            bool result = false;  
+            IWorkbook workbook = null;  
+            FileStream fs = null;  
+            IRow row = null;  
+            ISheet sheet = null;  
+            ICell cell = null;  
+            try  
+            {  
+                if (_dataTable != null && _dataTable.Rows.Count > 0)  
+                {  
+                    workbook = new XSSFWorkbook();  
+                    sheet = workbook.CreateSheet("Sheet0");//创建一个名称为Sheet0的表  
+                    int rowCount = _dataTable.Rows.Count;//行数  
+                    int columnCount = _dataTable.Columns.Count;//列数  
+  
+                    //设置列头  
+                    row = sheet.CreateRow(0);//excel第一行设为列头  
+                    for (int c = 0; c < columnCount; c++)  
+                    {  
+                        cell = row.CreateCell(c);  
+                        cell.SetCellValue(_dataTable.Columns[c].ColumnName);  
+                    }                      
+  
+                    //设置每行每列的单元格,  
+                    for (int i = 0; i <rowCount; i++)  
+                    {  
+                        row = sheet.CreateRow(i+1);  
+                        for (int j = 0; j < columnCount; j++)  
+                        {                              
+                            cell = row.CreateCell(j);//excel第二行开始写入数据  
+                            SetCellValue(cell, _dataTable.Rows[i][j]);
+                        }  
+                    }
+
+                    string savePath = Application.dataPath + "/../Excel/test.xlsx";
+                    if(File.Exists(savePath))
+                        File.Delete(savePath);
+                    using (fs = File.OpenWrite(savePath))   
+                    {  
+                        workbook.Write(fs);//向打开的这个xls文件中写入数据  
+                        result = true;  
+                    }  
+                }  
+                return result;  
+            }  
+            catch (Exception ex)  
+            {  
+                if (fs != null)  
+                {  
+                    fs.Close();  
+                }  
+                return false;  
+            }  
+        }  
+        //根据数据类型设置不同类型的cell
+        public void SetCellValue(object obj,int rowIndex,int colIndex)
+        {
+            Debug.Log("SetCellValue:" + obj.ToString());
             if (obj is int)
             {
-                cell.SetCellValue((int)obj);
+                _dataTable.Rows[rowIndex][colIndex] = (int) obj;
             }
             else if (obj is double)
             {
-                cell.SetCellValue((double)obj);
+                _dataTable.Rows[rowIndex][colIndex] = (double) obj;
+            }
+            else if (obj.GetType() == typeof(IRichTextString))
+            {
+                _dataTable.Rows[rowIndex][colIndex] = (IRichTextString) obj;
+            }
+            else if (obj is string)
+            {
+                _dataTable.Rows[rowIndex][colIndex] = obj.ToString();
+            }
+            else if (obj is DateTime)
+            {
+                _dataTable.Rows[rowIndex][colIndex] = (DateTime) obj;
+            }
+            else if (obj is bool)
+            {
+                _dataTable.Rows[rowIndex][colIndex] = (bool) obj;
+            }
+            else
+            {
+                _dataTable.Rows[rowIndex][colIndex] = obj.ToString();
+            }
+        }
+        public void SetCellValue(ICell cell, object obj)
+        {
+            Debug.Log("SetCellValue:" + obj.ToString());
+            if (obj is int i)
+            {
+                cell.SetCellValue(i);
+            }
+            else if (obj is double d)
+            {
+                cell.SetCellValue(d);
             }
             else if (obj.GetType() == typeof(IRichTextString))
             {
