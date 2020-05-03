@@ -126,6 +126,19 @@ namespace BattleEditor
             }
         }
 
+        private ICell GetCell(int rowIndex, int colIndex)
+        {
+            ISheet sheet = xssfWorkbook.GetSheetAt(0);// 第一张表
+            IEnumerator rows = sheet.GetRowEnumerator();
+            int rowCount = 0;
+            while (rowCount < rowIndex)
+            {
+                rows.MoveNext();
+                rowCount++;
+            }
+            var row = (XSSFRow)rows.Current;
+            return row.GetCell(colIndex);
+        }
         public void Save()
         {
             try
@@ -158,8 +171,8 @@ namespace BattleEditor
             {  
                 if (_dataTable != null && _dataTable.Rows.Count > 0)  
                 {  
-                    workbook = new XSSFWorkbook();  
-                    sheet = workbook.CreateSheet("Sheet0");//创建一个名称为Sheet0的表  
+                    sheet = xssfWorkbook.GetSheet("Sheet0");//创建一个名称为Sheet0的表  
+                    IEnumerator rows = sheet.GetRowEnumerator();
                     int rowCount = _dataTable.Rows.Count;//行数  
                     int columnCount = _dataTable.Columns.Count;//列数  
   
@@ -205,7 +218,7 @@ namespace BattleEditor
         //根据数据类型设置不同类型的cell
         public void SetCellValue(object obj,int rowIndex,int colIndex)
         {
-            Debug.Log("SetCellValue:" + obj.ToString());
+//            Debug.Log("SetCellValue:" + obj.ToString());
             if (obj is int)
             {
                 _dataTable.Rows[rowIndex][colIndex] = (int) obj;
@@ -234,10 +247,12 @@ namespace BattleEditor
             {
                 _dataTable.Rows[rowIndex][colIndex] = obj.ToString();
             }
+            ICell cell = GetCell(rowIndex + 2, colIndex);
+            SetCellValue(cell, obj);
         }
         public void SetCellValue(ICell cell, object obj)
         {
-            Debug.Log("SetCellValue:" + obj.ToString());
+//            Debug.Log("SetCellValue:" + obj.ToString());
             if (obj is int i)
             {
                 cell.SetCellValue(i);

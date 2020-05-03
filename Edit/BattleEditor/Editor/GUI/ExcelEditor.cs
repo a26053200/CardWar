@@ -55,8 +55,8 @@ namespace BattleEditor
         
         public void Save()
         {
-//            _excelReader?.Save();
-            _excelReader?.SaveDataTableToExcel();
+            _excelReader?.Save();
+//            _excelReader?.SaveDataTableToExcel();
         }
         
         public void DisplayRow(int rowIndex)
