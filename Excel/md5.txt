@@ -1,0 +1,9 @@
+Account.xlsx=abce80c0ca5ee13a947723fa4b9c3671
+Anim.xlsx=63fd04e9bf5ed279427b5a539c475a2e
+Avatar.xlsx=61c2d0b0b53296df093b93511ee9b998
+Battle.xlsx=6ef18a7cbb3fcdcbd8a8346a20c2256e
+BattleUnit.xlsx=c1f429ac2dbdbee72f7a27778430a9d3
+Card.xlsx=8bfe9a95756958ea115ced425f9cff36
+CheckPoint.xlsx=d2df8ef9ad9ec30294bcaeb12940c7b3
+Performance.xlsx=a936a8922206f45ad149c6a6d913074b
+Skill.xlsx=78fe8324e2700c58a67526880bb68487
