@@ -1,0 +1,29 @@
+﻿{
+	"id":{
+		"fieldType":"number"
+	},
+	"pid":{
+		"fieldType":"string"
+	},
+	"areaIndex":{
+		"fieldType":"number"
+	},
+	"areaType":{
+		"fieldType":"string"
+	},
+	"waveIndex":{
+		"fieldType":"number"
+	},
+	"waveMode":{
+		"fieldType":"string"
+	},
+	"bornMode":{
+		"fieldType":"string"
+	},
+	"battleUnit":{
+		"fieldType":"string"
+	},
+	"grid":{
+		"fieldType":"number"
+	}
+}

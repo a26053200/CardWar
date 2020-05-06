@@ -1,0 +1,17 @@
+﻿{
+	"id":{
+		"fieldType":"string"
+	},
+	"animName":{
+		"fieldType":"string"
+	},
+	"animSpeed":{
+		"fieldType":"number"
+	},
+	"accountPoint":{
+		"fieldType":"number"
+	},
+	"animEffect":{
+		"fieldType":"string"
+	}
+}

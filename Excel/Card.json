@@ -1,0 +1,26 @@
+﻿{
+	"id":{
+		"fieldType":"number"
+	},
+	"name":{
+		"fieldType":"string"
+	},
+	"type":{
+		"fieldType":"string"
+	},
+	"battleUnit":{
+		"fieldType":"string"
+	},
+	"star":{
+		"fieldType":"number"
+	},
+	"level":{
+		"fieldType":"number"
+	},
+	"rarity":{
+		"fieldType":"number"
+	},
+	"rarityLabel":{
+		"fieldType":"string"
+	}
+}

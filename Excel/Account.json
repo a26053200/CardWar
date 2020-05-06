@@ -1,0 +1,28 @@
+﻿{
+	"id":{
+		"fieldType":"string"
+	},
+	"name":{
+		"fieldType":"string"
+	},
+	"group":{
+		"fieldType":"string"
+	},
+	"type":{
+		"fieldType":"string"
+	},
+	"targetMode":{
+		"fieldType":"string",
+		"editorType":"PopupEnum",
+		"fieldEnum":["Self","Friend","Enemy","AOE","Pos"]
+	},
+	"gridSelect":{
+		"fieldType":"string"
+	},
+	"accountPoint":{
+		"fieldType":"number"
+	},
+	"damageAdd":{
+		"fieldType":"number"
+	}
+}
