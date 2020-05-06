@@ -15,22 +15,24 @@ namespace BattleEditor
         public static void ShowWnd()
         {
             Rect rect = new Rect(100,100,510,320);
-            BattleEditorWnd wnd = EditorWindow.GetWindow<BattleEditorWnd>(true, "战斗编辑器");
+            BattleEditorWnd wnd = EditorWindow.GetWindow<BattleEditorWnd>(false, "战斗编辑器");
             wnd.position = rect;
         }
 
         private readonly string[] _camp = {"Atk", "Def"};
         private const string SettingPath = "Assets/Edit/BattleEditorSetting.asset";
-        private BattleEditorSetting _setting;
+        public static BattleEditorSetting Setting;
 
         private List<string> excelFileList;
         private LuaReflect _luaReflect;
         private Dictionary<string, List<LuaReflect>> _luaReflectDict;
         private GameObject[] rootGameObjects;
+
+        
         private void Init()
         {
-            if (_setting == null)
-                _setting = BattleEditorUtility.LoadSetting(SettingPath);
+            if (Setting == null)
+                Setting = BattleEditorUtility.LoadSetting(SettingPath);
         }
 
         private void OnFocus()
@@ -65,6 +67,24 @@ namespace BattleEditor
             EditorGUILayout.Space();
             if (_luaReflect == null)
             {
+                List<string> excelFileList = BattleEditorUtility.GetExcelFileList(Setting.excelFolder);
+                for (int i = 0; i < excelFileList.Count; i++)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField(excelFileList[i]);
+                    if (NeedGenerateHeaderJson(excelFileList[i]) && GUILayout.Button("Generate"))
+                    {
+                        ExcelEditor  excelEditor = new ExcelEditor(excelFileList[i]);
+                        excelEditor.GenerateHeaderJson(false);
+                    }
+                    if (GUILayout.Button("Force Generate"))
+                    {
+                        ExcelEditor  excelEditor = new ExcelEditor(excelFileList[i]);
+                        excelEditor.GenerateHeaderJson(true);
+                    }
+                    EditorGUILayout.EndHorizontal();
+                }
+                EditorGUILayout.Space();
                 EditorGUILayout.HelpBox("请先启动游戏,并进入测试关卡", MessageType.Warning);
             }
             else
@@ -91,14 +111,20 @@ namespace BattleEditor
                     EditorGUILayout.EndHorizontal();
                 }
 
-                if (GUILayout.Button("Add Atk" + _camp[0]))
+                if (GUILayout.Button("Add Attacker" + _camp[0]))
                 {
-                    ListEditorWnd wnd = ListEditorWnd.Create(this, _luaReflect, _setting.battleUnitExcelPath);
-                    wnd.onRowSelect = delegate(string battleUnit, int index) { AddBattle(battleUnit); };
+                    TableEditorWnd wnd = TableEditorWnd.Create("Select Attacker",this, _luaReflect, Setting.battleUnitExcelPath);
+                    wnd.rowSelect = delegate(string battleUnit, int index) { AddBattle(battleUnit); };
                 }
             }
         }
 
+        bool NeedGenerateHeaderJson(string excelPath)
+        {
+            var jsonPath = Application.dataPath + excelPath.Replace(".xlsx", ".json");
+            return !File.Exists(jsonPath);
+        }
+        
         void DrawLuaReflect(List<LuaReflect> list, string camp, LuaReflect luaReflect)
         {
             EditorGUILayout.BeginHorizontal();
@@ -126,9 +152,9 @@ namespace BattleEditor
                 EditorGUILayout.LabelField(skillId.ToString());
                 if (GUILayout.Button("Edit"))
                 {
-                    RowEditorWnd wnd = RowEditorWnd.Create(this, luaReflect, _setting.skillExcelPath);
+                    RowEditorWnd wnd = RowEditorWnd.Create("Skill", this, luaReflect, Setting.skillExcelPath);
                     wnd.rowIndex = wnd.GetRowIndex("id", skillId.ToString());
-                    wnd.outputPath = $"{_setting.outputPath}/{Path.GetFileNameWithoutExtension(_setting.skillExcelPath)}.lua";
+                    wnd.luaKey = LuaKey.Skill;
                 }
                 if (GUILayout.Button("Test"))
                 {

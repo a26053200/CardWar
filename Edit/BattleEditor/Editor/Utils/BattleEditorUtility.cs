@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
+using LitJson;
 using UnityEditor;
 using Object = UnityEngine.Object;
 
@@ -27,6 +28,19 @@ namespace BattleEditor
             if(excelFileList.Count == 0)
                 Debug.LogErrorFormat("There is not any excel file in folder");
             return excelFileList;
+        }
+        
+        public static Dictionary<string, ExcelColHeader> GetExcelHeaderList(string excelPath)
+        {
+            var jsonPath = Application.dataPath + excelPath.Replace(".xlsx", ".json");
+            Dictionary<string, ExcelColHeader> excelColHeaders = new Dictionary<string, ExcelColHeader>();
+            JsonData jsonData = JsonMapper.ToObject(LoadText(jsonPath));
+            foreach (var key in jsonData.Keys)
+            {
+                ExcelColHeader header = new ExcelColHeader(key, jsonData[key]);
+                excelColHeaders.Add(key, header);
+            }
+            return excelColHeaders;
         }
         
         public static void DisplayProgress(int progress, int total, string file)
@@ -73,6 +87,14 @@ namespace BattleEditor
             Selection.activeObject = asset;
         }
 
+        public static string LoadText(string path)
+        {
+            if (File.Exists(path))
+                return File.ReadAllText(path);
+            else
+                return null;
+        }
+        
         public static void SaveUTF8TextFile(string fn, string txt)
         {
             byte[] data = System.Text.UTF8Encoding.UTF8.GetBytes(txt);
@@ -199,6 +221,20 @@ namespace BattleEditor
             System.Text.RegularExpressions.Regex rex=
                 new System.Text.RegularExpressions.Regex(@"^\d+$");
             return rex.IsMatch(message.ToString());
+        }
+        
+        public static string[] JsonToArray(JsonData json, string fieldName)
+        {
+            if(json.Keys.Contains(fieldName))
+            {
+                string[] list = new string[json[fieldName].Count];
+                for (int i = 0; i < list.Length; i++)
+                {
+                    list[i] = json[fieldName][i].ToString();
+                }
+                return list;
+            }
+            return null;
         }
     }
 }

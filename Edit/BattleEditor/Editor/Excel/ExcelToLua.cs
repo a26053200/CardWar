@@ -137,7 +137,7 @@ return Data
         }
         private static void Output(StringBuilder sb, string outputPath)
         {
-           Debug.Log(sb.ToString());
+//           Debug.Log(sb.ToString());
            if (!File.Exists(outputPath))
                Directory.Delete(outputPath);
            EditUtils.SaveUTF8TextFile(outputPath,sb.ToString());

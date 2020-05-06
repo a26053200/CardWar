@@ -1,4 +1,5 @@
-﻿using Framework;
+﻿using System.IO;
+using Framework;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -14,13 +15,13 @@ namespace BattleEditor
     {
         private ExcelEditor excelEditor;
         public int rowIndex = -1;
-        public string outputPath;
+        public string luaKey ;
         
-        public static RowEditorWnd Create(EditorWindow parent,  LuaReflect luaReflect, string excelPath)
+        public static RowEditorWnd Create(string title, EditorWindow parent, LuaReflect luaReflect, string excelPath)
         {
             Rect rect = new Rect(parent.position.x + parent.position.width + 20,100,440,1136 * 0.5f);
             EditorWindow.FocusWindowIfItsOpen(typeof(RowEditorWnd));
-            RowEditorWnd wnd = EditorWindow.GetWindow<RowEditorWnd>(true, "RowEditorWnd");
+            RowEditorWnd wnd = EditorWindow.CreateWindow<RowEditorWnd>(title);
             wnd.position = rect;
             wnd.ShowWnd(parent, luaReflect, excelPath);
             return wnd;
@@ -28,8 +29,9 @@ namespace BattleEditor
         
         public void ShowWnd(EditorWindow parent, LuaReflect luaReflect, string excelPath)
         {
-            base.ShowWnd(parent, luaReflect);
+            this.luaReflect = luaReflect;
             excelEditor = new ExcelEditor(excelPath);
+            excelEditor.LinkEditor = LinkEditor;
         }
 
         protected override void OnGUI()
@@ -51,28 +53,21 @@ namespace BattleEditor
             excelEditor?.Reload();
         }
         
-        public override void Save()
+        public override void Apply(int index)
         {
-            SaveBackToLua("Skill", excelEditor.GetRowJson(rowIndex));
+            SaveBackToLua(luaKey, excelEditor.GetRowJson(rowIndex));
             //重新导出lua
+            var outputPath = $"{BattleEditorWnd.Setting.outputPath}/{Path.GetFileNameWithoutExtension(excelEditor.excelReader.xlsxPath)}.lua";
             ExcelToLua.GenerateLua(excelEditor.excelReader, outputPath);
             //同时写回到Excel文件
             excelEditor?.Save();
         }
         
-        //保存回lua
-        private void SaveBackToLua(string key, string json)
-        {
-            Debug.Log(json);
-            var luaFunc = _luaReflect.luaFuncDict["JsonToLua"];
-            luaFunc.BeginPCall();
-            luaFunc.Push(key);
-            luaFunc.Push(json);
-            luaFunc.PCall();
-            luaFunc.EndPCall();
-        }
-        
         protected override void DrawPageButtons() { }
         
+        protected virtual void LinkEditor(ExcelColHeader excelColHeader, string vid)
+        {
+            ListEditorWnd.Create(excelColHeader.linkEditorLuaKey, this, excelColHeader, vid);
+        }
     }
 }

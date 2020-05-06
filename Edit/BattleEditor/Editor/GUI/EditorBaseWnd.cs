@@ -26,15 +26,9 @@ namespace BattleEditor
         private int totalPage = 0;
         private int currPage = 0;
         private int sortBy = 0;
-        
-        protected EditorWindow _parent;
-        protected LuaReflect _luaReflect;
 
-        public virtual void ShowWnd(EditorWindow parent, LuaReflect luaReflect)
-        {
-            _parent = parent;
-            _luaReflect = luaReflect;
-        }
+        public LuaReflect luaReflect;
+        
         public virtual void SetPageCount(int count)
         {
             _totalCount = count;
@@ -96,7 +90,7 @@ namespace BattleEditor
         {
             
         }
-        protected virtual void DrawBottom(bool showClose = false)
+        protected virtual void DrawBottom(bool showClose = false, int index = -1)
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("",GUILayout.ExpandWidth(true));
@@ -104,9 +98,9 @@ namespace BattleEditor
             {
                 Reload();
             }
-            if (GUILayout.Button("Save"))
+            if (GUILayout.Button("Apply"))
             {
-                Save();
+                Apply(index);
             }
             if (showClose && GUILayout.Button("Close"))
             {
@@ -119,13 +113,25 @@ namespace BattleEditor
         {
         }
         
-        public virtual void Save()
+        public virtual void Apply(int rowIndex)
         {
         }
         protected virtual void CloseWnd()
         {
             Close();
             DestroyImmediate(this);
+        }
+        
+        //保存回lua
+        protected void SaveBackToLua(string key, string json)
+        {
+            Debug.Log(json);
+            var luaFunc = luaReflect.luaFuncDict["JsonToLua"];
+            luaFunc.BeginPCall();
+            luaFunc.Push(key);
+            luaFunc.Push(json);
+            luaFunc.PCall();
+            luaFunc.EndPCall();
         }
     }
 }

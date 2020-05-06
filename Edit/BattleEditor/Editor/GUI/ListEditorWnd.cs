@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using Framework;
 using NPOI.SS.UserModel;
 using UnityEditor;
@@ -9,26 +11,28 @@ namespace BattleEditor
 {
     public class ListEditorWnd: EditorBaseWnd
     {
-        public delegate void OnRowSelect(string firstColValue, int rowIndex);
-
-        public OnRowSelect onRowSelect;
-        public static ListEditorWnd Create(EditorWindow parent,  LuaReflect luaReflect, string excelPath)
+        protected bool[] foldOpen;
+        protected int[] showRows;
+        protected ExcelEditor excelEditor;
+        private ExcelColHeader header;
+        public static ListEditorWnd Create(string title, EditorWindow parent, ExcelColHeader header, string value)
         {
-            Rect rect = new Rect(parent.position.x + parent.position.width + 20,parent.position.y,440,1136 * 0.5f);
-            ListEditorWnd wnd = EditorWindow.GetWindow<ListEditorWnd>(true, "BattleUnitEditor");
+            Rect rect = new Rect(parent.position.x + parent.position.width + 20, parent.position.y, 440, 1136 * 0.5f);
+            ListEditorWnd wnd = EditorWindow.CreateWindow<ListEditorWnd>( title);
             wnd.position = rect;
-            wnd.ShowWnd(parent, luaReflect, excelPath);
+            ExcelEditor excelEditor = new ExcelEditor(header.linkEditorUrl);
+            wnd.ShowWnd(excelEditor,excelEditor.GetRowIndexes(header.linkEditorField, value));
+            wnd.header = header;
             return wnd;
         }
         
-        private bool[] foldOpen;
-        private ExcelEditor excelEditor;
-        public void ShowWnd(EditorWindow parent, LuaReflect luaReflect, string excelPath)
+        protected void ShowWnd(ExcelEditor excelEditor, int[] showRows)
         {
-            base.ShowWnd(parent, luaReflect);
-            excelEditor = new ExcelEditor(excelPath);
-            foldOpen = new bool[excelEditor.dataTable.Rows.Count - 2];
-            base.SetPageCount(excelEditor.dataTable.Rows.Count - 2);
+            this.excelEditor = excelEditor;
+            excelEditor.LinkEditor = LinkEditor;
+            this.showRows = showRows;
+            foldOpen = new bool[showRows.Length];
+            base.SetPageCount(showRows.Length);
         }
         protected override void DrawPageContent(int index)
         {
@@ -46,22 +50,32 @@ namespace BattleEditor
         protected virtual void DrawFoldout(int index)
         {
             EditorGUILayout.BeginHorizontal();
-            var id = excelEditor.dataTable.Rows[index + 2][0].ToString();
+            var id = excelEditor.dataTable.Rows[showRows[index]][0].ToString();
             foldOpen[index] = EditorGUILayout.Foldout(foldOpen[index] , id);
-            if (GUILayout.Button("Select"))
-            {
-                onRowSelect?.Invoke(id, index);
-                Close();
-            }
             EditorGUILayout.EndHorizontal();
         }
         
         protected virtual void DrawFoldoutContent(int index)
         {
             EditorGUI.indentLevel++;
-            excelEditor.DisplayRow(index + 2);
+            excelEditor.DisplayRow(showRows[index]);
             EditorGUI.indentLevel--;
-            DrawBottom();
+            DrawBottom(false, index);
+        }
+
+        public override void Apply(int rowIndex)
+        {
+            SaveBackToLua(header.linkEditorLuaKey, excelEditor.GetRowJson(rowIndex));
+            //重新导出lua
+            var outputPath = $"{BattleEditorWnd.Setting.outputPath}/{Path.GetFileNameWithoutExtension(excelEditor.excelReader.xlsxPath)}.lua";
+            ExcelToLua.GenerateLua(excelEditor.excelReader, outputPath);
+            //同时写回到Excel文件
+            excelEditor?.Save();
+        }
+        
+        private void LinkEditor(ExcelColHeader excelColHeader, string vid)
+        {
+            Create(excelColHeader.linkEditorLuaKey,this, excelColHeader, vid);
         }
     }
 }

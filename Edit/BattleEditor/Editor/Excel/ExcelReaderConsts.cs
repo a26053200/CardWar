@@ -9,8 +9,13 @@
     
     public class UnityEditorType
     {
+        public const string Number = "Number";
         public const string String = "String";
-        public const string Slider = "Slider";
+        public const string Bool = "Bool";
+        public const string SliderInt = "SliderInt";
+        public const string SliderFloat = "SliderFloat";
         public const string PopupEnum = "PopupEnum";
     }
+    
+    
 }
