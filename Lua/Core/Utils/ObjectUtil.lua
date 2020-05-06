@@ -16,7 +16,7 @@ local ObjectUtil = {}
 
 --- 浅拷贝 table
 ---@param from table
----@param optional to table
+---@param to table
 ---@return table
 function ObjectUtil.copy(from, to)
     to = to or {}
@@ -52,6 +52,5 @@ function ObjectUtil.clone(target)
 
     return _copy(target)
 end
-
 
 return ObjectUtil

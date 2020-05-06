@@ -36,20 +36,26 @@ end
 ---@param unit Game.Modules.World.Items.BattleUnit
 ---@param jsonData string
 function LuaReflectHelper.JsonToLua(unit, key, jsonData)
-    if unit.luaReflect then
-        if key == Key.BattleUnitInfo then
-            unit.battleUnitVo.battleUnitInfo = json.decode(jsonData)
-        elseif key == Key.Avatar then
-            unit.battleUnitVo.avatarInfo = json.decode(jsonData)
-        elseif key == Key.Skill then
-            local skillInfo = json.decode(jsonData)
-            for i = 1, #unit.battleUnitVo.skills do
-                if skillInfo.id == unit.battleUnitVo.skills[i].skillInfo.id then
-                    unit.battleUnitVo.skills[i].skillInfo = skillInfo
-                    break;
-                end
-            end
-        end
+    local Config
+    if key == Key.BattleUnitInfo then
+        Config = BattleUnitInfo
+    elseif key == Key.Avatar then
+        Config = AvatarInfo
+    elseif key == Key.Skill then
+        Config = SkillConfig
+    elseif key == Key.Performance then
+        Config = PerformanceConfig
+    elseif key == Key.Anim then
+        Config = PerformanceConfig.animData
+    elseif key == Key.Account then
+        Config = AccountConfig
+    end
+    if Config then
+        local newData = json.decode(jsonData) ---@type AccountInfo
+        local oldData = Config.Get(newData.id)
+        ObjectUtil.copy(newData, oldData)
+    else
+        logError("No config with - " .. key)
     end
 end
 

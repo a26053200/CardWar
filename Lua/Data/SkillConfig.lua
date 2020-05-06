@@ -47,7 +47,6 @@ function SkillConfig.GetList(battleUnitName)
             skillInfo.triggerCondition = condition[1]
             skillInfo.triggerConditionParam = condition[2]
 
-
             local list = map[skillInfo.owner]
             if list == nil then
                 list = {}
