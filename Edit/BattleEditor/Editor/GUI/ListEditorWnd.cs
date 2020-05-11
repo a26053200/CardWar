@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
+﻿using System.IO;
 using Framework;
-using NPOI.SS.UserModel;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,27 +11,40 @@ namespace BattleEditor
         protected int[] showRows;
         protected ExcelEditor excelEditor;
         private ExcelColHeader header;
-        public static ListEditorWnd Create(string title, EditorWindow parent, ExcelColHeader header, string value)
+        public static ListEditorWnd Create(string title, EditorWindow parent, LuaReflect luaReflect, ExcelColHeader header, string vid)
         {
-            Rect rect = new Rect(parent.position.x + parent.position.width + 20, parent.position.y, 440, 1136 * 0.5f);
+            Rect rect = new Rect(parent.position.x + parent.position.width + 20, parent.position.y, parent.position.width, parent.position.height);
             ListEditorWnd wnd = EditorWindow.CreateWindow<ListEditorWnd>( title);
             wnd.position = rect;
             ExcelEditor excelEditor = new ExcelEditor(header.linkEditorUrl);
-            wnd.ShowWnd(excelEditor,excelEditor.GetRowIndexes(header.linkEditorField, value));
+            wnd.ShowWnd(excelEditor);
+            wnd.SetShowRows(excelEditor.GetRowIndexes(header.linkEditorField, vid), true);
             wnd.header = header;
+            wnd.luaReflect = luaReflect;
             return wnd;
         }
-        
-        protected void ShowWnd(ExcelEditor excelEditor, int[] showRows)
+        protected override void OnGUI()
+        {
+            base.OnGUI();
+            if(!EditorApplication.isPlaying)
+                Close();
+        }
+        protected virtual void ShowWnd(ExcelEditor excelEditor)
         {
             this.excelEditor = excelEditor;
             excelEditor.LinkEditor = LinkEditor;
+        }
+        protected void SetShowRows(int[] showRows, bool openFold)
+        {
             this.showRows = showRows;
             foldOpen = new bool[showRows.Length];
+            for (int i = 0; i < showRows.Length; i++)
+                foldOpen[i] = openFold;
             base.SetPageCount(showRows.Length);
         }
         protected override void DrawPageContent(int index)
         {
+            if(excelEditor == null) return;
             if (foldOpen[index])
             {
                 DrawFoldout(index);
@@ -73,9 +82,9 @@ namespace BattleEditor
             excelEditor?.Save();
         }
         
-        private void LinkEditor(ExcelColHeader excelColHeader, string vid)
+        protected override void OnSelect(string id, int rowIndex, int colIndex)
         {
-            Create(excelColHeader.linkEditorLuaKey,this, excelColHeader, vid);
+            excelEditor.excelReader.SetCellValue(id, rowIndex, colIndex);
         }
     }
 }

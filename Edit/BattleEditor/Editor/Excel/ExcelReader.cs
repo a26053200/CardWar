@@ -250,7 +250,7 @@ namespace BattleEditor
             ICell cell = GetCell(rowIndex + 2, colIndex);
             SetCellValue(cell, obj);
         }
-        public void SetCellValue(ICell cell, object obj)
+        private void SetCellValue(ICell cell, object obj)
         {
 //            Debug.Log("SetCellValue:" + obj.ToString());
             if (obj is int i)

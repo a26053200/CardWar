@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data;
 using Framework;
-using NPOI.SS.UserModel;
 using UnityEditor;
 using UnityEngine;
 
@@ -28,6 +26,7 @@ namespace BattleEditor
         private int sortBy = 0;
 
         public LuaReflect luaReflect;
+        public EditorBaseWnd childWnd;
         
         public virtual void SetPageCount(int count)
         {
@@ -61,14 +60,14 @@ namespace BattleEditor
             {
                 EditorGUILayout.BeginHorizontal();
                 {
-                    if (GUILayout.Button(ButtonTop,EditorStyles.toolbarButton, GUILayout.Width(ButtonWidth)))
+                    if (GUILayout.Button(ButtonTop,EditorStyles.miniButtonMid, GUILayout.Width(ButtonWidth)))
                         currPage = 0;
-                    if (GUILayout.Button(ButtonPre,EditorStyles.toolbarButton, GUILayout.Width(ButtonWidth)))
+                    if (GUILayout.Button(ButtonPre,EditorStyles.miniButtonMid, GUILayout.Width(ButtonWidth)))
                         currPage = Mathf.Max(0, currPage - 1);
                     EditorGUILayout.LabelField((currPage + 1) + "/" + totalPage, EditorStyles.centeredGreyMiniLabel,GUILayout.Width(ButtonWidth));
-                    if (GUILayout.Button(ButtonNext,EditorStyles.toolbarButton, GUILayout.Width(ButtonWidth)))
+                    if (GUILayout.Button(ButtonNext,EditorStyles.miniButtonMid, GUILayout.Width(ButtonWidth)))
                         currPage = Mathf.Min(totalPage - 1, currPage + 1);
-                    if (GUILayout.Button(ButtonBottom,EditorStyles.toolbarButton, GUILayout.Width(ButtonWidth)))
+                    if (GUILayout.Button(ButtonBottom,EditorStyles.miniButtonMid, GUILayout.Width(ButtonWidth)))
                         currPage = totalPage - 1;
                 }
                 EditorGUILayout.EndHorizontal();
@@ -132,6 +131,30 @@ namespace BattleEditor
             luaFunc.Push(json);
             luaFunc.PCall();
             luaFunc.EndPCall();
+        }
+        
+        protected void LinkEditor(ExcelColHeader excelColHeader, DataRowCollection rows, int rowIndex,int colIndex, bool showAll)
+        {
+            if(childWnd)
+                childWnd.Close();
+            string vid = rows?[rowIndex][colIndex].ToString();
+            if (showAll)
+            {
+                childWnd = SelectWnd.Create("Select " + excelColHeader.linkEditorLuaKey,this,  luaReflect, excelColHeader.linkEditorUrl);
+                ((SelectWnd) childWnd).SetSelectDelegate(delegate(string id) 
+                {  
+                    OnSelect(id, rowIndex, colIndex); 
+                });
+            }
+            else
+            {
+                childWnd = ListEditorWnd.Create(excelColHeader.linkEditorLuaKey,this, luaReflect, excelColHeader, vid);
+            }
+        }
+        
+        protected virtual void OnSelect(string id, int rowIndex, int colIndex)
+        {
+            
         }
     }
 }

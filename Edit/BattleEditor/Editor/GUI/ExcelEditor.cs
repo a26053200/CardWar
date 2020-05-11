@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using LitJson;
-using NPOI.SS.UserModel;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Windows;
@@ -16,7 +15,7 @@ namespace BattleEditor
     /// </summary> 
     public class ExcelEditor
     {
-        public delegate void OnLinkEditor(ExcelColHeader header, string vid);
+        public delegate void OnLinkEditor(ExcelColHeader header, DataRowCollection rows, int rowIndex,int colIndex, bool showAll);
         
         private string _excelPath;
         
@@ -60,12 +59,10 @@ namespace BattleEditor
             {
                 if (_dataTable.Columns[i].ColumnName == fieldName)
                 {
-                    for (int j = 0; j < _dataTable.Rows.Count; j++)
+                    for (int j = 2; j < _dataTable.Rows.Count; j++)
                     {
-                        if ((string) _dataTable.Rows[j][i] == value)
-                        {
+                        if (value == null || (string) _dataTable.Rows[j][i] == value)
                             indexes.Add(j);
-                        }
                     }
                     break;
                 }
@@ -96,9 +93,9 @@ namespace BattleEditor
                 var fieldType = _dataTable.Rows[0][i].ToString();
                 var fieldComment = _dataTable.Rows[1][i].ToString();
                 var header = _excelColHeaderDict[fieldName];
-                if (header.IsString())
+                if (header.IsEnum())
                 {
-                    DisplayString(fieldName, fieldComment, rowIndex,i, header);
+                    DisplayEnum(fieldName, fieldComment, rowIndex, i, header);
                 }else if (fieldType == FieldType.Number)
                 {
                     if(header.IsSliderFloat())
@@ -110,16 +107,16 @@ namespace BattleEditor
                 }else if (header.IsBool())
                 {
                     DisplayBool(fieldName, fieldComment, rowIndex, i);
-                }else if (header.IsEnum())
+                }else if (header.IsString())
                 {
-                    DisplayEnum(fieldName, fieldComment, rowIndex, i, header);
+                    DisplayString(fieldName, fieldComment, rowIndex,i, header);
                 }
             }
         }
 
         public string GetRowJson(int rowIndex)
         {
-            var json = BattleEditorUtility.DataRowToJson(_excelReader.dataTable.Columns,_excelReader.dataTable.Rows[rowIndex]);
+            var json = BattleEditorUtility.DataRowToJson(_excelReader.dataTable.Columns,_excelReader.dataTable.Rows[rowIndex + 2]);
             return json; 
         }
         
@@ -130,8 +127,13 @@ namespace BattleEditor
             var newValue = EditorGUILayout.TextField(new GUIContent(title,comment), value);
             if(value != newValue)
                 _excelReader.SetCellValue(newValue, rowIndex, colIndex);
-            if (!string.IsNullOrEmpty(header.linkEditorUrl) && GUILayout.Button("..."))
-                LinkEditor(header, newValue);
+            if (!string.IsNullOrEmpty(header.linkEditorUrl))
+            {
+                if (GUILayout.Button("edit", GUILayout.Width(50)))
+                    LinkEditor(header, _dataTable.Rows, rowIndex, colIndex, false);
+                if (GUILayout.Button("...", GUILayout.Width(50)))
+                    LinkEditor(header, _dataTable.Rows, rowIndex, colIndex,true);
+            }
             EditorGUILayout.EndHorizontal();
         }
         private void DisplayNumber(string title,string comment, int rowIndex,int colIndex, ExcelColHeader header)

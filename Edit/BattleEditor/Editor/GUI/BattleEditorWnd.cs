@@ -113,7 +113,7 @@ namespace BattleEditor
 
                 if (GUILayout.Button("Add Attacker" + _camp[0]))
                 {
-                    TableEditorWnd wnd = TableEditorWnd.Create("Select Attacker",this, _luaReflect, Setting.battleUnitExcelPath);
+                    SelectWnd wnd = SelectWnd.Create("Select Attacker",this, _luaReflect, Setting.battleUnitExcelPath);
                     wnd.rowSelect = delegate(string battleUnit, int index) { AddBattle(battleUnit); };
                 }
             }

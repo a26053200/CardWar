@@ -2,7 +2,6 @@
 using Framework;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace BattleEditor
 {
@@ -19,7 +18,7 @@ namespace BattleEditor
         
         public static RowEditorWnd Create(string title, EditorWindow parent, LuaReflect luaReflect, string excelPath)
         {
-            Rect rect = new Rect(parent.position.x + parent.position.width + 20,100,440,1136 * 0.5f);
+            Rect rect = new Rect(parent.position.x + parent.position.width + 20,parent.position.y, parent.position.width, parent.position.height);
             EditorWindow.FocusWindowIfItsOpen(typeof(RowEditorWnd));
             RowEditorWnd wnd = EditorWindow.CreateWindow<RowEditorWnd>(title);
             wnd.position = rect;
@@ -36,6 +35,7 @@ namespace BattleEditor
 
         protected override void OnGUI()
         {
+            if(excelEditor == null) return;
             base.OnGUI();
             DrawBottom(true);
         }
@@ -62,12 +62,11 @@ namespace BattleEditor
             //同时写回到Excel文件
             excelEditor?.Save();
         }
-        
-        protected override void DrawPageButtons() { }
-        
-        protected virtual void LinkEditor(ExcelColHeader excelColHeader, string vid)
+        protected override void OnSelect(string id, int rowIndex, int colIndex)
         {
-            ListEditorWnd.Create(excelColHeader.linkEditorLuaKey, this, excelColHeader, vid);
+            excelEditor.excelReader.SetCellValue(id, rowIndex, colIndex);
         }
+        protected override void DrawPageButtons() { }
+     
     }
 }
