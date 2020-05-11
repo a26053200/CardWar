@@ -60,6 +60,7 @@ function RoundBehavior:ManualAttack(camp, layoutIndex, skillName)
     if self:isRunning() then
         print("isRunning")
     else
+        print("Manual Attack - " .. skillName)
         self.manualCamp = camp
         self.manualLayoutIndex = layoutIndex
         self.manualSkillName = skillName

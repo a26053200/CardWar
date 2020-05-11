@@ -48,6 +48,7 @@ function BehaviorStrategyBase:AutoSelectSkill()
         if skill.isNecessary then --必然触发的技能
             self.canUseList:Clear()
             self.canUseList:Add(skill)
+            break;
         else
             if skill.skillInfo.skillType == SkillType.Passive then
                 -- do nothing
@@ -86,7 +87,9 @@ end
 function BehaviorStrategyBase:SetNecessarySkill(skillName)
     for i = 1, #self.skills do
         if self.skills[i].skillInfo.id == skillName then
+            print("Set Necessary Skill:" .. skillName)
             self.skills[i].isNecessary = true
+            break
         end
     end
 end

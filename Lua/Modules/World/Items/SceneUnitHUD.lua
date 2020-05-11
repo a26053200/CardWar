@@ -41,7 +41,8 @@ function SceneItemHUD:Ctor(battleUnit)
 end
 
 function SceneItemHUD:Init()
-    self.hpText = self.gameObject:GetText("Text")
+    self.text = self.gameObject:GetText("Text")
+    self.text.text = self.battleItemVo.battleUnitInfo.name
     self.hpMain = self.gameObject:GetImage("HpBar/main")
     self.hpSub = self.gameObject:GetImage("HpBar/sub")
     self.agMain = self.gameObject:GetImage("AgBar/main")
@@ -54,7 +55,7 @@ function SceneItemHUD:Init()
 end
 
 function SceneItemHUD:Update()
-    self.hpText.text = self.battleItemVo.curHp .. "/" .. self.battleItemVo.maxHp
+    --self.text.text = self.battleItemVo.curHp .. "/" .. self.battleItemVo.maxHp
     local hpPer = Mathf.Max(0, self.battleItemVo.curHp / self.battleItemVo.maxHp)
     local agPer = Mathf.Max(0, self.battleItemVo.curAnger / self.battleItemVo.maxAnger)
     self.hpMain.fillAmount = hpPer

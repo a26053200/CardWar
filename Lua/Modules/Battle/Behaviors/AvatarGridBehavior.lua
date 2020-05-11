@@ -110,7 +110,7 @@ function AvatarGridBehavior:OnSkillUse(behavior, skill)
     --if target and target.layoutGrid then
     --    target.layoutGrid:SetAttackSelect(true)
     --end
-    --self.battleUnit:_debug(string.format("use skill:[%s]",skill.skillInfo.name))
+    self.battleUnit:_debug(string.format("use skill:[%s]",skill.skillInfo.id))
     self.battleUnit.accountCtrl:Account(skill,
             Handler.New(function()
                 behavior:NextState()

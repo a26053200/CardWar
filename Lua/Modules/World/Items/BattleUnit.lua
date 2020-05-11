@@ -68,9 +68,12 @@ end
 function BattleItem:Born(callback)
     LuaReflectHelper.PushVo(self, self.battleUnitVo)
     self.luaReflect:PushLuaFunction("JsonToLua", handler(self,self.JsonToLua))
-    self:PlayBorn()
+    self:PlayBorn(function()
+        if callback then callback() end
+        self:PlayIdle()
+        self:OnBorn()
+    end)
     self:SetRenderEnabled(true)
-    self:OnBorn(callback)
 end
 
 function BattleItem:JsonToLua(key, json)

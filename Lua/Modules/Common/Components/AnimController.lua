@@ -281,6 +281,7 @@ end
 --动作进度
 ---@param animInfo AnimInfo
 function AnimController:PlayAnimInfo(animInfo, animOverCallback)
+    --print("play anim info:" .. animInfo.id)
     self:PlayAnim(animInfo.animName, animOverCallback, animInfo.animSpeed,0.1)
 end
 

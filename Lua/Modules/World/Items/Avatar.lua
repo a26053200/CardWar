@@ -100,8 +100,10 @@ function Avatar:SetRenderEnabled(enabled)
     end
 end
 
-function Avatar:PlayBorn()
-    self.animCtrl:PlayAnim(self.avatarInfo.animBorn)
+function Avatar:PlayBorn(callback)
+    self.animCtrl:PlayAnim(self.avatarInfo.animBorn, Handler.New(function()
+        if callback then callback() end
+    end , self))
 end
 
 function Avatar:PlayIdle()
