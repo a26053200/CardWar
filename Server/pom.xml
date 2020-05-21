@@ -9,9 +9,7 @@
   <version>1.0</version>
   <modules>
     <module>core</module>
-    <module>lobby</module>
-    <module>room</module>
-    <module>robot</module>
+    <module>game</module>
   </modules>
 
   <packaging>pom</packaging>

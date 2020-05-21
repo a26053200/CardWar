@@ -1,7 +1,0 @@
-00:34:40.928 INFO  com.betel.database.RedisClient 39 connectDB - Redis Database connection success! connection info:127.0.0.1:6379
-00:34:41.615 INFO  com.betel.servers.node.NodeServer 69 run - LobbyServer :8092 startup successful!
-00:34:41.617 INFO  com.betel.servers.node.NodeServer$2 93 run - Node Server Client is connecting center server:BalanceServer
-00:34:41.625 INFO  com.betel.servers.forward.ServerClient 41 run - Server Client boot start...
-00:34:41.642 INFO  com.betel.handler.ByteBufHandler 34 handlerAdded - Client ip:null is added
-00:34:41.649 INFO  com.betel.handler.ByteBufHandler 61 channelActive - Client ip:/192.168.31.174:8090 is online
-00:34:41.649 INFO  com.betel.servers.forward.ServerClient 59 run - Client connect BalanceServer successful!!!
