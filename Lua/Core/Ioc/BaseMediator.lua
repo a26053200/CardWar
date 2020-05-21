@@ -19,7 +19,7 @@ local BaseMediator = class("BaseMediator",LuaMonoBehaviour)
 function BaseMediator:Ctor()
     BaseMediator.super.Ctor(self)
     self.layer = UILayer.LAYER_DEPTH_UI --默认在深度排序层级
-    self.netWorkListener = NetworkListener.New()
+    self.netWorkListener = NetworkListener.New(true)
     self.clickEventMap = {} --主动注册的点击事件
     self.removeCallback = nil
     self.autoClickEventObjs = {} --自动注册的点击事件

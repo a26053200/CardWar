@@ -4,13 +4,18 @@
 --- DateTime: 2019/1/10 0:17
 ---
 
+---@class Action
+---@field server string
+---@field action string
+---@field fields string
+
 local Action = {}
 
 Action.LoginAccount = { server = "AccountServer", action = "account@account_login", fields = "username,password" }
 
 Action.LoginRegister = { server = "AccountServer", action = "account@account_register", fields = "username,password" }
 
-Action.LoginLobbyServer = { server = "LobbyServer", action = "player@player_login", fields = "aid,token"}
+Action.LoginGameServer = { server = "GameServer", action = "player@player_login", fields = "aid,token"}
 
 Action.FetchRandomName = { server = "LobbyServer", action = "role@role_random_name", fields = "playerId"}
 

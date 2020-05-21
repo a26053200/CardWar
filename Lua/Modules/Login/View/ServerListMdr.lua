@@ -4,6 +4,11 @@
 --- DateTime: 2018-07-13-00:00:21
 ---
 
+---@class ServerInfo
+---@field name string
+---@field host string
+---@field port port
+
 local ServerItem = require("Game.Modules.Login.View.ServerItem")
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.Login.View.ServerListMdr : Game.Core.Ioc.BaseMediator
@@ -22,22 +27,22 @@ end
 function ServerListMdr:InitSrvList()
     self.srvList = BaseList.New(self.gameObject:FindChild("ListView"),ServerItem)
     self.srvList:SetData(List.New(self.loginModel.serverList))
-    self.srvList.eventDispatcher:AddEventListener(ListViewEvent.ItemClick,handler(self,self.onSrvItemClick))
+    self.srvList.eventDispatcher:AddEventListener(ListViewEvent.ItemClick,self.onSrvItemClick, self)
 end
 
-function ServerListMdr:onSrvItemClick(data)
+function ServerListMdr:onSrvItemClick(event, data)
     log(string.format("nmgr:Connect %s:%s",data.host,data.port))
-    --nmgr:Connect("127.0.0.1", 8082,
-    --        handler(self,self.onConnectSuccess),
-    --        handler(self,self.onConnectFail))
-    nmgr:Connect(data.host, tonumber(data.port),
+    nmgr:Connect("127.0.0.1", 8082,
             handler(self,self.onConnectSuccess),
             handler(self,self.onConnectFail))
+    --nmgr:Connect(data.host, tonumber(data.port),
+    --        handler(self,self.onConnectSuccess),
+    --        handler(self,self.onConnectFail))
 end
 
 function ServerListMdr:onConnectSuccess()
     print("onConnectSuccess")
-    self.loginService:LoginLobbyServer(
+    self.loginService:LoginGameServer(
             self.loginModel.aid,
             self.loginModel.token,
             handler(self,self.onLoginLobbyServerSuccess),

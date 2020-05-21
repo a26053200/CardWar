@@ -46,16 +46,16 @@ end
 function LoginMdr:validityInput(callback)
     self:fetchInput()
     if string.isNullOrEmpty(self.username) or string.isNullOrEmpty(self.password) then
-        print("Please input id and pw")
+        Tips.Show("Please input id and pw")
     else
         callback()
     end
 end
 
 function LoginMdr:On_Click_BtnRegister()
-    --self:validityInput(function()
-    --    self.loginService:HttpRegister(self.username, self.password, handler(self,self.OnHttpRegister))
-    --end)
+    self:validityInput(function()
+        self.loginService:HttpRegister(self.username, self.password, handler(self,self.OnHttpRegister))
+    end)
     --Alert.Show("AlertAlertAlert",function ()
     --    Tips.Show("TipsTipsTips")
     --end)
@@ -67,16 +67,15 @@ function LoginMdr:On_Click_BtnRegister()
 end
 
 function LoginMdr:On_Click_BtnLogin()
-    --self:validityInput(function()
-    --    self.loginService:HttpLogin(self.username, self.password, handler(self,self.OnHttpLogin))
-    --end)
-    World.EnterScene(WorldConfig.World)
-    self:fetchInput()
-    vmgr:UnloadView(ViewConfig.Login)
+    self:validityInput(function()
+        self.loginService:HttpLogin(self.username, self.password, handler(self,self.OnHttpLogin))
+    end)
+    --World.EnterScene(WorldConfig.World)
+    --self:fetchInput()
+    --vmgr:UnloadView(ViewConfig.Login)
 end
 
 function LoginMdr:OnHttpRegister(data)
-    Tips.Show(data.msg)
     self:saveInput()
 end
 

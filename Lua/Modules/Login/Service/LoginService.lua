@@ -10,8 +10,9 @@ local BaseService = require("Game.Core.Ioc.BaseService")
 ---@field loginModel Game.Modules.Login.Model.LoginModel
 ---@field roleModel Game.Modules.Role.Model.RoleModel
 local LoginService = class("LoginService", BaseService)
---local Url = "http://127.0.0.1:8081"      --本地测试服
-local Url = "http://118.31.3.216:8081"    --阿里云服务器
+local Url = "http://127.0.0.1:8081"      --本地测试服
+--local Url = "http://192.168.31.174:8081"      --局域网测试服
+--local Url = "http://118.31.3.216:8081"    --阿里云服务器
 
 function LoginService:Ctor()
     --nmgr:AddPush(Action.PlayerInfo, handler(self,self.OnPlayerInfo))
@@ -24,15 +25,15 @@ function LoginService:HttpRegister(username, password, callback)
 end
 
 function LoginService:HttpLogin(username, password, callback)
-    nmgr:HttpRqst(Url, Action.LoginAccount, { username, password }, function(response)
-        self.loginModel.serverList = response.data.srvList.list
-        self.loginModel.aid = response.data.aid
-        self.loginModel.token = response.data.token
-        callback(response.data)
+    self:HttpRequest(Url, Action.LoginAccount, { username, password }, function(data)
+        self.loginModel.serverList = data.srvList.list
+        self.loginModel.aid = data.aid
+        self.loginModel.token = data.token
+        callback(data)
     end)
 end
 
-function LoginService:LoginLobbyServer(aid, token, callback, failCallback)
+function LoginService:LoginGameServer(aid, token, callback, failCallback)
     self:JsonRequest(Action.LoginLobbyServer, { aid, token }, function(data)
         self.loginModel.playerId = data.playerId
         if data.roleInfo ~= nil then

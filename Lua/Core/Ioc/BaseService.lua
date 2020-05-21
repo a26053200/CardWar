@@ -4,12 +4,39 @@
 --- DateTime: 2018/6/19 18:18
 ---
 
+---@class Response
+---@field server string
+---@field data table
+---@field action string
+---@field state SessionState
+
 local LuaObject = require('Betel.LuaObject')
 ---@class Game.Core.Ioc.BaseService : Betel.LuaObject
 local BaseService = class("BaseService", LuaObject)
 
 function BaseService:Ctor()
 
+end
+
+--Http请求
+---@param url string
+---@param action Action
+---@param params table
+---@param callback fun()
+function BaseService:HttpRequest(url, action, params, callback)
+    ---@param response Response
+    nmgr:HttpRqst(url, action, params, function(response)
+        if response.state == SessionState.Success then
+            callback(response.data)
+        elseif response.state == SessionState.Fail then
+            --Tips.Show(response.data.msg)
+        else
+            logError("Unknown session error:" .. response.state)
+        end
+        if response and response.data and response.data.msg then
+            Tips.Show(response.data.msg)
+        end
+    end)
 end
 
 --Json请求

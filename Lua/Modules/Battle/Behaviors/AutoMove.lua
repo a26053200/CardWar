@@ -75,7 +75,7 @@ function AutoMove:DoPathFound(destPos, smooth, overCallback, stepCallback)
     else
         self.aStar.RequestPath(self.avatar.transform.position, destPos, 5, 10, smooth,function(path)
             self.lookPoints = path.lookPoints
-            self:OnPathFound(Tools.ToLuaArray(path.lookPoints))
+            self:OnPathFound(Tool.ToLuaArray(path.lookPoints))
         end,function()
             if self.overCallback then
                 self.overCallback:Execute(false)

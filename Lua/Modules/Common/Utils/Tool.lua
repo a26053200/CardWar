@@ -358,4 +358,42 @@ function Tool.GetLightObj(unityScene, lightName)
     return lightObj
 end
 
+---@param eventData UnityEngine.EventSystems.PointerEventData
+---@param rect UnityEngine.RectTransform
+---@param uiCamera UnityEngine.Camera
+---@return UnityEngine.Vector3
+function Tool.WorldToUILocalPosition(eventData, rect, uiCamera)
+    local camera = UnityEngine.Camera.main
+    local outPos = Vector2.zero;
+    local clickIn = UnityEngine.RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            rect,
+            eventData.position,
+            uiCamera,
+            outPos);
+    print(tostring(clickIn))
+    return Vector3.New(outPos.x,outPos.y,0)
+end
+
+
+---@param clickPos UnityEngine.Vector2
+---@param uiCanvas UnityEngine.Canvas
+---@param targetRect UnityEngine.RectTransform
+---@return UnityEngine.Vector3
+function Tool.ScreenToUICanvasPoint(clickPos, uiCanvas, targetRect)
+    local s2v = uiCanvas.worldCamera:ScreenToViewportPoint(clickPos)
+    local w2v = uiCanvas.worldCamera:WorldToViewportPoint(targetRect.position)
+    local v2w = uiCanvas.worldCamera:ViewportToWorldPoint(Vector3.New(s2v.x,s2v.y,w2v.z))
+    return v2w
+end
+
+--c# 数组转化为Lua表
+---@param array any
+function Tool.ToLuaArray(array)
+    local list = {}
+    for i = 0, array.Length - 1 do
+        table.insert(list, array[i])
+    end
+    return list
+end
+
 return Tool

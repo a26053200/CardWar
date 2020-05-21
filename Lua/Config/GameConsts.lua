@@ -31,6 +31,15 @@ CardRarity =
 --- 支撑系统
 ---=========================================================================
 
+--服务器返回会话状态
+---@class SessionState
+SessionState =
+{
+    Success = 0,
+    Fail = 1,
+    UnknowError = 2
+}
+
 --预加载类型
 PreLoadType =
 {

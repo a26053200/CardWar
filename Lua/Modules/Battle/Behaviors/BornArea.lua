@@ -85,7 +85,7 @@ function BornArea:GetNearestTarget(src)
         for j = 1, #wave.monsterList do
             local monster = wave.monsterList[j]
             local d = AStarTools.DistanceNode(src.node, monster.node)
-            if d ~= 0 and d < min and not Tools.isNullObj(monster) and not monster:IsDead() then
+            if d ~= 0 and d < min and not monster:IsDead() then
                 min = d
                 target = monster
             end

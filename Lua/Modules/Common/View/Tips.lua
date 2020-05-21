@@ -6,7 +6,7 @@
 
 local UIView = require('Game.Modules.Common.View.UIView')
 ---@class Game.Modules.Common.View.Tips : Game.Modules.Common.View.UIView
----@field Show function<msg:string , delay:number>
+---@field Show fun(msg:string , delay:number)
 ---@field gameObject UnityEngine.GameObject
 local Tips = class("Tips",UIView)
 

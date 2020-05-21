@@ -8,6 +8,7 @@
 local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@class Game.Modules.Login.Model.LoginModel : Game.Core.Ioc.BaseModel
 ---@field loginService Game.Modules.Login.Service.LoginService
+---@field serverList table<number, ServerInfo>
 local LoginModel = class("LoginModel",BaseModel)
 
 function LoginModel:Ctor()
