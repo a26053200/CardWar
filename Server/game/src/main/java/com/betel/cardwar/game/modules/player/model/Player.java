@@ -15,6 +15,18 @@ public class Player extends BaseVo
     private String lastLoginTime;//最后一次登陆时间
     private String lastLogoutTime;//最后一次登出时间
 
+    @Override
+    public String getVid()
+    {
+        return accountId;
+    }
+
+    @Override
+    public void setVid(String accountId)
+    {
+        this.accountId = accountId;
+    }
+
     public String getAccountId()
     {
         return accountId;

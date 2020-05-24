@@ -11,10 +11,6 @@
 
     <artifactId>game</artifactId>
 
-    <name>game</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
-
     <dependencies>
         <dependency>
             <groupId>com.cardwar.server</groupId>
@@ -22,19 +18,8 @@
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>2.0.0</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-        <!-- spring-redis -->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
-            <version>1.0.0.RELEASE</version>
-        </dependency>
+
+
     </dependencies>
 
     <build>

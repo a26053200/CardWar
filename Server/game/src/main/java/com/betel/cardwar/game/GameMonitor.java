@@ -1,12 +1,12 @@
 package com.betel.cardwar.game;
 
-import com.betel.cardwar.game.consts.Bean;
+import com.betel.cardwar.game.modules.player.model.Player;
 import com.betel.cardwar.game.modules.player.service.PlayerBusiness;
 import com.betel.cardwar.game.modules.player.service.PlayerService;
+import com.betel.cardwar.game.modules.role.model.Role;
 import com.betel.cardwar.game.modules.role.service.RoleBusiness;
 import com.betel.cardwar.game.modules.role.service.RoleService;
 import com.betel.config.ServerConfigVo;
-import com.betel.servers.action.ImplAction;
 import com.betel.servers.node.NodeServerMonitor;
 import com.betel.utils.BytesUtils;
 import io.netty.buffer.ByteBuf;
@@ -28,8 +28,8 @@ public class GameMonitor extends NodeServerMonitor
         PlayerService playerService = (PlayerService) applicationContext.getBean("playerService");
         RoleService roleService     = (RoleService) applicationContext.getBean("roleService");
 
-        actionMap.put(Bean.PLAYER,      new ImplAction<>(this, Bean.PLAYER, new PlayerBusiness(), playerService));
-        actionMap.put(Bean.ROLE,        new ImplAction<>(this, Bean.ROLE, new RoleBusiness(), roleService));
+        pushService(Player.class, new PlayerBusiness(), playerService);
+        pushService(Role.class, new RoleBusiness(), roleService);
     }
 
     @Override

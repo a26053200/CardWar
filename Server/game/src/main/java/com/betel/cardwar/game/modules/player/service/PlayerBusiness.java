@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.betel.asd.Business;
 import com.betel.cardwar.game.consts.Action;
-import com.betel.cardwar.game.consts.Bean;
-import com.betel.cardwar.game.consts.Field;
 import com.betel.cardwar.game.modules.player.model.Player;
 import com.betel.cardwar.game.modules.role.model.Role;
 import com.betel.session.Session;
@@ -27,6 +25,12 @@ public class PlayerBusiness extends Business<Player>
 
     final static Logger logger = LogManager.getLogger(PlayerBusiness.class);
 
+    class Field
+    {
+        public static final String ACCOUNT_ID = "aid";
+        public static final String PLAYER_ID = "playerId";
+        public static final String ROLE_INFO        = "roleInfo";
+    }
     private static final String ViceKey = "accountId";
 
     @Override
@@ -68,12 +72,12 @@ public class PlayerBusiness extends Business<Player>
         Player player;
         List<Player> playerList = service.getViceEntities(aid);
         if (playerList.size() > 0)
-        {
+        {//非首次登陆
             player = playerList.get(0);
             player.setLastLoginTime(TimeUtils.now2String());
         }
         else
-        {//自动注册
+        {//首次登陆该游戏服务器,自动注册
             player = new Player();
             long playerId = IdGenerator.getInstance().nextId();
             player.setId(Long.toString(playerId));
@@ -83,7 +87,7 @@ public class PlayerBusiness extends Business<Player>
             player.setLastLogoutTime(TimeUtils.now2String());
             service.addEntity(player);
         }
-        List<Role> roleList = monitor.getAction(Bean.ROLE).getService().getViceEntities(player.getId());
+        List roleList = monitor.getAction(Role.class).getService().getViceEntities(player.getId());
         if(roleList.size() > 0)
             sendJson.put(Field.ROLE_INFO, JSON.toJSON(roleList.get(0)));//默认选择第一个角色
         sendJson.put(Field.PLAYER_ID, player.getId());

@@ -17,19 +17,19 @@
   <!-- FIXME change it to the project's website -->
   <!--<url>http://www.example.com</url> -->
 
-  <repositories>
-    <repository>
-      <id>aliyun maven</id>
-      <name>aliyun maven</name>
-      <url>http://118.31.3.216/maven/respositor/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
+  <!--<repositories>-->
+    <!--<repository>-->
+      <!--<id>aliyun maven</id>-->
+      <!--<name>aliyun maven</name>-->
+      <!--<url>http://118.31.3.216/maven/respositor/</url>-->
+      <!--<releases>-->
+        <!--<enabled>true</enabled>-->
+      <!--</releases>-->
+      <!--<snapshots>-->
+        <!--<enabled>false</enabled>-->
+      <!--</snapshots>-->
+    <!--</repository>-->
+  <!--</repositories>-->
 
   <build>
     <plugins>
@@ -49,6 +49,13 @@
       <groupId>betel-zhengnan</groupId>
       <artifactId>betel-server</artifactId>
       <version>1.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
     </dependency>
   </dependencies>
 </project>

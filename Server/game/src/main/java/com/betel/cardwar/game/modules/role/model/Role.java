@@ -1,7 +1,6 @@
 package com.betel.cardwar.game.modules.role.model;
 
 import com.betel.asd.BaseVo;
-import com.betel.cardwar.game.consts.RoomRoleState;
 
 /**
  * @ClassName: Role
@@ -20,8 +19,19 @@ public class Role extends BaseVo
     private int sex; //性别 0男 1女 其他未知
     private int headIcon;//头像 0使用微信头像 其他 自定义
     private int roomPos;                //所在房间的位置
-    private RoomRoleState roleState;    //角色当前状态
     private boolean isRobot;
+
+    @Override
+    public String getVid()
+    {
+        return playerId;
+    }
+
+    @Override
+    public void setVid(String playerId)
+    {
+        this.playerId = playerId;
+    }
 
     public String getChannelId()
     {
@@ -111,16 +121,6 @@ public class Role extends BaseVo
     public void setRoomPos(int roomPos)
     {
         this.roomPos = roomPos;
-    }
-
-    public RoomRoleState getRoleState()
-    {
-        return roleState;
-    }
-
-    public void setRoleState(RoomRoleState roleState)
-    {
-        this.roleState = roleState;
     }
 
     public boolean isRobot()

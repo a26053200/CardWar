@@ -31,6 +31,12 @@ public class RoleBusiness extends Business<Role>
         static final String role_random_name3 = "role_random_name3";
     }
 
+    class Field
+    {
+        public static final String PLAYER_ID        = "playerId";
+        public static final String ROLE_NAME        = "roleName";
+        public static final String ROLE_INFO        = "roleInfo";
+    }
 
     final static Logger logger = LogManager.getLogger(RoleBusiness.class);
 
@@ -93,7 +99,7 @@ public class RoleBusiness extends Business<Role>
             return;
         }
         //正式创建
-        Player player = (Player) monitor.getAction(Bean.PLAYER).getService().getEntity(playerId);
+        Player player = (Player) monitor.getAction(Player.class).getService().getEntity(playerId);
         Role role = new Role();
         long roleId = IdGenerator.getInstance().nextId();
         role.setId(Long.toString(roleId));
@@ -119,8 +125,8 @@ public class RoleBusiness extends Business<Role>
         }
         else
         {
-            logger.info(String.format(ReturnCode.Register_not_yet + ":%s", roleName));
-            rspdMessage(session, ReturnCode.Register_not_yet);
+            logger.info(String.format(ReturnCode.Error_already_exits + ":%s", roleName));
+            rspdMessage(session, ReturnCode.Error_already_exits);
             return false;
         }
     }

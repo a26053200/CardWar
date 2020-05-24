@@ -32,19 +32,4 @@ public class ServerName
      * 大厅服务器
      */
     public static final String GAME_SERVER = "GameServer";
-
-    /**
-     * 大厅服务器
-     */
-    public static final String LOBBY_SERVER = "LobbyServer";
-
-    /**
-     * 房间服务器
-     */
-    public static final String ROOM_SERVER = "RoomServer";
-
-    /**
-     * 机器人服务器
-     */
-    public static final String ROBOT_SERVER = "RobotServer";
 }
