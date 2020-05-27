@@ -14,6 +14,8 @@ import com.betel.utils.IdGenerator;
 import com.betel.utils.TimeUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -40,33 +42,6 @@ public class RoleBusiness extends Business<Role>
 
     final static Logger logger = LogManager.getLogger(RoleBusiness.class);
 
-    private static final String ViceKey = "playerId";
-
-    @Override
-    public String getViceKey()
-    {
-        return ViceKey;
-    }
-
-    @Override
-    public void Handle(Session session, String method)
-    {
-        switch (method)
-        {
-            case Action.ROLE_RANDOM_NAME:
-                randomName(session);
-                break;
-            case Action.ROLE_CREATE:
-                roleCreate(session);
-                break;
-            case Action.ROLE_ENTER_GAME:
-                enterGame(session);
-                break;
-            default:
-                logger.error("Unknown action:" + method);
-                break;
-        }
-    }
 
     //产生随机名字
     private void randomName(Session session)

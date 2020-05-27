@@ -22,7 +22,6 @@ import java.util.List;
  */
 public class PlayerBusiness extends Business<Player>
 {
-
     final static Logger logger = LogManager.getLogger(PlayerBusiness.class);
 
     class Field
@@ -31,34 +30,11 @@ public class PlayerBusiness extends Business<Player>
         public static final String PLAYER_ID = "playerId";
         public static final String ROLE_INFO        = "roleInfo";
     }
-    private static final String ViceKey = "accountId";
-
-    @Override
-    public String getViceKey()
-    {
-        return ViceKey;
-    }
-
-    @Override
-    public void Handle(Session session, String method)
-    {
-        switch (method)
-        {
-            case Action.PLAYER_LOGIN:
-                login(session);
-                break;
-            case Action.PLAYER_LOGOUT:
-                logout(session);
-                break;
-            default:
-                logger.error("Unknown action:" + method);
-                break;
-        }
-    }
 
     //处理登录游戏服务器
     private void login(Session session)
     {
+        String timeNow = TimeUtils.now2String();
         String aid = session.getRecvJson().getString(Field.ACCOUNT_ID);
         /*
         //验证登陆有效性
@@ -74,7 +50,7 @@ public class PlayerBusiness extends Business<Player>
         if (playerList.size() > 0)
         {//非首次登陆
             player = playerList.get(0);
-            player.setLastLoginTime(TimeUtils.now2String());
+            player.setLastLoginTime(timeNow);
         }
         else
         {//首次登陆该游戏服务器,自动注册
@@ -82,16 +58,15 @@ public class PlayerBusiness extends Business<Player>
             long playerId = IdGenerator.getInstance().nextId();
             player.setId(Long.toString(playerId));
             player.setAccountId(aid);
-            player.setRegisterTime(TimeUtils.now2String());
-            player.setLastLoginTime(TimeUtils.now2String());
-            player.setLastLogoutTime(TimeUtils.now2String());
+            player.setRegisterTime(timeNow);
+            player.setLastLoginTime(timeNow);
+            player.setLastLogoutTime(timeNow);
             service.addEntity(player);
         }
-        List roleList = monitor.getAction(Role.class).getService().getViceEntities(player.getId());
-        if(roleList.size() > 0)
-            sendJson.put(Field.ROLE_INFO, JSON.toJSON(roleList.get(0)));//默认选择第一个角色
+
         sendJson.put(Field.PLAYER_ID, player.getId());
         action.rspdClient(session, sendJson);
+        service.updateEntity(player);
     }
 
     //登出游戏服务器

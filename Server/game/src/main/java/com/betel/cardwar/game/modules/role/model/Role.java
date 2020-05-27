@@ -1,6 +1,7 @@
 package com.betel.cardwar.game.modules.role.model;
 
 import com.betel.asd.BaseVo;
+import com.betel.cardwar.game.consts.GameConsts;
 
 /**
  * @ClassName: Role
@@ -10,17 +11,25 @@ import com.betel.asd.BaseVo;
  */
 public class Role extends BaseVo
 {
-    private String channelId;               //频道ID 用于推送
-    private String playerId;
-    private String registerTime; //第一次创建角色时间
-    private String lastLoginTime;//最后一次登陆时间
-    private String lastLogoutTime;//最后一次登出时间
-    private String roleName;    //角色名
-    private int sex; //性别 0男 1女 其他未知
-    private int headIcon;//头像 0使用微信头像 其他 自定义
-    private int roomPos;                //所在房间的位置
-    private boolean isRobot;
+    private String channelId;       //频道ID 用于推送
+    private String playerId;        //所属Player玩家id
+    private String registerTime;    //第一次创建角色时间
+    private String lastLoginTime;   //最后一次登陆时间
+    private String lastLogoutTime;  //最后一次登出时间
 
+    //游戏业务逻辑
+    private String roleName;        //角色名
+    private int sex;                //性别 0男 1女 其他未知
+    private int headIcon;           //头像
+    private int strength;           //体力
+    private int[] money;            //货币
+
+    public Role()
+    {
+        money = new int[GameConsts.MaxMoneyTypeNum];
+        for (int i = 0;i<money.length;i++)
+            money[i] = 0;
+    }
     @Override
     public String getVid()
     {
@@ -113,23 +122,23 @@ public class Role extends BaseVo
         this.headIcon = headIcon;
     }
 
-    public int getRoomPos()
+    public int getStrength()
     {
-        return roomPos;
+        return strength;
     }
 
-    public void setRoomPos(int roomPos)
+    public void setStrength(int strength)
     {
-        this.roomPos = roomPos;
+        this.strength = strength;
     }
 
-    public boolean isRobot()
+    public int[] getMoney()
     {
-        return isRobot;
+        return money;
     }
 
-    public void setRobot(boolean robot)
+    public void setMoney(int[] money)
     {
-        isRobot = robot;
+        this.money = money;
     }
 }
