@@ -10,8 +10,8 @@ local BaseService = require("Game.Core.Ioc.BaseService")
 ---@field loginModel Game.Modules.Login.Model.LoginModel
 ---@field roleModel Game.Modules.Role.Model.RoleModel
 local LoginService = class("LoginService", BaseService)
-local Url = "http://127.0.0.1:8081"      --本地测试服
---local Url = "http://192.168.31.174:8081"      --局域网测试服
+--local Url = "http://127.0.0.1:8081"      --本地测试服
+local Url = "http://192.168.31.174:8081"      --局域网测试服
 --local Url = "http://118.31.3.216:8081"    --阿里云服务器
 
 function LoginService:Ctor()
@@ -19,40 +19,50 @@ function LoginService:Ctor()
 end
 
 function LoginService:HttpRegister(username, password, callback)
-    nmgr:HttpRqst(Url, Action.LoginRegister, { username, password }, function(response)
+    nmgr.httpUrl = Url
+    self:HttpRequest(Action.LoginRegister, { username, password }, function(response)
         callback(response.data)
     end)
 end
 
 function LoginService:HttpLogin(username, password, callback)
-    self:HttpRequest(Url, Action.LoginAccount, { username, password }, function(data)
+    nmgr.httpUrl = Url
+    self:HttpRequest(Action.LoginAccount, { username, password }, function(data)
+        log("login success! - aid:{0} token:{1}", data.aid, data.token)
         self.loginModel.serverList = data.srvList.list
         self.loginModel.aid = data.aid
         self.loginModel.token = data.token
-        callback(data)
+
+        local gameServer = self.loginModel.serverList[1]
+        nmgr.httpUrl = string.format("http://%s:%s",gameServer.host,gameServer.port)
+        self:LoginGameServer(data.aid, data.token, callback)
     end)
 end
 
 function LoginService:LoginGameServer(aid, token, callback, failCallback)
-    self:JsonRequest(Action.LoginLobbyServer, { aid, token }, function(data)
+    self:HttpRequest(Action.LoginGameServer, { aid, token }, function(data)
         self.loginModel.playerId = data.playerId
-        if data.roleInfo ~= nil then
+        if data.roleInfo == nil then--创建角色
+            self:FetchRandomName(callback)
+        else
             self.roleModel.roleId = data.roleInfo.id
             self.roleModel.mainRoleInfo = RoleVo.New(data.roleInfo)
+            callback(data)
         end
-        callback(data)
     end, failCallback)
 end
-
+--随机获取角色名
 function LoginService:FetchRandomName(callback)
-    self:JsonRequest(Action.FetchRandomName, { self.loginModel.playerId }, function(data)
-        callback(data)
+    self:HttpRequest(Action.FetchRandomName, { self.loginModel.playerId }, function(data)
+        log("角色随机名字:"..data.roleName)
+        self:CreateRole(data.roleName, callback)
     end)
 end
-
+--创建角色
 function LoginService:CreateRole(roleName, callback)
-    self:JsonRequest(Action.CreateRole, { self.loginModel.playerId, roleName }, function(data)
+    self:HttpRequest(Action.CreateRole, { self.loginModel.playerId, roleName }, function(data)
         if data.roleInfo ~= nil then
+            self.roleModel.roleId = data.roleInfo.id
             self.roleModel.mainRoleInfo = RoleVo.New(data.roleInfo)
         end
         callback(data)
@@ -60,7 +70,7 @@ function LoginService:CreateRole(roleName, callback)
 end
 
 function LoginService:EnterGame(callback)
-    self:JsonRequest(Action.EnterGame, { self.loginModel.playerId }, function(data)
+    self:HttpRequest(Action.EnterGame, { self.loginModel.playerId }, function(data)
         callback(data)
     end)
 end

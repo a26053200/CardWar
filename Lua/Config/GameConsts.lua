@@ -530,5 +530,12 @@ RoundMode =
     Auto = "Auto",      --自动
     Manual = "Manual",  --手动
 }
+
+Money =
+{
+    GameMoney   = 1,    --游戏币
+    PayMoney    = 2,    --充值币
+    FreeMoney   = 3,    --免费币
+}
 local GameConst = {}
 return GameConst

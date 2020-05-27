@@ -23,9 +23,9 @@ end
 ---@param action Action
 ---@param params table
 ---@param callback fun()
-function BaseService:HttpRequest(url, action, params, callback)
+function BaseService:HttpRequest(action, params, callback)
     ---@param response Response
-    nmgr:HttpRqst(url, action, params, function(response)
+    nmgr:HttpRqst(action, params, function(response)
         if response.state == SessionState.Success then
             callback(response.data)
         elseif response.state == SessionState.Fail then

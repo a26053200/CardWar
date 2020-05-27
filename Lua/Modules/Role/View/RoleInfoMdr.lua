@@ -13,7 +13,7 @@ local RoleInfoMdr = class("RoleInfoMdr",BaseMediator)
 
 function RoleInfoMdr:OnInit()
     self.mainRoleInfo = self.roleModel.mainRoleInfo;
-    self.gameObject:GetText("TextRoleName").text = self.mainRoleInfo.roleName
+    self.gameObject:GetText("RoleName/Text").text = self.mainRoleInfo.roleName
 end
 
 function RoleInfoMdr:Update()

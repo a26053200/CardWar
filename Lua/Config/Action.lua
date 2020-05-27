@@ -11,17 +11,17 @@
 
 local Action = {}
 
-Action.LoginAccount = { server = "AccountServer", action = "account@account_login", fields = "username,password" }
+Action.LoginAccount = { server = "AccountServer", action = "account@accountLogin", fields = "username,password" }
 
-Action.LoginRegister = { server = "AccountServer", action = "account@account_register", fields = "username,password" }
+Action.LoginRegister = { server = "AccountServer", action = "account@accountRegister", fields = "username,password" }
 
-Action.LoginGameServer = { server = "GameServer", action = "player@player_login", fields = "aid,token"}
+Action.LoginGameServer = { server = "GameServer", action = "player@login", fields = "aid,token"}
 
-Action.FetchRandomName = { server = "LobbyServer", action = "role@role_random_name", fields = "playerId"}
+Action.FetchRandomName = { server = "GameServer", action = "role@randomName", fields = "playerId"}
 
-Action.CreateRole = { server = "LobbyServer", action = "role@role_create", fields = "playerId,roleName"}
+Action.CreateRole = { server = "GameServer", action = "role@roleCreate", fields = "playerId,roleName"}
 
-Action.EnterGame = { server = "LobbyServer", action = "role@role_enter_game", fields = "playerId" }
+Action.EnterGame = { server = "GameServer", action = "role@enterGame", fields = "playerId" }
 
 Action.JoinMatch = { server = "LobbyServer", action = "match@join_match", fields = "roleId,game,gameMode" }
 

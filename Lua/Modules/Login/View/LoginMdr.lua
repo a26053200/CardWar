@@ -81,10 +81,10 @@ end
 
 function LoginMdr:OnHttpLogin(data)
     self:saveInput()
-    log("aid:{0} token:{1}", data.aid, data.token)
     vmgr:UnloadView(ViewConfig.Login)
-    vmgr:LoadView(ViewConfig.ServerList)
+    --vmgr:LoadView(ViewConfig.ServerList)
     --vmgr:LoadView(ViewConfig.Notice)
+    World.EnterScene(WorldConfig.World)
 end
 
 return LoginMdr

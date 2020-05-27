@@ -5,9 +5,10 @@
 ---
 
 ---@class ServerInfo
+---@field type string
 ---@field name string
 ---@field host string
----@field port port
+---@field port number
 
 local ServerItem = require("Game.Modules.Login.View.ServerItem")
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
@@ -31,13 +32,15 @@ function ServerListMdr:InitSrvList()
 end
 
 function ServerListMdr:onSrvItemClick(event, data)
-    log(string.format("nmgr:Connect %s:%s",data.host,data.port))
-    nmgr:Connect("127.0.0.1", 8082,
-            handler(self,self.onConnectSuccess),
-            handler(self,self.onConnectFail))
-    --nmgr:Connect(data.host, tonumber(data.port),
-    --        handler(self,self.onConnectSuccess),
-    --        handler(self,self.onConnectFail))
+    log(string.format("nmgr:Connect %s:%s - %s",data.host,data.port,data.type))
+    if data.type == "http" then
+        nmgr.httpUrl = string.format("http://%s:%s",data.host,data.port)
+        self:onConnectSuccess()
+    else
+        nmgr:Connect(data.host, tonumber(data.port),
+                handler(self,self.onConnectSuccess),
+                handler(self,self.onConnectFail))
+    end
 end
 
 function ServerListMdr:onConnectSuccess()
