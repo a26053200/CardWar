@@ -13,6 +13,20 @@ MonoBehaviour:
   m_Name: BattleEditorSetting
   m_EditorClassIdentifier: 
   excelFolder: /../Excel/
-  outputPath: Assets/Lua/Game/Data/Excel/
+  luaExportList:
+  - Account.xlsx
+  - Anim.xlsx
+  - Avatar.xlsx
+  - Battle.xlsx
+  - BattleUnit.xlsx
+  - Card.xlsx
+  - CheckPoint.xlsx
+  - Performance.xlsx
+  - Skill.xlsx
+  luaOutputPath: /Lua/Game/Data/Excel/
+  jsonExportList:
+  - RoleLevel.xlsx
+  - RoleName.xlsx
+  jsonOutputPath: D:/work/WorkSpace_Java/CardWarServer/game/src/main/resources/
   battleUnitExcelPath: /../Excel/BattleUnit.xlsx
   skillExcelPath: /../Excel/Skill.xlsx

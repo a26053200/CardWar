@@ -17,14 +17,11 @@ namespace BattleEditor
     /// </summary> 
     public static class BattleEditorUtility
     {
-        public static List<string> GetExcelFileList(string excelFolder)
+        public static List<string> GetExcelFileList(string excelFolder, string[] fileList)
         {
             List<string> excelFileList = new List<string>();
-            DirectoryInfo dirs = new DirectoryInfo(Application.dataPath + excelFolder);
-            FileInfo[] files = dirs.GetFiles("*.xlsx", SearchOption.AllDirectories);
-        
-            for (int i = 0; i < files.Length; i++)
-                excelFileList.Add(Path.Combine(excelFolder, files[i].Name));
+            for (int i = 0; i < fileList.Length; i++)
+                excelFileList.Add(Path.Combine(excelFolder, fileList[i]));
             if(excelFileList.Count == 0)
                 Debug.LogErrorFormat("There is not any excel file in folder");
             return excelFileList;
@@ -34,11 +31,19 @@ namespace BattleEditor
         {
             var jsonPath = Application.dataPath + excelPath.Replace(".xlsx", ".json");
             Dictionary<string, ExcelColHeader> excelColHeaders = new Dictionary<string, ExcelColHeader>();
-            JsonData jsonData = JsonMapper.ToObject(LoadText(jsonPath));
-            foreach (var key in jsonData.Keys)
+            var json = LoadText(jsonPath);
+            if (!string.IsNullOrEmpty(json))
             {
-                ExcelColHeader header = new ExcelColHeader(key, jsonData[key]);
-                excelColHeaders.Add(key, header);
+                JsonData jsonData = JsonMapper.ToObject(json);
+                foreach (var key in jsonData.Keys)
+                {
+                    ExcelColHeader header = new ExcelColHeader(key, jsonData[key]);
+                    excelColHeaders.Add(key, header);
+                }
+            }
+            else
+            {
+                Debug.LogError($"{excelPath} has not header json file");
             }
             return excelColHeaders;
         }

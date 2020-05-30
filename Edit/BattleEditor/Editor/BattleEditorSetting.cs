@@ -6,7 +6,10 @@ namespace BattleEditor
     public class BattleEditorSetting : ScriptableObject
     {
         public string excelFolder = "";
-        public string outputPath = "";
+        public string[] luaExportList;
+        public string luaOutputPath = "";
+        public string[] jsonExportList;
+        public string jsonOutputPath = "";
         public string battleUnitExcelPath;
         public string skillExcelPath;
     }

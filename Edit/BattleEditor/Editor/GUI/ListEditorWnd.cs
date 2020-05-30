@@ -76,8 +76,8 @@ namespace BattleEditor
         {
             SaveBackToLua(header.linkEditorLuaKey, excelEditor.GetRowJson(rowIndex));
             //重新导出lua
-            var outputPath = $"{BattleEditorWnd.Setting.outputPath}/{Path.GetFileNameWithoutExtension(excelEditor.excelReader.xlsxPath)}.lua";
-            ExcelToLua.GenerateLua(excelEditor.excelReader, outputPath);
+            var outputPath = $"{BattleEditorWnd.Setting.luaOutputPath}/{Path.GetFileNameWithoutExtension(excelEditor.excelReader.xlsxPath)}.lua";
+            new ExcelToLua().GenerateLua(excelEditor.excelReader, outputPath);
             //同时写回到Excel文件
             excelEditor?.Save();
         }

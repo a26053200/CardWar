@@ -67,7 +67,7 @@ namespace BattleEditor
             EditorGUILayout.Space();
             if (_luaReflect == null)
             {
-                List<string> excelFileList = BattleEditorUtility.GetExcelFileList(Setting.excelFolder);
+                List<string> excelFileList = BattleEditorUtility.GetExcelFileList(Setting.excelFolder, Setting.luaExportList);
                 for (int i = 0; i < excelFileList.Count; i++)
                 {
                     EditorGUILayout.BeginHorizontal();
