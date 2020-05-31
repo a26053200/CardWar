@@ -43,7 +43,7 @@ namespace BattleEditor
             }
             else
             {
-                Debug.LogError($"{excelPath} has not header json file");
+                //Debug.LogError($"{excelPath} has not header json file");
             }
             return excelColHeaders;
         }
