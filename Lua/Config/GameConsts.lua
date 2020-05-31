@@ -531,6 +531,7 @@ RoundMode =
     Manual = "Manual",  --手动
 }
 
+---@class Money
 Money =
 {
     GameMoney   = 1,    --游戏币

@@ -6,16 +6,42 @@
 
 local BaseVo = require("Game.Core.BaseVo")
 ---@class Game.Modules.Role.Vo.RoleVo : Game.Core.BaseVo
+---@field New fun(): Game.Modules.Role.Vo.RoleVo
+---@field id string
+---@field playerId string
+---@field roleName string
+---@field sex number
+---@field headIcon number
+---@field curStrength number
+---@field maxStrength number
+---@field level number
+---@field curExp number
+---@field maxExp number
+---@field ce number --角色的总战斗力 Combat Effectiveness
+---@field gameMoney number --游戏币
+---@field payMoney number --充值币
+---@field freeMoney number --免费币
+---@field clientOnlineTime number --角色上线游戏时间(受到游戏帧频影响)(单位:毫秒)
+---@field clientOnlineRealTime number --角色上线实际时间(单位:毫秒)
 local RoleVo = class("RoleVo",BaseVo)
 
 function RoleVo:Ctor(roleInfo)
     self.id = roleInfo.id;
     self.playerId = roleInfo.playerId
     self.roleName = roleInfo.roleName
-    self.onlineTime = roleInfo.onlineTime
+    self.sex = roleInfo.sex
+    self.headIcon = roleInfo.headIcon
+    self.curStrength = roleInfo.curStrength
+    self.maxStrength = roleInfo.maxStrength
+    self.level = roleInfo.level
+    self.curExp = roleInfo.curExp
+    self.maxExp = roleInfo.maxExp
+    self.ce = roleInfo.ce
+    self.gameMoney = roleInfo.money[Money.GameMoney]
+    self.payMoney = roleInfo.money[Money.PayMoney]
+    self.freeMoney = roleInfo.money[Money.FreeMoney]
 
-    self.clientOnlineTime = Time.time--角色上线游戏时间(受到游戏帧频影响)(单位:毫秒)
-    self.clientOnlineRealTime = Time.realtimeSinceStartup--角色上线实际时间(单位:毫秒)
+
 end
 
 function RoleVo:GetTotalOnlineTime()

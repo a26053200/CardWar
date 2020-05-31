@@ -8,17 +8,39 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.Role.View.RoleInfoMdr : Game.Core.Ioc.BaseMediator
 ---@field roleService Game.Modules.Role.Service.RoleService
 ---@field roleModel Game.Modules.Role.Model.RoleModel
----@field mainRoleInfo Game.Modules.Role.Vo.RoleVo
+---@field roleInfo Game.Modules.Role.Vo.RoleVo
 local RoleInfoMdr = class("RoleInfoMdr",BaseMediator)
 
+local HeadIcon =
+{
+    [1] = "Atlas/HeadIcon/gongsunzan.png",
+    [2] = "Atlas/HeadIcon/guanyu.png",
+    [3] = "Atlas/HeadIcon/lvbu.png",
+    [4] = "Atlas/HeadIcon/pangtong.png",
+    [5] = "Atlas/HeadIcon/sunce.png",
+    [6] = "Atlas/HeadIcon/sunquan.png",
+    [7] = "Atlas/HeadIcon/zhaoyun.png",
+    [8] = "Atlas/HeadIcon/tongyong.png",
+}
+
 function RoleInfoMdr:OnInit()
-    self.mainRoleInfo = self.roleModel.mainRoleInfo;
-    self.gameObject:GetText("RoleName/Text").text = self.mainRoleInfo.roleName
+    self.roleInfo = self.roleModel.mainRoleInfo;
+    self.gameObject:GetText("RoleName/Text").text = self.roleInfo.roleName
+    self.gameObject:GetText("SampleInfo/RoleName/Text").text = self.roleInfo.roleName
+    self.gameObject:GetImage("SampleInfo/Head/Mask/Icon").sprite = Res.LoadSprite(HeadIcon[self.roleInfo.headIcon])
+    self.gameObject:GetText("SampleInfo/Lv/Level").text = self.roleInfo.level
+
+    self.exp = self:InitSlider("SampleInfo/Exp/Slider", 0, self.roleInfo.maxExp, self.roleInfo.curExp)
+    self.sp = self:InitSlider("SampleInfo/Sp/Slider", 0, self.roleInfo.maxStrength, self.roleInfo.curStrength)
 end
 
-function RoleInfoMdr:Update()
-    local totalTime = Mathf.Floor(self.mainRoleInfo:GetRealTotalOnlineTime())
-    self.gameObject:GetText("TextOnlineTime").text = "在线:"..totalTime .. "秒"
+---@return UnityEngine.UI.Slider
+function RoleInfoMdr:InitSlider(path, minValue, maxValue, value)
+    local slider = self.gameObject:GetSlider(path)
+    slider.minValue = minValue
+    slider.maxValue = maxValue
+    slider.value = value
+    return slider
 end
 
 return RoleInfoMdr

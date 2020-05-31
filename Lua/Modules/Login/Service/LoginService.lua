@@ -42,13 +42,8 @@ end
 function LoginService:LoginGameServer(aid, token, callback, failCallback)
     self:HttpRequest(Action.LoginGameServer, { aid, token }, function(data)
         self.loginModel.playerId = data.playerId
-        if data.roleInfo == nil then--创建角色
-            self:FetchRandomName(callback)
-        else
-            self.roleModel.roleId = data.roleInfo.id
-            self.roleModel.mainRoleInfo = RoleVo.New(data.roleInfo)
-            callback(data)
-        end
+        self:EnterGame(callback)
+
     end, failCallback)
 end
 --随机获取角色名
@@ -62,8 +57,7 @@ end
 function LoginService:CreateRole(roleName, callback)
     self:HttpRequest(Action.CreateRole, { self.loginModel.playerId, roleName }, function(data)
         if data.roleInfo ~= nil then
-            self.roleModel.roleId = data.roleInfo.id
-            self.roleModel.mainRoleInfo = RoleVo.New(data.roleInfo)
+            self:OnRecvRoleInfo(data)
         end
         callback(data)
     end, roleName)
@@ -71,8 +65,20 @@ end
 
 function LoginService:EnterGame(callback)
     self:HttpRequest(Action.EnterGame, { self.loginModel.playerId }, function(data)
-        callback(data)
+        if data.roleInfo == nil then--创建角色
+            self:FetchRandomName(callback)
+        else
+            self:OnRecvRoleInfo(data)
+            callback(data)
+        end
     end)
+end
+
+function LoginService:OnRecvRoleInfo(data)
+    self.roleModel.roleId = data.roleInfo.id
+    self.roleModel.mainRoleInfo = RoleVo.New(data.roleInfo)
+    self.roleModel.mainRoleInfo.clientOnlineTime = Time.time
+    self.roleModel.mainRoleInfo.clientOnlineRealTime = Time.realtimeSinceStartup
 end
 
 ---push

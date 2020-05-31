@@ -17,11 +17,11 @@ Action.LoginRegister = { server = "AccountServer", action = "account@accountRegi
 
 Action.LoginGameServer = { server = "GameServer", action = "player@login", fields = "aid,token"}
 
+Action.EnterGame = { server = "GameServer", action = "role@enterGame", fields = "playerId" }
+
 Action.FetchRandomName = { server = "GameServer", action = "role@randomName", fields = "playerId"}
 
 Action.CreateRole = { server = "GameServer", action = "role@roleCreate", fields = "playerId,roleName"}
-
-Action.EnterGame = { server = "GameServer", action = "role@enterGame", fields = "playerId" }
 
 Action.JoinMatch = { server = "LobbyServer", action = "match@join_match", fields = "roleId,game,gameMode" }
 
