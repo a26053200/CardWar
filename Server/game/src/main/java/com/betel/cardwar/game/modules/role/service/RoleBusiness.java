@@ -4,18 +4,17 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.betel.asd.Business;
 import com.betel.cardwar.game.consts.*;
+import com.betel.cardwar.game.modules.ModuleConfig;
 import com.betel.cardwar.game.modules.player.model.Player;
 import com.betel.cardwar.game.modules.role.model.Role;
+import com.betel.cardwar.game.modules.role.model.RoleLevel;
 import com.betel.framework.utils.MathUtils;
-import com.betel.database.RedisKeys;
 import com.betel.session.Session;
 import com.betel.session.SessionState;
 import com.betel.utils.IdGenerator;
 import com.betel.utils.TimeUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -26,13 +25,6 @@ import java.util.List;
  */
 public class RoleBusiness extends Business<Role>
 {
-    private class RoleRandom
-    {
-        static final String role_random_name1 = "role_random_name1";
-        static final String role_random_name2 = "role_random_name2";
-        static final String role_random_name3 = "role_random_name3";
-    }
-
     class Field
     {
         public static final String PLAYER_ID        = "playerId";
@@ -42,13 +34,12 @@ public class RoleBusiness extends Business<Role>
 
     final static Logger logger = LogManager.getLogger(RoleBusiness.class);
 
-
     //产生随机名字
     private void randomName(Session session)
     {
-        List<String> nameList1 = monitor.getDB().lrange(RoleRandom.role_random_name1, 0, -1);
-        List<String> nameList2 = monitor.getDB().lrange(RoleRandom.role_random_name2, 0, -1);
-        List<String> nameList3 = monitor.getDB().lrange(RoleRandom.role_random_name3, 0, -1);
+        List<String> nameList1 = ModuleConfig.getRoleName(0);
+        List<String> nameList2 = ModuleConfig.getRoleName(1);
+        List<String> nameList3 = ModuleConfig.getRoleName(2);
 
         String name1 = nameList1.get(MathUtils.randomInt(0, nameList1.size()));
         String name2 = nameList2.get(MathUtils.randomInt(0, nameList2.size()));
@@ -66,24 +57,32 @@ public class RoleBusiness extends Business<Role>
         String playerId = session.getRecvJson().getString(Field.PLAYER_ID);
         //先检测是否有重名的
         String roleName = session.getRecvJson().getString(Field.ROLE_NAME);
-        if (!roleNameValid(session, roleName))
+        List<Role> roleList = getRoleList(session);
+        if (roleList.size() > 0)
         {//角色名未通过检查
-            //推送失败
             session.setState(SessionState.Fail);
-            action.rspdClient(session);
+            rspdMessage(session, ReturnCode.Error_already_role);
             return;
         }
         //正式创建
         Player player = (Player) monitor.getAction(Player.class).getService().getEntity(playerId);
         Role role = new Role();
+        List<RoleLevel> roleLevels = ModuleConfig.getRoleLevelList();
+        RoleLevel roleLevel = roleLevels.get(1); //默认1级
         long roleId = IdGenerator.getInstance().nextId();
         role.setId(Long.toString(roleId));
         role.setPlayerId(player.getId());
         role.setRoleName(roleName);
-        role.setHeadIcon(MathUtils.randomInt(1,6));
-        role.setRegisterTime(TimeUtils.now2String());
-        role.setLastLoginTime(TimeUtils.now2String());
-        role.setLastLogoutTime(TimeUtils.now2String());
+        role.setHeadIcon(MathUtils.randomInt(1,7));
+        role.setRegisterTime(now());
+        role.setLastLoginTime(now());
+        role.setLastLogoutTime(now());
+
+        role.setLevel(1);
+        role.setCurStrength(roleLevel.strength);
+        role.setMaxStrength(roleLevel.strength);
+        //role.setCurExp(0);
+        role.setMaxExp(roleLevel.needExp);
         service.addEntity(role);
         JSONObject sendJson = new JSONObject();
         sendJson.put(Field.ROLE_INFO, JSON.toJSON(role));
@@ -91,37 +90,34 @@ public class RoleBusiness extends Business<Role>
         action.rspdClient(session, sendJson);
     }
 
-    private boolean roleNameValid(Session session, String roleName)
-    {
-        String roleId = monitor.getDB().get(Field.ROLE_NAME + RedisKeys.SPLIT + roleName);
-        if (roleId == null)
-        {//角色名还未被使用
-            return true;
-        }
-        else
-        {
-            logger.info(String.format(ReturnCode.Error_already_exits + ":%s", roleName));
-            rspdMessage(session, ReturnCode.Error_already_exits);
-            return false;
-        }
-    }
-
     private void enterGame(Session session)
     {
-        String playerId = session.getRecvJson().getString(Field.PLAYER_ID);
-        List<Role> roleList = service.getViceEntities(playerId);
+        List<Role> roleList = getRoleList(session);
         if (roleList.size() > 0)
         {
+            Role role = roleList.get(0);
+            logger.info(role.getRoleName() + " 进入游戏");
+            role.setLastLoginTime(now());
+            service.updateEntity(role);
             JSONObject sendJson = new JSONObject();
-            sendJson.put(Field.ROLE_INFO, JSON.toJSON(roleList.get(0)));//默认选择第一个角色
+            sendJson.put(Field.ROLE_INFO, JSON.toJSON(role));//默认选择第一个角色
             //推送玩家信息
             action.rspdClient(session, sendJson);
         }
         else
         {
             //推送玩家失败
-            session.setState(SessionState.Fail);
+            //session.setState(SessionState.Fail);
+            rspdMessage(session, ReturnCode.Error_no_role);
             action.rspdClient(session);
         }
     }
+
+    private List<Role> getRoleList(Session session)
+    {
+        String playerId = session.getRecvJson().getString(Field.PLAYER_ID);
+        List<Role> roleList = service.getViceEntities(playerId);
+        return roleList;
+    }
+
 }

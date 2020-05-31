@@ -1,10 +1,18 @@
 package com.betel.cardwar.game.modules.player.service;
 
+import com.betel.asd.BaseVo;
+import com.betel.asd.RedisDao;
 import com.betel.cardwar.game.modules.player.model.Player;
 import com.betel.cardwar.game.modules.player.model.PlayerDao;
 import com.betel.spring.IRedisService;
+import com.betel.utils.DBUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +24,12 @@ public class PlayerService implements IRedisService<Player>
 {
     @Autowired
     protected PlayerDao playerDao;
+
+    @Override
+    public RedisDao<Player> getDao()
+    {
+        return playerDao;
+    }
 
     @Override
     public void setTableName(String s)

@@ -1,7 +1,10 @@
 package com.betel.cardwar.game.modules.role.model;
 
-import com.betel.asd.BaseVo;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.betel.asd.interfaces.IVo;
 import com.betel.cardwar.game.consts.GameConsts;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @ClassName: Role
@@ -9,20 +12,29 @@ import com.betel.cardwar.game.consts.GameConsts;
  * @Author: zhengnan
  * @Date: 2019/1/19 22:50
  */
-public class Role extends BaseVo
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Role implements IVo
 {
-    private String channelId;       //频道ID 用于推送
-    private String playerId;        //所属Player玩家id
+    @JSONField(serialize=false)
     private String registerTime;    //第一次创建角色时间
+    @JSONField(serialize=false)
     private String lastLoginTime;   //最后一次登陆时间
+    @JSONField(serialize=false)
     private String lastLogoutTime;  //最后一次登出时间
 
     //游戏业务逻辑
+    private String id;
+    private String playerId;        //所属Player玩家id
     private String roleName;        //角色名
     private int sex;                //性别 0男 1女 其他未知
     private int headIcon;           //头像
-    private int strength;           //体力
-    private int[] money;            //货币
+    private int curStrength;            //体力
+    private int maxStrength;  //当前等级最大体力
+    private int[] money;                //货币
+    private int level;                  //等级
+    private long curExp;                //当前经验
+    private long maxExp;      //升级所需最大经验
+    private long ce;            //角色的总战斗力 Combat Effectiveness
 
     public Role()
     {
@@ -30,6 +42,19 @@ public class Role extends BaseVo
         for (int i = 0;i<money.length;i++)
             money[i] = 0;
     }
+
+    @Override
+    public String getId()
+    {
+        return id;
+    }
+
+    @Override
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
     @Override
     public String getVid()
     {
@@ -40,16 +65,6 @@ public class Role extends BaseVo
     public void setVid(String playerId)
     {
         this.playerId = playerId;
-    }
-
-    public String getChannelId()
-    {
-        return channelId;
-    }
-
-    public void setChannelId(String channelId)
-    {
-        this.channelId = channelId;
     }
 
     public String getPlayerId()
@@ -122,14 +137,24 @@ public class Role extends BaseVo
         this.headIcon = headIcon;
     }
 
-    public int getStrength()
+    public int getCurStrength()
     {
-        return strength;
+        return curStrength;
     }
 
-    public void setStrength(int strength)
+    public void setCurStrength(int curStrength)
     {
-        this.strength = strength;
+        this.curStrength = curStrength;
+    }
+
+    public int getMaxStrength()
+    {
+        return maxStrength;
+    }
+
+    public void setMaxStrength(int maxStrength)
+    {
+        this.maxStrength = maxStrength;
     }
 
     public int[] getMoney()
@@ -140,5 +165,45 @@ public class Role extends BaseVo
     public void setMoney(int[] money)
     {
         this.money = money;
+    }
+
+    public int getLevel()
+    {
+        return level;
+    }
+
+    public void setLevel(int level)
+    {
+        this.level = level;
+    }
+
+    public long getCurExp()
+    {
+        return curExp;
+    }
+
+    public void setCurExp(long curExp)
+    {
+        this.curExp = curExp;
+    }
+
+    public long getMaxExp()
+    {
+        return maxExp;
+    }
+
+    public void setMaxExp(long maxExp)
+    {
+        this.maxExp = maxExp;
+    }
+
+    public long getCe()
+    {
+        return ce;
+    }
+
+    public void setCe(long ce)
+    {
+        this.ce = ce;
     }
 }

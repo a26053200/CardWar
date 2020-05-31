@@ -1,6 +1,6 @@
 package com.betel.cardwar.game.modules.player.model;
 
-import com.betel.asd.BaseVo;
+import com.betel.asd.interfaces.IVo;
 
 /**
  * @ClassName: Player
@@ -8,12 +8,25 @@ import com.betel.asd.BaseVo;
  * @Author: zhengnan
  * @Date: 2019/1/19 22:49
  */
-public class Player extends BaseVo
+public class Player implements IVo
 {
+    private String id;
     private String accountId;
     private String registerTime; //玩家第一次登陆游戏时间,即玩家在该服务器的注册时间
     private String lastLoginTime;//最后一次登陆时间
     private String lastLogoutTime;//最后一次登出时间
+
+    @Override
+    public String getId()
+    {
+        return id;
+    }
+
+    @Override
+    public void setId(String id)
+    {
+        this.id = id;
+    }
 
     @Override
     public String getVid()

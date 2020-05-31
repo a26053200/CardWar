@@ -42,12 +42,12 @@
         <property name="valueSerializer">
             <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
         </property>
-        <!--<property name="hashKeySerializer">-->
-            <!--<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>-->
-        <!--</property>-->
-        <!--<property name="hashValueSerializer">-->
-            <!--<bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>-->
-        <!--</property>-->
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
+        </property>
     </bean>
 
     <bean id="playerDao" class="com.betel.cardwar.game.modules.player.model.PlayerDao"/>

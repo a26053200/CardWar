@@ -1,5 +1,6 @@
 package com.betel.cardwar.game.modules.role.service;
 
+import com.betel.asd.RedisDao;
 import com.betel.cardwar.game.modules.role.model.Role;
 import com.betel.cardwar.game.modules.role.model.RoleDao;
 import com.betel.spring.IRedisService;
@@ -16,6 +17,12 @@ public class RoleService implements IRedisService<Role>
 {
     @Autowired
     protected RoleDao roleDao;
+
+    @Override
+    public RedisDao<Role> getDao()
+    {
+        return roleDao;
+    }
 
     @Override
     public void setTableName(String s)
