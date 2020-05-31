@@ -13,5 +13,6 @@ ViewConfig.Battle = {module = "Battle",name = "Battle",prefab = "Prefabs/UI/Batt
 ViewConfig.BattleInfo = {module = "Battle",name = "BattleInfo",prefab = "Prefabs/UI/Battle/BattleInfo.prefab",}
 ViewConfig.Navigation = {name = "Navigation",module = "Lobby",prefab = "Prefabs/UI/Lobby/Navigation.prefab",}
 ViewConfig.BattleEditor = {name = "BattleEditor",module = "Battle",prefab = "Prefabs/UI/Battle/BattleEditor.prefab",}
-ViewConfig.Player = {name = "Player",}
+ViewConfig.ResourceBar = {name = "ResourceBar",module = "Role",prefab = "Prefabs/UI/Common/ResourceBar.prefab",}
 ViewConfig.PlayerInfo = {name = "PlayerInfo",module = "Player",}
+ViewConfig.CardDraw = {name = "CardDraw",module = "Card",prefab = "Prefabs/UI/Card/CardDraw.prefab",}

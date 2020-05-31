@@ -49,12 +49,15 @@ function BaseMediator:AddPush(action, callback)
 end
 
 --自动注册按钮点击事件
-function BaseMediator:OnAutoRegisterEvent()
+function BaseMediator:OnAutoRegisterEvent(addPointerScale)
     local buttons = Tools3D.GetComponents(self.gameObject, typeof(UnityEngine.UI.Button), true)
     for i = 0,buttons.Length - 1 do
         local funName = "On_Click_"..buttons[i].gameObject.name
         if self[funName] then
             log("Auto Register Events:" .. funName)
+            if addPointerScale == nil or addPointerScale == true then
+                buttons[i].gameObject:GetOrAddComponent(typeof(Framework.ClickFeedback))
+            end
             LuaHelper.AddButtonClick(buttons[i].gameObject,handler(self,self[funName]))
             --buttons[i].gameObject:GetOrAddComponent(typeof(Framework.PointerScaler))
             table.insert(self.autoClickEventObjs, buttons[i].gameObject)
@@ -68,6 +71,9 @@ function BaseMediator:OnAutoRegisterEvent()
             local funName = "On_Click_"..images[i].gameObject.name
             if self[funName] then
                 log("Auto Register Events:" .. funName)
+                if addPointerScale == nil or addPointerScale == true then
+                    images[i].gameObject:GetOrAddComponent(typeof(Framework.ClickFeedback))
+                end
                 LuaHelper.AddObjectClickEvent(images[i].gameObject,handler(self,self[funName]))
                 --images[i].gameObject:GetOrAddComponent(typeof(Framework.PointerScaler))
                 table.insert(self.autoClickEventObjs, images[i].gameObject)
@@ -83,9 +89,12 @@ function BaseMediator:OnAutoRemoveEvent()
     end
 end
 
-function BaseMediator:AddClickEventListener(go, clickFun)
+function BaseMediator:AddClickEventListener(go, clickFun, addPointerScale)
     if self.clickEventMap[clickFun] == nil  then
         self.clickEventMap[clickFun] = {}
+    end
+    if addPointerScale == nil or addPointerScale == true then
+        go:GetOrAddComponent(typeof(Framework.ClickFeedback))
     end
     local handler = handler(self,clickFun)
     LuaHelper.AddObjectClickEvent(go,handler)
@@ -99,9 +108,9 @@ end
 --    end
 --end
 
-function BaseMediator:RegisterButtonClick(go, clickFun, addPointerScaler)
-    if addPointerScaler == nil or addPointerScaler == true then
-        go:GetOrAddComponent(typeof(Framework.PointerScaler))
+function BaseMediator:RegisterButtonClick(go, clickFun, addPointerScale)
+    if addPointerScale == nil or addPointerScale == true then
+        go:GetOrAddComponent(typeof(Framework.ClickFeedback))
     end
     LuaHelper.AddButtonClick(go,handler(self,clickFun))
 end

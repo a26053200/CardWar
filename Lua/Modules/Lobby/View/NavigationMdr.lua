@@ -8,14 +8,51 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.Lobby.View.NavigationMdr : Game.Core.Ioc.BaseMediator
 ---@field lobbyModel Game.Modules.Lobby.Model.LobbyModel
 ---@field lobbyService Game.Modules.Lobby.Service.LobbyService
+---@field btns List | table<number, UnityEngine.UI.Toggle>
+---@field currSelectTabIndex number
 local NavigationMdr = class("Game.Modules.Lobby.View.NavigationMdr",BaseMediator)
 
+local ButtonLabels = {
+    [1] = "主页",
+    [2] = "卡片",
+    [3] = "剧情",
+    [4] = "冒险",
+    [5] = "家园",
+    [6] = "抽卡",
+    [7] = "菜单",
+}
+
 function NavigationMdr:OnInit()
-    
+    self.btns = List.New()
+    self.currSelectTabIndex = 0
+    self.views = {
+        [6] = ViewConfig.CardDraw,
+    }
+    self.toggleGroup = self.gameObject:GetToggleGroup("Bar")
+    for i = 1, 7 do
+        local toggle = self.gameObject:GetToggle("Bar/Toggle" .. i)
+        self.gameObject:GetText("Bar/Toggle" .. i .. "/Label").text = ButtonLabels[i]
+        self.btns:Add(toggle.gameObject)
+        self:AddClickEventListener(toggle.gameObject, self.OnTabClick)
+    end
 end
 
-function NavigationMdr:On_Click_Button()
-    World.worldScene:EnterCheckPoint("battle_1_1")
+---@param event UnityEngine.EventSystems.PointerEventData
+function NavigationMdr:OnTabClick(event)
+    local index = self.btns:IndexOf(event.pointerPress)
+    if index >= 1 then
+        if self.currSelectTabIndex ~= index then
+            if self.currSelectTabIndex > 0 and self.views[self.currSelectTabIndex] then
+                vmgr:UnloadView(self.views[self.currSelectTabIndex])
+            end
+            if self.views[index] then
+                vmgr:LoadView(ViewConfig.ResourceBar)
+                vmgr:LoadView(self.views[index])
+            end
+            self.currSelectTabIndex = index
+        end
+        --print("Click " .. ButtonLabels[index])
+    end
 end
 
 return NavigationMdr

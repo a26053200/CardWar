@@ -11,6 +11,9 @@
 
 local Action = {}
 
+---==================
+--- 登陆相关
+---==================
 Action.LoginAccount = { server = "AccountServer", action = "account@accountLogin", fields = "username,password" }
 
 Action.LoginRegister = { server = "AccountServer", action = "account@accountRegister", fields = "username,password" }
@@ -23,7 +26,18 @@ Action.FetchRandomName = { server = "GameServer", action = "role@randomName", fi
 
 Action.CreateRole = { server = "GameServer", action = "role@roleCreate", fields = "playerId,roleName"}
 
-Action.JoinMatch = { server = "LobbyServer", action = "match@join_match", fields = "roleId,game,gameMode" }
+
+---==================
+--- Card
+---==================
+--获取当前角色所拥有卡牌信息
+Action.CardInfo = { server = "GameServer", action = "Card@cardInfo", fields = "roleId" }
+
+--卡池信息
+Action.CardInfo = { server = "GameServer", action = "Card@cardPoolInfo", fields = "" }
+
+--抽卡
+Action.CardInfo = { server = "GameServer", action = "Card@cardInfo", fields = "poolId,type" }
 
 --推送房间信息
 Action.PushRoomInfo = "push@room_info"
