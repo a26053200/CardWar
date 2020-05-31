@@ -7,3 +7,5 @@ Card.xlsx=8bfe9a95756958ea115ced425f9cff36
 CheckPoint.xlsx=d2df8ef9ad9ec30294bcaeb12940c7b3
 Performance.xlsx=a936a8922206f45ad149c6a6d913074b
 Skill.xlsx=1556127c0084d5a5529b981a8c752e53
+RoleLevel.xlsx=3490b8115c88c270c860cb864a89a56f
+RoleName.xlsx=ca38dd25d289143524cdb9355f21b2a0
