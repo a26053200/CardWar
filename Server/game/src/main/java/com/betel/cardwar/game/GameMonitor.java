@@ -1,5 +1,8 @@
 package com.betel.cardwar.game;
 
+import com.betel.cardwar.game.modules.card.model.Card;
+import com.betel.cardwar.game.modules.card.service.CardBusiness;
+import com.betel.cardwar.game.modules.card.service.CardService;
 import com.betel.cardwar.game.modules.player.model.Player;
 import com.betel.cardwar.game.modules.player.service.PlayerBusiness;
 import com.betel.cardwar.game.modules.player.service.PlayerService;
@@ -27,9 +30,11 @@ public class GameMonitor extends NodeServerMonitor
 
         PlayerService playerService = (PlayerService) applicationContext.getBean("playerService");
         RoleService roleService     = (RoleService) applicationContext.getBean("roleService");
+        CardService cardService     = (CardService) applicationContext.getBean("cardService");
 
-        pushService(Player.class, new PlayerBusiness(), playerService);
-        pushService(Role.class, new RoleBusiness(), roleService);
+        pushService(Player.class,   new PlayerBusiness(),   playerService);
+        pushService(Role.class,     new RoleBusiness(),     roleService);
+        pushService(Card.class,     new CardBusiness(),     cardService);
     }
 
     @Override

@@ -1,0 +1,4 @@
+﻿{	"list":[
+		{"id": "normal","name": "基本池","baseProb3": 0.025,"baseProb2": 0.18,"baseProb1": 0.765,"lastProb3": 0.025,"lastProb2": 0.975,"lastProb1": 0,"maxTimes": 10,"startDate": "2020-05-31 05:00:00","overDate": "2021-05-31 23:59:59"},
+		{"id": "pickup_20200602","name": "2020年6月2日活动池","baseProb3": 0.025,"baseProb2": 0.18,"baseProb1": 0.765,"lastProb3": 0.025,"lastProb2": 0.975,"lastProb1": 0,"maxTimes": 10,"startDate": "2020-05-31 05:00:00","overDate": "2021-05-31 23:59:59"}	]
+}

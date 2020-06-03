@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.betel.asd.Business;
 import com.betel.cardwar.game.consts.Action;
+import com.betel.cardwar.game.consts.Field;
 import com.betel.cardwar.game.modules.player.model.Player;
 import com.betel.cardwar.game.modules.role.model.Role;
 import com.betel.session.Session;
@@ -23,13 +24,6 @@ import java.util.List;
 public class PlayerBusiness extends Business<Player>
 {
     final static Logger logger = LogManager.getLogger(PlayerBusiness.class);
-
-    class Field
-    {
-        public static final String ACCOUNT_ID = "aid";
-        public static final String PLAYER_ID = "playerId";
-        public static final String ROLE_INFO        = "roleInfo";
-    }
 
     //处理登录游戏服务器
     private void login(Session session)

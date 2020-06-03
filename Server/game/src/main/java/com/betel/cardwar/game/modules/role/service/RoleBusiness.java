@@ -12,7 +12,6 @@ import com.betel.framework.utils.MathUtils;
 import com.betel.session.Session;
 import com.betel.session.SessionState;
 import com.betel.utils.IdGenerator;
-import com.betel.utils.TimeUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,13 +24,6 @@ import java.util.List;
  */
 public class RoleBusiness extends Business<Role>
 {
-    class Field
-    {
-        public static final String PLAYER_ID        = "playerId";
-        public static final String ROLE_NAME        = "roleName";
-        public static final String ROLE_INFO        = "roleInfo";
-    }
-
     final static Logger logger = LogManager.getLogger(RoleBusiness.class);
 
     //产生随机名字

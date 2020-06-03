@@ -51,12 +51,17 @@
     </bean>
 
     <bean id="playerDao" class="com.betel.cardwar.game.modules.player.model.PlayerDao"/>
-    <bean id="roleDao" class="com.betel.cardwar.game.modules.role.model.RoleDao"/>
-
     <bean id="playerService" class="com.betel.cardwar.game.modules.player.service.PlayerService">
         <property name="tableName" value="Player"/>
     </bean>
+
+    <bean id="roleDao" class="com.betel.cardwar.game.modules.role.model.RoleDao"/>
     <bean id="roleService" class="com.betel.cardwar.game.modules.role.service.RoleService">
         <property name="tableName" value="Role"/>
+    </bean>
+
+    <bean id="cardDao" class="com.betel.cardwar.game.modules.card.model.CardDao"/>
+    <bean id="cardService" class="com.betel.cardwar.game.modules.card.service.CardService">
+        <property name="tableName" value="Card"/>
     </bean>
 </beans>
