@@ -7,12 +7,12 @@
 local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@class Game.Modules.Role.Model.RoleModel : Game.Core.Ioc.BaseModel
 ---@field roleId string
----@field mainRoleInfo Game.Modules.Role.Vo.RoleVo
+---@field roleInfo Game.Modules.Role.Vo.RoleVo
 local RoleModel = class("RoleModel",BaseModel)
 
 function RoleModel:Ctor()
     self.roleId = nil
-    self.mainRoleInfo = nil
+    self.roleInfo = nil
 end
 
 return RoleModel

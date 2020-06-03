@@ -76,9 +76,9 @@ end
 
 function LoginService:OnRecvRoleInfo(data)
     self.roleModel.roleId = data.roleInfo.id
-    self.roleModel.mainRoleInfo = RoleVo.New(data.roleInfo)
-    self.roleModel.mainRoleInfo.clientOnlineTime = Time.time
-    self.roleModel.mainRoleInfo.clientOnlineRealTime = Time.realtimeSinceStartup
+    self.roleModel.roleInfo = RoleVo.New(data.roleInfo)
+    self.roleModel.roleInfo.clientOnlineTime = Time.time
+    self.roleModel.roleInfo.clientOnlineRealTime = Time.realtimeSinceStartup
 end
 
 ---push

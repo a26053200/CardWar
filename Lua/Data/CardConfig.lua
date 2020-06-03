@@ -11,6 +11,9 @@
 ---@field rarity number
 ---@field star number
 ---@field level number
+---@field fragments number
+---@field fragmentId number
+---@field fragmentNum number
 ---@field iconUrl string
 
 local CardConfig = {}

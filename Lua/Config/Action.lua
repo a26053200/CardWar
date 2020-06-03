@@ -8,7 +8,6 @@
 ---@field server string
 ---@field action string
 ---@field fields string
-
 local Action = {}
 
 ---==================
@@ -31,13 +30,13 @@ Action.CreateRole = { server = "GameServer", action = "role@roleCreate", fields 
 --- Card
 ---==================
 --获取当前角色所拥有卡牌信息
-Action.CardInfo = { server = "GameServer", action = "Card@cardInfo", fields = "roleId" }
+Action.CardList = { server = "GameServer", action = "Card@cardList", fields = "roleId" }
 
 --卡池信息
-Action.CardInfo = { server = "GameServer", action = "Card@cardPoolInfo", fields = "" }
+Action.CardPoolInfo = { server = "GameServer", action = "Card@cardPoolInfo", fields = "" }
 
 --抽卡
-Action.CardInfo = { server = "GameServer", action = "Card@cardInfo", fields = "poolId,type" }
+Action.DrawCard = { server = "GameServer", action = "Card@drawCard", fields = "roleId,cardPoolName,drawCardNum" }
 
 --推送房间信息
 Action.PushRoomInfo = "push@room_info"

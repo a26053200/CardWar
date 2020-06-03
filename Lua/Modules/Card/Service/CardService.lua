@@ -4,13 +4,54 @@
 --- DateTime: 2020-04-12-01:33:53
 ---
 
+local CardVo = require("Game.Modules.Card.Vo.CardVo")
+local CardPoolVo = require("Game.Modules.Card.Vo.CardPoolVo")
 local BaseService = require("Game.Core.Ioc.BaseService")
 ---@class Game.Modules.Card.Service.CardService : Game.Core.Ioc.BaseService
 ---@field cardModel Game.Modules.Card.Model.CardModel
-local CardService = class("Game.Modules.Card.Service.CardService",BaseService)
+---@field roleModel Game.Modules.Role.Model.RoleModel
+local CardService = class("CardService",BaseService)
 
 function CardService:Ctor()
     
+end
+
+---@param roleId string
+---@param callback fun()
+function CardService:getCardList(roleId, callback)
+    self:HttpRequest(Action.CardList, {roleId}, function(data)
+        if self.roleModel.roleInfo.id == roleId then
+            local cardList = List.New()
+            for i = 1, #data.cardList do
+                local cardVo = CardVo.New(data.cardList[i])
+                cardList:Add(cardVo)
+            end
+            self.cardModel.cardList = cardList
+        end
+        invoke(callback, data)
+    end)
+end
+
+---@param callback fun() | Handler
+function CardService:getCardPool(callback)
+    self:HttpRequest(Action.CardPoolInfo, EmptyParam, function(data)
+        local cardPoolList = List.New()
+        for i = 1, #data.cardPoolList do
+            local vo = CardPoolVo.New(data.cardPoolList[i])
+            cardPoolList:Add(vo)
+        end
+        self.cardModel.cardPoolList = cardPoolList
+        invoke(callback, data)
+    end)
+end
+
+---@param poolName string
+---@param num number
+---@param callback fun()
+function CardService:drawCard(poolName, num, callback)
+    self:HttpRequest(Action.DrawCard, {self.roleModel.roleId, poolName, num}, function(data)
+        invoke(callback, data)
+    end)
 end
 
 return CardService

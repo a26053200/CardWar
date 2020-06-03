@@ -8,22 +8,21 @@ local BaseVo = require("Game.Core.BaseVo")
 ---@class Game.Modules.Card.Vo.CardVo : Game.Core.BaseVo
 ---@field New fun(cardName:string):Game.Modules.Card.Vo.CardVo
 ---@field cardInfo CardInfo
----@field avatarInfo AvatarInfo
----@field inTeamIndex number 上阵位置
----@field layoutIndex number 布局位置
----@field inAdventureEvent boolean 正在探索冒险事件中
----@field state CardState
----@field isGet boolean 是否获得
+---@field id string
+---@field level number 等级
+---@field star number 星级
+---@field rank number 品阶
+---@field ce number 战力
 local CardVo = class("Module.Card.Vo.CardVo",BaseVo)
 
----@param cardName number
-function CardVo:Ctor(cardName)
-    self.cardInfo = CardConfig.Get(cardName)
-    self.avatarInfo = AvatarConfig.Get(self.cardInfo.battleUnit)
-    self.inTeamIndex = 0
-    self.layoutIndex = 0
-    self.state = CardState.Normal
-    self.inAdventureEvent = false
+---@param card table
+function CardVo:Ctor(card)
+    self.cardInfo = CardConfig.Get(card.cardId)
+    self.id = card.id
+    self.level = card.level
+    self.star = card.star
+    self.rank = card.rank
+    self.ce = card.ce
 end
 
 return CardVo

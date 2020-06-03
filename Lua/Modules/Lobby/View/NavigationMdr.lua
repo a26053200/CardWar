@@ -12,26 +12,23 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@field currSelectTabIndex number
 local NavigationMdr = class("Game.Modules.Lobby.View.NavigationMdr",BaseMediator)
 
-local ButtonLabels = {
-    [1] = "主页",
-    [2] = "卡片",
-    [3] = "剧情",
-    [4] = "冒险",
-    [5] = "家园",
-    [6] = "抽卡",
-    [7] = "菜单",
+local Navigation = {
+    [1] = {label = "主页", view = nil,                    showResourceBar = false},
+    [2] = {label = "卡片", view = ViewConfig.CardList,    showResourceBar = false},
+    [3] = {label = "剧情", view = nil},
+    [4] = {label = "冒险", view = nil},
+    [5] = {label = "家园", view = nil},
+    [6] = {label = "抽卡", view = ViewConfig.CardDraw,    showResourceBar = true},
+    [7] = {label = "菜单", view = nil},
 }
 
 function NavigationMdr:OnInit()
     self.btns = List.New()
     self.currSelectTabIndex = 0
-    self.views = {
-        [6] = ViewConfig.CardDraw,
-    }
     self.toggleGroup = self.gameObject:GetToggleGroup("Bar")
     for i = 1, 7 do
         local toggle = self.gameObject:GetToggle("Bar/Toggle" .. i)
-        self.gameObject:GetText("Bar/Toggle" .. i .. "/Label").text = ButtonLabels[i]
+        self.gameObject:GetText("Bar/Toggle" .. i .. "/Label").text = Navigation[i].label
         self.btns:Add(toggle.gameObject)
         self:AddClickEventListener(toggle.gameObject, self.OnTabClick)
     end
@@ -42,12 +39,19 @@ function NavigationMdr:OnTabClick(event)
     local index = self.btns:IndexOf(event.pointerPress)
     if index >= 1 then
         if self.currSelectTabIndex ~= index then
-            if self.currSelectTabIndex > 0 and self.views[self.currSelectTabIndex] then
-                vmgr:UnloadView(self.views[self.currSelectTabIndex])
+            if self.currSelectTabIndex > 0 then
+                if Navigation[self.currSelectTabIndex].view then
+                    vmgr:UnloadView(Navigation[self.currSelectTabIndex].view)
+                end
+                if Navigation[self.currSelectTabIndex].showResourceBar and not Navigation[index].showResourceBar then
+                    vmgr:UnloadView(ViewConfig.ResourceBar)
+                end
             end
-            if self.views[index] then
+            if Navigation[index].view then
+                vmgr:LoadView(Navigation[index].view)
+            end
+            if Navigation[index].showResourceBar then
                 vmgr:LoadView(ViewConfig.ResourceBar)
-                vmgr:LoadView(self.views[index])
             end
             self.currSelectTabIndex = index
         end

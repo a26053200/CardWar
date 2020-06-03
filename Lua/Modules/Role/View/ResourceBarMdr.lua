@@ -11,7 +11,7 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 local ResourceBarMdr = class("Game.Modules.Role.View.ResourceBarMdr",BaseMediator)
 
 function ResourceBarMdr:OnInit()
-    self.roleInfo = self.roleModel.mainRoleInfo;
+    self.roleInfo = self.roleModel.roleInfo;
 
     self.gameObject:GetText("Status/GameMoney/Text").text = self.roleInfo.gameMoney
     self.gameObject:GetText("Status/FreeMoney/Text").text = self.roleInfo.freeMoney

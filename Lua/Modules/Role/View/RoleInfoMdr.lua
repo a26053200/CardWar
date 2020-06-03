@@ -24,7 +24,7 @@ local HeadIcon =
 }
 
 function RoleInfoMdr:OnInit()
-    self.roleInfo = self.roleModel.mainRoleInfo;
+    self.roleInfo = self.roleModel.roleInfo;
     self.gameObject:GetText("RoleName/Text").text = self.roleInfo.roleName
     self.gameObject:GetText("SampleInfo/RoleName/Text").text = self.roleInfo.roleName
     self.gameObject:GetImage("SampleInfo/Head/Mask/Icon").sprite = Res.LoadSprite(HeadIcon[self.roleInfo.headIcon])

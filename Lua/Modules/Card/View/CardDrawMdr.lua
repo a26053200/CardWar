@@ -7,16 +7,33 @@
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.Card.View.CardDrawMdr : Game.Core.Ioc.BaseMediator
 ---@field cardModel Game.Modules.Card.Model.CardModel
+---@field roleModel Game.Modules.Role.Model.RoleModel
 ---@field cardService Game.Modules.Card.Service.CardService
+---@field cardPool Game.Modules.Card.Vo.CardPoolVo
 local CardDrawMdr = class("Game.Modules.Card.View.CardDrawMdr",BaseMediator)
 
 function CardDrawMdr:OnInit()
-    
+    self.cardService:getCardPool(Handler.New(self.OnCardPool, self))
+end
+
+function CardDrawMdr:OnCardPool(data)
+    self.cardPool = self.cardModel.cardPoolList[1]
 end
 
 function CardDrawMdr:On_Click_Btn11()
 
+end
 
+function CardDrawMdr:On_Click_Btn12()
+    self.cardService:drawCard(self.cardPool.name, 1,function(data)
+
+    end)
+end
+
+function CardDrawMdr:On_Click_Btn13()
+    self.cardService:drawCard(self.cardPool.name, self.cardPool.maxTimes,function(data)
+
+    end)
 end
 
 return CardDrawMdr

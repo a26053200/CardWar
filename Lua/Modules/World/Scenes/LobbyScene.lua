@@ -17,12 +17,10 @@ end
 
 function LobbyScene:OnEnterScene()
     self:Show()
-    vmgr:LoadView(ViewConfig.RoleInfo)
-    vmgr:LoadView(ViewConfig.Navigation)
+    vmgr:LoadView(ViewConfig.Lobby)
 end
 
 function LobbyScene:OnExitScene()
-    vmgr:UnloadView(ViewConfig.RoleInfo)
-    vmgr:UnloadView(ViewConfig.Navigation)
+    vmgr:UnloadView(ViewConfig.Lobby)
 end
 return LobbyScene
