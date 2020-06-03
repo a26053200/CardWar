@@ -15,13 +15,13 @@ namespace BattleEditor
         [MenuItem("Tools/Excel/Excel2Lua %#l")]
         static void DoExcelToLua()
         {
-            DoExcelExport(false, "lua", new ExcelToJson());
+            DoExcelExport(false, "lua", new ExcelToLua());
         }
         
         [MenuItem("Tools/Excel/Excel2Lua Force")]
         static void DoExcelToLuaForce()
         {
-            DoExcelExport(true, "lua", new ExcelToJson());
+            DoExcelExport(true, "lua", new ExcelToLua());
         }
         
         public override void GenerateLua(ExcelReader reader, string outputPath)
@@ -53,7 +53,7 @@ return Data
                 ");
             Output(sb, outputPath);
         }
-        private static void ExecuteFile(int rowIndex, DataColumnCollection columns, DataRow row,StringBuilder sb)
+        private void ExecuteFile(int rowIndex, DataColumnCollection columns, DataRow row,StringBuilder sb)
         {
             if (rowIndex == 0)
             {
