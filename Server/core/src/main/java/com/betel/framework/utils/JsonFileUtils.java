@@ -1,15 +1,10 @@
 package com.betel.framework.utils;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.betel.consts.ServerConsts;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.betel.utils.JSONArrayUtils;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.List;
 
 /**
  * @Description
@@ -18,20 +13,16 @@ import java.io.IOException;
  */
 public class JsonFileUtils
 {
-    final static Logger logger = LogManager.getLogger(JsonFileUtils.class);
-
-    public static JSONObject getJsonObject(String filePath)
+    public static JSONArray getJSONArray(String file, String listField)
     {
-        String content = null;
-        try
-        {
-            String path = JsonFileUtils.class.getResource(filePath).getPath();
-            logger.info("load json file:" + path);
-            content = FileUtils.readFileToString(new File(path), ServerConsts.CHARSET_UTF_8);
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        return JSON.parseObject(content);
+        String path = JsonFileUtils.class.getResource(file).getPath();
+        JSONObject json = JSONArrayUtils.getJsonObject(path);
+        JSONArray array = json.getJSONArray(listField);
+        return array;
+    }
+    public static <T> List<T> getDataList(String file, Class<T> clazz, String listField)
+    {
+        String path = JsonFileUtils.class.getResource(file).getPath();
+        return JSONArrayUtils.getDataList(path, clazz, listField);
     }
 }

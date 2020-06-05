@@ -1,14 +1,12 @@
 package com.betel.cardwar.game.modules;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.betel.cardwar.game.modules.card.model.Card;
 import com.betel.cardwar.game.modules.card.model.CardInfo;
 import com.betel.cardwar.game.modules.card.model.CardPool;
 import com.betel.cardwar.game.modules.card.model.CardPoolItem;
 import com.betel.cardwar.game.modules.role.model.RoleLevel;
-import com.betel.cardwar.game.utils.JSONArrayUtils;
 import com.betel.framework.utils.JsonFileUtils;
+import com.betel.utils.JSONArrayUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +19,8 @@ import java.util.List;
  */
 public class ModuleConfig
 {
+    private static final String JSON_LIST_FIELD = "list";
+
     private static ArrayList<List<String>> roleName;
 
     public static List<String> getRoleName(int index)
@@ -28,7 +28,7 @@ public class ModuleConfig
         if(roleName == null)
         {
             roleName = new ArrayList<>();
-            JSONArray array = JSONArrayUtils.getJSONArray("/RoleName.json");
+            JSONArray array = JsonFileUtils.getJSONArray("/RoleName.json", JSON_LIST_FIELD);
             roleName.add(JSONArrayUtils.getStringList(array, "name1"));
             roleName.add(JSONArrayUtils.getStringList(array, "name2"));
             roleName.add(JSONArrayUtils.getStringList(array, "name3"));
@@ -41,7 +41,7 @@ public class ModuleConfig
     public static List<RoleLevel> getRoleLevelList()
     {
         if(roleLevels == null)
-            roleLevels = JSONArrayUtils.getDataList("/RoleLevel.json", RoleLevel.class);
+            roleLevels = JsonFileUtils.getDataList("/RoleLevel.json", RoleLevel.class, JSON_LIST_FIELD);
         return roleLevels;
     }
 
@@ -53,7 +53,7 @@ public class ModuleConfig
         if(cardInfoMap == null)
         {
             cardInfoMap = new HashMap<>();
-            List<CardInfo> list = JSONArrayUtils.getDataList("/Card.json", CardInfo.class);
+            List<CardInfo> list = JsonFileUtils.getDataList("/Card.json", CardInfo.class, JSON_LIST_FIELD);
             for (int i = 0; i < list.size(); i++)
                 cardInfoMap.put(list.get(i).id, list.get(i));
         }
@@ -69,7 +69,7 @@ public class ModuleConfig
         if(cardPoolItems == null)
         {
             cardPoolItemsMap = new HashMap<>();
-            cardPoolItems = JSONArrayUtils.getDataList("/CardPoolItem.json", CardPoolItem.class);
+            cardPoolItems = JsonFileUtils.getDataList("/CardPoolItem.json", CardPoolItem.class, JSON_LIST_FIELD);
             for (int i = 0; i < cardPoolItems.size(); i++)
             {
                 List<CardPoolItem> poolItemList = cardPoolItemsMap.get(cardPoolItems.get(i).poolId);
@@ -91,7 +91,7 @@ public class ModuleConfig
         if(cardPoolMap == null)
         {
             cardPoolMap = new HashMap<>();
-            List<CardPool> cardPoolList = JSONArrayUtils.getDataList("/CardPool.json", CardPool.class);
+            List<CardPool> cardPoolList = JsonFileUtils.getDataList("/CardPool.json", CardPool.class, JSON_LIST_FIELD);
             for (int i = 0; i < cardPoolList.size(); i++)
             {
                 cardPoolMap.put(cardPoolList.get(i).id, cardPoolList.get(i));
