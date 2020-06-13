@@ -1,4 +1,4 @@
-package com.betel.cardwar.game.modules;
+package com.betel.cardwar.game.modules.card;
 
 import com.alibaba.fastjson.JSONArray;
 import com.betel.cardwar.game.modules.card.model.CardInfo;
@@ -21,43 +21,25 @@ public class ModuleConfig
 {
     private static final String JSON_LIST_FIELD = "list";
 
-    private static ArrayList<List<String>> roleName;
-
-    public static List<String> getRoleName(int index)
-    {
-        if(roleName == null)
-        {
-            roleName = new ArrayList<>();
-            JSONArray array = JsonFileUtils.getJSONArray("/RoleName.json", JSON_LIST_FIELD);
-            roleName.add(JSONArrayUtils.getStringList(array, "name1"));
-            roleName.add(JSONArrayUtils.getStringList(array, "name2"));
-            roleName.add(JSONArrayUtils.getStringList(array, "name3"));
-        }
-        return roleName.get(index);
-    }
-
-    private static List<RoleLevel> roleLevels;
-
-    public static List<RoleLevel> getRoleLevelList()
-    {
-        if(roleLevels == null)
-            roleLevels = JsonFileUtils.getDataList("/RoleLevel.json", RoleLevel.class, JSON_LIST_FIELD);
-        return roleLevels;
-    }
-
-
     private static HashMap<Integer, CardInfo> cardInfoMap;
+    private static List<CardInfo> cardInfoList;
 
     public static CardInfo getCardInfo(int cardId)
     {
         if(cardInfoMap == null)
         {
             cardInfoMap = new HashMap<>();
-            List<CardInfo> list = JsonFileUtils.getDataList("/Card.json", CardInfo.class, JSON_LIST_FIELD);
+            List<CardInfo> list = getCardInfoList();
             for (int i = 0; i < list.size(); i++)
                 cardInfoMap.put(list.get(i).id, list.get(i));
         }
         return cardInfoMap.get(cardId);
+    }
+    public static List<CardInfo> getCardInfoList()
+    {
+        if(cardInfoList == null)
+            cardInfoList = JsonFileUtils.getDataList("/Card.json", CardInfo.class, JSON_LIST_FIELD);
+        return cardInfoList;
     }
 
 

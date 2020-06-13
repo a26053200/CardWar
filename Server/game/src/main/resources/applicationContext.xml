@@ -64,4 +64,9 @@
     <bean id="cardService" class="com.betel.cardwar.game.modules.card.service.CardService">
         <property name="tableName" value="Card"/>
     </bean>
+
+    <bean id="itemDao" class="com.betel.cardwar.game.modules.item.model.ItemDao"/>
+    <bean id="itemService" class="com.betel.cardwar.game.modules.item.service.ItemService">
+        <property name="tableName" value="Item"/>
+    </bean>
 </beans>

@@ -13,6 +13,7 @@ public class Card implements IVo
     private String id;
     private int cardId;
     private String roleId;        //所属Role玩家id
+    private boolean active;
     private int level;
     private int star;
     private int rank;
@@ -40,6 +41,16 @@ public class Card implements IVo
     public void setVid(String s)
     {
         roleId = s;
+    }
+
+    public boolean isActive()
+    {
+        return active;
+    }
+
+    public void setActive(boolean active)
+    {
+        this.active = active;
     }
 
     public int getCardId()

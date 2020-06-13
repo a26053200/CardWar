@@ -1,15 +1,15 @@
 package com.betel.cardwar.game;
 
 import com.betel.cardwar.game.modules.card.model.Card;
-import com.betel.cardwar.game.modules.card.service.CardBusiness;
 import com.betel.cardwar.game.modules.card.service.CardService;
+import com.betel.cardwar.game.modules.item.model.Item;
+import com.betel.cardwar.game.modules.item.service.ItemService;
 import com.betel.cardwar.game.modules.player.model.Player;
-import com.betel.cardwar.game.modules.player.service.PlayerBusiness;
 import com.betel.cardwar.game.modules.player.service.PlayerService;
 import com.betel.cardwar.game.modules.role.model.Role;
-import com.betel.cardwar.game.modules.role.service.RoleBusiness;
 import com.betel.cardwar.game.modules.role.service.RoleService;
 import com.betel.config.ServerConfigVo;
+import com.betel.event.EventDispatcher;
 import com.betel.servers.node.NodeServerMonitor;
 import com.betel.utils.BytesUtils;
 import io.netty.buffer.ByteBuf;
@@ -31,10 +31,15 @@ public class GameMonitor extends NodeServerMonitor
         PlayerService playerService = (PlayerService) applicationContext.getBean("playerService");
         RoleService roleService     = (RoleService) applicationContext.getBean("roleService");
         CardService cardService     = (CardService) applicationContext.getBean("cardService");
+        ItemService itemService     = (ItemService) applicationContext.getBean("itemService");
 
-        pushService(Player.class,   new PlayerBusiness(),   playerService);
-        pushService(Role.class,     new RoleBusiness(),     roleService);
-        pushService(Card.class,     new CardBusiness(),     cardService);
+        EventDispatcher eventDispatcher = new EventDispatcher();
+        pushService(Player.class,   playerService);playerService.setEventDispatcher(eventDispatcher);
+        pushService(Role.class,     roleService);roleService.setEventDispatcher(eventDispatcher);
+        pushService(Card.class,     cardService);cardService.setEventDispatcher(eventDispatcher);
+        pushService(Item.class,     itemService);itemService.setEventDispatcher(eventDispatcher);
+
+        OnAllServiceLoaded();
     }
 
     @Override

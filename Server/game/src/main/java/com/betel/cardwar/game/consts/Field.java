@@ -31,4 +31,9 @@ public class Field
      * 抽到的卡片
      */
     public static final String DRAW_CARD_LIST        = "drawCardList";
+
+    /**
+     * 道具列表
+     */
+    public static final String ITEM_LIST            = "itemList";
 }

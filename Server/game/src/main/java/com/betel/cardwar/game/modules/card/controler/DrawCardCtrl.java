@@ -1,20 +1,19 @@
 package com.betel.cardwar.game.modules.card.controler;
 
 
+import com.betel.asd.BaseService;
 import com.betel.cardwar.game.consts.DrawCardState;
 import com.betel.cardwar.game.consts.Field;
 import com.betel.cardwar.game.consts.ReturnCode;
-import com.betel.cardwar.game.modules.ModuleConfig;
-import com.betel.cardwar.game.modules.card.model.Card;
-import com.betel.cardwar.game.modules.card.model.CardPool;
-import com.betel.cardwar.game.modules.card.model.CardPoolItem;
-import com.betel.cardwar.game.modules.card.model.DrawCard;
+import com.betel.cardwar.game.modules.card.ModuleConfig;
+import com.betel.cardwar.game.modules.card.model.*;
+import com.betel.cardwar.game.modules.card.service.CardService;
+import com.betel.cardwar.game.modules.item.model.Item;
 import com.betel.framework.spring.Controller;
 import com.betel.framework.utils.DateUtils;
 import com.betel.servers.action.ImplAction;
 import com.betel.session.Session;
 import com.betel.spring.IRedisService;
-import com.betel.utils.IdGenerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,9 +30,12 @@ public class DrawCardCtrl extends Controller
 {
     final static Logger logger = LogManager.getLogger(DrawCardCtrl.class);
 
-    public DrawCardCtrl(ImplAction action, IRedisService service)
+    private CardService cardService;
+
+    public DrawCardCtrl(CardService service)
     {
-        super(action, service);
+        super(service);
+        cardService = service;
     }
 
     @Override
@@ -67,7 +69,7 @@ public class DrawCardCtrl extends Controller
 
         String roleId = session.getRecvJson().getString(Field.ROLE_ID);
         //已经拥有的卡
-        List<Card> ownerCardList = action.getService().getViceEntities(roleId);
+        List<Card> ownerCardList = cardService.getCardList(roleId);
         List<DrawCard> drawCards = new ArrayList<>();
         //抽卡过程
         //是否抽到2Star
@@ -111,27 +113,23 @@ public class DrawCardCtrl extends Controller
         DrawCard drawCard = new DrawCard();
         drawCard.cardId = item.cardId;
         drawCard.state = DrawCardState.New;
-        boolean alreadyOwned = false;
         for (int i = 0; i < ownerList.size(); i++)
         {
-            if(ownerList.get(i).getCardId() == item.cardId)
+            Card card = ownerList.get(i);
+            if(card.getCardId() == item.cardId)
             {
                 drawCard.state = DrawCardState.Owned;
                 drawCard.fragment = item.fragment;
-                alreadyOwned = true;
+                if(card.isActive())
+                {
+                    //添加碎片
+                }else{
+                    logger.info("Draw a new card roleId:" + roleId);
+                    card.setActive(true);
+                    cardService.updateCard(card);
+                }
                 break;
             }
-        }
-        if(alreadyOwned)
-        {
-            //添加碎片
-        }else{
-            Card card = new Card();
-            card.setId(Long.toString(IdGenerator.getInstance().nextId()));
-            card.setCardId(item.cardId);
-            card.setVid(roleId);
-            ownerList.add(card);
-            service.addEntity(card);
         }
         return drawCard;
     }

@@ -19,12 +19,14 @@ public class GameServer extends NodeServer
         super(serverConfig, monitor);
     }
 
+
+
     public static void main(String[] args) throws Exception
     {
         ServerConfigVo serverCfg = ServerTools.createServerConfig(args, ServerName.GAME_SERVER,ServerName.BALANCE_SERVER);
-        GameMonitor mnt = new GameMonitor(serverCfg);
-        GameServer server = new GameServer(serverCfg,mnt);
-        server.setServerClient(new ServerClient(serverCfg, mnt));
+        GameMonitor gameMonitor = new GameMonitor(serverCfg);
+        GameServer server = new GameServer(serverCfg,gameMonitor);
+        server.setServerClient(new ServerClient(serverCfg, gameMonitor));
         server.run();
     }
 

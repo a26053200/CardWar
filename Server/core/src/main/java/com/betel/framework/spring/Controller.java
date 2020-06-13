@@ -2,6 +2,7 @@ package com.betel.framework.spring;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.betel.asd.BaseService;
 import com.betel.asd.Business;
 import com.betel.asd.interfaces.IVo;
 import com.betel.consts.FieldName;
@@ -20,13 +21,11 @@ public abstract class Controller
 {
     final static Logger logger = LogManager.getLogger(Controller.class);
 
-    protected ImplAction action;
-    protected IRedisService service;
+    protected BaseService service;
     protected JSONObject rspdJson;
 
-    public Controller(ImplAction action, IRedisService service)
+    public Controller(BaseService service)
     {
-        this.action = action;
         this.service = service;
         rspdJson = new JSONObject();
     }
@@ -38,7 +37,6 @@ public abstract class Controller
             logger.error("There is old json has not respond to the client!");
             rspdJson.clear();
         }
-//        return true;
     }
 
     public void append(String key, Object obj)
@@ -69,7 +67,7 @@ public abstract class Controller
 
     public void send2client(Session session)
     {
-        action.rspdClient(session, rspdJson);
+        service.rspdClient(session, rspdJson);
         rspdJson.clear();
     }
 
@@ -77,6 +75,6 @@ public abstract class Controller
     {
         JSONObject rspdJson = new JSONObject();
         rspdJson.put(FieldName.MSG, msg);
-        this.action.rspdClient(session, rspdJson);
+        service.rspdClient(session, rspdJson);
     }
 }
