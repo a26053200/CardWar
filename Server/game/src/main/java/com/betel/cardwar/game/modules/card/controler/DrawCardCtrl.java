@@ -72,40 +72,39 @@ public class DrawCardCtrl extends Controller
         List<Card> ownerCardList = cardService.getCardList(roleId);
         List<DrawCard> drawCards = new ArrayList<>();
         //抽卡过程
-        //是否抽到2Star
-        boolean bingo2Star = false;
+        boolean bingo2Star = false;//是否抽到2Star
         CardPoolItem bingo;
         for (int i = 0; i < (drawNum > 1 ? drawNum - 1 : drawNum); i++)
         {
             //先抽稀有度
-            bingo = null;
-            double random = Math.random();
-            if(random < cardPool.baseProb1)
-                bingo = getRandomCard(cardPool);
-            else if(random < cardPool.baseProb2)
-                bingo = getRandomCard(cardPool);
-            else if(random < cardPool.baseProb3)
-                bingo = getRandomCard(cardPool);
-            if(bingo != null)
-            {
-                if(!bingo2Star)
-                    bingo2Star = ModuleConfig.getCardInfo(bingo.cardId).star >= 2;
-                drawCards.add(newDrawCard(bingo, ownerCardList, roleId));
-            }
+            bingo = drawCardProb(cardPool, cardPool.baseProb3, cardPool.baseProb2, 1);
+            if(!bingo2Star)
+                bingo2Star = ModuleConfig.getCardInfo(bingo.cardId).star >= 2;
+            drawCards.add(newDrawCard(bingo, ownerCardList, roleId));
         }
-        //最后一张必出2星, 前面一张2星以上的都没抽到则补抽
-        if(drawNum > 1 && !bingo2Star)
+        //最后一抽
+        if(drawNum > 1)
         {
-            bingo = null;
-            double random = Math.random();
-            if(random < cardPool.lastProb2)
-                bingo = getRandomCard(cardPool);
-            else if(random < cardPool.lastProb3)
-                bingo = getRandomCard(cardPool);
-            if(bingo != null)
-                drawCards.add(newDrawCard(bingo, ownerCardList, roleId));
+            if(bingo2Star)
+                bingo = drawCardProb(cardPool, cardPool.baseProb3, cardPool.baseProb2, 1);
+            else//最后一张必出2星, 前面一张2星以上的都没抽到则补抽
+                bingo = drawCardProb(cardPool, cardPool.lastProb3, 1, 1);
+            drawCards.add(newDrawCard(bingo, ownerCardList, roleId));
         }
         append(Field.DRAW_CARD_LIST, drawCards);
+    }
+
+    private CardPoolItem drawCardProb(CardPool cardPool, double star3Prob, double star2Prob, double star1Prob)
+    {
+        CardPoolItem bingo;
+        double random = Math.random();
+        if(random < star3Prob)
+            bingo = getRandomCard(cardPool, 3);
+        else if(random < star2Prob)
+            bingo = getRandomCard(cardPool, 2);
+        else // cardPool.baseProb3 + cardPool.baseProb2 + cardPool.baseProb1 == 1
+            bingo = getRandomCard(cardPool, 1);
+        return bingo;
     }
 
     private DrawCard newDrawCard(CardPoolItem item, List<Card> ownerList,String roleId)
@@ -119,10 +118,12 @@ public class DrawCardCtrl extends Controller
             if(card.getCardId() == item.cardId)
             {
                 drawCard.state = DrawCardState.Owned;
-                drawCard.fragment = item.fragment;
                 if(card.isActive())
                 {
                     //添加碎片
+                    drawCard.fragmentStoneNum = item.fragmentStoneNum;
+                    CardInfo cardInfo = ModuleConfig.getCardInfo(drawCard.cardId);
+                    cardService.addFragmentStone(roleId, cardInfo.fragmentNum);
                 }else{
                     logger.info("Draw a new card roleId:" + roleId);
                     card.setActive(true);
@@ -134,10 +135,17 @@ public class DrawCardCtrl extends Controller
         return drawCard;
     }
 
-    private CardPoolItem getRandomCard(CardPool cardPool)
+    private CardPoolItem getRandomCard(CardPool cardPool, int star)
     {
         List<CardPoolItem> cardPoolItems = ModuleConfig.getCardPoolItems(cardPool.id);
-        int random = (int)Math.floor(Math.random() * cardPoolItems.size());
-        return cardPoolItems.get(random);
+        List<CardPoolItem> starItems = new ArrayList<>();
+        for (int i = 0; i < cardPoolItems.size(); i++)
+        {
+            CardInfo cardInfo = ModuleConfig.getCardInfo(cardPoolItems.get(i).cardId);
+            if(cardInfo.star == star)
+                starItems.add(cardPoolItems.get(i));
+        }
+        int random = (int)Math.floor(Math.random() * starItems.size());
+        return starItems.get(random);
     }
 }

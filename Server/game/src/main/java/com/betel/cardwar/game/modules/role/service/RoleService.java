@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.betel.asd.BaseService;
 import com.betel.asd.RedisDao;
 import com.betel.cardwar.game.consts.Field;
+import com.betel.cardwar.game.consts.Money;
 import com.betel.cardwar.game.consts.ReturnCode;
 import com.betel.cardwar.game.modules.player.model.Player;
 import com.betel.cardwar.game.modules.player.service.PlayerService;
@@ -16,12 +17,12 @@ import com.betel.cardwar.game.modules.role.model.RoleLevel;
 import com.betel.framework.utils.MathUtils;
 import com.betel.session.Session;
 import com.betel.session.SessionState;
-import com.betel.spring.IRedisService;
 import com.betel.utils.IdGenerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -43,6 +44,8 @@ public class RoleService extends BaseService<Role>
 
     @Autowired
     protected PlayerService playerService;
+
+    private HashMap<String, Role> roleMap = new HashMap<>();
 
     //产生随机名字
     private void randomName(Session session)
@@ -94,6 +97,7 @@ public class RoleService extends BaseService<Role>
         //role.setCurExp(0);
         role.setMaxExp(roleLevel.needExp);
         roleDao.addEntity(role);
+        roleMap.put(role.getId(), role);
         JSONObject sendJson = new JSONObject();
         sendJson.put(Field.ROLE_INFO, JSON.toJSON(role));
         //推送玩家信息
@@ -109,7 +113,7 @@ public class RoleService extends BaseService<Role>
             logger.info(role.getRoleName() + " 进入游戏");
             role.setLastLoginTime(now());
             roleDao.updateEntity(role);
-
+            roleMap.put(role.getId(), role);
             eventDispatcher.dispatchEvent(new RoleEvent(RoleEvent.ROLE_ENTER_GAME, role.getId()));
 
             JSONObject sendJson = new JSONObject();
@@ -131,6 +135,13 @@ public class RoleService extends BaseService<Role>
         String playerId = session.getRecvJson().getString(Field.PLAYER_ID);
         List<Role> roleList = roleDao.getViceEntities(playerId);
         return roleList;
+    }
+
+    public void addRoleMoney(String roleId, Money money, int num)
+    {
+        Role role = roleMap.get(roleId);
+        role.getMoney()[money.ordinal()] += num;
+        roleDao.updateEntity(role);
     }
 
 }

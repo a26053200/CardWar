@@ -13,7 +13,9 @@ import com.betel.cardwar.game.modules.role.events.RoleEvent;
 import com.betel.event.EventDelegate;
 import com.betel.event.EventObject;
 import com.betel.session.Session;
+import com.betel.session.SessionState;
 import com.betel.spring.IRedisService;
+import com.betel.utils.IdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
@@ -40,36 +42,22 @@ public class ItemService extends BaseService<Item>
     @Override
     public void OnLoaded()
     {
-        eventDispatcher.addEventListener(RoleEvent.ROLE_ENTER_GAME, new EventDelegate()
-        {
-            @Autowired
-            protected ItemService itemService;
 
-            @Override
-            public void invoke(EventObject event)
-            {
-                itemService.initRoleItemList(((RoleEvent)event).getRoleId());
-            }
-        });
     }
 
     //获取玩家的所有物品列表
     private void itemList(Session session)
     {
         String roleId = session.getRecvJson().getString(Field.ROLE_ID);
+        if(!roleItemsMap.containsKey(roleId))
+            initRoleItemList(roleId);
         List<Item> itemList = roleItemsMap.get(roleId);
         JSONObject sendJson = new JSONObject();
         sendJson.put(Field.ITEM_LIST, itemList);
         rspdClient(session, sendJson);
     }
 
-    //添加物品
-    public void addItem(String roleId, int itemId)
-    {
-        List<Item> itemList = roleItemsMap.get(roleId);
-    }
-
-    public void initRoleItemList(String roleId)
+    private void initRoleItemList(String roleId)
     {
         List<Item> itemList = dao.getViceEntities(roleId);
         HashMap<Integer, Item> hashMap = new HashMap<>();
@@ -81,5 +69,39 @@ public class ItemService extends BaseService<Item>
         }
         roleItemsMap.put(roleId, itemList);
         roleItemHashMap.put(roleId, hashMap);
+    }
+
+    //装备
+    public void putEquip(String roleId, int itemId, boolean equipped)
+    {
+        HashMap<Integer, Item> hashMap = roleItemHashMap.get(roleId);
+        if(hashMap.containsKey(itemId))
+        {
+            Item item = hashMap.get(itemId);
+            item.setEquipped(equipped);
+            dao.updateEntity(item);
+        }
+    }
+
+    //添加物品
+    public void addItem(String roleId, int itemId, int num)
+    {
+        HashMap<Integer, Item> hashMap = roleItemHashMap.get(roleId);
+        if(hashMap.containsKey(itemId))
+        {
+            Item item = hashMap.get(itemId);
+            int newNum = item.getNum() + num;
+            item.setNum(newNum);
+            dao.updateEntity(item);
+        }else{
+            Item item = new Item();
+            item.setId(Long.toString(IdGenerator.getInstance().nextId()));
+            item.setVid(roleId);
+            item.setNum(num);
+            item.setEquipped(false);
+            item.setLevel(1);
+            item.setItemId(itemId);
+            dao.addEntity(item);
+        }
     }
 }

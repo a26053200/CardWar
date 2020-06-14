@@ -13,6 +13,6 @@ public class DrawCard
 {
     public int cardId;
     public DrawCardState state;
-    public int fragment;
+    public int fragmentStoneNum;
 
 }

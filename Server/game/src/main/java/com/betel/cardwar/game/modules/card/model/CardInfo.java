@@ -15,4 +15,7 @@ public class CardInfo
     public int star;     //星级
     public int rank;     //rank
     public int rarity;   //稀有度
+    public String fragments; //升星所需碎片数量
+    public int fragmentId; //碎片id
+    public int fragmentNum; //重复抽到时兑换碎片数量
 }

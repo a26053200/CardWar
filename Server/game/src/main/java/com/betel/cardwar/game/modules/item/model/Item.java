@@ -11,6 +11,7 @@ public class Item implements IVo
 {
     private String id;
     private String roleId;
+    private String addTime; //道具获得的时间
     private int itemId;
     private int level;
     private int num;

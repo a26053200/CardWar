@@ -15,5 +15,5 @@ public class CardPoolItem
     public String name;
     public String type;
     public int cardId;
-    public int fragment;
+    public int fragmentStoneNum;
 }

@@ -15,6 +15,7 @@ public enum Money
      */
     FreeMoney,
     /**
-     *
+     * 碎片兑换石
      */
+    FragmentStone,
 }

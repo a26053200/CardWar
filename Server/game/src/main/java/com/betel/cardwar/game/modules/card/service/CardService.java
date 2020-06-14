@@ -5,16 +5,15 @@ import com.alibaba.fastjson.JSONObject;
 import com.betel.asd.BaseService;
 import com.betel.asd.RedisDao;
 import com.betel.cardwar.game.consts.Field;
+import com.betel.cardwar.game.consts.Money;
 import com.betel.cardwar.game.modules.card.ModuleConfig;
 import com.betel.cardwar.game.modules.card.controler.DrawCardCtrl;
 import com.betel.cardwar.game.modules.card.model.Card;
 import com.betel.cardwar.game.modules.card.model.CardDao;
 import com.betel.cardwar.game.modules.card.model.CardInfo;
 import com.betel.cardwar.game.modules.card.model.CardPool;
-import com.betel.cardwar.game.modules.item.service.ItemService;
-import com.betel.cardwar.game.modules.role.model.Role;
+import com.betel.cardwar.game.modules.role.service.RoleService;
 import com.betel.session.Session;
-import com.betel.spring.IRedisService;
 import com.betel.utils.IdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,7 +36,7 @@ public class CardService extends BaseService<Card>
         return dao;
     }
     @Autowired
-    protected ItemService itemService;
+    protected RoleService roleService;
 
     private DrawCardCtrl drawCardCtrl;
 
@@ -105,8 +104,8 @@ public class CardService extends BaseService<Card>
         return dao.getViceEntities(roleId);
     }
 
-    public void addCardFragment(String roleId)
+    public void addFragmentStone(String roleId, int num)
     {
-
+        roleService.addRoleMoney(roleId, Money.FragmentStone, num);
     }
 }
