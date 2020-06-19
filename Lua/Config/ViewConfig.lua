@@ -18,3 +18,8 @@ ViewConfig.PlayerInfo = {name = "PlayerInfo",module = "Player",}
 ViewConfig.CardDraw = {name = "CardDraw",module = "Card",prefab = "Prefabs/UI/Card/CardDraw.prefab",}
 ViewConfig.Lobby = {name = "Lobby",module = "Lobby",prefab = "Prefabs/UI/Lobby/Lobby.prefab",}
 ViewConfig.CardList = {name = "CardList",module = "Card",prefab = "Prefabs/UI/Card/CardList.prefab",}
+ViewConfig.DrawCardList = {name = "DrawCardList",module = "Card",prefab = "Prefabs/UI/Card/DrawCardList.prefab",}
+ViewConfig.Adventure = {name = "Adventure",module = "Adventure",prefab = "Prefabs/UI/Adventure/Adventure.prefab",}
+ViewConfig.ItemBag = {name = "ItemBag",module = "Item",}
+ViewConfig.ArrayEditor = {module = "Array",name = "ArrayEditor",prefab = "Prefabs/UI/Array/ArrayEditor.prefab",}
+ViewConfig.CheckPoint = {name = "CheckPoint",module = "CheckPoint",prefab = "Prefabs/UI/CheckPoint/CheckPoint.prefab",}

@@ -42,7 +42,7 @@ Screen = UnityEngine.Screen
 --- Lua Framework
 edp = EventDispatcher.New() --全局事件派发器
 ListViewEvent = require("Betel.UI.ListViewEvent")
-BaseList = require("Betel.UI.BaseList")
+TableList = require("Betel.UI.TableList")
 --ListExtend = require("Game.Modules.Common.View.ListExtend") ---@type Module.Common.View.ListExtend
 ListItemRenderer = require("Betel.UI.ListItemRenderer")
 

@@ -114,13 +114,13 @@ function GetComponent.Slider(go)
 end
 
 ---@param go UnityEngine.GameObject
----@return ListView
+---@return EasyList.ListViewBase
 function GetListView(go)
     return go:GetCom(ListView)
 end
 
 ---@param go UnityEngine.GameObject
----@return ListView
+---@return EasyList.ListViewBase
 function GetComponent.ListView(go)
     return go:GetCom(ListView)
 end

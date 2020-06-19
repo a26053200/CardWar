@@ -7,7 +7,6 @@
 local NetworkListener = require("Betel.Net.NetworkListener")
 local LuaMonoBehaviour = require('Betel.LuaMonoBehaviour')
 ---@class Game.Core.Ioc.BaseMediator : Betel.LuaMonoBehaviour
----@field gameObject UnityEngine.GameObject
 ---@field layer UILayer 该模块所在UI层级
 ---@field rectTransform UnityEngine.RectTransform
 ---@field scene Game.Modules.World.Scenes.Core.BaseScene
@@ -18,7 +17,7 @@ local BaseMediator = class("BaseMediator",LuaMonoBehaviour)
 
 function BaseMediator:Ctor()
     BaseMediator.super.Ctor(self)
-    self.layer = UILayer.LAYER_DEPTH_UI --默认在深度排序层级
+    self.layer = UILayer.LAYER_DEPTH --默认在深度排序层级
     self.netWorkListener = NetworkListener.New(true)
     self.clickEventMap = {} --主动注册的点击事件
     self.removeCallback = nil
@@ -101,12 +100,12 @@ function BaseMediator:AddClickEventListener(go, clickFun, addPointerScale)
     table.insert(self.clickEventMap[clickFun], {go = go, handler = handler})
 end
 
---function BaseMediator:AddObjectEventListener(listener, go, func)
---    if not self.clickEventMap[func] then
---        listener(go, func)
---        self.clickEventMap[func] = {go,func}
---    end
---end
+---@param bg UnityEngine.GameObject
+function BaseMediator:SetCloseBg(bg)
+    self:AddClickEventListener(bg, function()
+        self:Unload()
+    end,false)
+end
 
 function BaseMediator:RegisterButtonClick(go, clickFun, addPointerScale)
     if addPointerScale == nil or addPointerScale == true then

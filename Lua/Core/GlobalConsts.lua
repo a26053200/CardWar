@@ -10,11 +10,10 @@ UILayer =
 {
     -- 场景图层
     LAYER_SCENE = "scene", -- 场景层
-    LAYER_EXTEND_UI = "uiExtendLayer", -- UI可伸缩层
-    LAYER_MOVE_UI = "uiMoveLayer", -- UI可移动层
-    LAYER_DEPTH_UI = "depth", -- UI深度排序层
-    LAYER_WINDOW = "windowLayer", -- 窗口层
-    LAYER_UI_TOP = "uiTopLayer", -- 顶级UI层
+    LAYER_BOTTOM = "bottom", -- UIBottom
+    LAYER_DEPTH = "depth", -- UI深度排序层
+    LAYER_FLOAT = "float", -- 顶级UI层
+    LAYER_WINDOW = "window", -- 弹出窗口
     LAYER_ALERT = "alert", -- 提示层
     LAYER_GUIDE = "guide", -- 引导层
     LAYER_TOP = "top", -- 顶级层

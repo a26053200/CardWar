@@ -10,15 +10,21 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@field roleModel Game.Modules.Role.Model.RoleModel
 ---@field lobbyService Game.Modules.Lobby.Service.LobbyService
 ---@field cardService Game.Modules.Card.Service.CardService
+---@field itemService Game.Modules.Item.Service.ItemService
 local LobbyMdr = class("Game.Modules.Lobby.View.LobbyMdr",BaseMediator)
 
 function LobbyMdr:OnInit()
     self.cardService:getCardList(self.roleModel.roleInfo.id, self.OnCardList)
+    self.itemService:getItemList(self.roleModel.roleInfo.id, self.OnItemList)
     vmgr:LoadView(ViewConfig.RoleInfo)
     vmgr:LoadView(ViewConfig.Navigation)
 end
 
 function LobbyMdr:OnCardList(data)
+
+end
+
+function LobbyMdr:OnItemList(data)
 
 end
 

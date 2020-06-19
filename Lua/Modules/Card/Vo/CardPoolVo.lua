@@ -9,11 +9,17 @@ local BaseVo = require("Game.Core.BaseVo")
 ---@field New fun():Game.Modules.Card.Vo.CardPoolVo
 ---@field name string
 ---@field maxTimes number
+---@field limitDrawPrice number
+---@field singleDrawPrice number
+---@field seriesDrawPrice number
 local CardPoolVo = class("Game.Modules.Card.Vo.CardPoolVo",BaseVo)
 
 function CardPoolVo:Ctor(cardPool)
     self.name = cardPool.id
     self.maxTimes = cardPool.maxTimes
+    self.limitDrawPrice = cardPool.limitDrawPrice
+    self.singleDrawPrice = cardPool.singleDrawPrice
+    self.seriesDrawPrice = cardPool.seriesDrawPrice
 end
 
 return CardPoolVo

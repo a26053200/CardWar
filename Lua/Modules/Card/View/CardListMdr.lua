@@ -12,13 +12,15 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 local CardListMdr = class("Game.Modules.Card.View.CardListMdr",BaseMediator)
 
 function CardListMdr:OnInit()
-    self.cardList = BaseList.New(self.gameObject:FindChild("ListView"), CardItem)
-    self.cardList:SetData(self.cardModel.cardList)
+    self:SetCloseBg(self.gameObject:FindChild("Bg"))
+    self.cardList = TableList.New(self.gameObject:FindChild("List/ListView"), CardItem)
+    self.cardList:SetData(self.cardModel:SortByActive())
     self.cardList.eventDispatcher:AddEventListener(ListViewEvent.ItemClick,self.onItemClick, self)
 end
 
-function CardListMdr:onItemClick(event, data)
-    print(string.format("click card %s",data.id))
+
+function CardListMdr:onItemClick(event, data, index)
+    print(string.format("click card index %s",index))
 end
 
 return CardListMdr

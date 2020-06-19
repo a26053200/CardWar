@@ -5,9 +5,10 @@
 ---
 
 ---@class CardInfo
----@field id string
+---@field id number
 ---@field name string
 ---@field battleUnit string
+---@field rank number
 ---@field rarity number
 ---@field star number
 ---@field level number

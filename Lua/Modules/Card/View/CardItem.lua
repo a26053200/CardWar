@@ -8,25 +8,41 @@ local ListItemRenderer = require("Betel.UI.ListItemRenderer")
 ---@class Game.Modules.Card.View.CardItem: Betel.UI.ListItemRenderer
 local CardItem = class("Game.Modules.Login.View.ServerItem",ListItemRenderer)
 
-local RankFrame =
-{
-    [1] = "Atlas/PostCard/dikuang_16_1_6.png",
-    [2] = "Atlas/PostCard/dikuang_16_1_1.png",
-    [3] = "Atlas/PostCard/dikuang_16_1_2.png",
-    [4] = "Atlas/PostCard/dikuang_16_1_3.png",
-    [5] = "Atlas/PostCard/dikuang_16_1_4.png",
-    [6] = "Atlas/PostCard/dikuang_16_1_5.png",
-}
-
 ---@param gameObject UnityEngine.GameObject
 function CardItem:Ctor(gameObject)
     CardItem.super.Ctor(self,gameObject)
 end
 
-function CardItem:UpdateItem(data, index)
+---@param cardVo Game.Modules.Card.Vo.CardVo
+function CardItem:UpdateItem(cardVo, index)
+    local frameImg = self.gameObject:GetImage("Frame")
+    frameImg.sprite = Res.LoadSprite(RankFrameUrl[cardVo.cardInfo.rarity])
+
     local maskImg = self.gameObject:GetImage("Mask")
-    maskImg.sprite = Res.LoadSprite(RankFrame[1])
-    maskImg.type = UnityEngine.UI.Image.Type.Sliced
+    maskImg.gameObject:SetActive(not cardVo.active)
+
+    local iconImg = self.gameObject:GetImage("Icon")
+    iconImg.sprite = Res.LoadSprite(cardVo.cardInfo.iconUrl)
+    iconImg:SetNativeSize()
+
+    local starBar = self.gameObject:FindChild("StarBar")
+    self:SetStar(starBar, cardVo.star)
+
+    local rankText = self.gameObject:GetText("Rank")
+    rankText.text = "RANK " .. cardVo.rank
+    rankText.gameObject:SetActive(cardVo.active)
+
+    local displayText = self.gameObject:GetText("Display")
+    displayText.text = "Lv " .. cardVo.level
+    displayText.gameObject:SetActive(cardVo.active)
+end
+
+---@param starBar UnityEngine.GameObject
+function CardItem:SetStar(starBar, starNum)
+    for i = 1, starBar.transform.childCount do
+        local starImg = starBar.transform:GetChild(i - 1).gameObject:GetImage()
+        starImg.sprite = UITools.GetSprite(starImg.gameObject, i <= starNum and 1 or 0)
+    end
 end
 
 function CardItem:OnDestroy()

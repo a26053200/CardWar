@@ -9,11 +9,81 @@ local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@field cardService Game.Modules.Card.Service.CardService
 ---@field cardList List | table<number, Game.Modules.Card.Vo.CardVo>
 ---@field cardPoolList List | table<number, Game.Modules.Card.Vo.CardPoolVo>
+---@field drawCardList List | table<number, Game.Modules.Card.Vo.DrawCardVo>
 local CardModel = class("CardModel",BaseModel)
 
 function CardModel:Ctor()
 
 end
 
+---@param c1 Game.Modules.Card.Vo.CardVo
+---@param c2 Game.Modules.Card.Vo.CardVo
+---@return number
+local function sortByActive(c1, c2)
+    if c1 ~= nil and c2 ~= nil then
+        if c1.active and c2.active or not c1.active and not c2.active then
+            return c1.cardInfo.id < c2.cardInfo.id
+        else
+            return c1.active and not c2.active
+        end
+    else
+        return false
+    end
+end
+
+---@param c1 Game.Modules.Card.Vo.CardVo
+---@param c2 Game.Modules.Card.Vo.CardVo
+---@return number
+local function sortByStar(c1, c2)
+    if c1 ~= nil and c2 ~= nil then
+        return c1.star < c2.star
+    else
+        return false
+    end
+end
+
+---@param c1 Game.Modules.Card.Vo.CardVo
+---@param c2 Game.Modules.Card.Vo.CardVo
+---@return number
+local function sortByLevel(c1, c2)
+    if c1 ~= nil and c2 ~= nil then
+        return c1.level < c2.level
+    else
+        return false
+    end
+end
+
+---@return List | table<number, Game.Modules.Card.Vo.CardVo>
+function CardModel:SortByActive()
+    local list = self.cardList:Clone()
+    list:Sort(sortByActive)
+    return list
+end
+
+---@return List | table<number, Game.Modules.Card.Vo.CardVo>
+function CardModel:SortByStar()
+    local list = self:getSortList(false)
+    list:Sort(sortByStar)
+    return list
+end
+
+---@return List | table<number, Game.Modules.Card.Vo.CardVo>
+function CardModel:SortByLevel()
+    local list = self:getSortList(false)
+    list:Sort(sortByLevel)
+    return list
+end
+
+---@param includeInactive boolean
+---@return List | table<number, Game.Modules.Card.Vo.CardVo>
+function CardModel:getSortList(includeInactive)
+    local list = List.New()
+    for i = 1, self.cardList:Size() do
+        if includeInactive or self.cardList[i].active then
+            list:Add(self.cardList[i])
+        end
+    end
+    return list
+end
 
 return CardModel

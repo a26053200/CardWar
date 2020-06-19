@@ -7,7 +7,7 @@
 
 local BaseService = require("Game.Core.Ioc.BaseService")
 ---@class Game.Modules.Role.Service.RoleService : Game.Core.Ioc.BaseService
----@field roomModel Game.Modules.Room.Model.RoomModel
+---@field roleModel Game.Modules.Role.Model.RoleModel
 local RoleService = class("RoleService",BaseService)
 local RoleVo = require("Game.Modules.Role.Vo.RoleVo")
 
@@ -15,5 +15,18 @@ function RoleService:Ctor()
 
 end
 
+---@param roleId string
+---@param callback fun()
+function RoleService:getResource(roleId, callback)
+    self:HttpRequest(Action.GetResource, {roleId}, function(data)
+        if self.roleModel.roleInfo then
+            self.roleModel.roleInfo.gameMoney = data.roleResource[Money.GameMoney]
+            self.roleModel.roleInfo.payMoney = data.roleResource[Money.PayMoney]
+            self.roleModel.roleInfo.freeMoney = data.roleResource[Money.FreeMoney]
+            self.roleModel.roleInfo.fragmentStone = data.roleResource[Money.FragmentStone]
+        end
+        invoke(callback, data)
+    end)
+end
 
 return RoleService

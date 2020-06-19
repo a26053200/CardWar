@@ -26,7 +26,7 @@ function ServerListMdr:RegisterListeners()
 end
 
 function ServerListMdr:InitSrvList()
-    self.srvList = BaseList.New(self.gameObject:FindChild("ListView"),ServerItem)
+    self.srvList = TableList.New(self.gameObject:FindChild("ListView"),ServerItem)
     self.srvList:SetData(List.New(self.loginModel.serverList))
     self.srvList.eventDispatcher:AddEventListener(ListViewEvent.ItemClick,self.onSrvItemClick, self)
 end

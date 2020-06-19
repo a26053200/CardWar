@@ -20,7 +20,8 @@ local BaseVo = require("Game.Core.BaseVo")
 ---@field ce number --角色的总战斗力 Combat Effectiveness
 ---@field gameMoney number --游戏币
 ---@field payMoney number --充值币
----@field freeMoney number --免费币
+---@field freeMoney number --
+---@field fragmentStone number --兑换石
 ---@field clientOnlineTime number --角色上线游戏时间(受到游戏帧频影响)(单位:毫秒)
 ---@field clientOnlineRealTime number --角色上线实际时间(单位:毫秒)
 local RoleVo = class("RoleVo",BaseVo)
@@ -37,11 +38,10 @@ function RoleVo:Ctor(roleInfo)
     self.curExp = roleInfo.curExp
     self.maxExp = roleInfo.maxExp
     self.ce = roleInfo.ce
-    self.gameMoney = roleInfo.money[Money.GameMoney]
-    self.payMoney = roleInfo.money[Money.PayMoney]
-    self.freeMoney = roleInfo.money[Money.FreeMoney]
-
-
+    self.gameMoney = roleInfo.resource[Money.GameMoney]
+    self.payMoney = roleInfo.resource[Money.PayMoney]
+    self.freeMoney = roleInfo.resource[Money.FreeMoney]
+    self.fragmentStone = roleInfo.resource[Money.FragmentStone]
 end
 
 function RoleVo:GetTotalOnlineTime()

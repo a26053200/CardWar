@@ -4,6 +4,10 @@
 --- DateTime: 2020-04-10-22:53:29
 ---
 
+---@class NavigationInfo
+---@field label string
+---@field views List | table<number, Game.Manager.ViewInfo>
+
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.Lobby.View.NavigationMdr : Game.Core.Ioc.BaseMediator
 ---@field lobbyModel Game.Modules.Lobby.Model.LobbyModel
@@ -12,21 +16,50 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@field currSelectTabIndex number
 local NavigationMdr = class("Game.Modules.Lobby.View.NavigationMdr",BaseMediator)
 
-local Navigation = {
-    [1] = {label = "主页", view = nil,                    showResourceBar = false},
-    [2] = {label = "卡片", view = ViewConfig.CardList,    showResourceBar = false},
-    [3] = {label = "剧情", view = nil},
-    [4] = {label = "冒险", view = nil},
-    [5] = {label = "家园", view = nil},
-    [6] = {label = "抽卡", view = ViewConfig.CardDraw,    showResourceBar = true},
-    [7] = {label = "菜单", view = nil},
-}
+local Navigation = {}
+
+function NavigationMdr:Ctor()
+    NavigationMdr.super.Ctor(self)
+    self.layer = UILayer.LAYER_FLOAT
+end
 
 function NavigationMdr:OnInit()
+    Navigation =
+    {
+        [1] = {
+            label = "主页",
+            views = List.New()
+        },
+        [2] = {
+            label = "卡片",
+            views = List.New({ViewConfig.CardList}),
+        },
+        [3] = {
+            label = "剧情",
+            views = List.New()
+        },
+        [4] = {
+            label = "冒险",
+            views = List.New({ViewConfig.Adventure, ViewConfig.ResourceBar})
+        },
+        [5] = {
+            label = "家园",
+            views = List.New()
+        },
+        [6] = {
+            label = "抽卡",
+            views = List.New({ViewConfig.CardDraw, ViewConfig.ResourceBar})
+        },
+        [7] = {
+            label = "物品",
+            views = List.New()
+        },
+    }
+
     self.btns = List.New()
     self.currSelectTabIndex = 0
     self.toggleGroup = self.gameObject:GetToggleGroup("Bar")
-    for i = 1, 7 do
+    for i = 1, #Navigation do
         local toggle = self.gameObject:GetToggle("Bar/Toggle" .. i)
         self.gameObject:GetText("Bar/Toggle" .. i .. "/Label").text = Navigation[i].label
         self.btns:Add(toggle.gameObject)
@@ -39,19 +72,17 @@ function NavigationMdr:OnTabClick(event)
     local index = self.btns:IndexOf(event.pointerPress)
     if index >= 1 then
         if self.currSelectTabIndex ~= index then
+            local currNav = Navigation[index] ---@type NavigationInfo
             if self.currSelectTabIndex > 0 then
-                if Navigation[self.currSelectTabIndex].view then
-                    vmgr:UnloadView(Navigation[self.currSelectTabIndex].view)
-                end
-                if Navigation[self.currSelectTabIndex].showResourceBar and not Navigation[index].showResourceBar then
-                    vmgr:UnloadView(ViewConfig.ResourceBar)
+                local lastNav = Navigation[self.currSelectTabIndex] ---@type NavigationInfo
+                for i = 1, lastNav.views:Size() do
+                    if not currNav.views:Contain(lastNav.views[i]) then
+                        vmgr:UnloadView(lastNav.views[i])
+                    end
                 end
             end
-            if Navigation[index].view then
-                vmgr:LoadView(Navigation[index].view)
-            end
-            if Navigation[index].showResourceBar then
-                vmgr:LoadView(ViewConfig.ResourceBar)
+            for i = 1, currNav.views:Size() do
+                vmgr:LoadView(currNav.views[i])
             end
             self.currSelectTabIndex = index
         end

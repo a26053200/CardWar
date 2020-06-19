@@ -55,4 +55,12 @@ function UITools.CreateScrollList(go, scrollListName, itemRenderHandler, scrollO
     return srvList
 end
 
+--获取sprite
+---@param go UnityEngine.GameObject
+---@return UnityEngine.Sprite
+function UITools.GetSprite(go, index)
+    local spriteList = go:GetComponent(typeof(Framework.SpriteList))---@type Framework.SpriteList
+    return spriteList.Sprites[index]
+end
+
 return UITools

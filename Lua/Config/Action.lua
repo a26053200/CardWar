@@ -25,7 +25,12 @@ Action.FetchRandomName = { server = "GameServer", action = "role@randomName", fi
 
 Action.CreateRole = { server = "GameServer", action = "role@roleCreate", fields = "playerId,roleName"}
 
+---==================
+--- Role
+---==================
 
+--获取角色资源
+Action.GetResource = { server = "GameServer", action = "role@getResource", fields = "roleId" }
 ---==================
 --- Card
 ---==================
@@ -36,42 +41,13 @@ Action.CardList = { server = "GameServer", action = "Card@cardList", fields = "r
 Action.CardPoolInfo = { server = "GameServer", action = "Card@cardPoolInfo", fields = "" }
 
 --抽卡
-Action.DrawCard = { server = "GameServer", action = "Card@drawCard", fields = "roleId,cardPoolName,drawCardNum" }
+Action.DrawCard = { server = "GameServer", action = "Card@drawCard", fields = "roleId,cardPoolName,drawCardType,drawCardNum" }
 
---推送房间信息
-Action.PushRoomInfo = "push@room_info"
 
---推送其他玩家进入房间
-Action.PushEnterRoom = "push@enter_room"
-
---推送其他玩家退出房间
-Action.PushExitRoom = "push@exit_room"
-
---手动创建房间
-Action.CreateRoom = { server = "RoomServer", action = "room@create_room", fields = "roleId,game,gameMode,robotNum" }
-
---手动进入房间
-Action.EnterRoom = { server = "LobbyServer", action = "match@enter_room", fields = "roleId,roomId,roomPos,isRobot" }
-
---手动退出房间
-Action.ExitRoom = { server = "RoomServer", action = "room@exit_room", fields = "roleId,roomId" }
-
---玩家状态改变
-Action.ChangeState = { server = "RoomServer", action = "room@role_state", fields = "roomId,roleId,roleState,isRobot" }
-
---推送玩家状态
-Action.PushRoomRoleState = "push@room_role_state"
-
---推送开始加载
-Action.PushRoomLoadStart = "push@load_start"
-
---推送开始加载
-Action.PushRoomGameStart = "push@game_start"
-
---推送发牌
-Action.PushHJCardSlot = "push@hj_card_slot"
-
---推送轮到谁出牌
-Action.PushHJWhoseTurn = "push@hj_whose_turn"
+---==================
+--- Item
+---==================
+--获取当前角色所拥物品信息
+Action.ItemList = { server = "GameServer", action = "Item@itemList", fields = "roleId" }
 
 return Action

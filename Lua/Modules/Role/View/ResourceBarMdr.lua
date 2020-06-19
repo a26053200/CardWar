@@ -4,24 +4,36 @@
 --- DateTime: 2020-05-31-23:56:06
 ---
 
+local RoleEvents = require("Game.Modules.Role.Events.RoleEvents")
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.Role.View.ResourceBarMdr : Game.Core.Ioc.BaseMediator
 ---@field roleModel Game.Modules.Role.Model.RoleModel
 ---@field roleService Game.Modules.Role.Service.RoleService
+---@field roleInfo Game.Modules.Role.Vo.RoleVo
 local ResourceBarMdr = class("Game.Modules.Role.View.ResourceBarMdr",BaseMediator)
 
 function ResourceBarMdr:OnInit()
     self.roleInfo = self.roleModel.roleInfo;
 
-    self.gameObject:GetText("Status/GameMoney/Text").text = self.roleInfo.gameMoney
-    self.gameObject:GetText("Status/FreeMoney/Text").text = self.roleInfo.freeMoney
-    self.gameObject:GetText("Status/Exp/Text").text = self.roleInfo.curExp
-    self.gameObject:GetText("Status/Sp/Text").text = self.roleInfo.curStrength .. "/" .. self.roleInfo.maxStrength
-
+    self:OnUpdateResource()
     self.exp = self:InitSlider("Status/Exp/Slider", 0, self.roleInfo.maxExp, self.roleInfo.curExp)
     self.sp = self:InitSlider("Status/Sp/Slider", 0, self.roleInfo.maxStrength, self.roleInfo.curStrength)
 end
 
+function ResourceBarMdr:RegisterListeners()
+    self:AddGlobalEventListener(RoleEvents.GetResource, handler(self, self.OnGetResource))
+end
+
+function ResourceBarMdr:OnGetResource()
+    self.roleService:getResource(self.roleInfo.id, handler(self, self.OnUpdateResource))
+end
+
+function ResourceBarMdr:OnUpdateResource()
+    self.gameObject:GetText("Status/GameMoney/Text").text = self.roleInfo.fragmentStone
+    self.gameObject:GetText("Status/Money/Text").text = tostring(self.roleInfo.freeMoney + self.roleInfo.payMoney)
+    self.gameObject:GetText("Status/Exp/Text").text = self.roleInfo.curExp
+    self.gameObject:GetText("Status/Sp/Text").text = self.roleInfo.curStrength .. "/" .. self.roleInfo.maxStrength
+end
 
 ---@return UnityEngine.UI.Slider
 function ResourceBarMdr:InitSlider(path, minValue, maxValue, value)

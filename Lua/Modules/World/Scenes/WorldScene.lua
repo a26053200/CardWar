@@ -18,6 +18,9 @@ end
 
 function WorldScene:OnEnterScene()
     --vmgr:LoadView(ViewConfig.NewbieWelcome)
+
+    CheckPointConfig.Init()
+
     self:EnterSubScene("Lobby")
 end
 

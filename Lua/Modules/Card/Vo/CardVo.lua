@@ -9,6 +9,7 @@ local BaseVo = require("Game.Core.BaseVo")
 ---@field New fun(cardName:string):Game.Modules.Card.Vo.CardVo
 ---@field cardInfo CardInfo
 ---@field id string
+---@field active boolean
 ---@field level number 等级
 ---@field star number 星级
 ---@field rank number 品阶
@@ -19,6 +20,7 @@ local CardVo = class("Module.Card.Vo.CardVo",BaseVo)
 function CardVo:Ctor(card)
     self.cardInfo = CardConfig.Get(card.cardId)
     self.id = card.id
+    self.active = card.active
     self.level = card.level
     self.star = card.star
     self.rank = card.rank

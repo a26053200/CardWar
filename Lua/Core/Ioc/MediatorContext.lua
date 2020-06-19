@@ -21,11 +21,16 @@ end
 
 function MediatorContext:Launch()
     --TODO
+	self.binder:Bind(require("Game.Modules.Adventure.View.AdventureMdr")):To(ViewConfig.Adventure.name)
+	self.binder:Bind(require("Game.Modules.Array.View.ArrayEditorMdr")):To(ViewConfig.ArrayEditor.name)
 	self.binder:Bind(require("Game.Modules.Battle.View.BattleEditorMdr")):To(ViewConfig.BattleEditor.name)
 	self.binder:Bind(require("Game.Modules.Battle.View.BattleInfoMdr")):To(ViewConfig.BattleInfo.name)
 	self.binder:Bind(require("Game.Modules.Battle.View.BattleMdr")):To(ViewConfig.Battle.name)
 	self.binder:Bind(require("Game.Modules.Card.View.CardDrawMdr")):To(ViewConfig.CardDraw.name)
 	self.binder:Bind(require("Game.Modules.Card.View.CardListMdr")):To(ViewConfig.CardList.name)
+	self.binder:Bind(require("Game.Modules.Card.View.DrawCardListMdr")):To(ViewConfig.DrawCardList.name)
+	self.binder:Bind(require("Game.Modules.CheckPoint.View.CheckPointMdr")):To(ViewConfig.CheckPoint.name)
+	self.binder:Bind(require("Game.Modules.Item.View.ItemBagMdr")):To(ViewConfig.ItemBag.name)
 	self.binder:Bind(require("Game.Modules.Joystick.View.JoystickMdr")):To(ViewConfig.Joystick.name)
 	self.binder:Bind(require("Game.Modules.Loading.View.LoadingMdr")):To(ViewConfig.Loading.name)
 	self.binder:Bind(require("Game.Modules.Lobby.View.LobbyMdr")):To(ViewConfig.Lobby.name)

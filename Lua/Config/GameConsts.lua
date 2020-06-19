@@ -17,14 +17,15 @@ HERO_AWAKEN_UP_LEVEL = 10      -- 觉醒增加的最大等级
 HERO_AWAKEN_UP_ATTRIBUTE = 0.1 -- 觉醒增加的属性值
 HERO_MOOD_MAX = 100       -- 心情的最大值
 
---Card 稀有度
----@class CardRarity
-CardRarity =
+
+RankFrameUrl =
 {
-    SSR = "SSR",--全称为superior super rare，特级超稀有。一般为集换式卡牌游戏最高稀有等级。
-    SR = "SR",  --Super Rare 超稀有（一般低于）
-    R = "R",    --Rare稀有（一般作为协战点/友情/助战点能抽到的稀有度上限）
-    N = "N",    --Normal普通（最常见最容易到手的稀有度级别
+    [1] = "Atlas/RankFrame/dikuang_16_1_0.png",
+    [2] = "Atlas/RankFrame/dikuang_16_1_1.png",
+    [3] = "Atlas/RankFrame/dikuang_16_1_2.png",
+    [4] = "Atlas/RankFrame/dikuang_16_1_3.png",
+    [5] = "Atlas/RankFrame/dikuang_16_1_4.png",
+    [6] = "Atlas/RankFrame/dikuang_16_1_5.png",
 }
 
 ---=========================================================================
@@ -62,6 +63,34 @@ PreloadingTaskType =
 ---=========================================================================
 --- 功能模块
 ---=========================================================================
+
+--Card 稀有度
+---@class CardRarity
+CardRarity =
+{
+    SSR = "SSR",--全称为superior super rare，特级超稀有。一般为集换式卡牌游戏最高稀有等级。
+    SR = "SR",  --Super Rare 超稀有（一般低于）
+    R = "R",    --Rare稀有（一般作为协战点/友情/助战点能抽到的稀有度上限）
+    N = "N",    --Normal普通（最常见最容易到手的稀有度级别
+}
+
+--DrawCardState 抽卡状态
+---@class DrawCardState
+DrawCardState =
+{
+    New = 0,
+    Owned = 1,
+}
+
+--DrawCardState 抽卡类型
+---@class DrawCardType
+DrawCardType =
+{
+    Limit_Single = 0,  --限定单次
+    Normal_Single = 1, --单次
+    Normal_Series = 2, --连续多次
+}
+
 
 --卡牌的状态
 ---@class CardState
@@ -205,13 +234,25 @@ AttrType =
     Crit = 4,       -- 暴击
 }
 
+---@class ItemType
 ItemType =
 {
     Item = 1,           -- 道具
-    Exp = 2,            -- 经验道具
-    BossTrace = 3,      -- Boss踪迹
-    ExplorePoint = 4,   -- 探索点数
-    Equip = 10,         -- 装备
+    Equip = 2,          -- 装备
+    Fragment = 3,       -- 碎片
+    Task = 4,           -- 任务
+}
+
+---@class ItemSubType
+ItemSubType =
+{
+    Exp = "Exp",                        -- 经验道具
+    SwapTicket = "SwapTicket",          -- 扫荡券
+    Stone = "Stone",                    -- 强化石
+    Gift = "Gift",                      -- 礼物
+    DrawCardTicket = "DrawCardTicket",  -- 抽卡券
+    Equip = "Equip",                    -- 装备
+    EquipFragment = "EquipFragment",    -- 装备碎片
 }
 
 ---@class TargetMode
@@ -539,6 +580,7 @@ Money =
     GameMoney   = 1,    --游戏币
     PayMoney    = 2,    --充值币
     FreeMoney   = 3,    --免费币
+    FragmentStone   = 4,    --兑换石
 }
 local GameConst = {}
 return GameConst
