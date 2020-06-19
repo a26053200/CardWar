@@ -1,11 +1,14 @@
 package com.betel.cardwar.game.consts;
 
-public enum Money
+/***
+ * 游戏资源
+ */
+public enum Resources
 {
     /**
      * 游戏币
      */
-    GameMoney,
+    Gold,
     /**
      * 充值币
      */

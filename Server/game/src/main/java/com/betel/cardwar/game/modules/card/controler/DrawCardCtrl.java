@@ -2,9 +2,7 @@ package com.betel.cardwar.game.modules.card.controler;
 
 
 import com.betel.asd.BaseService;
-import com.betel.cardwar.game.consts.DrawCardState;
-import com.betel.cardwar.game.consts.Field;
-import com.betel.cardwar.game.consts.ReturnCode;
+import com.betel.cardwar.game.consts.*;
 import com.betel.cardwar.game.modules.card.ModuleConfig;
 import com.betel.cardwar.game.modules.card.model.*;
 import com.betel.cardwar.game.modules.card.service.CardService;
@@ -13,6 +11,7 @@ import com.betel.framework.spring.Controller;
 import com.betel.framework.utils.DateUtils;
 import com.betel.servers.action.ImplAction;
 import com.betel.session.Session;
+import com.betel.session.SessionState;
 import com.betel.spring.IRedisService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,6 +42,7 @@ public class DrawCardCtrl extends Controller
     {
         super.newRspd(session);
         String cardPoolName = session.getRecvJson().getString(Field.CARD_POOL_NAME);
+
         //获取卡池
         CardPool cardPool = ModuleConfig.getCardPool(cardPoolName);
         if(cardPool == null)
@@ -59,7 +59,6 @@ public class DrawCardCtrl extends Controller
             rspdMessage(session, ReturnCode.Card_Pool_Not_In_Time);
             return;
         }
-        //开始抽卡
         int drawNum  = session.getRecvJson().getIntValue(Field.DRAW_CARD_NUM);
         if(drawNum != 1 && drawNum != 10)
         {
@@ -67,31 +66,58 @@ public class DrawCardCtrl extends Controller
             return;
         }
 
+        //开始抽卡
         String roleId = session.getRecvJson().getString(Field.ROLE_ID);
-        //已经拥有的卡
-        List<Card> ownerCardList = cardService.getCardList(roleId);
-        List<DrawCard> drawCards = new ArrayList<>();
-        //抽卡过程
-        boolean bingo2Star = false;//是否抽到2Star
-        CardPoolItem bingo;
-        for (int i = 0; i < (drawNum > 1 ? drawNum - 1 : drawNum); i++)
+        DrawCardType drawCardType = DrawCardType.values()[session.getRecvJson().getIntValue(Field.DRAW_CARD_TYPE)];
+        Resources consumeResource;
+        int consume = 0;
+        boolean consumeEnable = false;//是否可以消费
+        if(drawCardType == DrawCardType.Limit_Single)
         {
-            //先抽稀有度
-            bingo = drawCardProb(cardPool, cardPool.baseProb3, cardPool.baseProb2, 1);
-            if(!bingo2Star)
-                bingo2Star = ModuleConfig.getCardInfo(bingo.cardId).star >= 2;
-            drawCards.add(newDrawCard(bingo, ownerCardList, roleId));
+            consume = cardPool.limitDrawPrice;
+            consumeResource = Resources.PayMoney;
+        }else if(drawCardType == DrawCardType.Normal_Single)
+        {
+            consume = cardPool.singleDrawPrice;
+            consumeResource = Resources.FreeMoney;
+        }else {
+            consume = cardPool.seriesDrawPrice;
+            consumeResource = Resources.FreeMoney;
         }
-        //最后一抽
-        if(drawNum > 1)
+        //优先消耗免费的资源,再消耗付费的资源
+        consumeEnable = cardService.consumeRoleResource(roleId, consumeResource, consume);
+        if(!consumeEnable && consumeResource == Resources.FreeMoney)
+            consumeEnable = cardService.consumeRoleResource(roleId, Resources.PayMoney, consume);
+        if(consumeEnable)
         {
-            if(bingo2Star)
+            //已经拥有的卡
+            List<Card> ownerCardList = cardService.getCardList(roleId);
+            List<DrawCard> drawCards = new ArrayList<>();
+            //抽卡过程
+            boolean bingo2Star = false;//是否抽到2Star
+            CardPoolItem bingo;
+            for (int i = 0; i < (drawNum > 1 ? drawNum - 1 : drawNum); i++)
+            {
+                //先抽稀有度
                 bingo = drawCardProb(cardPool, cardPool.baseProb3, cardPool.baseProb2, 1);
-            else//最后一张必出2星, 前面一张2星以上的都没抽到则补抽
-                bingo = drawCardProb(cardPool, cardPool.lastProb3, 1, 1);
-            drawCards.add(newDrawCard(bingo, ownerCardList, roleId));
+                if(!bingo2Star)
+                    bingo2Star = ModuleConfig.getCardInfo(bingo.cardId).star >= 2;
+                drawCards.add(newDrawCard(bingo, ownerCardList, roleId));
+            }
+            //最后一抽
+            if(drawNum > 1)
+            {
+                if(bingo2Star)
+                    bingo = drawCardProb(cardPool, cardPool.baseProb3, cardPool.baseProb2, 1);
+                else//最后一张必出2星, 前面一张2星以上的都没抽到则补抽
+                    bingo = drawCardProb(cardPool, cardPool.lastProb3, 1, 1);
+                drawCards.add(newDrawCard(bingo, ownerCardList, roleId));
+            }
+            append(Field.DRAW_CARD_LIST, drawCards);
+        }else{
+            session.setState(SessionState.Fail);
+            rspdMessage(session, ReturnCode.Draw_Card_NotEnough_Res);
         }
-        append(Field.DRAW_CARD_LIST, drawCards);
     }
 
     private CardPoolItem drawCardProb(CardPool cardPool, double star3Prob, double star2Prob, double star1Prob)

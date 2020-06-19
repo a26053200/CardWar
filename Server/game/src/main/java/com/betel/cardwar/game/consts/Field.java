@@ -12,15 +12,21 @@ public class Field
     public static final String ROLE_ID          = "roleId";
     public static final String ROLE_INFO        = "roleInfo";
     public static final String ROLE_NAME        = "roleName";
-
+    public static final String ROLE_RESOURCE    = "roleResource";
+    /**
+     * 卡片列表
+     */
     public static final String CARD_LIST        = "cardList";
-
     /**
      * 卡池名
      */
     public static final String CARD_POOL_NAME        = "cardPoolName";
     /**
-     * 卡池名
+     * 抽卡类型
+     */
+    public static final String DRAW_CARD_TYPE        = "drawCardType";
+    /**
+     * 卡池列表
      */
     public static final String CARD_POOL_LIST            = "cardPoolList";
     /**

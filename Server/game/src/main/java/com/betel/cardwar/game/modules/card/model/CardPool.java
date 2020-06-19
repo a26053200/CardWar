@@ -11,6 +11,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class CardPool
 {
     public String id;
+    public int limitDrawPrice;
+    public int singleDrawPrice;
+    public int seriesDrawPrice;
     public float baseProb1;     //基本1星的概率
     public float baseProb2;     //基本2星的概率
     public float baseProb3;     //基本3星的概率

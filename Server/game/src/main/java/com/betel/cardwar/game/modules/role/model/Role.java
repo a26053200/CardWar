@@ -3,7 +3,6 @@ package com.betel.cardwar.game.modules.role.model;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.betel.asd.interfaces.IVo;
 import com.betel.cardwar.game.consts.GameConsts;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -28,9 +27,9 @@ public class Role implements IVo
     private String roleName;        //角色名
     private int sex;                //性别 0男 1女 其他未知
     private int headIcon;           //头像
-    private int curStrength;            //体力
-    private int maxStrength;  //当前等级最大体力
-    private int[] money;                //货币
+    private int curStrength;        //体力
+    private int maxStrength;        //当前等级最大体力
+    private int[] resource;         //资源
     private int level;                  //等级
     private long curExp;                //当前经验
     private long maxExp;      //升级所需最大经验
@@ -38,9 +37,9 @@ public class Role implements IVo
 
     public Role()
     {
-        money = new int[GameConsts.MaxMoneyTypeNum];
-        for (int i = 0;i<money.length;i++)
-            money[i] = 0;
+        resource = new int[GameConsts.MaxMoneyTypeNum];
+        for (int i = 0; i< resource.length; i++)
+            resource[i] = 0;
     }
 
     @Override
@@ -157,14 +156,14 @@ public class Role implements IVo
         this.maxStrength = maxStrength;
     }
 
-    public int[] getMoney()
+    public int[] getResource()
     {
-        return money;
+        return resource;
     }
 
-    public void setMoney(int[] money)
+    public void setResource(int[] resource)
     {
-        this.money = money;
+        this.resource = resource;
     }
 
     public int getLevel()

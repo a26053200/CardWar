@@ -19,6 +19,7 @@ public class ReturnCode
 
     //Card
     public static final String Card_Pool_Not_Exits          = "卡池不存在";
+    public static final String Draw_Card_NotEnough_Res          = "资源不足";
     public static final String Card_Pool_Not_In_Time        = "卡池不在活动时间内";
     public static final String Draw_Card_Num_Error          = "抽卡次数不支持";
 }

@@ -5,13 +5,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.betel.asd.BaseService;
 import com.betel.asd.RedisDao;
 import com.betel.cardwar.game.consts.Field;
-import com.betel.cardwar.game.consts.Money;
+import com.betel.cardwar.game.consts.Resources;
 import com.betel.cardwar.game.modules.card.ModuleConfig;
 import com.betel.cardwar.game.modules.card.controler.DrawCardCtrl;
 import com.betel.cardwar.game.modules.card.model.Card;
 import com.betel.cardwar.game.modules.card.model.CardDao;
 import com.betel.cardwar.game.modules.card.model.CardInfo;
 import com.betel.cardwar.game.modules.card.model.CardPool;
+import com.betel.cardwar.game.modules.role.model.Role;
 import com.betel.cardwar.game.modules.role.service.RoleService;
 import com.betel.session.Session;
 import com.betel.utils.IdGenerator;
@@ -106,6 +107,13 @@ public class CardService extends BaseService<Card>
 
     public void addFragmentStone(String roleId, int num)
     {
-        roleService.addRoleMoney(roleId, Money.FragmentStone, num);
+        roleService.addRoleResource(roleId, Resources.FragmentStone, num);
+    }
+
+    //消耗资源
+    public boolean consumeRoleResource(String roleId, Resources resource, int num)
+    {
+        boolean result = roleService.consumeRoleResource(roleId, resource, num);
+        return result;
     }
 }

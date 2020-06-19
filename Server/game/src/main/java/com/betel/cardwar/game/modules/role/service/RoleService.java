@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.betel.asd.BaseService;
 import com.betel.asd.RedisDao;
 import com.betel.cardwar.game.consts.Field;
-import com.betel.cardwar.game.consts.Money;
+import com.betel.cardwar.game.consts.Resources;
 import com.betel.cardwar.game.consts.ReturnCode;
 import com.betel.cardwar.game.modules.player.model.Player;
 import com.betel.cardwar.game.modules.player.service.PlayerService;
@@ -130,6 +130,16 @@ public class RoleService extends BaseService<Role>
         }
     }
 
+    //更新资源信息
+    private void getResource(Session session)
+    {
+        String roleId = session.getRecvJson().getString(Field.ROLE_ID);
+        Role role = getLoginRole(roleId);
+        JSONObject sendJson = new JSONObject();
+        sendJson.put(Field.ROLE_RESOURCE, JSON.toJSON(role.getResource()));
+        rspdClient(session, sendJson);
+    }
+
     private List<Role> getRoleList(Session session)
     {
         String playerId = session.getRecvJson().getString(Field.PLAYER_ID);
@@ -137,11 +147,37 @@ public class RoleService extends BaseService<Role>
         return roleList;
     }
 
-    public void addRoleMoney(String roleId, Money money, int num)
+    //增加资源
+    public void addRoleResource(String roleId, Resources resource, int num)
     {
-        Role role = roleMap.get(roleId);
-        role.getMoney()[money.ordinal()] += num;
+        Role role = getLoginRole(roleId);
+        role.getResource()[resource.ordinal()] += num;
         roleDao.updateEntity(role);
     }
 
+    //消耗资源
+    public boolean consumeRoleResource(String roleId, Resources resource, int num)
+    {
+        Role role = getLoginRole(roleId);
+        int orgRes = role.getResource()[resource.ordinal()];
+        if(orgRes >= num)
+        {
+            orgRes = Math.max(orgRes - num, 0);
+            role.getResource()[resource.ordinal()] = orgRes;
+            roleDao.updateEntity(role);
+            return true;
+        }else
+            return false;
+    }
+
+    private Role getLoginRole(String roleId)
+    {
+        Role role = roleMap.get(roleId);
+//        if(role == null)
+//        {
+//            role =
+//            roleMap.put(role.getId(), role);
+//        }
+        return role;
+    }
 }
