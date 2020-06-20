@@ -10,7 +10,7 @@
 ---@field name string
 ---@field type string 类型
 ---@field sections table<number, CheckPointData>
----@field layoutUrl string
+---@field uiLayoutUrl string
 
 --场景关卡信息
 ---@class CheckPointData
@@ -40,14 +40,14 @@ CheckPointConfig.chapters = nil
 function CheckPointConfig.Init()
     CheckPointConfig.data = require("Game.Data.Excel.CheckPoint")
     CheckPointConfig.chapters = {}
-    for i, info in pairs(CheckPointConfig.data) do
+    for i, info in pairs(CheckPointConfig.data.table) do
         local chapterData = CheckPointConfig.chapters[info.chapter] ---@type ChapterData
         if chapterData == nil then
             chapterData = {}
             chapterData.sections = {}
             chapterData.name = info.chapter
             chapterData.type = info.type
-            chapterData.layoutUrl = info.layoutUrl
+            chapterData.uiLayoutUrl = info.uiLayoutUrl
             CheckPointConfig.chapters[info.chapter] = chapterData
         end
         if isString(info.cameraAngle) then
@@ -80,7 +80,7 @@ end
 
 ---@return ChapterData
 function CheckPointConfig.GetChapterData(chapter)
-    local info = CheckPointConfig.chapters(chapter)
+    local info = CheckPointConfig.chapters[chapter]
     return info
 end
 

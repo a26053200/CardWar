@@ -14,6 +14,7 @@ local CanvasGroup       = "CanvasGroup"
 local Slider            = "Slider"
 local Text              = "Text"
 local ListView          = "ListView"
+local ListPositionView  = "ListPositionView"
 local Animator          = "Animator"
 local TextMesh          = "TextMesh"
 
@@ -114,9 +115,15 @@ function GetComponent.Slider(go)
 end
 
 ---@param go UnityEngine.GameObject
----@return EasyList.ListViewBase
+---@return EasyList.ListView
 function GetListView(go)
     return go:GetCom(ListView)
+end
+
+---@param go UnityEngine.GameObject
+---@return EasyList.ListPositionView
+function GetListPositionView(go)
+    return go:GetCom(ListPositionView)
 end
 
 ---@param go UnityEngine.GameObject

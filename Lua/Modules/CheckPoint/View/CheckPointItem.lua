@@ -18,23 +18,18 @@ function CheckPointItem:UpdateItem(checkPointData, index)
     --local frameImg = self.gameObject:GetImage("")
     --frameImg.sprite = Res.LoadSprite(RankFrameUrl[cardVo.cardInfo.rarity])
 
-    local maskImg = self.gameObject:GetImage("Mask")
-    maskImg.gameObject:SetActive(not cardVo.active)
+    --local maskImg = self.gameObject:GetImage("Mask")
+    --maskImg.gameObject:SetActive(not cardVo.active)
 
     local iconImg = self.gameObject:GetImage("Icon")
     iconImg.sprite = Res.LoadSprite(checkPointData.iconUrl)
     iconImg:SetNativeSize()
 
     local starBar = self.gameObject:FindChild("StarBar")
-    self:SetStar(starBar, cardVo.star)
+    self:SetStar(starBar, 0)
 
-    local rankText = self.gameObject:GetText("Rank")
-    rankText.text = "RANK " .. cardVo.rank
-    rankText.gameObject:SetActive(cardVo.active)
-
-    local displayText = self.gameObject:GetText("Display")
-    displayText.text = "Lv " .. cardVo.level
-    displayText.gameObject:SetActive(cardVo.active)
+    local text = self.gameObject:GetText("Text")
+    text.text = checkPointData.id
 end
 
 ---@param starBar UnityEngine.GameObject

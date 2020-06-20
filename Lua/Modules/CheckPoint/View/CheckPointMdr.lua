@@ -8,6 +8,7 @@ local CheckPointItem = require("Game.Modules.CheckPoint.View.CheckPointItem")
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.CheckPoint.View.CheckPointMdr : Game.Core.Ioc.BaseMediator
 ---@field checkPointModel Game.Modules.CheckPoint.Model.CheckPointModel
+---@field arrayModel Game.Modules.Array.Model.ArrayModel
 ---@field checkPointService Game.Modules.CheckPoint.Service.CheckPointService
 ---@field chapterData ChapterData
 ---@field positionList Betel.UI.PositionList
@@ -20,15 +21,19 @@ end
 
 function CheckPointMdr:OnInit()
     self.chapterData = CheckPointConfig.GetChapterData(self.checkPointModel.currChapter)
-    self.layoutPos = Instantiate(self.chapterData.layoutUrl, self.transform)
-    self.positionList = TableList.New(self.gameObject:FindChild("List/ListView"), CheckPointItem)
+    self.positionList = PositionList.New(self.gameObject:FindChild("List/ListView"), CheckPointItem)
+    self.positionList:SetPosList(self.chapterData.uiLayoutUrl)
     self.positionList:SetData(List.New(self.chapterData.sections))
-    self.positionList:SetPosList()
     self.positionList.eventDispatcher:AddEventListener(ListViewEvent.ItemClick,self.onItemClick, self)
 end
 
 function CheckPointMdr:onItemClick(event, data, index)
-    print(string.format("check point index %s",index))
+    self.arrayModel.currCheckPointData = data
+    vmgr:LoadView(ViewConfig.ArrayEditor)
+end
+
+function CheckPointMdr:On_Click_BtnBack()
+    vmgr:UnloadView(ViewConfig.CheckPoint)
 end
 
 return CheckPointMdr

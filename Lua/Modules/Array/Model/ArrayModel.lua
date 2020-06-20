@@ -7,6 +7,7 @@
 local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@class Game.Modules.Array.Model.ArrayModel : Game.Core.Ioc.BaseModel
 ---@field arrayService Game.Modules.Array.Service.ArrayService
+---@field currCheckPointData CheckPointData
 local ArrayModel = class("ArrayModel",BaseModel)
 
 function ArrayModel:Ctor()

@@ -43,6 +43,7 @@ Screen = UnityEngine.Screen
 edp = EventDispatcher.New() --全局事件派发器
 ListViewEvent = require("Betel.UI.ListViewEvent")
 TableList = require("Betel.UI.TableList")
+PositionList = require("Betel.UI.PositionList")
 --ListExtend = require("Game.Modules.Common.View.ListExtend") ---@type Module.Common.View.ListExtend
 ListItemRenderer = require("Betel.UI.ListItemRenderer")
 
