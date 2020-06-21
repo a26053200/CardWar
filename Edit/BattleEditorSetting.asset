@@ -23,6 +23,7 @@ MonoBehaviour:
   - CheckPoint.xlsx
   - Performance.xlsx
   - Skill.xlsx
+  - Item.xlsx
   luaOutputPath: D:/work/WorkSpace_Unity/CardWar/Assets/Lua/Game/Data/Excel/
   jsonExportList:
   - RoleLevel.xlsx
@@ -30,6 +31,8 @@ MonoBehaviour:
   - Card.xlsx
   - CardPool.xlsx
   - CardPoolItem.xlsx
+  - Item.xlsx
+  - CheckPoint.xlsx
   jsonOutputPath: D:/work/WorkSpace_Java/CardWarServer/game/src/main/resources/
   battleUnitExcelPath: /../Excel/BattleUnit.xlsx
   skillExcelPath: /../Excel/Skill.xlsx

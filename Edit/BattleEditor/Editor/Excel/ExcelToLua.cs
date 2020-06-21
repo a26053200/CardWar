@@ -13,13 +13,13 @@ namespace BattleEditor
     public class ExcelToLua : ExcelExporter
     {
         [MenuItem("Tools/Excel/Excel2Lua %#l")]
-        static void DoExcelToLua()
+        public static void DoExcelToLua()
         {
             DoExcelExport(false, "lua", new ExcelToLua());
         }
         
         [MenuItem("Tools/Excel/Excel2Lua Force")]
-        static void DoExcelToLuaForce()
+        public static void DoExcelToLuaForce()
         {
             DoExcelExport(true, "lua", new ExcelToLua());
         }

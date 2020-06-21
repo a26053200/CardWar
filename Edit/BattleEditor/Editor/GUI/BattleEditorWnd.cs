@@ -18,6 +18,13 @@ namespace BattleEditor
             BattleEditorWnd wnd = EditorWindow.GetWindow<BattleEditorWnd>(false, "战斗编辑器");
             wnd.position = rect;
         }
+        
+        [MenuItem("Tools/Excel/Excel2All %&e")]
+        static void DoExcel2JsonAndDoExcelToLua()
+        {
+            ExcelToJson.DoExcel2Json();
+            ExcelToLua.DoExcelToLua();
+        }
 
         private readonly string[] _camp = {"Atk", "Def"};
         private const string SettingPath = "Assets/Edit/BattleEditorSetting.asset";

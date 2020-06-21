@@ -17,13 +17,13 @@ namespace BattleEditor
         private static Dictionary<string, string> md5Dict;
         
         [MenuItem("Tools/Excel/Excel2Json %#j")]
-        static void DoExcel2Json()
+        public static void DoExcel2Json()
         {
-            DoExcelExport(true, "json", new ExcelToJson());
+            DoExcelExport(false, "json", new ExcelToJson());
         }
         
         [MenuItem("Tools/Excel/Excel2Json Force")]
-        static void DoExcel2JsonForce()
+        public static void DoExcel2JsonForce()
         {
             DoExcelExport(true, "json", new ExcelToJson());
         }
