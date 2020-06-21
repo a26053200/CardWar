@@ -69,4 +69,9 @@
     <bean id="itemService" class="com.betel.cardwar.game.modules.item.service.ItemService">
         <property name="tableName" value="Item"/>
     </bean>
+
+    <bean id="checkPointDao" class="com.betel.cardwar.game.modules.checkpoint.model.CheckPointDao"/>
+    <bean id="checkPointService" class="com.betel.cardwar.game.modules.checkpoint.service.CheckPointService">
+        <property name="tableName" value="CheckPoint"/>
+    </bean>
 </beans>

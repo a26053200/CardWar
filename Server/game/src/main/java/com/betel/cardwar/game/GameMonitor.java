@@ -2,6 +2,8 @@ package com.betel.cardwar.game;
 
 import com.betel.cardwar.game.modules.card.model.Card;
 import com.betel.cardwar.game.modules.card.service.CardService;
+import com.betel.cardwar.game.modules.checkpoint.model.CheckPoint;
+import com.betel.cardwar.game.modules.checkpoint.service.CheckPointService;
 import com.betel.cardwar.game.modules.item.model.Item;
 import com.betel.cardwar.game.modules.item.service.ItemService;
 import com.betel.cardwar.game.modules.player.model.Player;
@@ -28,16 +30,18 @@ public class GameMonitor extends NodeServerMonitor
         super(serverCfgInfo);
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        PlayerService playerService = (PlayerService) applicationContext.getBean("playerService");
-        RoleService roleService     = (RoleService) applicationContext.getBean("roleService");
-        CardService cardService     = (CardService) applicationContext.getBean("cardService");
-        ItemService itemService     = (ItemService) applicationContext.getBean("itemService");
+        PlayerService playerService             = (PlayerService) applicationContext.getBean("playerService");
+        RoleService roleService                 = (RoleService) applicationContext.getBean("roleService");
+        CardService cardService                 = (CardService) applicationContext.getBean("cardService");
+        ItemService itemService                 = (ItemService) applicationContext.getBean("itemService");
+        CheckPointService checkPointService     = (CheckPointService) applicationContext.getBean("checkPointService");
 
         EventDispatcher eventDispatcher = new EventDispatcher();
-        pushService(Player.class,   playerService);playerService.setEventDispatcher(eventDispatcher);
-        pushService(Role.class,     roleService);roleService.setEventDispatcher(eventDispatcher);
-        pushService(Card.class,     cardService);cardService.setEventDispatcher(eventDispatcher);
-        pushService(Item.class,     itemService);itemService.setEventDispatcher(eventDispatcher);
+        pushService(Player.class,           playerService);playerService.setEventDispatcher(eventDispatcher);
+        pushService(Role.class,             roleService);roleService.setEventDispatcher(eventDispatcher);
+        pushService(Card.class,             cardService);cardService.setEventDispatcher(eventDispatcher);
+        pushService(Item.class,             itemService);itemService.setEventDispatcher(eventDispatcher);
+        pushService(CheckPoint.class,       checkPointService);checkPointService.setEventDispatcher(eventDispatcher);
 
         OnAllServiceLoaded();
     }

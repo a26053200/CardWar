@@ -13,6 +13,11 @@ public class Field
     public static final String ROLE_INFO        = "roleInfo";
     public static final String ROLE_NAME        = "roleName";
     public static final String ROLE_RESOURCE    = "roleResource";
+
+
+    //==================
+    // 卡片
+    //==================
     /**
      * 卡片列表
      */
@@ -38,8 +43,23 @@ public class Field
      */
     public static final String DRAW_CARD_LIST        = "drawCardList";
 
+    //==================
+    // 物品
+    //==================
     /**
      * 道具列表
      */
     public static final String ITEM_LIST            = "itemList";
+
+    //==================
+    // 关卡
+    //==================
+    /**
+     * 获取关卡信息
+     */
+    public static final String CHAPTER_ID            = "chapterId";
+    /**
+     * 获取关卡信息
+     */
+    public static final String CHAPTER_INFO            = "chapterInfo";
 }
