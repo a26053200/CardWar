@@ -60,4 +60,12 @@ function ArrayEditorMdr:onSelectItemClick(event, data, index)
     end
 end
 
+function ArrayEditorMdr:On_Click_BtnCancel()
+    vmgr:UnloadView(ViewConfig.ArrayEditor)
+end
+
+function ArrayEditorMdr:On_Click_BtnEnter()
+    vmgr:UnloadView(ViewConfig.ArrayEditor)
+end
+
 return ArrayEditorMdr

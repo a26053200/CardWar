@@ -7,11 +7,12 @@
 local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@class Game.Modules.CheckPoint.Model.CheckPointModel : Game.Core.Ioc.BaseModel
 ---@field checkPointService Game.Modules.CheckPoint.Service.CheckPointService
----@field currChapter number
+---@field currChapter Game.Modules.CheckPoint.Vo.ChapterVo
+---@field currSection Game.Modules.CheckPoint.Vo.SectionVo
 local CheckPointModel = class("CheckPointModel",BaseModel)
 
 function CheckPointModel:Ctor()
-    self.currChapter = 0
+
 end
 
 return CheckPointModel

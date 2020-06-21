@@ -13,8 +13,8 @@ function CheckPointItem:Ctor(gameObject)
     CheckPointItem.super.Ctor(self,gameObject)
 end
 
----@param checkPointData CheckPointData
-function CheckPointItem:UpdateItem(checkPointData, index)
+---@param sectionVo Game.Modules.CheckPoint.Vo.SectionVo
+function CheckPointItem:UpdateItem(sectionVo, index)
     --local frameImg = self.gameObject:GetImage("")
     --frameImg.sprite = Res.LoadSprite(RankFrameUrl[cardVo.cardInfo.rarity])
 
@@ -22,14 +22,14 @@ function CheckPointItem:UpdateItem(checkPointData, index)
     --maskImg.gameObject:SetActive(not cardVo.active)
 
     local iconImg = self.gameObject:GetImage("Icon")
-    iconImg.sprite = Res.LoadSprite(checkPointData.iconUrl)
+    iconImg.sprite = Res.LoadSprite(sectionVo.checkPointData.iconUrl)
     iconImg:SetNativeSize()
 
     local starBar = self.gameObject:FindChild("StarBar")
-    self:SetStar(starBar, 0)
+    self:SetStar(starBar, sectionVo.star)
 
     local text = self.gameObject:GetText("Text")
-    text.text = checkPointData.id
+    text.text = sectionVo.name
 end
 
 ---@param starBar UnityEngine.GameObject

@@ -18,7 +18,12 @@
 ---@field name string
 ---@field type string 类型
 ---@field chapter number 所属章节
----@field section number 所属章节
+---@field section number 消耗体力
+---@field strength number 所属章节
+---@field maxPassNum number 最大通关次数
+---@field maxResetNum number 最大重置次数
+---@field firstRewardId number 首次奖励id
+---@field rewardId number 奖励id
 ---@field level string
 ---@field cameraDistance number
 ---@field cameraAngle UnityEngine.Vector3

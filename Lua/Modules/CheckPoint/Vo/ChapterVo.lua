@@ -4,13 +4,21 @@
 --- DateTime: 2020-06-20-21:29:18
 ---
 
+local SectionVo = require("Game.Modules.CheckPoint.Vo.SectionVo")
 local BaseVo = require("Game.Core.BaseVo")
 ---@class Game.Modules.CheckPoint.Vo.ChapterVo : Game.Core.BaseVo
 ---@field New fun():Game.Modules.CheckPoint.Vo.ChapterVo
+---@field id number
+---@field sections List | table<number, Game.Modules.CheckPoint.Vo.SectionVo>
 local ChapterVo = class("Game.Modules.CheckPoint.Vo.ChapterVo",BaseVo)
 
-function ChapterVo:Ctor()
-    
+function ChapterVo:Ctor(data)
+    self.sections = List.New()
+    self.chapterInfo = CheckPointConfig.GetChapterData(data.id)
+    for i = 1, #data.checkPoints do
+        local sectionVo = SectionVo.New(data.checkPoints[i])
+        self.sections:Add(sectionVo)
+    end
 end
 
 return ChapterVo

@@ -50,4 +50,11 @@ Action.DrawCard = { server = "GameServer", action = "Card@drawCard", fields = "r
 --获取当前角色所拥物品信息
 Action.ItemList = { server = "GameServer", action = "Item@itemList", fields = "roleId" }
 
+
+---==================
+--- Checkpoint
+---==================
+--获取章节信息
+Action.ChapterInfo = { server = "GameServer", action = "checkpoint@chapterInfo", fields = "roleId,chapterId" }
+
 return Action

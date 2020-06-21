@@ -4,6 +4,7 @@
 --- DateTime: 2020-06-19-23:48:17
 ---
 
+local ChapterVo = require("Game.Modules.CheckPoint.Vo.ChapterVo")
 local BaseService = require("Game.Core.Ioc.BaseService")
 ---@class Game.Modules.CheckPoint.Service.CheckPointService : Game.Core.Ioc.BaseService
 ---@field checkPointModel Game.Modules.CheckPoint.Model.CheckPointModel
@@ -11,6 +12,16 @@ local CheckPointService = class("CheckPointService",BaseService)
 
 function CheckPointService:Ctor()
     
+end
+
+---@param roleId string
+---@param callback fun()
+function CheckPointService:getChapterInfo(roleId, chapterId, callback)
+    self:HttpRequest(Action.ChapterInfo, {roleId, chapterId}, function(data)
+        local chapterVo = ChapterVo.New(data.chapterInfo)
+        self.checkPointModel.currChapter = chapterVo
+        invoke(callback, data)
+    end)
 end
 
 return CheckPointService
