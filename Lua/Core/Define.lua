@@ -78,6 +78,10 @@ ImageHelper = require("Game.Modules.Common.View.ImageHelper")
 
 ---Global
 World = require("Game.Modules.World.World")
+
+---导航
+navigation = require("Game.Modules.Lobby.View.Navigation").New()
+
 FRAME_TIME = 1 / Application.targetFrameRate
 
 -- [声音系统]
@@ -123,6 +127,7 @@ AccountConfig      = require("Game.Data.AccountConfig")
 --PlotConfig          = require("Game.Data.PlotConfig")
 BattleConfig        = require("Game.Data.BattleConfig")
 BattleUnitConfig    = require("Game.Data.BattleUnitConfig")
+BattleSceneConfig   = require("Game.Data.BattleSceneConfig")
 CheckPointConfig    = require("Game.Data.CheckPointConfig")
 --CameraShakeConfig   = require("Game.Data.CameraShakeConfig")
 --BufferConfig        = require("Game.Data.BufferConfig")

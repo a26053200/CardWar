@@ -121,7 +121,7 @@ function AccountContext:DamageAccount(skillVo, account, target)
         return
     end
     hurtInfo.miss = false
-    print("dam:" .. hurtInfo.dam)
+    --print("dam:" .. hurtInfo.dam)
     if target then
         if isHelpful then
             target.battleUnitVo.curHp = math.min(target.battleUnitVo.curHp + hurtInfo.dam, target.battleUnitVo.maxHp)

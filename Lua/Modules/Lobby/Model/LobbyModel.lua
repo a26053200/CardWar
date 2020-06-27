@@ -7,10 +7,11 @@
 local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@class Game.Modules.Lobby.Model.LobbyModel : Game.Core.Ioc.BaseModel
 ---@field lobbyService Game.Modules.Lobby.Service.LobbyService
+---@field currNavPage number
 local LobbyModel = class("LobbyModel",BaseModel)
 
 function LobbyModel:Ctor()
-    
+    self.currNavPage = 1
 end
 
 return LobbyModel

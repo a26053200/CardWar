@@ -5,7 +5,7 @@
 ---
 
 ---@class Game.Modules.Battle.Events.BattleEvents
----@field target Game.Modules.World.Items.Avatar
+---@field target Game.Modules.World.Items.BattleUnit
 ---@field hero Game.Modules.World.Items.Hero
 ---@field monster Module.World.Items.Monster
 ---@field callback Handler
@@ -39,7 +39,7 @@ function BattleEvents.Dispatch(event)
     DispatchEvent(BattleEvents,event,false, false)
 end
 
----@param item Game.Modules.Battle.Items.SceneItem
+---@param item Game.Modules.World.Items.BattleUnit
 function BattleEvents.DispatchItemEvent(type, item)
     local event = {}
     event.type = type

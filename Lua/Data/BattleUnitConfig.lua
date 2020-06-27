@@ -6,11 +6,11 @@
 
 
 --Avatar基础属性
----@class BattleUnitInfo : SceneUnitInfo
+---@class BattleUnitInfo
 ---@field id string
 ---@field name string
 ---@field avatarName string
----@field type string
+---@field type BattleUnitType
 ---@field skills string
 ---@field cost number
 ---@field atk number

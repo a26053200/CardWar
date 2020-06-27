@@ -16,52 +16,22 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@field currSelectTabIndex number
 local NavigationMdr = class("Game.Modules.Lobby.View.NavigationMdr",BaseMediator)
 
-local Navigation = {}
-
 function NavigationMdr:Ctor()
     NavigationMdr.super.Ctor(self)
     self.layer = UILayer.LAYER_FLOAT
 end
 
 function NavigationMdr:OnInit()
-    Navigation =
-    {
-        [1] = {
-            label = "主页",
-            views = List.New()
-        },
-        [2] = {
-            label = "卡片",
-            views = List.New({ViewConfig.CardList}),
-        },
-        [3] = {
-            label = "剧情",
-            views = List.New()
-        },
-        [4] = {
-            label = "冒险",
-            views = List.New({ViewConfig.Adventure, ViewConfig.ResourceBar})
-        },
-        [5] = {
-            label = "家园",
-            views = List.New()
-        },
-        [6] = {
-            label = "抽卡",
-            views = List.New({ViewConfig.CardDraw, ViewConfig.ResourceBar})
-        },
-        [7] = {
-            label = "物品",
-            views = List.New()
-        },
-    }
-
+    NetModal.Show()
+    navigation:Init()
+    navigation:NavigateTo(self.lobbyModel.currNavPage, function()
+        NetModal.Hide()
+    end)
     self.btns = List.New()
-    self.currSelectTabIndex = 0
     self.toggleGroup = self.gameObject:GetToggleGroup("Bar")
-    for i = 1, #Navigation do
+    for i = 1, #navigation.navigationPages do
         local toggle = self.gameObject:GetToggle("Bar/Toggle" .. i)
-        self.gameObject:GetText("Bar/Toggle" .. i .. "/Label").text = Navigation[i].label
+        self.gameObject:GetText("Bar/Toggle" .. i .. "/Label").text = navigation.navigationPages[i].label
         self.btns:Add(toggle.gameObject)
         self:AddClickEventListener(toggle.gameObject, self.OnTabClick)
     end
@@ -71,21 +41,14 @@ end
 function NavigationMdr:OnTabClick(event)
     local index = self.btns:IndexOf(event.pointerPress)
     if index >= 1 then
-        if self.currSelectTabIndex ~= index then
-            local currNav = Navigation[index] ---@type NavigationInfo
-            if self.currSelectTabIndex > 0 then
-                local lastNav = Navigation[self.currSelectTabIndex] ---@type NavigationInfo
-                for i = 1, lastNav.views:Size() do
-                    if not currNav.views:Contain(lastNav.views[i]) then
-                        vmgr:UnloadView(lastNav.views[i])
-                    end
-                end
-            end
-            for i = 1, currNav.views:Size() do
-                vmgr:LoadView(currNav.views[i])
-            end
-            self.currSelectTabIndex = index
+        if self.lobbyModel.currNavPage == index then
+            return
         end
+        NetModal.Show()
+        navigation:NavigateTo(index, function()
+            NetModal.Hide()
+        end)
+        self.lobbyModel.currNavPage = index
         --print("Click " .. ButtonLabels[index])
     end
 end

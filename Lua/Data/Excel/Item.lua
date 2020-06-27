@@ -1,6 +1,8 @@
 ﻿-- Item Last Edit By:zheng
 local Data = {}
-Data.table = {    [200001] = {id = 200001, name = "英雄碎片1", type = "", subType = "", maxNum = 9999999, maxLevel = 1, rarity = 4, param = 0, price = 145, describe = "合成英雄1"},
+Data.table = 
+{
+    [200001] = {id = 200001, name = "英雄碎片1", type = "", subType = "", maxNum = 9999999, maxLevel = 1, rarity = 4, param = 0, price = 145, describe = "合成英雄1"},
     [200001] = {id = 200001, name = "英雄碎片2", type = "", subType = "", maxNum = 9999999, maxLevel = 1, rarity = 4, param = 0, price = 145, describe = "合成英雄2"},
     [200001] = {id = 200001, name = "英雄碎片3", type = "", subType = "", maxNum = 9999999, maxLevel = 1, rarity = 4, param = 0, price = 145, describe = "合成英雄3"},
     [200001] = {id = 200001, name = "英雄碎片4", type = "", subType = "", maxNum = 9999999, maxLevel = 1, rarity = 4, param = 0, price = 145, describe = "合成英雄4"},

@@ -29,7 +29,7 @@ function CheckPointItem:UpdateItem(sectionVo, index)
     self:SetStar(starBar, sectionVo.star)
 
     local text = self.gameObject:GetText("Text")
-    text.text = sectionVo.name
+    text.text = sectionVo.checkPointData.name
 end
 
 ---@param starBar UnityEngine.GameObject

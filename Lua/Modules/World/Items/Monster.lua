@@ -171,87 +171,8 @@ function Monster:PlayDead()
     end
 end
 
----@field callBack function
-function Monster:PlayDeadChapter(callBack)
-    self.animCtrl:PlayAnim(self.avatarInfo.animDead)
-    local length = self.animCtrl:GetAnimLength(self.avatarInfo.animDead)
-    self.animCtrl:CreateDelay(length, function()
-        self:SetRenderEnabled(false)
-        if callBack then callBack() end
-    end)
-end
-
-function Monster:DropCheck(killer)
-    local dropIndex = 0
-    for i = 1, #self.avatarInfo.drops do
-        local dropId = self.avatarInfo.drops[i]
-        local drop = DropItemDB.Get(dropId)
-        local random = math.random()
-        if random <= drop.probability then
-            local dropNumInterval = drop.num
-            local dropNums = string.split(dropNumInterval, "-")
-            if dropNums and #dropNums > 0 then
-                local minNum, maxNum = tonumber(dropNums[1]), tonumber(dropNums[2])
-                local dropNum = maxNum and maxNum > 0 and math.random(minNum, maxNum) or minNum
-                --TODO 执行掉落逻辑
-                local itemDB = ItemDB.Get(drop.itemId)
-                if itemDB.type == ItemType.BossTrace then           -- Boss踪迹
-                    local event = {}
-                    event.type = BattleEvents.DropBossTrace
-                    event.monster = self
-                    event.dropNum = dropNum
-                    BattleEvents.Dispatch(event)
-                elseif itemDB.type == ItemType.ExplorePoint then    -- 探索点数
-                    if killer and killer.AddAreaFind then
-                        killer:AddAreaFind(dropNum)
-                    end
-                else
-                    --if self.avatarInfo.avatarType == AvatarType.Collect
-                    --and self.avatarInfo.dropType ~= DropType.blowout
-                    --then
-                    --    FlyGainReward.GetInstance():AddReward(drop.itemId, dropNum)
-                    --    World.model.itemModel:AddItem(drop.itemId, dropNum)
-                    --else
-                        for i = 1, dropNum do
-                            local delay
-                            if self.avatarInfo.dropType == DropType.blowout then
-                                delay = dropIndex * 0.1
-                                dropIndex = dropIndex + 1
-                            end
-                            local drop = DropItem.New(drop, killer, self:IsBoss() == true and 4 or 1, delay)
-                            drop.gameObject.transform.position = self.gameObject.transform.position
-                            self.context.dropList:Add(drop)
-                        end
-                    --end
-                end
-            end
-        end
-    end
-end
-
 --怪物死亡时
 function Monster:OnMonsterDead()
-    --if self.avatarInfo.quality == MonsterQuality.Boss then
-    --    local sequence = self.animCtrl:CreateSequence()
-    --    --sequence:AppendInterval(0.5)
-    --    sequence:Append(Tool.DOTweenFloat(0.2,1,0.5,function(value)
-    --        Time.timeScale = value
-    --    end,function()
-    --        Time.timeScale = 1
-    --    end))
-    --    sequence:AppendCallback(function()
-    --        Time.timeScale = 1
-    --        local event = {}
-    --        event.type = ItemEvents.WorldBossDead
-    --        event.monster = self
-    --        BattleEvents.Dispatch(event)
-    --        --vmgr:LoadView(ViewConfig.BossRstRank)
-    --    end)
-    --end
-    --local event = {}
-    --event.type = ItemEvents.MonsterDead
-    --event.monster = self
-    --ItemEvents.Dispatch(event)
     self:SetRenderEnabled(false)
     if StringUtil.IsEmpty(self.avatarInfo.deadEffect) then
         --print("OnMonsterDead Over 111  " .. self.gameObject.name)
@@ -272,15 +193,6 @@ end
 
 function Monster:OnMonsterDeadOver()
     self.deadOver = true
-end
-
--- 检测战力差，是否会被碾压
-function Monster:CalcScared()
-    if self.avatarInfo.quality == MonsterQuality.Normal then
-        local heroCombatPower = World.mainHero.avatarInfo.combatPower
-        local monsterCombatPower = self.avatarInfo.combatPower
-        return heroCombatPower > monsterCombatPower
-    end
 end
 
 function Monster:OnDead()

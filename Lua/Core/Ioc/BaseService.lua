@@ -24,8 +24,10 @@ end
 ---@param params table
 ---@param callback fun()
 function BaseService:HttpRequest(action, params, callback)
+    NetModal.Show()
     ---@param response Response
     nmgr:HttpRqst(action, params, function(response)
+        NetModal.Hide()
         if response.state == SessionState.Success then
             callback(response.data)
         elseif response.state == SessionState.Fail then

@@ -24,10 +24,12 @@ function WorldScene:OnEnterScene()
     self:EnterSubScene("Lobby")
 end
 
+--进入关卡战斗
 function WorldScene:EnterCheckPoint(checkPointName)
     local checkPointData = CheckPointConfig.GetBattleSceneData(checkPointName)
-    self:EnterSubScene(checkPointData.level,function(subScene)
-        subScene:InitScene(checkPointData)
+    local battleSceneInfo = BattleSceneConfig.Get(checkPointData.battleScene)
+    self:EnterSubScene(battleSceneInfo.level,function(subScene)
+        subScene:InitScene(battleSceneInfo)
     end)
 end
 

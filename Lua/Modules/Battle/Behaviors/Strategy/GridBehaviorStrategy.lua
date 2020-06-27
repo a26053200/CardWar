@@ -9,14 +9,6 @@ local BehaviorStrategyBase = require("Game.Modules.Battle.Behaviors.Strategy.Beh
 
 ---@class Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy:Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase
 ---@field New fun(avatar : Game.Modules.World.Items.Avatar):Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy
----@field aiParam table<string, any> --AI参数
----@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
----@field canUseList table<number, Game.Modules.Battle.Vo.SkillVo>
----@field currSelectedSkill Game.Modules.Battle.Vo.SkillVo 当前被选中的技能
----@field lastTarget Game.Modules.World.Items.Avatar
----@field lastTargetPos UnityEngine.Vector3
----@field currTargetAttackNum number 当前目标被攻击的次数
----@field targetStartAttackTime number 当前目标被攻击的时间
 local GridBehaviorStrategy = class("Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy",BehaviorStrategyBase)
 
 

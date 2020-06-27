@@ -20,7 +20,6 @@ function NetModal.Show()
     return NetModal.single
 end
 
----@param modal Game.Modules.Common.View.NetModal
 function NetModal.Hide()
     if NetModal.single ~= nil then
         NetModal.single:DisplayHide()
@@ -34,33 +33,37 @@ function NetModal:Ctor()
     self.tip = self.gameObject:FindChild("Tip")
     self.text = GetText(self.gameObject:FindChild("Tip/Text"))
     self.gameObject:SetActive(false)
+    self.tip:SetActive(false)
 end
 
 function NetModal:DisplayShow()
+    self.startTime = Time.realtimeSinceStartup
     self.gameObject:SetActive(true)
     self.text.text = "Net working"
     local sequence = self:CreateSequence()
+    self.showSequence = sequence;
+    sequence:AppendInterval(0.2)
+    sequence:AppendCallback(function ()
+        self.tip:SetActive(true)
+    end)
     self.tip.transform.localScale = Vector3.New(1,0,1)
     sequence:Append(self.tip.transform:DOScale(Vector3.one,0.3))
-    sequence:AppendCallback(function ()
-        self.tween = self.text:DOText("Net working...",0.5,false):SetLoops(-1, LoopType.Restart)
-    end)
+    sequence:Append(self.text:DOText("Loading ...",0.5,false):SetLoops(-1, DOTween_Enum.LoopType.Restart))
 end
 
 function NetModal:DisplayHide()
+    --print("Show Modal " .. (Time.realtimeSinceStartup - self.startTime) * 1000 .. "ms")
     local sequence = self:CreateSequence()
     self.tip.transform.localScale = Vector3.one
     sequence:Append(self.tip.transform:DOScale(Vector3.New(1,0,1),0.3))
     sequence:AppendCallback(function ()
         self.gameObject:SetActive(false)
+        self.tip:SetActive(false)
     end)
 end
 
 function NetModal:Dispose()
     NetModal.super.Dispose(self)
-    if self.tween then
-        self.tween:Kill()
-    end
 end
 
 return NetModal

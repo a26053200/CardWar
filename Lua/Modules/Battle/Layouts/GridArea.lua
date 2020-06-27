@@ -148,17 +148,11 @@ function GridArea:IsAllDead()
     if not self.isRefreshOver then
         return false
     end
+    local monsters = self:GetAllMonster()
     local allDead = true
-    for i = 1, #self.waves do
-        local wave = self.waves[i]
-        for j = 1, wave.itemList:Size() do
-            local monster = wave.itemList[j] ---@type Module.World.Items.Monster
-            if not monster:IsDead() then
-                allDead = false
-                break;
-            end
-        end
-        if not allDead then
+    for i = 1, monsters:Size() do
+        if not monsters[i].deadOver then
+            allDead = false
             break;
         end
     end
@@ -171,21 +165,29 @@ function GridArea:IsAllDeadOver()
     if not self.isRefreshOver then
         return false
     end
+    local monsters = self:GetAllMonster()
     local allDead = true
-    for i = 1, #self.waves do
-        local wave = self.waves[i]
-        for j = 1, wave.itemList:Size() do
-            local monster = wave.itemList[j] ---@type Module.World.Items.Monster
-            if not monster.deadOver then
-                allDead = false
-                break;
-            end
-        end
-        if not allDead then
+    for i = 1, monsters:Size() do
+        if not monsters[i].deadOver then
+            allDead = false
             break;
         end
     end
     return allDead
+end
+
+
+--是否都已经死亡并且死亡动作也播放完毕
+---@return List | table<number, Game.Modules.World.Items.BattleUnit>
+function GridArea:GetAllMonster()
+    local monsters = List.New()
+    for i = 1, #self.waves do
+        local wave = self.waves[i]
+        for j = 1, wave.itemList:Size() do
+            monsters:Add(wave.itemList[j])
+        end
+    end
+    return monsters
 end
 
 ---@param event Game.Modules.World.Events.BattleItemEvents

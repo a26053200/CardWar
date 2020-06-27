@@ -41,6 +41,10 @@ function RoundBehavior:Ctor(context)
     self.context.luaReflect:PushLuaFunction("ManualAttack",handler(self, self.ManualAttack))
 end
 
+function RoundBehavior:Play()
+    RoundBehavior.super.Play(self)
+end
+
 ---@param event Game.Modules.Battle.Events.BattleEvents
 function RoundBehavior:OnBattlePause(event)
     if self.currRoundAvatar then
@@ -49,7 +53,7 @@ function RoundBehavior:OnBattlePause(event)
 end
 
 ---@param mode RoundMode
-function RoundBehavior:RoundStart(mode)
+function RoundBehavior:SetRoundMode(mode)
     self.mode = mode
 end
 
@@ -64,8 +68,7 @@ function RoundBehavior:ManualAttack(camp, layoutIndex, skillName)
         self.manualCamp = camp
         self.manualLayoutIndex = layoutIndex
         self.manualSkillName = skillName
-        self:RoundStart(RoundMode.Manual)
-        self.loop = false
+        self:SetRoundMode(RoundMode.Manual)
         self:Play()
     end
 end
@@ -140,6 +143,7 @@ function RoundBehavior:RoundProgress()
                 end
                 self.currRoundAvatar = currAvatar
             end
+            self:_debug("RoundBehavior Round Attack Over")
             self:NextState()
         end)
     end)
@@ -155,9 +159,10 @@ function RoundBehavior:RoundEnd()
             self:_debug("RoundBehavior RoundEnd")
         end
         self.currRoundAvatar = nil
-        if self.loop then
+        if self.mode == RoundMode.Auto then
             self:NextState()
-        else
+        else --self.mode == RoundMode.Auto
+            self:_debug("RoundBehavior Stop")
             self.isRoundOver = true
             self:Stop()
         end

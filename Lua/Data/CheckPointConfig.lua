@@ -17,6 +17,7 @@
 ---@field id string
 ---@field name string
 ---@field type string 类型
+---@field battleScene string
 ---@field chapter number 所属章节
 ---@field section number 消耗体力
 ---@field strength number 所属章节

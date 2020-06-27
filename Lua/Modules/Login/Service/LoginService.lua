@@ -11,7 +11,8 @@ local BaseService = require("Game.Core.Ioc.BaseService")
 ---@field roleModel Game.Modules.Role.Model.RoleModel
 local LoginService = class("LoginService", BaseService)
 --local Url = "http://127.0.0.1:8081"      --本地测试服
-local Url = "http://192.168.31.149:8081"      --局域网测试服
+--local Url = "http://192.168.31.149:8081"      --局域网测试服 台式
+local Url = "http://192.168.31.174:8081"      --局域网测试服 Mac Book
 --local Url = "http://118.31.3.216:8081"    --阿里云服务器
 
 function LoginService:Ctor()

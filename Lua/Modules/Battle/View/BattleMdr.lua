@@ -6,7 +6,7 @@
 
 local BattleItemEvents = require("Game.Modules.Battle.Events.BattleItemEvents")
 local AttachCamera = require("Game.Modules.Common.Components.AttachCamera")
-local GridBattleBehavior = require("Game.Modules.Battle.Behaviors.GridBattleBehavior")
+local PveBattleBehavior = require("Game.Modules.Battle.Behaviors.PveBattleBehavior")
 local RoundBehavior = require("Game.Modules.Battle.Behaviors.RoundBehavior")
 local BattleEvents = require("Game.Modules.Battle.Events.BattleEvents")
 local BattleBaseMdr = require("Game.Modules.Battle.View.BattleMdrBase")
@@ -25,8 +25,8 @@ function BattleMdr:RegisterListeners()
     AddEventListener(BattleEvents, BattleEvents.BattlePause, self.OnBattlePause, self)
     AddEventListener(BattleEvents, BattleEvents.BattleResume, self.OnBattleResume, self)
     AddEventListener(BattleEvents, BattleEvents.AllMonsterDeadOver, self.OnAllMonsterDeadOver, self)
-    AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnMonsterDead, self)
-    AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemBorn, self.OnMonsterBorn, self)
+    AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnBattleItemDead, self)
+    AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemBorn, self.OnBattleItemBorn, self)
 end
 
 ---@param event Game.Modules.Battle.Events.BattleEvents
@@ -40,22 +40,22 @@ function BattleMdr:OnBattleResume(event)
 end
 
 ---@param event Game.Modules.World.Events.BattleItemEvents
-function BattleMdr:OnMonsterBorn(event)
+function BattleMdr:OnBattleItemBorn(event)
     if event.target.avatarInfo.quality == MonsterQuality.Boss then
 
     end
 end
 
 ---@param event Game.Modules.World.Events.BattleItemEvents
-function BattleMdr:OnMonsterDead(event)
-    if event.target.avatarInfo.quality == MonsterQuality.Boss then
-        self.context.battleLayout:SetAllGridVisible(Camp.Def,false)
-        self:StartCoroutine(function()
-            Time.timeScale = 0.2
-            coroutine.wait(2 * 0.2)
-            Time.timeScale = 1
-        end)
-    end
+function BattleMdr:OnBattleItemDead(event)
+    --if event.target.avatarInfo.quality == MonsterQuality.Boss then
+    --    self.context.battleLayout:SetAllGridVisible(Camp.Def,false)
+    --    self:StartCoroutine(function()
+    --        Time.timeScale = 0.2
+    --        coroutine.wait(2 * 0.2)
+    --        Time.timeScale = 1
+    --    end)
+    --end
 end
 
 function BattleMdr:OnGridBattleStart()
@@ -75,44 +75,54 @@ end
 
 function BattleMdr:InitLayoutData()
     BattleMdr.super.InitLayoutData(self)
-
 end
 
 --初始化战斗模式
 function BattleMdr:InitBattleMode()
     BattleMdr.super.InitBattleMode(self)
-    self.context.battleBehavior = GridBattleBehavior.New(self.checkPointData, self.context)
-    self.context.battleBehavior:CreateBattle()
+    if self.battleModel.currBattleMode == BattleMode.PVE then
+        local behavior = PveBattleBehavior.New(self.battleModel.currCheckPointData, self.arrayModel.selectList, self.context)
+        self.context.battleBehavior = behavior
+    else
+        --self.context.battleBehavior = PveBattleBehavior.New(self.checkPointData, self.context)
+    end
+
+end
+
+function BattleMdr:InitObjectPool()
+    self.context.battleBehavior:InitObjectPool()
 end
 
 function BattleMdr:StartBattle()
     BattleMdr.super.StartBattle(self)
     --self.context:CreateBattleItems(self.battleModel.playerVo.cards, Camp.Atk, CardState.GridBattle)
+    self.context.battleBehavior:CreateBattle()
 
     self.context.attachCamera = AttachCamera.New(self.context.currSubScene:GetCamera(),
-            self.checkPointData.cameraDistance, self.checkPointData.cameraAngle,self.checkPointData.cameraOffset)
+            self.battleSceneInfo.cameraDistance, self.battleSceneInfo.cameraAngle,self.battleSceneInfo.cameraOffset)
     self.context.currSubScene:GetCamera().enabled = true
     self.context.attachCamera:AttachPos(self.context.battleLayout.areaPointObj.transform.position)
     self.context.attachCamera:StopAttach()
     self.context.attachCamera:Reset()
-    self.context.battleBehavior:GetCurrArea():Active()
     self.context.attachCamera:StartAttach()
     BattleEvents.Dispatch(BattleEvents.EnterScene)
 
     self:StartCoroutine(function()
         local currArea = self.context.battleBehavior:GetCurrArea()
+        currArea:Active()
         --等待刷怪结束
         while not currArea.isBornOver do
             coroutine.step(1)
         end
         coroutine.wait(0.2)
-        self.context.attachCamera:AttachPos(self.context.battleLayout.areaPointObj.transform.position)
+        --self.context.attachCamera:AttachPos(self.context.battleLayout.areaPointObj.transform.position)
         --vmgr:LoadView(ViewConfig.BattleArrayEditor)--布阵
         coroutine.step(1)
         --等待布局结束
         --while not self.battleModel.isEditBattleArrayComplete do
         --    coroutine.step(1)
         --end
+        coroutine.wait(1)
         self:OnBattleStart()
         log("Battle Start")
     end)
@@ -120,7 +130,8 @@ end
 
 function BattleMdr:OnBattleStart()
     self.roundBehavior = RoundBehavior.New(self.context)
-    --self.roundBehavior:RoundStart(RoundMode.Auto)
+    self.roundBehavior:SetRoundMode(RoundMode.Auto)
+    self.roundBehavior:Play()
     self.context.currSubScene:SetAllColliderEnable(false)
 end
 
@@ -129,7 +140,7 @@ function BattleMdr:OnRemove()
     RemoveEventListener(BattleEvents, BattleEvents.BattlePause, self.OnBattlePause, self)
     RemoveEventListener(BattleEvents, BattleEvents.AllMonsterDeadOver, self.OnAllMonsterDeadOver, self)
     RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnMonsterDead, self)
-    RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemBorn, self.OnMonsterBorn, self)
+    RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemBorn, self.OnBattleItemBorn, self)
 
     if self.roundBehavior then
         self.roundBehavior:Dispose()

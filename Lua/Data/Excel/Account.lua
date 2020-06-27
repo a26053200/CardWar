@@ -1,6 +1,8 @@
 ﻿-- Account Last Edit By:zheng
 local Data = {}
-Data.table = {    ["Villager_B_Boy_atk1"] = {id = "Villager_B_Boy_atk1", name = "普通攻击", group = "Villager_B_Boy_atk", type = "", targetMode = "Enemy", gridSelect = "Current", accountPoint = 0.24, damageAdd = 0.1},
+Data.table = 
+{
+    ["Villager_B_Boy_atk1"] = {id = "Villager_B_Boy_atk1", name = "普通攻击", group = "Villager_B_Boy_atk", type = "", targetMode = "Enemy", gridSelect = "Current", accountPoint = 0.24, damageAdd = 0.1},
     ["Villager_B_Boy_atk2"] = {id = "Villager_B_Boy_atk2", name = "普通攻击", group = "Villager_B_Boy_atk", type = "", targetMode = "Enemy", gridSelect = "Current", accountPoint = 0.45, damageAdd = 0.2},
     ["Villager_B_Boy_atk3"] = {id = "Villager_B_Boy_atk3", name = "普通攻击", group = "Villager_B_Boy_atk", type = "", targetMode = "Enemy", gridSelect = "Current", accountPoint = 0.66, damageAdd = 0.3},
     ["Villager_B_Boy_skill1"] = {id = "Villager_B_Boy_skill1", name = "技能1", group = "Villager_B_Boy_skill1", type = "", targetMode = "Enemy", gridSelect = "Current", accountPoint = 0, damageAdd = 0},

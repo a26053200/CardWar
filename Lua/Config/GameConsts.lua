@@ -91,6 +91,14 @@ DrawCardType =
     Normal_Series = 2, --连续多次
 }
 
+---@class BattleType
+BattleType =
+{
+    Guide = 0, --新手引导战斗
+    Trunk_Normal = 1, --主线剧情(普通)
+    Trunk_Hard = 2, --主线剧情(困难)
+    PVP_JJC = 3, --pvp 竞技场
+}
 
 --卡牌的状态
 ---@class CardState
@@ -99,6 +107,8 @@ CardState = {
     GridBattle = 2, --战斗战斗
     IdleBattle = 4, --放置战斗
 }
+
+
 -- 冒险事件类型
 ---@class IconType
 IconType = {
@@ -134,11 +144,14 @@ AdventureEventAfterEventType = {
 
 --游戏战斗模式
 ---@class BattleMode
-BattleMode = {
+BattleMode =
+{
     City = "City",          --城镇非战斗模式
     Idle = "Idle",          --放置战斗挂机模式
     Grid = "Grid",          --九宫格战斗挂机模式
     Camp = "Camp",          --营地挂机模式
+    PVE = "PVE",          --营地挂机模式
+    PVP = "PVP",          --营地挂机模式
 }
 
 --对阵阵营
@@ -146,6 +159,18 @@ BattleMode = {
 Camp = {
     Atk = "Atk",    --攻防阵营
     Def = "Def",    --守方阵营
+}
+
+---@class BattleUnitType
+BattleUnitType =
+{
+    Hero        = "Hero",       --英雄
+    Monster     = "Monster",    --怪物
+    NPC         = "NPC",        --NPC
+    Collect     = "Collect",    --被采集
+    Broken      = "Broken",     --可破坏物体
+    Trap        = "Trap",       --陷阱
+    Supply      = "Supply",     --补给物品
 }
 
 --包围圈间隔

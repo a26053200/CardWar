@@ -6,9 +6,12 @@
 
 
 --Avatar基础属性
----@class AvatarInfo : SceneUnitInfo
+---@class AvatarInfo
+---@field id string|number
+---@field prefabUrl string
+---@field scale number
 ---@field name string
----@field type number
+---@field type string
 ---@field hudOffset UnityEngine.Vector3
 ---@field skills string
 ---@field animBorn string --登场动作
@@ -17,7 +20,7 @@
 ---@field animRun string --行走动作
 ---@field animWin string --胜利动作
 ---@field animHit string --受击动作
----
+
 local AvatarConfig = {}
 
 ---@return AvatarInfo

@@ -17,7 +17,7 @@ local CheckPointMdr = class("Game.Modules.CheckPoint.View.CheckPointMdr",BaseMed
 
 function CheckPointMdr:Ctor()
     CheckPointMdr.super.Ctor(self)
-    self.layer = UILayer.LAYER_FLOAT
+    --self.layer = UILayer.LAYER_FLOAT
 end
 
 function CheckPointMdr:OnInit()
@@ -35,11 +35,11 @@ end
 
 function CheckPointMdr:onItemClick(event, data, index)
     self.checkPointModel.currSection = data
-    vmgr:LoadView(ViewConfig.CheckPointInfo)
+    navigation:Push(ViewConfig.CheckPointInfo)
 end
 
 function CheckPointMdr:On_Click_BtnBack()
-    vmgr:UnloadView(ViewConfig.CheckPoint)
+    navigation:Pop(ViewConfig.CheckPoint)
 end
 
 return CheckPointMdr

@@ -4,54 +4,15 @@
 --- DateTime: 2019-05-18-23:23:09
 ---
 
---场景单位信息
----@class SceneUnitInfo
----@field id string|number
----@field prefabUrl string
----@field scale number
-
---相机震动
----@class ShakeCamera
----@field delay number
-
---基础属性
----@class BaseAttribute
----@field hpMax number
----@field hpMin number
----@field atkMax number
----@field atkMin number
----@field defMax number
----@field defMin number
----@field critMax number
----@field critMin number
-
---动态属性
----@class Attribute
----@field hpMax number
----@field hp number
----@field atk number
----@field def number
----@field crit number
-
-
----@class HeroInfo : AvatarInfo
----@field heroName string
-
----@class MonsterInfo : AvatarInfo
----@field quality string
-
-
----@class BattlePoolInfo
----@field avatarName string
----@field init number
-
 
 local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@class Game.Modules.Battle.Model.BattleModel : Game.Core.Ioc.BaseModel
 ---@field battleService Game.Modules.Battle.Service.BattleService
 ---@field currentContext WorldContext
 ---@field currCheckPointData CheckPointData     当前关卡数据
+---@field battleSceneInfo BattleSceneInfo --战斗场景信息
 ---@field playerVo Game.Modules.Player.Vo.PlayerVo    当前战斗的玩家
+---@field currBattleMode BattleMode
 local BattleModel = class("BattleModel",BaseModel)
 
 function BattleModel:Ctor()
@@ -61,6 +22,7 @@ end
 function BattleModel:Clear()
     self.currentContext = nil
     self.currCheckPointData = nil
+    self.battleSceneInfo = nil
     self.playerVo = nil
     self.isEditBattleArrayComplete = false
 end

@@ -9,6 +9,8 @@ local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@field arrayService Game.Modules.Array.Service.ArrayService
 ---@field currCheckPointData CheckPointData
 ---@field currChapterVo Game.Modules.CheckPoint.Vo.ChapterVo
+---@field selectList List | table<number, Game.Modules.Card.Vo.CardVo>
+---@field battleType BattleType
 local ArrayModel = class("ArrayModel",BaseModel)
 
 function ArrayModel:Ctor()

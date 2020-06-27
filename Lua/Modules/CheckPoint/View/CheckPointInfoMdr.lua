@@ -8,6 +8,7 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.CheckPoint.View.CheckPointInfoMdr : Game.Core.Ioc.BaseMediator
 ---@field checkPointModel Game.Modules.CheckPoint.Model.CheckPointModel
 ---@field roleModel Game.Modules.Role.Model.RoleModel
+---@field arrayModel Game.Modules.Array.Model.ArrayModel
 ---@field checkPointService Game.Modules.CheckPoint.Service.CheckPointService
 ---@field section Game.Modules.CheckPoint.Vo.SectionVo
 local CheckPointInfoMdr = class("Game.Modules.CheckPoint.View.CheckPointInfoMdr",BaseMediator)
@@ -24,8 +25,15 @@ function CheckPointInfoMdr:OnInit()
     self.textStrength = self.gameObject:GetText("Right/GroupText/TextStrength")
     self.textTimes = self.gameObject:GetText("Right/GroupText/TextTimes")
 
+    local starBar = self.gameObject:FindChild("StarBar")
+    for i = 1, starBar.transform.childCount do
+        local starImg = starBar.transform:GetChild(i - 1).gameObject:GetImage()
+        starImg.sprite = UITools.GetSprite(starImg.gameObject, i <= self.section.star and 1 or 0)
+    end
+
     self:UpdateView()
 end
+
 
 function CheckPointInfoMdr:UpdateView()
     self.textStrength.text = self.section.checkPointData.strength .. "/" .. self.roleModel.roleInfo.curStrength
@@ -36,12 +44,13 @@ function CheckPointInfoMdr:UpdateView()
     end
 end
 
-function CheckPointInfoMdr:On_Click_BtnCancel()
-    vmgr:UnloadView(ViewConfig.CheckPointInfo)
+function CheckPointInfoMdr:On_Click_BtnEnter()
+    self.arrayModel.battleType = BattleType.Trunk_Normal
+    navigation:Push(ViewConfig.ArrayEditor)
 end
 
-function CheckPointInfoMdr:On_Click_BtnEnter()
-    vmgr:LoadView(ViewConfig.ArrayEditor)
+function CheckPointInfoMdr:On_Click_BtnCancel()
+    navigation:Pop(ViewConfig.CheckPointInfo)
 end
 
 return CheckPointInfoMdr

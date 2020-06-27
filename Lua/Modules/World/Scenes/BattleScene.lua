@@ -7,6 +7,7 @@
 local SubScene = require('Game.Modules.World.Scenes.Core.SubScene')
 
 ---@class Game.Modules.World.Scenes.BattleScene : Game.Modules.World.Scenes.Core.SubScene
+---@field battleSceneInfo BattleSceneInfo
 local BattleScene = class("Game.Modules.World.Scenes.BattleScene",SubScene)
 
 ---@param subSceneInfo SceneInfo
@@ -18,9 +19,11 @@ end
 function BattleScene:OnInitialize()
 
 end
-
-function BattleScene:InitScene(checkPointData)
+---@param battleSceneInfo BattleSceneInfo
+function BattleScene:InitScene(battleSceneInfo)
+    BattleScene.super.InitScene(self, battleSceneInfo)
     self.checkPointData = checkPointData
+    self.battleSceneInfo = battleSceneInfo
     self:InitSubScene()
     self:Show()
     vmgr:LoadView(ViewConfig.Battle)
@@ -33,7 +36,7 @@ function BattleScene:GetLightObj()
         if isnull(lightObj) then
             logError(string.format("This scene [%s]'s Light must named with 'Directional Light' and set to root", self.subLevelName))
         end
-        self.lightObj = lightObj:FindChild(self.checkPointData.light)
+        self.lightObj = lightObj:FindChild(self.battleSceneInfo.light)
     end
     return self.lightObj
 end

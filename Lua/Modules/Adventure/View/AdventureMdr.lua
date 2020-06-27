@@ -16,8 +16,7 @@ end
 
 function AdventureMdr:On_Click_BtnTrunk()
     --主线关卡
-
-    vmgr:LoadView(ViewConfig.CheckPoint)
+    navigation:Push(ViewConfig.CheckPoint)
 end
 
 function AdventureMdr:On_Click_BtnDaily()

@@ -13,11 +13,16 @@ local CardListMdr = class("Game.Modules.Card.View.CardListMdr",BaseMediator)
 
 function CardListMdr:OnInit()
     self:SetCloseBg(self.gameObject:FindChild("Bg"))
+
+    self.cardService:getCardList(self.roleModel.roleInfo.id, handler(self, self.OnCardList))
+end
+
+
+function CardListMdr:OnCardList(data)
     self.cardList = TableList.New(self.gameObject:FindChild("List/ListView"), CardItem)
     self.cardList:SetData(self.cardModel:SortByActive())
     self.cardList.eventDispatcher:AddEventListener(ListViewEvent.ItemClick,self.onItemClick, self)
 end
-
 
 function CardListMdr:onItemClick(event, data, index)
     print(string.format("click card index %s",index))

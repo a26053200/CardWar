@@ -17,10 +17,4 @@ function AccountContextGroup:Ctor(gameObject)
     AccountContextGroup.super.Ctor(self, gameObject)
 end
 
----@param gameObject UnityEngine.GameObject
-function AccountContextGroup:Ctor(gameObject)
-    AccountContextGroup.super.Ctor(self, gameObject)
-end
-
-
 return AccountContextGroup

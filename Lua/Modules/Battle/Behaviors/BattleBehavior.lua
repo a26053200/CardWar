@@ -19,6 +19,10 @@ function BattleBehavior:Ctor(checkPointData, context)
     self.checkPointData = checkPointData
 end
 
+function BattleBehavior:InitObjectPool()
+
+end
+
 --创建战场
 function BattleBehavior:CreateBattle()
 

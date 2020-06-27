@@ -25,12 +25,11 @@ function UIView:Ctor(prefab,parent)
             logError("UIView 's parent can not nil")
         end
     end
+    self.transform = self.gameObject.transform
     self.gameObject.transform.localPosition = Vector3.zero
     self.gameObject.transform.localEulerAngles = Vector3.zero
     self.gameObject.transform.localScale = Vector3.one
-    self:OnAutoRegisterEvent()
-
-    self.sequenceList = List.New()
+    --self:OnAutoRegisterEvent()
     self:AddLuaMonoBehaviour(self.gameObject,"UIView")
 end
 
@@ -46,15 +45,8 @@ function UIView:OnAutoRegisterEvent()
     end
 end
 
---创建
-function UIView:CreateSequence()
-    local sequence = DOTween.Sequence()
-    self.sequenceList:Push(sequence)
-    return sequence
-end
-
-
 function UIView:Dispose()
+    UIView.super.Dispose(self)
     if self.sequenceList then
         for i = 1, self.sequenceList:Size() do
             self.sequenceList[i]:Kill()

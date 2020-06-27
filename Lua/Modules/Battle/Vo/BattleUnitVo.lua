@@ -27,7 +27,8 @@ end
 function BattleUnitVo:Init(battleUnitName)
     self.battleUnitInfo = BattleUnitConfig.Get(battleUnitName)
     BattleUnitVo.super.Init(self, self.battleUnitInfo.avatarName)
-    local skillInfoList = SkillConfig.GetList(battleUnitName)
+    --local skillInfoList = SkillConfig.GetList(battleUnitName)
+    local skillInfoList = SkillConfig.GetList(self.battleUnitInfo.avatarName)--测试时按模型来选技能
     if skillInfoList then
         for i = 1, #skillInfoList do
             local skill = SkillVoPool:Get() ---@type Game.Modules.Battle.Vo.SkillVo
@@ -37,6 +38,8 @@ function BattleUnitVo:Init(battleUnitName)
             end
             table.insert(self.skills, skill)
         end
+    else
+        logError("There is no skill with battle unit " .. battleUnitName)
     end
     self:Reset()
 end

@@ -11,6 +11,7 @@ local BaseScene = require("Game.Modules.World.Scenes.Core.BaseScene")
 ---@field unityScene UnityEngine.SceneManagement.Scene
 ---@field subSceneInfo SubSceneInfo
 ---@field checkPointData CheckPointData
+---@field sceneBaseInfo SceneBaseInfo
 local SubScene = class("Game.Modules.World.Scenes.Core.SubScene",BaseScene)
 
 ---@param subSceneInfo SubSceneInfo
@@ -26,10 +27,9 @@ function SubScene:OnInitialize()
     self:InitSubScene()
 end
 
----@field checkPointData CheckPointData 场景配置数据
-function SubScene:InitScene(checkPointData)
-    self.checkPointData = checkPointData
-    self:Show()
+---@field sceneBaseInfo SceneBaseInfo
+function SubScene:InitScene(sceneBaseInfo)
+    self.sceneBaseInfo = sceneBaseInfo;
 end
 
 ---@return UnityEngine.Camera

@@ -4,16 +4,36 @@
 --- DateTime: 2020-04-12-01:33:50
 ---
 
+local CardVo = require("Game.Modules.Card.Vo.CardVo")
 local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@class Game.Modules.Card.Model.CardModel : Game.Core.Ioc.BaseModel
 ---@field cardService Game.Modules.Card.Service.CardService
 ---@field cardList List | table<number, Game.Modules.Card.Vo.CardVo>
+---@field cardMap table<string, Game.Modules.Card.Vo.CardVo>
+---@field cardByCardIdMap table<string, Game.Modules.Card.Vo.CardVo>
 ---@field cardPoolList List | table<number, Game.Modules.Card.Vo.CardPoolVo>
 ---@field drawCardList List | table<number, Game.Modules.Card.Vo.DrawCardVo>
 local CardModel = class("CardModel",BaseModel)
 
 function CardModel:Ctor()
 
+end
+
+function CardModel:SetCardList(data)
+    self.cardList = List.New()
+    self.cardMap = {}
+    self.cardByCardIdMap = {}
+    for i = 1, #data.cardList do
+        local cardVo = CardVo.New(data.cardList[i])
+        self.cardList:Add(cardVo)
+        self.cardMap[cardVo.id] = cardVo;
+        self.cardByCardIdMap[cardVo.cardInfo.id] = cardVo;
+    end
+end
+
+---@return Game.Modules.Card.Vo.CardVo
+function CardModel:GetCardById(id)
+    return self.cardMap[id]
 end
 
 ---@param c1 Game.Modules.Card.Vo.CardVo

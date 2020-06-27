@@ -46,14 +46,14 @@ function AccountCtrl:OnAccountBegin(skillVo)
         if performanceInfo.gridSelect == GridSelectType.Row then
             tagPosGrids = {1,4,9}
             local target = self:GetTarget(self.targetCamp, tagPosGrids)
-            tagPos = GridUtils.GetTargetAttackPoint(target.gameObject,self.battleUnit.context.checkPointData.layoutGridSize)
+            tagPos = GridUtils.GetTargetAttackPoint(target.gameObject,self.battleUnit.context.battleSceneInfo.layoutGridSize)
         elseif performanceInfo.gridSelect == GridSelectType.Current then
             local target = self:GetTarget(self.targetCamp, tagPosGrids)
-            tagPos = GridUtils.GetTargetAttackPoint(target.gameObject,self.battleUnit.context.checkPointData.layoutGridSize)
+            tagPos = GridUtils.GetTargetAttackPoint(target.gameObject,self.battleUnit.context.battleSceneInfo.layoutGridSize)
         elseif performanceInfo.gridSelect == GridSelectType.Col then
             tagPosGrids = LayoutIndex2Col[self.battleUnit.layoutIndex]
             local targetGrid = self.battleUnit.context.battleLayout:GetLayoutGridByIndex(self.targetCamp, tagPosGrids[1])
-            tagPos = targetGrid.transform.position + -self.battleUnit.transform.forward * self.battleUnit.context.checkPointData.layoutGridSize
+            tagPos = targetGrid.transform.position + -self.battleUnit.transform.forward * self.battleUnit.context.battleSceneInfo.layoutGridSize
         elseif performanceInfo.gridSelect == GridSelectType.All
                 or performanceInfo.gridSelect == GridSelectType.Friend_Lowest
                 or performanceInfo.gridSelect == GridSelectType.Friend_All then

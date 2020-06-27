@@ -8,8 +8,6 @@ local BaseVo = require("Game.Core.BaseVo")
 ---@class Game.Modules.CheckPoint.Vo.SectionVo : Game.Core.BaseVo
 ---@field New fun():Game.Modules.CheckPoint.Vo.SectionVo
 ---@field checkPointData CheckPointData
----@field chapter number --所属节
----@field section number --通关星级
 ---@field star number --通关星级
 ---@field passNum number --通关次数
 ---@field resetNum number --重置次数
@@ -19,8 +17,6 @@ local SectionVo = class("Game.Modules.CheckPoint.Vo.SectionVo",BaseVo)
 
 function SectionVo:Ctor(data)
     self.checkPointData = CheckPointConfig.Get(data.checkpointId)
-    self.chapter = data.chapter
-    self.section = data.section
     self.star = data.star
     self.passNum = data.passNum
     self.resetNum = data.resetNum

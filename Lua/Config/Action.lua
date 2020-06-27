@@ -57,4 +57,23 @@ Action.ItemList = { server = "GameServer", action = "Item@itemList", fields = "r
 --获取章节信息
 Action.ChapterInfo = { server = "GameServer", action = "checkpoint@chapterInfo", fields = "roleId,chapterId" }
 
+
+---==================
+--- Battle
+---==================
+--请求开始战斗
+Action.StartBattle = {server = "GameServer", action = "battlereport@startBattle", fields = "roleId,chapterId,checkpointId,battleType,battleArray"}
+
+--请求结束战斗
+Action.EndBattle = {server = "GameServer", action = "battlereport@endBattle", fields = "roleId,chapterId,checkpointId"}
+
+--请求生成战报
+Action.GenerateBattleReport = { server = "GameServer", action = "battlereport@generateBattleReport", fields = "roleId,checkpointId" }
+
+--获取保存的编组
+Action.GetBattleArray = { server = "GameServer", action = "battleArray@getBattleArray", fields = "roleId,battleType" }
+
+--保存编组
+Action.SaveBattleArray = { server = "GameServer", action = "battleArray@saveBattleArray", fields = "roleId,battleType,battleArray" }
+
 return Action

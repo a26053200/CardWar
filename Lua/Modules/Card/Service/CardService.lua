@@ -23,14 +23,7 @@ end
 ---@param callback fun()
 function CardService:getCardList(roleId, callback)
     self:HttpRequest(Action.CardList, {roleId}, function(data)
-        if self.roleModel.roleInfo.id == roleId then
-            local cardList = List.New()
-            for i = 1, #data.cardList do
-                local cardVo = CardVo.New(data.cardList[i])
-                cardList:Add(cardVo)
-            end
-            self.cardModel.cardList = cardList
-        end
+        self.cardModel:SetCardList(data)
         invoke(callback, data)
     end)
 end

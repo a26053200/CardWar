@@ -13,7 +13,7 @@ local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 ---@field context WorldContext
 ---@field areaPointObj UnityEngine.GameObject
 ---@field center UnityEngine.Vector3
----@field checkPointData CheckPointData
+---@field battleSceneInfo BattleSceneInfo
 ---@field gridLayoutMap table<Camp, table<number, Game.Modules.Battle.Layouts.LayoutGrid>>
 local BattleLayout = class("Game.Modules.Battle.View.BattleLayout", LuaMonoBehaviour)
 
@@ -26,7 +26,7 @@ function BattleLayout:Ctor(context, areaObject)
     self.context = context
     self.areaPointObj = areaObject
     self.center = areaObject.transform.position
-    self.checkPointData = self.context.currSubScene.checkPointData
+    self.battleSceneInfo = self.context.currSubScene.battleSceneInfo
     self.gridLayoutMap = {}
 
     self.gridLayoutMap[Camp.Atk] = self:CreateLayoutGrids(self.areaPointObj, Camp.Atk)
@@ -41,8 +41,8 @@ function BattleLayout:CreateLayoutGrids(areaPointObj, camp)
     local forward = areaPointObj.transform.forward
     local dir = camp == Camp.Atk and -forward or forward
     local bornForward = camp == Camp.Atk and forward or -forward --出生朝向
-    local firstPos = areaPointObj.transform.position + dir * self.checkPointData.layoutDistance / 2 --首格
-    local gridPoints = GridUtils.GetNineGridPoints(firstPos, bornForward, areaPointObj.transform.right, self.checkPointData.layoutGridSize)--获取九宫格位置
+    local firstPos = areaPointObj.transform.position + dir * self.battleSceneInfo.layoutDistance / 2 --首格
+    local gridPoints = GridUtils.GetNineGridPoints(firstPos, bornForward, areaPointObj.transform.right, self.battleSceneInfo.layoutGridSize)--获取九宫格位置
     local layoutGrids = BattleUtils.CreateLayoutGrids(gridPoints, bornForward, self.context)
     return layoutGrids
 end

@@ -13,4 +13,33 @@ function ArrayService:Ctor()
     
 end
 
+---@param roleId string
+---@param battleType number
+---@param callback fun()
+function ArrayService:getBattleArray(roleId, battleType, callback)
+    self:HttpRequest(Action.GetBattleArray, {roleId, battleType, battleArray}, function(data)
+        invoke(callback, data)
+    end)
+end
+
+---@param roleId string
+---@param battleType number
+---@param battleArray string
+---@param callback fun()
+function ArrayService:saveBattleArray(roleId, battleType, battleArray, callback)
+    self:HttpRequest(Action.SaveBattleArray, {roleId, battleType, battleArray}, function(data)
+        invoke(callback, data)
+    end)
+end
+
+---@param roleId string
+---@param chapterId number
+---@param checkpointId string
+---@param callback fun()
+function ArrayService:startBattle(roleId, chapterId,  checkpointId, battleType, battleArray, callback)
+    self:HttpRequest(Action.StartBattle, {roleId, chapterId, checkpointId, battleType, battleArray}, function(data)
+        invoke(callback, data)
+    end)
+end
+
 return ArrayService

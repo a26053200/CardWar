@@ -169,10 +169,6 @@ function BattleItem:Clean()
         self.hud:Dispose()
         self.hud = nil
     end
-    if self.battleUnitVo then
-        self.battleUnitVo:Dispose()
-        self.battleUnitVo = nil
-    end
     if self.cc then
         self.cc.enabled = false
     end
@@ -187,7 +183,10 @@ function BattleItem:Dispose()
         self.animCtrl:Dispose()
         self.animCtrl = nil
     end
-
+    if self.battleUnitVo then
+        self.battleUnitVo:Dispose()
+        self.battleUnitVo = nil
+    end
     --if self.effectWidget then
     --    self.effectWidget:RemoveSingCircle()
     --end
