@@ -13,6 +13,7 @@
 
 local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 ---@class Game.Modules.Lobby.View.Navigation : Betel.LuaMonoBehaviour
+---@field New():Game.Modules.Lobby.View.Navigation
 ---@field navigationPages table<number, NavigationPage>
 local Navigation = class("Game.Modules.Lobby.View.Navigation", LuaMonoBehaviour)
 

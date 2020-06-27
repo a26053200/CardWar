@@ -12,16 +12,16 @@
 ---@field fields table<number, string>
 
 local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
----@class Game.Core.BaseCommand : Betel.LuaMonoBehaviour
+---@class Game.Core.BaseController : Betel.LuaMonoBehaviour
 ---@field New fun()
-local BaseCommand = class("Game.Core.BaseCommand ",LuaMonoBehaviour)
+local BaseController = class("Game.Core.BaseController ",LuaMonoBehaviour)
 
 
-function BaseCommand:Ctor()
+function BaseController:Ctor()
 
 end
 
-function BaseCommand:OnInit()
+function BaseController:OnInit()
 
 end
 
@@ -30,8 +30,8 @@ end
 ---@param param table<number, any>
 ---@param callback Handler
 ---@param failCallback Handler
-function BaseCommand:Request(protocol, param, callback, failCallback)
+function BaseController:Request(protocol, param, callback, failCallback)
     nmgr:SendRequest(protocol, param, callback, failCallback)
 end
 
-return BaseCommand
+return BaseController

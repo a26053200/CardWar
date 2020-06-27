@@ -205,12 +205,12 @@ function ViewManager:isUnloaded(viewInfo)
     return viewInfo.status == nil or viewInfo.status == ViewStatus.Unloaded
 end
 
----@param class Game.Core.BaseCommand
----@return Game.Core.BaseCommand
-function ViewManager:CreateCommand(class)
-    local cmd = class.New()
-    self.ioc.binder:InjectSingle(cmd)
-    cmd:OnInit()
-    return cmd
+---@param class Game.Core.BaseController
+---@return Game.Core.BaseController
+function ViewManager:CreateController(class)
+    local ctrl = class.New()
+    self.ioc.binder:InjectSingle(ctrl)
+    ctrl:OnInit()
+    return ctrl
 end
 return ViewManager

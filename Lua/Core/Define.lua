@@ -82,6 +82,9 @@ World = require("Game.Modules.World.World")
 ---导航
 navigation = require("Game.Modules.Lobby.View.Navigation").New()
 
+---过场
+transition = require("Game.Modules.Transition.View.Transition").New()
+
 FRAME_TIME = 1 / Application.targetFrameRate
 
 -- [声音系统]

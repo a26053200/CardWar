@@ -28,8 +28,7 @@ function BattleBehavior:CreateBattle()
 
 end
 
---重置战场从头开始（阵型变化后调用）
-function BattleBehavior:ResetBattle()
+function BattleBehavior:StartBattle()
 
 end
 

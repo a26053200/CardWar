@@ -31,12 +31,12 @@ end
 
 ---@param event Game.Modules.Battle.Events.BattleEvents
 function BattleMdr:OnBattlePause(event)
-    self.roundBehavior:Pause()
+
 end
 
 ---@param event Game.Modules.Battle.Events.BattleEvents
 function BattleMdr:OnBattleResume(event)
-    self.roundBehavior:Resume()
+
 end
 
 ---@param event Game.Modules.World.Events.BattleItemEvents
@@ -63,14 +63,7 @@ function BattleMdr:OnGridBattleStart()
 end
 
 function BattleMdr:OnAllMonsterDeadOver()
-    if self.roundBehavior then
-        self.roundBehavior:Dispose()
-    end
-    self:StartCoroutine(function()
-        coroutine.step(1)
-        --战斗结算画面
-        --vmgr:LoadView(ViewConfig.BattleRstTest)
-    end)
+
 end
 
 function BattleMdr:InitLayoutData()
@@ -129,9 +122,7 @@ function BattleMdr:StartBattle()
 end
 
 function BattleMdr:OnBattleStart()
-    self.roundBehavior = RoundBehavior.New(self.context)
-    self.roundBehavior:SetRoundMode(RoundMode.Auto)
-    self.roundBehavior:Play()
+    self.context.battleBehavior:StartBattle()
     self.context.currSubScene:SetAllColliderEnable(false)
 end
 
@@ -142,9 +133,6 @@ function BattleMdr:OnRemove()
     RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnMonsterDead, self)
     RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemBorn, self.OnBattleItemBorn, self)
 
-    if self.roundBehavior then
-        self.roundBehavior:Dispose()
-    end
     vmgr:UnloadView(ViewConfig.BattleArrayEditor)
     BattleMdr.super.OnRemove(self)
 end

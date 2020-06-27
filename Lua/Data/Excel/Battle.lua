@@ -11,6 +11,15 @@ Data.table =
     [7] = {id = 7, pid = "normal_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Micro_Dragon", grid = 7},
     [8] = {id = 8, pid = "normal_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Micro_Dragon", grid = 8},
     [9] = {id = 9, pid = "normal_1_1", areaIndex = 1, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Micro_Dragon", grid = 9},
+    [10] = {id = 10, pid = "normal_1_1", areaIndex = 2, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Ghost", grid = 1},
+    [11] = {id = 11, pid = "normal_1_1", areaIndex = 2, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Werewolf", grid = 2},
+    [12] = {id = 12, pid = "normal_1_1", areaIndex = 2, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Ghost", grid = 3},
+    [13] = {id = 13, pid = "normal_1_1", areaIndex = 2, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Werewolf", grid = 4},
+    [14] = {id = 14, pid = "normal_1_1", areaIndex = 2, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Ghost", grid = 5},
+    [15] = {id = 15, pid = "normal_1_1", areaIndex = 2, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Werewolf", grid = 6},
+    [16] = {id = 16, pid = "normal_1_1", areaIndex = 2, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Ghost", grid = 7},
+    [17] = {id = 17, pid = "normal_1_1", areaIndex = 2, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Werewolf", grid = 8},
+    [18] = {id = 18, pid = "normal_1_1", areaIndex = 2, areaType = "", waveIndex = 1, waveMode = "Trigger", bornMode = "", battleUnit = "Ghost", grid = 9},
 }
 
 function Data.Get(id)

@@ -10,14 +10,17 @@ local BattleItemEvents = require("Game.Modules.Battle.Events.BattleItemEvents")
 local GridArea = require("Game.Modules.Battle.Layouts.GridArea")
 local BattleBehavior = require("Game.Modules.Battle.Behaviors.BattleBehavior")
 local PoolProxy = require("Game.Modules.Common.Pools.AssetPoolProxy")
+local RoundBehavior = require("Game.Modules.Battle.Behaviors.RoundBehavior")
 
 ---@class Game.Modules.Battle.Behaviors.PveBattleBehavior : Game.Modules.Battle.Behaviors.BattleBehavior
 ---@field New fun(checkPointData:CheckPointData, cardList : table, context:WorldContext):Game.Modules.Battle.Behaviors.BattleBehavior
+---@field roundBehavior Game.Modules.Battle.Behaviors.RoundBehavior
 ---@field areas table<number,Game.Modules.Battle.Layouts.GridArea>  刷新区域数据
 ---@field areaQueue List | table<number, Game.Modules.Battle.Layouts.GridArea>  刷新区域数据 刷新区域队列
 ---@field lastArea Game.Modules.Battle.Layouts.GridArea 上一区域
 ---@field cardList List | table<number, Game.Modules.Card.Vo.CardVo> 上阵的卡牌
 ---@field atkUnitList List | table<number, Game.Modules.World.Items.BattleUnit> 上阵的卡牌
+---@field transitionCtrl Game.Modules.Transition.Controller.TransitionController
 local PveBattleBehavior = class("Game.Modules.Battle.Behaviors.PveBattleBehavior",BattleBehavior)
 
 ---@param checkPointData CheckPointData
@@ -84,8 +87,10 @@ function PveBattleBehavior:CreateBattle()
     end
 end
 
-function PveBattleBehavior:NewQueue()
-
+function PveBattleBehavior:StartBattle()
+    self.roundBehavior = RoundBehavior.New(self.context)
+    self.roundBehavior:SetRoundMode(RoundMode.Auto)
+    self.roundBehavior:Play()
 end
 
 --新的队列
@@ -113,6 +118,9 @@ end
 
 ---@param event Game.Modules.World.Events.BattleItemEvents
 function PveBattleBehavior:OnBattleItemDead(event)
+    if self.isAllDead then --任何一方全部死亡
+        return
+    end
     local unitList = nil
     if event.target.battleUnitVo.battleUnitInfo.type == BattleUnitType.Hero then
         unitList = self.atkUnitList
@@ -120,6 +128,7 @@ function PveBattleBehavior:OnBattleItemDead(event)
         unitList = self:GetCurrArea():GetAllMonster()
     end
     if self:IsAllDead(unitList) then
+        self.isAllDead = true
         if event.target.battleUnitVo.battleUnitInfo.type == BattleUnitType.Hero then
             self:OnAtkerAllDead()
         else
@@ -133,9 +142,16 @@ function PveBattleBehavior:OnCurrAreaAllDead()
     self.lastArea = self:GetCurrArea()
     self:_debug("当前区域所有怪物死亡 areaId:" .. self.lastArea.areaInfo.areaIndex)
     self:NextArea()
-    if self:GetCurrArea() then
-        self:_debug("下一个区域 areaId:" .. self:GetCurrArea().areaInfo.areaIndex)
-        self:GetCurrArea():Refresh()
+    local currArea = self:GetCurrArea()
+    if currArea then
+        self:_debug("下一个区域 areaId:" .. currArea.areaInfo.areaIndex)
+        currArea:Refresh()
+        self.roundBehavior:StopRound()
+        transition:DoTransition(function()
+            currArea:Active()
+            self.roundBehavior:Play()
+            self.isAllDead = false
+        end)
     else --没有下个区域,战斗结束
         --等待所有目标的死亡动画都播放完毕
         self:_debug("没有下个区域，战斗结束")
@@ -164,7 +180,8 @@ end
 function PveBattleBehavior:OnAtkerAllDead()
     self:StartCoroutine(function ()
         self:_debug("所有英雄都已经死亡:")
-        while not self.lastArea:IsAllDeadOver(self.atkUnitList) do
+        self.roundBehavior:StopRound()
+        while not self:IsAllDeadOver(self.atkUnitList) do
             coroutine.step(1)
         end
         self:OnAtkerAllDeadOver()
@@ -175,7 +192,7 @@ end
 ---@param unitList List | table<number, Game.Modules.World.Items.BattleUnit>
 function PveBattleBehavior:IsAllDead(unitList)
     local allDead = true
-    for i = 1, #unitList do
+    for i = 1, unitList:Size() do
         if not unitList[i]:IsDead() then
             allDead = false
             break;
@@ -187,23 +204,32 @@ end
 --死亡
 ---@param unitList List | table<number, Game.Modules.World.Items.BattleUnit>
 function PveBattleBehavior:IsAllDeadOver(unitList)
-    local allDead = true
-    for i = 1, #unitList do
-        if not unitList[i]:IsDeadOver() then
-            allDead = false
+    local allDeadOver = true
+    for i = 1, unitList:Size() do
+        if not unitList[i].deadOver then
+            allDeadOver = false
             break;
         end
     end
-    return allDead
+    return allDeadOver
 end
 
 function PveBattleBehavior:OnAtkerAllDeadOver()
-
+    if self.roundBehavior then
+        self.roundBehavior:Dispose()
+        self.roundBehavior = nil
+    end
 end
 
 function PveBattleBehavior:Dispose()
     PveBattleBehavior.super.Dispose(self)
     self:Clear()
+
+    if self.roundBehavior then
+        self.roundBehavior:Dispose()
+        self.roundBehavior = nil
+    end
+
     RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnBattleItemDead, self)
 end
 

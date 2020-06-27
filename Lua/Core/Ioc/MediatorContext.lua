@@ -45,6 +45,7 @@ function MediatorContext:Launch()
 	self.binder:Bind(require("Game.Modules.Player.View.PlayerInfoMdr")):To(ViewConfig.PlayerInfo.name)
 	self.binder:Bind(require("Game.Modules.Role.View.ResourceBarMdr")):To(ViewConfig.ResourceBar.name)
 	self.binder:Bind(require("Game.Modules.Role.View.RoleInfoMdr")):To(ViewConfig.RoleInfo.name)
+	self.binder:Bind(require("Game.Modules.Transition.View.TransitionMdr")):To(ViewConfig.Transition.name)
 	self.binder:Bind(require("Game.Modules.World.View.WorldMdr")):To(ViewConfig.World.name)
     --TODO
 end

@@ -61,7 +61,7 @@ function AvatarGridBehavior:SelectSkill()
     behavior:AppendState(function()
         --self:_debug("AvatarGridBehavior SelectSkill")
     end, function()
-        --self:_debug("AvatarGridBehavior SelectSkill")
+        self:_debug("AvatarGridBehavior SelectSkill")
         if self.currArea and self.currArea.isActive then
             self.battleUnit.strategy:AutoSelectSkill()
             self.stateMachine:NextState()

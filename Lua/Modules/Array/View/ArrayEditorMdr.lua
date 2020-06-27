@@ -109,7 +109,7 @@ function ArrayEditorMdr:OfficialStartBattle(battleArray)
                     self.battleModel.currBattleMode = BattleMode.PVE
                     self.battleModel.currCheckPointData = checkPointData
                     self.battleModel.battleSceneInfo = BattleSceneConfig.Get(checkPointData.battleScene)
-                    World.worldScene:EnterCheckPoint(checkPointData.id)
+                    transition:EnterCheckPoint(checkPointData.id)
                 end)
             end)
 end

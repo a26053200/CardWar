@@ -8,8 +8,8 @@
 local BattleEvent = require("Game.Modules.Battle.Events.BattleEvents")
 local BaseBehavior = require("Game.Modules.Common.Behavior.BaseBehavior")
 
----@class Module.Battle.Behaviors.RoundBehavior : Game.Modules.Common.Behavior.BaseBehavior
----@field New fun(context:WorldContext):Module.Battle.Behaviors.RoundBehavior
+---@class Game.Modules.Battle.Behaviors.RoundBehavior : Game.Modules.Common.Behavior.BaseBehavior
+---@field New fun(context:WorldContext):Game.Modules.Battle.Behaviors.RoundBehavior
 ---@field currArea Game.Modules.Battle.Layouts.GridArea
 ---@field context WorldContext
 ---@field currRoundAvatar Game.Modules.World.Items.Avatar 当前回合的Avatar
@@ -161,26 +161,23 @@ function RoundBehavior:RoundEnd()
         self.currRoundAvatar = nil
         if self.mode == RoundMode.Auto then
             self:NextState()
+            self:_debug("RoundBehavior Next Round")
         else --self.mode == RoundMode.Auto
             self:_debug("RoundBehavior Stop")
             self.isRoundOver = true
-            self:Stop()
+            self:StopRound()
         end
     end)
     return behavior
 end
 
+function RoundBehavior:StopRound()
+    self:Stop()
+end
+
 function RoundBehavior:Stop()
     RoundBehavior.super.Stop(self)
     --剩下的单位都停止行为
-    local tempList = List.New()
-    tempList:Concat(self.context.battleBehavior:GetCampAvatarList(Camp.Atk))
-    tempList:Concat(self.context.battleBehavior:GetCampAvatarList(Camp.Def))
-    for i = 1, tempList:Size() do
-        if not tempList[i]:IsDead() then
-            tempList[i]:SetBehaviorEnabled(false)
-        end
-    end
     self.attackSortList:Clear()
 end
 

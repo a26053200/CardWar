@@ -2,9 +2,6 @@
 local Data = {}
 Data.table = 
 {
-    ["Micro_Dragon"] = {id = "Micro_Dragon", name = "Micro Dragon", avatarName = "micro_dragon", type = "Monster", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 1000, maxAnger = 100, speed = 60},
-    ["Ghost"] = {id = "Ghost", name = "Ghost", avatarName = "Ghost", type = "Monster", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 1000, maxAnger = 100, speed = 60},
-    ["Werewolf"] = {id = "Werewolf", name = "Werewolf", avatarName = "Werewolf", type = "Monster", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 1000, maxAnger = 100, speed = 60},
     ["hero1"] = {id = "hero1", name = "英雄1", avatarName = "Villager_B_Boy", type = "Hero", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 1000, maxAnger = 100, speed = 60},
     ["hero2"] = {id = "hero2", name = "英雄2", avatarName = "Villager_B_Boy", type = "Hero", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 1000, maxAnger = 100, speed = 60},
     ["hero3"] = {id = "hero3", name = "英雄3", avatarName = "Villager_B_Boy", type = "Hero", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 1000, maxAnger = 100, speed = 60},
@@ -50,6 +47,9 @@ Data.table =
     ["hero43"] = {id = "hero43", name = "英雄43", avatarName = "Villager_B_Boy", type = "Hero", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 1000, maxAnger = 100, speed = 60},
     ["hero44"] = {id = "hero44", name = "英雄44", avatarName = "Villager_B_Boy", type = "Hero", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 1000, maxAnger = 100, speed = 60},
     ["hero45"] = {id = "hero45", name = "英雄45", avatarName = "Villager_B_Boy", type = "Hero", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 1000, maxAnger = 100, speed = 60},
+    ["Micro_Dragon"] = {id = "Micro_Dragon", name = "Micro Dragon", avatarName = "micro_dragon", type = "Monster", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 500, maxAnger = 100, speed = 60},
+    ["Ghost"] = {id = "Ghost", name = "Ghost", avatarName = "Ghost", type = "Monster", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 500, maxAnger = 100, speed = 60},
+    ["Werewolf"] = {id = "Werewolf", name = "Werewolf", avatarName = "Werewolf", type = "Monster", cost = 10, atk = 100, def = 10, crit = 0.3, critPow = 1.5, maxHp = 500, maxAnger = 100, speed = 60},
 }
 
 function Data.Get(id)

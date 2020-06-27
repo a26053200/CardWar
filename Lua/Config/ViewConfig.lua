@@ -24,3 +24,4 @@ ViewConfig.ItemBag = {name = "ItemBag",module = "Item",}
 ViewConfig.ArrayEditor = {module = "Array",name = "ArrayEditor",prefab = "Prefabs/UI/Array/ArrayEditor.prefab",}
 ViewConfig.CheckPoint = {name = "CheckPoint",module = "CheckPoint",prefab = "Prefabs/UI/CheckPoint/CheckPoint.prefab",}
 ViewConfig.CheckPointInfo = {name = "CheckPointInfo",module = "CheckPoint",prefab = "Prefabs/UI/CheckPoint/CheckPointInfo.prefab",}
+ViewConfig.Transition = {name = "Transition",module = "Transition",prefab = "Prefabs/UI/Common/Transition.prefab",}
