@@ -1,5 +1,6 @@
 package com.betel.cardwar.game.modules.checkpoint.model;
 
+import com.alibaba.fastjson.JSONObject;
 import com.betel.asd.interfaces.IVo;
 
 /**
@@ -20,10 +21,22 @@ public class CheckPoint implements IVo
     private String lastPassTime;    //上次通关时间
     private boolean[] rewards;      //奖励获取情况
 
+    public JSONObject toRspdJson()
+    {
+        JSONObject json = new JSONObject();
+        json.put("roleId", roleId);
+        json.put("checkpointId", checkpointId);
+        json.put("star", star);
+        json.put("passNum", passNum);
+        json.put("resetNum", resetNum);
+        json.put("rewards", rewards);
+        return json;
+    }
+
     @Override
     public String getId()
     {
-        return null;
+        return id;
     }
 
     @Override

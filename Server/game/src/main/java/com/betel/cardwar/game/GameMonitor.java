@@ -1,5 +1,10 @@
 package com.betel.cardwar.game;
 
+import com.betel.asd.BaseService;
+import com.betel.cardwar.game.modules.battle.model.BattleArray;
+import com.betel.cardwar.game.modules.battle.model.BattleReport;
+import com.betel.cardwar.game.modules.battle.service.BattleArrayService;
+import com.betel.cardwar.game.modules.battle.service.BattleReportService;
 import com.betel.cardwar.game.modules.card.model.Card;
 import com.betel.cardwar.game.modules.card.service.CardService;
 import com.betel.cardwar.game.modules.checkpoint.model.CheckPoint;
@@ -25,27 +30,46 @@ public class GameMonitor extends NodeServerMonitor
 {
     final static Logger logger = LogManager.getLogger(GameMonitor.class);
 
+    private ApplicationContext applicationContext;
+    private EventDispatcher eventDispatcher;
+
     public GameMonitor(ServerConfigVo serverCfgInfo)
     {
         super(serverCfgInfo);
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        eventDispatcher = new EventDispatcher();
 
-        PlayerService playerService             = (PlayerService) applicationContext.getBean("playerService");
-        RoleService roleService                 = (RoleService) applicationContext.getBean("roleService");
-        CardService cardService                 = (CardService) applicationContext.getBean("cardService");
-        ItemService itemService                 = (ItemService) applicationContext.getBean("itemService");
-        CheckPointService checkPointService     = (CheckPointService) applicationContext.getBean("checkPointService");
-
-        EventDispatcher eventDispatcher = new EventDispatcher();
-        pushService(Player.class,           playerService);playerService.setEventDispatcher(eventDispatcher);
-        pushService(Role.class,             roleService);roleService.setEventDispatcher(eventDispatcher);
-        pushService(Card.class,             cardService);cardService.setEventDispatcher(eventDispatcher);
-        pushService(Item.class,             itemService);itemService.setEventDispatcher(eventDispatcher);
-        pushService(CheckPoint.class,       checkPointService);checkPointService.setEventDispatcher(eventDispatcher);
+        registerService(PlayerService.class,            Player.class);
+        registerService(RoleService.class,              Role.class);
+        registerService(CardService.class,              Card.class);
+        registerService(ItemService.class,              Item.class);
+        registerService(CheckPointService.class,        CheckPoint.class);
+        registerService(BattleArrayService.class,       BattleArray.class);
+        registerService(BattleReportService.class,      BattleReport.class);
+        registerService(PlayerService.class,            Player.class);
 
         OnAllServiceLoaded();
     }
 
+    //注册Service
+    private void registerService(Class serviceClass, Class beanClass)
+    {
+        BaseService service = (BaseService) applicationContext.getBean(toLowerCaseFirstOne(serviceClass.getSimpleName()));
+        pushService(beanClass, service);service.setEventDispatcher(eventDispatcher);
+
+    }
+
+    /**
+     * 首字母转小写
+     * @param s
+     * @return
+     */
+    private String toLowerCaseFirstOne(String s){
+        if(Character.isLowerCase(s.charAt(0)))
+            return s;
+        else
+            return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
+    }
     @Override
     public void recvJsonBuff(ChannelHandlerContext ctx, ByteBuf buf)
     {

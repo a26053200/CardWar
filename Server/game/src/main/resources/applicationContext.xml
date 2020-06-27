@@ -74,4 +74,14 @@
     <bean id="checkPointService" class="com.betel.cardwar.game.modules.checkpoint.service.CheckPointService">
         <property name="tableName" value="CheckPoint"/>
     </bean>
+
+    <bean id="battleReportDao" class="com.betel.cardwar.game.modules.battle.model.BattleReportDao"/>
+    <bean id="battleReportService" class="com.betel.cardwar.game.modules.battle.service.BattleReportService">
+        <property name="tableName" value="BattleReport"/>
+    </bean>
+
+    <bean id="battleArrayDao" class="com.betel.cardwar.game.modules.battle.model.BattleArrayDao"/>
+    <bean id="battleArrayService" class="com.betel.cardwar.game.modules.battle.service.BattleArrayService">
+        <property name="tableName" value="BattleArray"/>
+    </bean>
 </beans>

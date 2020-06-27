@@ -33,7 +33,7 @@ public class Field
     /**
      * 卡池列表
      */
-    public static final String CARD_POOL_LIST            = "cardPoolList";
+    public static final String CARD_POOL_LIST        = "cardPoolList";
     /**
      * 抽卡次数
      */
@@ -55,11 +55,35 @@ public class Field
     // 关卡
     //==================
     /**
-     * 获取关卡信息
+     * 章节id
      */
     public static final String CHAPTER_ID            = "chapterId";
     /**
-     * 获取关卡信息
+     * 关卡id
+     */
+    public static final String CHECKPOINT_ID            = "checkpointId";
+    /**
+     * 获取章节信息
      */
     public static final String CHAPTER_INFO            = "chapterInfo";
+
+    //==================
+    // 战斗
+    //==================
+    /**
+     * 战斗类型
+     */
+    public static final String BATTLE_TYPE              = "battleType";
+    /**
+     * 生成战报
+     */
+    public static final String BATTLE_REPORT            = "battleReport";
+    /**
+     * 阵容结果
+     */
+    public static final String BATTLE_ARRAY_RESULT               = "battleArrayResult";
+    /**
+     * 阵容
+     */
+    public static final String BATTLE_ARRAY               = "battleArray";
 }
