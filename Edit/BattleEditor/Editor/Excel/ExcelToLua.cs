@@ -12,7 +12,7 @@ namespace BattleEditor
 {
     public class ExcelToLua : ExcelExporter
     {
-        [MenuItem("Tools/Excel/Excel2Lua %#l")]
+        [MenuItem("Tools/Excel/Excel2Lua %&l")]
         public static void DoExcelToLua()
         {
             DoExcelExport(false, "lua", new ExcelToLua());
@@ -31,7 +31,10 @@ namespace BattleEditor
             sb.AppendLine();
             sb.Append("local Data = {}");
             sb.AppendLine();
-            sb.Append("Data.table = {");
+            sb.Append("Data.table = ");
+            sb.AppendLine();
+            sb.Append("{");
+            sb.AppendLine();
             for (int i = 0; i < reader.dataTable.Rows.Count; i++)
             {
                 ExecuteFile(i, reader.dataTable.Columns, reader.dataTable.Rows[i], sb);
