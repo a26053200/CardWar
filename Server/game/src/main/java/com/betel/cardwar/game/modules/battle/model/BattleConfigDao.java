@@ -7,7 +7,7 @@ import com.betel.asd.RedisDao;
  * @Author zhengnan
  * @Date 2020/6/24
  */
-public class BattleArrayDao extends RedisDao<BattleArray>
+public class BattleConfigDao extends RedisDao<BattleConfig>
 {
 
 }

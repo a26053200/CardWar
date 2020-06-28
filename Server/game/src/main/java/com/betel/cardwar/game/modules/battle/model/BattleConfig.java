@@ -3,16 +3,18 @@ package com.betel.cardwar.game.modules.battle.model;
 import com.betel.asd.interfaces.IVo;
 
 /**
- * @Description 战斗编组
+ * @Description 战斗配置
  * @Author zhengnan
  * @Date 2020/6/24
  */
-public class BattleArray implements IVo
+public class BattleConfig implements IVo
 {
 
     private String id;
     private String roleId;
+    private boolean auto;
     private int battleType;
+    private int battleSpeed;
     private String[] cardIds;
     @Override
     public String getId()
@@ -38,6 +40,16 @@ public class BattleArray implements IVo
         roleId = s;
     }
 
+    public boolean isAuto()
+    {
+        return auto;
+    }
+
+    public void setAuto(boolean auto)
+    {
+        this.auto = auto;
+    }
+
     public int getBattleType()
     {
         return battleType;
@@ -46,6 +58,16 @@ public class BattleArray implements IVo
     public void setBattleType(int battleType)
     {
         this.battleType = battleType;
+    }
+
+    public int getBattleSpeed()
+    {
+        return battleSpeed;
+    }
+
+    public void setBattleSpeed(int battleSpeed)
+    {
+        this.battleSpeed = battleSpeed;
     }
 
     public String[] getCardIds()

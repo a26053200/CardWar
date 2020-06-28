@@ -80,8 +80,8 @@
         <property name="tableName" value="BattleReport"/>
     </bean>
 
-    <bean id="battleArrayDao" class="com.betel.cardwar.game.modules.battle.model.BattleArrayDao"/>
-    <bean id="battleArrayService" class="com.betel.cardwar.game.modules.battle.service.BattleArrayService">
-        <property name="tableName" value="BattleArray"/>
+    <bean id="battleConfigDao" class="com.betel.cardwar.game.modules.battle.model.BattleConfigDao"/>
+    <bean id="battleConfigService" class="com.betel.cardwar.game.modules.battle.service.BattleConfigService">
+        <property name="tableName" value="BattleConfig"/>
     </bean>
 </beans>

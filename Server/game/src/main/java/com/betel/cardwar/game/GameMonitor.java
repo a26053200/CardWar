@@ -1,9 +1,9 @@
 package com.betel.cardwar.game;
 
 import com.betel.asd.BaseService;
-import com.betel.cardwar.game.modules.battle.model.BattleArray;
+import com.betel.cardwar.game.modules.battle.model.BattleConfig;
 import com.betel.cardwar.game.modules.battle.model.BattleReport;
-import com.betel.cardwar.game.modules.battle.service.BattleArrayService;
+import com.betel.cardwar.game.modules.battle.service.BattleConfigService;
 import com.betel.cardwar.game.modules.battle.service.BattleReportService;
 import com.betel.cardwar.game.modules.card.model.Card;
 import com.betel.cardwar.game.modules.card.service.CardService;
@@ -44,7 +44,7 @@ public class GameMonitor extends NodeServerMonitor
         registerService(CardService.class,              Card.class);
         registerService(ItemService.class,              Item.class);
         registerService(CheckPointService.class,        CheckPoint.class);
-        registerService(BattleArrayService.class,       BattleArray.class);
+        registerService(BattleConfigService.class,      BattleConfig.class);
         registerService(BattleReportService.class,      BattleReport.class);
         registerService(PlayerService.class,            Player.class);
 

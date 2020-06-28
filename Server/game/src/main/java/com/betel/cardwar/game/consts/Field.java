@@ -86,4 +86,12 @@ public class Field
      * 阵容
      */
     public static final String BATTLE_ARRAY               = "battleArray";
+    /**
+     * 该战斗类型的速度
+     */
+    public static final String BATTLE_SPEED               = "battleSpeed";
+    /**
+     * 该战斗类型的是否开启自动战斗
+     */
+    public static final String BATTLE_AUTO               = "battleAuto";
 }
