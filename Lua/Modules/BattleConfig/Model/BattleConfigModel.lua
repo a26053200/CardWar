@@ -5,16 +5,18 @@
 ---
 
 local BaseModel = require("Game.Core.Ioc.BaseModel")
----@class Game.Modules.Array.Model.ArrayModel : Game.Core.Ioc.BaseModel
----@field arrayService Game.Modules.Array.Service.ArrayService
+---@class Game.Modules.BattleConfig.Model.BattleConfigModel : Game.Core.Ioc.BaseModel
+---@field arrayService Game.Modules.BattleConfig.Service.BattleConfigService
 ---@field currCheckPointData CheckPointData
 ---@field currChapterVo Game.Modules.CheckPoint.Vo.ChapterVo
 ---@field selectList List | table<number, Game.Modules.Card.Vo.CardVo>
 ---@field battleType BattleType
-local ArrayModel = class("ArrayModel",BaseModel)
+---@field battleSpeed number
+---@field battleAuto boolean
+local BattleConfigModel = class("BattleConfigModel",BaseModel)
 
-function ArrayModel:Ctor()
+function BattleConfigModel:Ctor()
     
 end
 
-return ArrayModel
+return BattleConfigModel

@@ -8,7 +8,7 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.CheckPoint.View.CheckPointInfoMdr : Game.Core.Ioc.BaseMediator
 ---@field checkPointModel Game.Modules.CheckPoint.Model.CheckPointModel
 ---@field roleModel Game.Modules.Role.Model.RoleModel
----@field arrayModel Game.Modules.Array.Model.ArrayModel
+---@field battleConfigModel Game.Modules.BattleConfig.Model.BattleConfigModel
 ---@field checkPointService Game.Modules.CheckPoint.Service.CheckPointService
 ---@field section Game.Modules.CheckPoint.Vo.SectionVo
 local CheckPointInfoMdr = class("Game.Modules.CheckPoint.View.CheckPointInfoMdr",BaseMediator)
@@ -45,8 +45,8 @@ function CheckPointInfoMdr:UpdateView()
 end
 
 function CheckPointInfoMdr:On_Click_BtnEnter()
-    self.arrayModel.battleType = BattleType.Trunk_Normal
-    navigation:Push(ViewConfig.ArrayEditor)
+    self.battleConfigModel.battleType = BattleType.Trunk_Normal
+    navigation:Push(ViewConfig.BattleConfig)
 end
 
 function CheckPointInfoMdr:On_Click_BtnCancel()

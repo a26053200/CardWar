@@ -27,7 +27,7 @@ function Navigation:Init()
         {
             [1] = {
                 label = "主页",
-                views = List.New(),
+                views = List.New({ViewConfig.RoleInfo}),
                 loadedViews = List.New(),
             },
             [2] = {

@@ -33,7 +33,7 @@ function Standard:OnBeginPerformance(sequence)
         self:OnProcessStart()
         for i = 1, self.performanceInfo.times do
             self:Process()
-            coroutine.wait(self.performanceInfo.interval)
+            coroutine.wait(self.performanceInfo.interval / self.battleUnit.context.battleSpeed)
         end
         while self.accountCount < self.performanceInfo.times * #self.accounts do
             coroutine.step(1)

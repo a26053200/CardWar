@@ -70,10 +70,13 @@ Action.EndBattle = {server = "GameServer", action = "battlereport@endBattle", fi
 --请求生成战报
 Action.GenerateBattleReport = { server = "GameServer", action = "battlereport@generateBattleReport", fields = "roleId,checkpointId" }
 
---获取保存的编组
-Action.GetBattleArray = { server = "GameServer", action = "battleArray@getBattleArray", fields = "roleId,battleType" }
+--获取战斗配置
+Action.GetBattleConfig = { server = "GameServer", action = "battleConfig@getBattleConfig", fields = "roleId,battleType" }
 
 --保存编组
-Action.SaveBattleArray = { server = "GameServer", action = "battleArray@saveBattleArray", fields = "roleId,battleType,battleArray" }
+Action.SaveBattleArray = { server = "GameServer", action = "battleConfig@saveBattleArray", fields = "roleId,battleType,battleArray" }
+
+--保存速度和自动
+Action.SaveBattleConfig = { server = "GameServer", action = "battleConfig@saveBattleConfig", fields = "roleId,battleType,battleSpeed,battleAuto" }
 
 return Action

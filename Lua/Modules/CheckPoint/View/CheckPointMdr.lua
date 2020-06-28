@@ -9,7 +9,7 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.CheckPoint.View.CheckPointMdr : Game.Core.Ioc.BaseMediator
 ---@field checkPointModel Game.Modules.CheckPoint.Model.CheckPointModel
 ---@field roleModel Game.Modules.Role.Model.RoleModel
----@field arrayModel Game.Modules.Array.Model.ArrayModel
+---@field battleConfigModel Game.Modules.BattleConfig.Model.BattleConfigModel
 ---@field checkPointService Game.Modules.CheckPoint.Service.CheckPointService
 ---@field currChapter ChapterData
 ---@field positionList Betel.UI.PositionList

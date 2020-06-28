@@ -14,9 +14,8 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 local LobbyMdr = class("Game.Modules.Lobby.View.LobbyMdr",BaseMediator)
 
 function LobbyMdr:OnInit()
-    self.cardService:getCardList(self.roleModel.roleInfo.id, self.OnCardList)
-    self.itemService:getItemList(self.roleModel.roleInfo.id, self.OnItemList)
-    vmgr:LoadView(ViewConfig.RoleInfo)
+    self.cardService:getCardList(self.roleModel.roleInfo.id, handler(self, self.OnCardList))
+    self.itemService:getItemList(self.roleModel.roleInfo.id, handler(self, self.OnItemList))
     vmgr:LoadView(ViewConfig.Navigation)
 end
 

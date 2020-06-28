@@ -4,20 +4,47 @@
 --- DateTime: 2019-09-17-00:16:13
 ---
 
+local BattleEvents = require("Game.Modules.Battle.Events.BattleEvents")
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
+
 ---@class Game.Modules.Battle.View.BattleInfoMdr : Game.Core.Ioc.BaseMediator
 ---@field battleModel Game.Modules.Battle.Model.BattleModel
+---@field battleConfigModel Game.Modules.BattleConfig.Model.BattleConfigModel
 ---@field battleService Game.Modules.Battle.Service.BattleService
+---@field arrayService Game.Modules.BattleConfig.Service.BattleConfigService
 ---@field scoreText UnityEngine.UI.Text
 local BattleInfoMdr = class("BattleInfoMdr",BaseMediator)
 
+local SpeedValues = {1,1.8,2.5}
+
 function BattleInfoMdr:OnInit()
-    self.scoreText = self.gameObject:GetText("Score/Text")
+    self.context = self.battleModel.currentContext
+    self.speedIndex = self.battleConfigModel.battleSpeed
+    self.gameObject:SetButtonText("BtnSpeed", "x" .. self.speedIndex)
 end
 
 
 function BattleInfoMdr:RegisterListeners()
 
+end
+
+function BattleInfoMdr:On_Click_BtnAuto()
+
+end
+
+function BattleInfoMdr:On_Click_BtnSpeed()
+    if self.speedIndex + 1 > #SpeedValues then
+        self.speedIndex = 1
+    else
+        self.speedIndex = self.speedIndex + 1
+    end
+    self.context.battleSpeed = SpeedValues[self.speedIndex]
+    BattleEvents.Dispatch(BattleEvents.BattleSpeedChanged)
+    self.gameObject:SetButtonText("BtnSpeed", "x" .. self.speedIndex)
+    self.arrayService:SaveBattleSpeed(
+            self.roleModel.roleId,
+            self.battleConfigModel.battleType,
+            self.speedIndex)
 end
 
 function BattleInfoMdr:Update()

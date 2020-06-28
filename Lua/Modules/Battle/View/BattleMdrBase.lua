@@ -13,7 +13,7 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.Battle.View.BattleMdrBase : Game.Core.Ioc.BaseMediator
 ---@field battleModel Game.Modules.Battle.Model.BattleModel
 ---@field playerModel Game.Modules.Player.Model.PlayerModel
----@field arrayModel Game.Modules.Array.Model.ArrayModel
+---@field battleConfigModel Game.Modules.BattleConfig.Model.BattleConfigModel
 ---@field battleService Game.Modules.Battle.Service.BattleService
 ---@field context WorldContext
 ---@field battleSceneInfo BattleSceneInfo --战斗场景信息
@@ -39,7 +39,7 @@ end
 --初始化关卡数据
 function BattleMdrBase:InitCheckPointData()
     log("Init Battle Scene" .. self.battleSceneInfo.id)
-    self.context = WorldContext.New(self.battleModel.currBattleMode)
+    self.context = WorldContext.New(self.battleModel.currBattleMode, self.battleConfigModel.battleSpeed)
     self.battleModel.currentContext = self.context
     self.context.checkPointData = self.battleModel.currCheckPointData
     self.context.battleSceneInfo = self.battleSceneInfo

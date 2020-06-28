@@ -185,6 +185,16 @@ function RoundBehavior:Dispose()
     RoundBehavior.super.Dispose(self)
     RemoveEventListener(BattleEvent, BattleEvent.ExitAttack, self.OnExitAttack, self)
     RemoveEventListener(BattleEvent, BattleEvent.BattlePause, self.OnBattlePause, self)
+
+    --剩下的单位都停止行为
+    local tempList = List.New()
+    tempList:Concat(self.context.battleBehavior:GetCampAvatarList(Camp.Atk))
+    tempList:Concat(self.context.battleBehavior:GetCampAvatarList(Camp.Def))
+    for i = 1, tempList:Size() do
+        if not tempList[i]:IsDead() then
+            tempList[i]:SetBehaviorEnabled(false)
+        end
+    end
 end
 
 return RoundBehavior

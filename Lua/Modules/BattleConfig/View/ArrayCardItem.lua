@@ -5,7 +5,7 @@
 ---
 
 local ListItemRenderer = require("Betel.UI.ListItemRenderer")
----@class Game.Modules.Array.View.ArrayCardItem: Betel.UI.ListItemRenderer
+---@class Game.Modules.BattleConfig.View.ArrayCardItem: Betel.UI.ListItemRenderer
 ---@field select boolean
 local ArrayCardItem = class("Game.Modules.Login.View.ServerItem",ListItemRenderer)
 

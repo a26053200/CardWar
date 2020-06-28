@@ -13,7 +13,8 @@
 local Widget = require("Game.Modules.Common.Components.Widget")
 
 ---@class Game.Modules.Common.Components.AnimController : Game.Modules.Common.Components.Widget
----@field New fun(gameObject:UnityEngine.GameObject)
+---@field New fun(avatar:Game.Modules.World.Items.Avatar, ctrlUrl:string)
+---@field avatar Game.Modules.World.Items.Avatar
 ---@field animator UnityEngine.Animator
 ---@field rac UnityEngine.RuntimeAnimatorController
 ---@field animLength table<number, number>
@@ -45,6 +46,7 @@ function AnimController:Ctor(avatar, ctrlUrl)
     self.currAnimDelay = nil
 
     AddEventListener(Stage, Event.UPDATE,self.Update, self)
+
 end
 
 function AnimController:SetRuntimeAnimatorController(ctrlUrl)
@@ -78,6 +80,7 @@ function AnimController:PlayAnim(animName,callback, speed, crossFade)
     end
     --self.avatar:_debug("play anim " .. animName)
     speed = speed == nil and 1 or speed
+    speed = speed * self.avatar.context.battleSpeed
     if callback then
         local length = self:GetAnimLength(animName)
         if length then
@@ -91,7 +94,7 @@ function AnimController:PlayAnim(animName,callback, speed, crossFade)
             --end
             --self.callbackList[callback.callback] = {handler = callback, startTime = Time.time, length = length / speed}
         else
-            logError("get anim lengtn error:" .. animName)
+            logError("get anim length error:" .. animName)
             callback:Execute()
             callback:Recycl()
         end

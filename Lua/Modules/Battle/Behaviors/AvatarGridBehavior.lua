@@ -101,7 +101,6 @@ end
 
 --技能释放
 ---@param behavior Game.Modules.Common.Behavior.BaseBehavior
----@param target Game.Modules.World.Items.Avatar
 ---@param skill Game.Modules.Battle.Vo.SkillVo
 function AvatarGridBehavior:OnSkillUse(behavior, skill)
     skill.startTime = Time.time --是否成功开始计时

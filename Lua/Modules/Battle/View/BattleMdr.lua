@@ -74,8 +74,11 @@ end
 function BattleMdr:InitBattleMode()
     BattleMdr.super.InitBattleMode(self)
     if self.battleModel.currBattleMode == BattleMode.PVE then
-        local behavior = PveBattleBehavior.New(self.battleModel.currCheckPointData, self.arrayModel.selectList, self.context)
+        local behavior = PveBattleBehavior.New(self.battleModel.currCheckPointData, self.battleConfigModel.selectList, self.context)
         self.context.battleBehavior = behavior
+
+        vmgr:LoadView(ViewConfig.BattleInfo)
+        vmgr:LoadView(ViewConfig.PveBattleInfo)
     else
         --self.context.battleBehavior = PveBattleBehavior.New(self.checkPointData, self.context)
     end

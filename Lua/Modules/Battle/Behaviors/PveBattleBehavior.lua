@@ -137,6 +137,18 @@ function PveBattleBehavior:OnBattleItemDead(event)
     end
 end
 
+--所有英雄都死亡结束
+function PveBattleBehavior:OnAtkerAllDead()
+    self:StartCoroutine(function ()
+        self:_debug("所有英雄都已经死亡:")
+        self.roundBehavior:StopRound()
+        while not self:IsAllDeadOver(self.atkUnitList) do
+            coroutine.step(1)
+        end
+        self:StopRound()
+    end)
+end
+
 --所有怪物死亡
 function PveBattleBehavior:OnCurrAreaAllDead()
     self.lastArea = self:GetCurrArea()
@@ -153,40 +165,29 @@ function PveBattleBehavior:OnCurrAreaAllDead()
             self.isAllDead = false
         end)
     else --没有下个区域,战斗结束
-        --等待所有目标的死亡动画都播放完毕
-        self:_debug("没有下个区域，战斗结束")
-        if self.lastArea:IsAllDead() then
-            self:StartCoroutine(function ()
-                while not self.lastArea:IsAllDeadOver() do
-                    coroutine.step(1)
-                end
-                self.lastArea:OnAreaExit(Handler.Get(self.OnCurrAreaAllDeadOver, self))
-            end)
-        end
+        self:OnCurrAreaAllDeadOver()
     end
 end
 
---所有怪物死亡结束
+
 function PveBattleBehavior:OnCurrAreaAllDeadOver()
-    if self.lastArea then
-        self:_debug("清除上一区域怪 areaId:" .. self.lastArea.areaInfo.areaIndex)
-        self.lastArea:Clear()
-        self:_debug("当前区域所有怪物死亡结束 areaId:" .. self.lastArea.areaInfo.areaIndex)
-        BattleEvents.Dispatch(BattleEvents.AllMonsterDeadOver)
-    end
-end
-
---所有英雄都死亡结束
-function PveBattleBehavior:OnAtkerAllDead()
+    --等待所有目标的死亡动画都播放完毕
+    self:_debug("没有下个区域，战斗结束")
     self:StartCoroutine(function ()
-        self:_debug("所有英雄都已经死亡:")
-        self.roundBehavior:StopRound()
-        while not self:IsAllDeadOver(self.atkUnitList) do
+        while not self.lastArea:IsAllDeadOver() do
             coroutine.step(1)
         end
-        self:OnAtkerAllDeadOver()
+        --所有怪物死亡结束
+        self.lastArea:OnAreaExit(Handler.New(function()
+            self:_debug("清除上一区域怪 areaId:" .. self.lastArea.areaInfo.areaIndex)
+            self.lastArea:Clear()
+            self:_debug("当前区域所有怪物死亡结束 areaId:" .. self.lastArea.areaInfo.areaIndex)
+            BattleEvents.Dispatch(BattleEvents.AllMonsterDeadOver)
+            self:StopRound()
+        end , self))
     end)
 end
+
 
 --死亡
 ---@param unitList List | table<number, Game.Modules.World.Items.BattleUnit>
@@ -214,7 +215,8 @@ function PveBattleBehavior:IsAllDeadOver(unitList)
     return allDeadOver
 end
 
-function PveBattleBehavior:OnAtkerAllDeadOver()
+--停止回合
+function PveBattleBehavior:StopRound()
     if self.roundBehavior then
         self.roundBehavior:Dispose()
         self.roundBehavior = nil
@@ -225,10 +227,7 @@ function PveBattleBehavior:Dispose()
     PveBattleBehavior.super.Dispose(self)
     self:Clear()
 
-    if self.roundBehavior then
-        self.roundBehavior:Dispose()
-        self.roundBehavior = nil
-    end
+    self:StopRound()
 
     RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnBattleItemDead, self)
 end

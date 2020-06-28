@@ -4,26 +4,26 @@
 --- DateTime: 2020-06-17-21:31:19
 ---
 
-local ArrayCardItem = require("Game.Modules.Array.View.ArrayCardItem")
+local ArrayCardItem = require("Game.Modules.BattleConfig.View.ArrayCardItem")
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
----@class Game.Modules.Array.View.ArrayEditorMdr : Game.Core.Ioc.BaseMediator
----@field arrayModel Game.Modules.Array.Model.ArrayModel
+---@class Game.Modules.BattleConfig.View.ArrayEditorMdr : Game.Core.Ioc.BaseMediator
+---@field battleConfigModel Game.Modules.BattleConfig.Model.BattleConfigModel
 ---@field cardModel Game.Modules.Card.Model.CardModel
 ---@field roleModel Game.Modules.Role.Model.RoleModel
 ---@field battleModel Game.Modules.Battle.Model.BattleModel
 ---@field checkPointModel Game.Modules.CheckPoint.Model.CheckPointModel
----@field arrayService Game.Modules.Array.Service.ArrayService
+---@field battleConfigService Game.Modules.BattleConfig.Service.BattleConfigService
 ---@field ownerList List | table<number, Game.Modules.Card.Vo.CardVo>
 ---@field cardList Betel.UI.TableList
 ---@field selectList List | table<number, Game.Modules.Card.Vo.CardVo>
-local ArrayEditorMdr = class("Game.Modules.Array.View.ArrayEditorMdr",BaseMediator)
+local BattleConfigMdr = class("Game.Modules.BattleConfig.View.BattleConfigMdr",BaseMediator)
 
-function ArrayEditorMdr:Ctor()
-    ArrayEditorMdr.super.Ctor(self)
+function BattleConfigMdr:Ctor()
+    BattleConfigMdr.super.Ctor(self)
     self.layer = UILayer.LAYER_FLOAT
 end
 
-function ArrayEditorMdr:OnInit()
+function BattleConfigMdr:OnInit()
     self.ownerList = self.cardModel:SortByStar()
 
     self:SetCloseBg(self.gameObject:FindChild("Bg"))
@@ -31,10 +31,10 @@ function ArrayEditorMdr:OnInit()
     self.cardList:SetData(self.ownerList)
     self.cardList.eventDispatcher:AddEventListener(ListViewEvent.ItemClick, self.onItemClick, self)
 
-    self.arrayService:getBattleArray(self.roleModel.roleId,self.arrayModel.battleType, handler(self, self.OnInitSelectList))
+    self.battleConfigService:GetBattleConfig(self.roleModel.roleId,self.battleConfigModel.battleType, handler(self, self.OnInitSelectList))
 end
 
-function ArrayEditorMdr:OnInitSelectList(data)
+function BattleConfigMdr:OnInitSelectList(data)
     self.selectList = List.New()
     for i = 1, #data.battleArray do
         self.selectList:Add(self.cardModel:GetCardById(data.battleArray[i]))
@@ -45,19 +45,19 @@ function ArrayEditorMdr:OnInitSelectList(data)
     self.selectCardList.eventDispatcher:AddEventListener(ListViewEvent.ItemClick,self.onSelectItemClick, self)
 end
 
-function ArrayEditorMdr:onItemClick(event, data, index)
+function BattleConfigMdr:onItemClick(event, data, index)
     if self.selectList:Size() < 5 and not self.selectList:Contain(data) then
         self.selectList:Add(data)
         self.selectCardList:SetData(self.selectList)
-        local item = self.cardList:GetItemRenderByIndex(index) ---@type Game.Modules.Array.View.ArrayCardItem
+        local item = self.cardList:GetItemRenderByIndex(index) ---@type Game.Modules.BattleConfig.View.ArrayCardItem
         item.select = true
         item:UpdateItem(data, index)
     end
 end
 
-function ArrayEditorMdr:onSelectItemClick(event, data, index)
+function BattleConfigMdr:onSelectItemClick(event, data, index)
     if self.selectList:Contain(data) then
-        local item = self.cardList:GetItemRenderByData(data) ---@type Game.Modules.Array.View.ArrayCardItem
+        local item = self.cardList:GetItemRenderByData(data) ---@type Game.Modules.BattleConfig.View.ArrayCardItem
         self.selectList:Remove(data)
         self.selectCardList:Refresh()
         if item then
@@ -70,11 +70,11 @@ function ArrayEditorMdr:onSelectItemClick(event, data, index)
     end
 end
 
-function ArrayEditorMdr:On_Click_BtnCancel()
-    navigation:Pop(ViewConfig.ArrayEditor)
+function BattleConfigMdr:On_Click_BtnCancel()
+    navigation:Pop(ViewConfig.BattleConfig)
 end
 
-function ArrayEditorMdr:On_Click_BtnEnter()
+function BattleConfigMdr:On_Click_BtnEnter()
     if self.selectList:Size() == 0 then
         Tips.Show("请选择上场英雄")
         return
@@ -83,8 +83,9 @@ function ArrayEditorMdr:On_Click_BtnEnter()
     for i = 1, self.selectList:Size() do
         table.insert(battleArray, self.selectList[i].id)
     end
-    self.arrayService:saveBattleArray(self.roleModel.roleId,
-            self.arrayModel.battleType,
+    self.battleConfigService:SaveBattleArray(
+            self.roleModel.roleId,
+            self.battleConfigModel.battleType,
             battleArray,function(data)
                 if data.battleArrayResult then
                     self:OfficialStartBattle()
@@ -94,15 +95,15 @@ function ArrayEditorMdr:On_Click_BtnEnter()
 end
 
 --正式进入战斗
-function ArrayEditorMdr:OfficialStartBattle(battleArray)
-    self.arrayService:startBattle(
+function BattleConfigMdr:OfficialStartBattle(battleArray)
+    self.battleConfigService:StartBattle(
             self.roleModel.roleId,
             self.checkPointModel.currSection.checkPointData.chapter,
             self.checkPointModel.currSection.checkPointData.id,
-            self.arrayModel.battleType,
+            self.battleConfigModel.battleType,
             battleArray,
             function()
-                self.arrayModel.selectList = self.selectList
+                self.battleConfigModel.selectList = self.selectList
 
                 navigation:Clear(function()
                     local checkPointData = CheckPointConfig.GetBattleSceneData(self.checkPointModel.currSection.checkPointData.id)
@@ -114,4 +115,4 @@ function ArrayEditorMdr:OfficialStartBattle(battleArray)
             end)
 end
 
-return ArrayEditorMdr
+return BattleConfigMdr

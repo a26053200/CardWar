@@ -12,28 +12,31 @@
 local BattleEvents = {}
 
 --进入场景
-BattleEvents.EnterScene    = "GridBattle_EnterScene"
+BattleEvents.EnterScene    = "Battle_EnterScene"
 
 --开始战斗
-BattleEvents.BattleStart    = "GridBattle_BattleStart"
+BattleEvents.BattleStart    = "Battle_BattleStart"
 
 --暂停战斗
-BattleEvents.BattlePause    = "GridBattle_BattlePause"
+BattleEvents.BattlePause    = "Battle_BattlePause"
 
 --恢复暂停的战斗
-BattleEvents.BattleResume    = "GridBattle_BattleResume"
+BattleEvents.BattleResume    = "Battle_BattleResume"
 
 --单次攻击开始
-BattleEvents.EnterAttack = "GridBattle_EnterAttack"
+BattleEvents.EnterAttack = "Battle_EnterAttack"
 
 --单次攻击结束
-BattleEvents.ExitAttack = "GridBattle_ExitAttack"
+BattleEvents.ExitAttack = "Battle_ExitAttack"
 
 --所有怪物死亡
-BattleEvents.AllMonsterDead    = "GridBattle_AllMonsterDead"
+BattleEvents.AllMonsterDead    = "Battle_AllMonsterDead"
 
 --所有怪物死亡结束
-BattleEvents.AllMonsterDeadOver    = "GridBattle_AllMonsterDeadOver"
+BattleEvents.AllMonsterDeadOver    = "Battle_AllMonsterDeadOver"
+
+--战斗速度改变
+BattleEvents.BattleSpeedChanged    = "Battle_BattleSpeedChanged"
 
 function BattleEvents.Dispatch(event)
     DispatchEvent(BattleEvents,event,false, false)

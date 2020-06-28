@@ -7,7 +7,7 @@
 local BattleUnit = require("Game.Modules.World.Items.BattleUnit")
 
 ---@class WorldContext
----@field New fun(mode : BattleMode)
+---@field New fun(mode : BattleMode, speed : number)
 ---@field mode BattleMode
 ---@field id number
 ---@field checkPointData CheckPointData
@@ -19,15 +19,17 @@ local BattleUnit = require("Game.Modules.World.Items.BattleUnit")
 ---@field pool Game.Modules.Common.Pools.AssetPoolProxy 对象池
 ---@field attachCamera Game.Modules.Common.Components.AttachCamera
 ---@field battleLayout Game.Modules.Battle.View.BattleLayout
+---@field battleSpeed number 战斗速度
 local WorldContext = class("WorldContext")
 
 local Sid = 1
 
 ---@param mode BattleMode
-function WorldContext:Ctor(mode)
+function WorldContext:Ctor(mode, speed)
     self.id = Sid
     Sid = Sid + 1
     self.mode = mode
+    self.battleSpeed = speed
     self.dropList = List.New()
 end
 
@@ -74,6 +76,10 @@ function WorldContext:CreateBattleItem(camp, battleUnitName, layoutIndex)
     battleItemVo.index = layoutIndex
     local battleItem = BattleUnit.New(battleItemVo, self)
     return battleItem
+end
+
+function WorldContext:SetBattleSpeed(speed)
+    self.battleSpeed = speed
 end
 
 function WorldContext:Dispose()

@@ -65,7 +65,7 @@ function AccountCtrl:OnAccountBegin(skillVo)
     end
     local moveOver = false
     self.battleUnit:PlayRun()
-    self.battleUnit.transform:DOMove(tagPos, FRAME_TIME * 9):OnComplete(function()
+    self.battleUnit.transform:DOMove(tagPos, FRAME_TIME * 9 / self.battleUnit.context.battleSpeed):OnComplete(function()
         self.battleUnit:PlayIdle()
         moveOver = true
     end)
@@ -115,7 +115,7 @@ end
 ---@param animInfo AnimInfo
 function AccountCtrl:AccountProgress(animInfo, accountCallback)
     local animLength = self.battleUnit.animCtrl:GetAnimLength(animInfo.animName)
-    self:CreateDelay(animInfo.accountPoint * (animLength / animInfo.animSpeed), accountCallback)
+    self:CreateDelay(animInfo.accountPoint * (animLength / (animInfo.animSpeed * self.battleUnit.context.battleSpeed)), accountCallback)
 end
 
 ---@param animInfo AnimInfo
@@ -123,7 +123,7 @@ end
 function AccountCtrl:MultiAccountProgress(animInfo, accounts, accountCallback)
     local animLength = self.battleUnit.animCtrl:GetAnimLength(animInfo.animName)
     for i = 1, #accounts do
-        self:CreateDelay(accounts[i].accountPoint * (animLength / animInfo.animSpeed), function()
+        self:CreateDelay(accounts[i].accountPoint * (animLength / (animInfo.animSpeed * self.battleUnit.context.battleSpeed)), function()
             accountCallback(accounts[i])
         end)
     end
