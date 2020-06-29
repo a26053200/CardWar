@@ -14,8 +14,8 @@ end
 function ServiceContext:Launch()
     --TODO
 	self.binder:Bind(require("Game.Modules.Adventure.Service.AdventureService")):ToSingleton()
-	self.binder:Bind(require("Game.Modules.BattleConfig.Service.BattleConfigService")):ToSingleton()
 	self.binder:Bind(require("Game.Modules.Battle.Service.BattleService")):ToSingleton()
+	self.binder:Bind(require("Game.Modules.BattleConfig.Service.BattleConfigService")):ToSingleton()
 	self.binder:Bind(require("Game.Modules.Card.Service.CardService")):ToSingleton()
 	self.binder:Bind(require("Game.Modules.CheckPoint.Service.CheckPointService")):ToSingleton()
 	self.binder:Bind(require("Game.Modules.Item.Service.ItemService")):ToSingleton()

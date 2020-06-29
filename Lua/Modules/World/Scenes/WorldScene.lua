@@ -21,7 +21,7 @@ function WorldScene:OnEnterScene()
 
     CheckPointConfig.Init()
 
-    self:EnterSubScene("Lobby")
+    self:EnterLobby()
 end
 
 --进入关卡战斗
@@ -35,6 +35,10 @@ end
 
 function WorldScene:OnExitScene()
 
+end
+
+function WorldScene:EnterLobby()
+    self:EnterSubScene("Lobby")
 end
 
 return WorldScene

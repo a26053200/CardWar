@@ -56,7 +56,7 @@ end
 ---@return number
 local function sortByStar(c1, c2)
     if c1 ~= nil and c2 ~= nil then
-        return c1.star < c2.star
+        return c1.star > c2.star
     else
         return false
     end

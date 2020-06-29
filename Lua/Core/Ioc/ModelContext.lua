@@ -14,8 +14,8 @@ end
 function ModelContext:Launch()
     --TODO
 	self.binder:Bind(require("Game.Modules.Adventure.Model.AdventureModel")):ToSingleton()
-	self.binder:Bind(require("Game.Modules.BattleConfig.Model.BattleConfigModel")):ToSingleton()
 	self.binder:Bind(require("Game.Modules.Battle.Model.BattleModel")):ToSingleton()
+	self.binder:Bind(require("Game.Modules.BattleConfig.Model.BattleConfigModel")):ToSingleton()
 	self.binder:Bind(require("Game.Modules.Card.Model.CardModel")):ToSingleton()
 	self.binder:Bind(require("Game.Modules.CheckPoint.Model.CheckPointModel")):ToSingleton()
 	self.binder:Bind(require("Game.Modules.Item.Model.ItemModel")):ToSingleton()

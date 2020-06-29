@@ -31,6 +31,7 @@ function NavigationMdr:OnInit()
     self.toggleGroup = self.gameObject:GetToggleGroup("Bar")
     for i = 1, #navigation.navigationPages do
         local toggle = self.gameObject:GetToggle("Bar/Toggle" .. i)
+        toggle.isOn = self.lobbyModel.currNavPage == i
         self.gameObject:GetText("Bar/Toggle" .. i .. "/Label").text = navigation.navigationPages[i].label
         self.btns:Add(toggle.gameObject)
         self:AddClickEventListener(toggle.gameObject, self.OnTabClick)

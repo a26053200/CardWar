@@ -62,6 +62,8 @@ function PveBattleBehavior:InitObjectPool()
     end
     local poolsInfos = PoolFactory.CalcPoolInfoMap(battleUnitList)
     table.insert(poolsInfos,{prefabUrl = Prefabs.LayoutGrid, initNum = 18})
+    table.insert(poolsInfos,{prefabUrl = Prefabs.BattleUnitHUD, initNum = 8})
+    table.insert(poolsInfos,{prefabUrl = Prefabs.FloatNumber, initNum = 1})
     self.context.pool:InitObjectPool(poolsInfos)
 end
 
@@ -83,6 +85,7 @@ function PveBattleBehavior:CreateBattle()
     for i = 1, self.cardList:Size() do
         local battleUnitName = self.cardList[i].cardInfo.battleUnit
         local battleItem = self.context:AddBattleUnit(Camp.Atk, battleUnitName)
+        battleItem.ownerCardVo = self.cardList[i]
         self.atkUnitList:Add(battleItem)
     end
 end
@@ -146,6 +149,7 @@ function PveBattleBehavior:OnAtkerAllDead()
             coroutine.step(1)
         end
         self:StopRound()
+        BattleEvents.Dispatch(BattleEvents.AllHeroDeadOver)
     end)
 end
 
@@ -225,6 +229,9 @@ end
 
 function PveBattleBehavior:Dispose()
     PveBattleBehavior.super.Dispose(self)
+    for i = 1, #self.areas do
+        self.areas[i]:Dispose()
+    end
     self:Clear()
 
     self:StopRound()

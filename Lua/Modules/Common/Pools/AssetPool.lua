@@ -8,6 +8,7 @@
 ---@class Game.Modules.Common.Pools.AssetPool
 ---@field New fun(prefab:string|UnityEngine.GameObject, parent:UnityEngine.Transform, initNum:number):Game.Modules.Common.Pools.AssetPool
 ---@field pool List
+---@field delList List
 ---@field orgObj UnityEngine.GameObject
 ---@field isDisposed boolean 对象池是否被释放
 local AssetPool = class("Game.Modules.Common.Pools.AssetPool")
@@ -19,6 +20,7 @@ local AssetPool = class("Game.Modules.Common.Pools.AssetPool")
 function AssetPool:Ctor(prefab, parent, initNum)
     self.isDisposed = false
     self.pool = List.New()
+    self.delList = List.New()
     self.parent = parent
     if type(prefab) == "string" then
         self.orgObj = Res.LoadAsset(prefab)
@@ -67,7 +69,7 @@ function AssetPool:Store(obj)
     end
     if self.pool:Contain(obj) then
         --在销毁之前存回给对象池
-        --logWarning("重复添加对象."..self.orgObj.name)
+        logWarning("重复添加对象."..self.orgObj.name)
     else
         --LuaHelper.SetParent(obj.transform, self.parent)
         obj.transform:SetParent(self.parent)
@@ -76,6 +78,7 @@ function AssetPool:Store(obj)
         obj:SetActive(false)
         obj.name = self.orgObj.name
         self.pool:Push(obj)
+        self.delList:Remove(obj)
     end
     return true
 end
@@ -100,6 +103,7 @@ function AssetPool:Pop()
     itemObj.transform.localPosition = self.orgObj.transform.localPosition
     --itemObj.transform.localScale    = self.orgObj.transform.localScale
     itemObj.transform.localRotation = self.orgObj.transform.localRotation
+    self.delList:Push(itemObj)
     return itemObj
 end
 
@@ -109,7 +113,11 @@ function AssetPool:Dispose()
     for i = 1, self.pool:Size() do
         Destroy(self.pool[i])
     end
+    for i = 1, self.delList:Size() do
+        Destroy(self.delList[i])
+    end
     self.pool:Clear()
+    self.delList:Clear()
 end
 
 return AssetPool

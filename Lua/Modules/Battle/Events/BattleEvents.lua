@@ -23,6 +23,9 @@ BattleEvents.BattlePause    = "Battle_BattlePause"
 --恢复暂停的战斗
 BattleEvents.BattleResume    = "Battle_BattleResume"
 
+--战斗结束
+BattleEvents.BattleEnd      = "Battle_BattleEnd"
+
 --单次攻击开始
 BattleEvents.EnterAttack = "Battle_EnterAttack"
 
@@ -34,6 +37,9 @@ BattleEvents.AllMonsterDead    = "Battle_AllMonsterDead"
 
 --所有怪物死亡结束
 BattleEvents.AllMonsterDeadOver    = "Battle_AllMonsterDeadOver"
+
+--所有英雄死亡结束
+BattleEvents.AllHeroDeadOver    = "Battle_AllHeroDeadOver"
 
 --战斗速度改变
 BattleEvents.BattleSpeedChanged    = "Battle_BattleSpeedChanged"

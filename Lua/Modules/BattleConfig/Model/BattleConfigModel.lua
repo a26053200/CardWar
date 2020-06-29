@@ -6,7 +6,7 @@
 
 local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@class Game.Modules.BattleConfig.Model.BattleConfigModel : Game.Core.Ioc.BaseModel
----@field arrayService Game.Modules.BattleConfig.Service.BattleConfigService
+---@field battleConfigService Game.Modules.BattleConfig.Service.BattleConfigService
 ---@field currCheckPointData CheckPointData
 ---@field currChapterVo Game.Modules.CheckPoint.Vo.ChapterVo
 ---@field selectList List | table<number, Game.Modules.Card.Vo.CardVo>

@@ -42,6 +42,7 @@ end
 
 ---@param camp Camp
 ---@param battleUnitName string
+---@return Game.Modules.World.Items.BattleUnit
 function WorldContext:AddBattleUnit(camp, battleUnitName)
     local emptyGrid = self.battleLayout:GetFirstEmptyGrid(camp)
     if emptyGrid then
@@ -85,14 +86,16 @@ end
 function WorldContext:Dispose()
     if self.battleBehavior then
         self.battleBehavior:Dispose()
+        self.battleBehavior = nil
     end
     if self.attachCamera then
         self.attachCamera:Dispose()
+        self.attachCamera = nil
     end
     if self.pool then
         self.pool:Dispose()
+        self.pool = nil
     end
-
     Destroy(self.avatarRoot)
     self.avatarRoot = nil
 end

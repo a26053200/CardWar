@@ -13,6 +13,7 @@ local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@field battleSceneInfo BattleSceneInfo --战斗场景信息
 ---@field playerVo Game.Modules.Player.Vo.PlayerVo    当前战斗的玩家
 ---@field currBattleMode BattleMode
+---@field battleResult boolean
 local BattleModel = class("BattleModel",BaseModel)
 
 function BattleModel:Ctor()

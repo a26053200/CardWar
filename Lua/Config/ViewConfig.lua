@@ -21,8 +21,9 @@ ViewConfig.CardList = {name = "CardList",module = "Card",prefab = "Prefabs/UI/Ca
 ViewConfig.DrawCardList = {name = "DrawCardList",module = "Card",prefab = "Prefabs/UI/Card/DrawCardList.prefab",}
 ViewConfig.Adventure = {name = "Adventure",module = "Adventure",prefab = "Prefabs/UI/Adventure/Adventure.prefab",}
 ViewConfig.ItemBag = {name = "ItemBag",module = "Item",}
-ViewConfig.BattleConfig = { module = "BattleConfig", name = "BattleConfig", prefab = "Prefabs/UI/BattleConfig/BattleConfig.prefab",}
+ViewConfig.BattleConfig = {module = "BattleConfig",name = "BattleConfig",prefab = "Prefabs/UI/BattleConfig/BattleConfig.prefab",}
 ViewConfig.CheckPoint = {name = "CheckPoint",module = "CheckPoint",prefab = "Prefabs/UI/CheckPoint/CheckPoint.prefab",}
 ViewConfig.CheckPointInfo = {name = "CheckPointInfo",module = "CheckPoint",prefab = "Prefabs/UI/CheckPoint/CheckPointInfo.prefab",}
 ViewConfig.Transition = {name = "Transition",module = "Transition",prefab = "Prefabs/UI/Common/Transition.prefab",}
 ViewConfig.PveBattleInfo = {name = "PveBattleInfo",module = "Battle",prefab = "Prefabs/UI/Battle/PveBattleInfo.prefab",}
+ViewConfig.BattleResult = {module = "Battle",name = "BattleResult",prefab = "Prefabs/UI/Battle/BattleResult.prefab",}

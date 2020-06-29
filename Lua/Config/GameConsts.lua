@@ -212,6 +212,8 @@ ResIcon =
 Prefabs =
 {
     LayoutGrid = "Prefabs/Common/LayoutGrid.prefab",--布阵的格子
+    BattleUnitHUD = "Prefabs/UI/Battle/BattleUnitHUD.prefab",
+    FloatNumber = "Prefabs/UI/Battle/FloatNumber.prefab",
 }
 
 

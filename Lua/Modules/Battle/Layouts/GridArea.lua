@@ -61,7 +61,7 @@ function GridArea:Refresh()
     if self.isActive then
         return --重复激活
     end
-    AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnMonsterDead, self)
+    AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnBattleItemDead, self)
     self:_debug(("GridArea Ready to Refresh AreaId:" .. self.areaInfo.areaIndex))
     self:DoActive()
     --BattleUtils.CreateGrid(self.orgBornPoints, self.forward, self.context)
@@ -191,7 +191,7 @@ function GridArea:GetAllMonster()
 end
 
 ---@param event Game.Modules.World.Events.BattleItemEvents
-function GridArea:OnMonsterDead(event)
+function GridArea:OnBattleItemDead(event)
     if event and event.target then
         --local grid = self.context.battleLayout:GetLayoutGridByOwner(event.target)
         --grid:ClearOwner()
@@ -199,7 +199,7 @@ function GridArea:OnMonsterDead(event)
 end
 
 function GridArea:Clear()
-    RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnMonsterDead, self)
+    RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnBattleItemDead, self)
 end
 
 return GridArea

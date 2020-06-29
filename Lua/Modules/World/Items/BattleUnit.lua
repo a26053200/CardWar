@@ -5,7 +5,8 @@
 --- 战斗单位
 ---
 
-local SceneUnitHUD = require("Game.Modules.World.Items.SceneUnitHUD")
+local BattleUnitHUD = require("Game.Modules.Battle.Components.BattleUnitHUD")
+local FloatNumber = require("Game.Modules.Battle.Components.FloatNumber")
 local PerformancePlayer = require("Game.Modules.Battle.Performances.PerformancePlayer")
 local AccountCtrl = require("Game.Modules.Battle.Components.AccountCtrl")
 local GridBehaviorStrategy = require("Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy")
@@ -23,6 +24,7 @@ local Avatar = require("Game.Modules.World.Items.Avatar")
 ---@field ownerCardVo Game.Modules.Card.Vo.CardVo 英雄所属卡
 ---@field layoutIndex number 布局索引 默认0 表示没有上场
 ---@field layoutGrid Game.Modules.Battle.Layouts.LayoutGrid 所在布局格子
+---@field floatNum Game.Modules.Battle.Components.FloatNumber
 local BattleItem = class("Game.Modules.World.Items.BattleUnit", Avatar)
 
 ---@param battleUnitVo Game.Modules.Battle.Vo.BattleUnitVo
@@ -55,7 +57,8 @@ function BattleItem:OnRenderObjInit()
     self.performancePlayer = PerformancePlayer.New(self)
     self.strategy = GridBehaviorStrategy.New(self)
 
-    self.hud = SceneUnitHUD.New(self)
+    self.hud = BattleUnitHUD.New(self)
+    self.floatNum = FloatNumber.New(self)
 end
 
 function BattleItem:SetHudVisible(visible)
@@ -118,7 +121,9 @@ end
 
 ---@param hurtInfo HurtInfo
 function BattleItem:DoHurt(hurtInfo)
-
+    if self.floatNum then
+        self.floatNum:Play(hurtInfo.dam)
+    end
 end
 
 function BattleItem:OnDeadOver()

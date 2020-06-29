@@ -81,9 +81,6 @@ end
 
 function BattleBehavior:Dispose()
     BattleBehavior.super.Dispose(self)
-    for i = 1, #self.bornAreas do
-        self.bornAreas[i]:Dispose()
-    end
 end
 
 return BattleBehavior

@@ -25,6 +25,7 @@ function BattleMdr:RegisterListeners()
     AddEventListener(BattleEvents, BattleEvents.BattlePause, self.OnBattlePause, self)
     AddEventListener(BattleEvents, BattleEvents.BattleResume, self.OnBattleResume, self)
     AddEventListener(BattleEvents, BattleEvents.AllMonsterDeadOver, self.OnAllMonsterDeadOver, self)
+    AddEventListener(BattleEvents, BattleEvents.AllHeroDeadOver, self.OnAllHeroDeadOver, self)
     AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnBattleItemDead, self)
     AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemBorn, self.OnBattleItemBorn, self)
 end
@@ -63,7 +64,13 @@ function BattleMdr:OnGridBattleStart()
 end
 
 function BattleMdr:OnAllMonsterDeadOver()
+    self.battleModel.battleResult = true
+    vmgr:LoadView(ViewConfig.BattleResult)
+end
 
+function BattleMdr:OnAllHeroDeadOver()
+    self.battleModel.battleResult = false
+    vmgr:LoadView(ViewConfig.BattleResult)
 end
 
 function BattleMdr:InitLayoutData()
@@ -76,9 +83,6 @@ function BattleMdr:InitBattleMode()
     if self.battleModel.currBattleMode == BattleMode.PVE then
         local behavior = PveBattleBehavior.New(self.battleModel.currCheckPointData, self.battleConfigModel.selectList, self.context)
         self.context.battleBehavior = behavior
-
-        vmgr:LoadView(ViewConfig.BattleInfo)
-        vmgr:LoadView(ViewConfig.PveBattleInfo)
     else
         --self.context.battleBehavior = PveBattleBehavior.New(self.checkPointData, self.context)
     end
@@ -93,6 +97,9 @@ function BattleMdr:StartBattle()
     BattleMdr.super.StartBattle(self)
     --self.context:CreateBattleItems(self.battleModel.playerVo.cards, Camp.Atk, CardState.GridBattle)
     self.context.battleBehavior:CreateBattle()
+
+    vmgr:LoadView(ViewConfig.BattleInfo)
+    vmgr:LoadView(ViewConfig.PveBattleInfo)
 
     self.context.attachCamera = AttachCamera.New(self.context.currSubScene:GetCamera(),
             self.battleSceneInfo.cameraDistance, self.battleSceneInfo.cameraAngle,self.battleSceneInfo.cameraOffset)
@@ -133,10 +140,16 @@ function BattleMdr:OnRemove()
     RemoveEventListener(BattleEvents, BattleEvents.BattleStart, self.OnGridBattleStart, self)
     RemoveEventListener(BattleEvents, BattleEvents.BattlePause, self.OnBattlePause, self)
     RemoveEventListener(BattleEvents, BattleEvents.AllMonsterDeadOver, self.OnAllMonsterDeadOver, self)
-    RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnMonsterDead, self)
+    RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnBattleItemDead, self)
     RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemBorn, self.OnBattleItemBorn, self)
 
-    vmgr:UnloadView(ViewConfig.BattleArrayEditor)
+    if self.battleModel.currBattleMode == BattleMode.PVE then
+        vmgr:UnloadView(ViewConfig.BattleInfo)
+        vmgr:UnloadView(ViewConfig.PveBattleInfo)
+    else
+        --self.context.battleBehavior = PveBattleBehavior.New(self.checkPointData, self.context)
+    end
+
     BattleMdr.super.OnRemove(self)
 end
 

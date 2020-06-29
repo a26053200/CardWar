@@ -39,7 +39,7 @@ end
 ---@param battleSpeed number
 ---@param callback fun()
 function ArrayService:SaveBattleConfig(roleId, battleType, battleSpeed, auto, callback)
-    self:HttpRequest(Action.SaveBattleConfig, {roleId, battleType, auto, battleSpeed}, function(data)
+    self:HttpRequest(Action.SaveBattleConfig, {roleId, battleType, battleSpeed, auto}, function(data)
         invoke(callback, data)
     end)
 end

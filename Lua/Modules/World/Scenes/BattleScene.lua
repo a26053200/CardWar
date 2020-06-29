@@ -22,7 +22,6 @@ end
 ---@param battleSceneInfo BattleSceneInfo
 function BattleScene:InitScene(battleSceneInfo)
     BattleScene.super.InitScene(self, battleSceneInfo)
-    self.checkPointData = checkPointData
     self.battleSceneInfo = battleSceneInfo
     self:InitSubScene()
     self:Show()
@@ -42,7 +41,7 @@ function BattleScene:GetLightObj()
 end
 
 function BattleScene:OnExitScene()
-
+    vmgr:UnloadView(ViewConfig.Battle)
 end
 
 return BattleScene

@@ -22,11 +22,12 @@ end
 function MediatorContext:Launch()
     --TODO
 	self.binder:Bind(require("Game.Modules.Adventure.View.AdventureMdr")):To(ViewConfig.Adventure.name)
-	self.binder:Bind(require("Game.Modules.BattleConfig.View.BattleConfigMdr")):To(ViewConfig.BattleConfig.name)
 	self.binder:Bind(require("Game.Modules.Battle.View.BattleEditorMdr")):To(ViewConfig.BattleEditor.name)
 	self.binder:Bind(require("Game.Modules.Battle.View.BattleInfoMdr")):To(ViewConfig.BattleInfo.name)
 	self.binder:Bind(require("Game.Modules.Battle.View.BattleMdr")):To(ViewConfig.Battle.name)
+	self.binder:Bind(require("Game.Modules.Battle.View.BattleResultMdr")):To(ViewConfig.BattleResult.name)
 	self.binder:Bind(require("Game.Modules.Battle.View.PveBattleInfoMdr")):To(ViewConfig.PveBattleInfo.name)
+	self.binder:Bind(require("Game.Modules.BattleConfig.View.BattleConfigMdr")):To(ViewConfig.BattleConfig.name)
 	self.binder:Bind(require("Game.Modules.Card.View.CardDrawMdr")):To(ViewConfig.CardDraw.name)
 	self.binder:Bind(require("Game.Modules.Card.View.CardListMdr")):To(ViewConfig.CardList.name)
 	self.binder:Bind(require("Game.Modules.Card.View.DrawCardListMdr")):To(ViewConfig.DrawCardList.name)
