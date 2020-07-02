@@ -10,7 +10,7 @@ SkillTriggerCondition =
 {
     CD              = "CD",                 -- 无条件	只要在非冷却下就会发动
     Prob            = "Prob",               -- 攻击概率	概率发动
-    FullAnger       = "FullAnger",          -- 怒气满时释放
+    FullTp = "FullAnger",          -- 怒气满时释放
 }
 
 --目标切换模式

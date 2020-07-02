@@ -34,6 +34,7 @@ end
 ---@param skillVo Game.Modules.Battle.Vo.SkillVo
 function AccountCtrl:OnAccountBegin(skillVo)
     local performanceInfo = PerformanceConfig.Get(skillVo.skillInfo.performance)
+    self.battleUnit.battleUnitVo:ActionRecoveryTP()
     self.battleUnit:SetHudVisible(false)
     self.targetCamp = BattleUtils.GetTargetCamp(performanceInfo.gridSelect, self.battleUnit)
     self.targetGridList = GridUtils.GetTargetCampAndGrids(performanceInfo.gridSelect,self.targetCamp, self.battleUnit)

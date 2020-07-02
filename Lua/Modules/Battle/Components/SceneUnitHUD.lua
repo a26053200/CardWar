@@ -14,11 +14,13 @@ local LuaMonoBehaviour = require('Betel.LuaMonoBehaviour')
 ---@field uiLayerRect UnityEngine.RectTransform
 local SceneItemHUD = class("Game.Modules.Battle.Components.SceneUnitHUD", LuaMonoBehaviour)
 
----@param battleUnit Game.Modules.World.Items.BattleUnit
-function SceneItemHUD:Ctor(battleUnit)
+function SceneItemHUD:Ctor()
     self.uiLayer = vmgr:GetUILayer(UILayer.LAYER_SCENE)
     self.uiLayerRect = self.uiLayer.gameObject:GetRect()
     SceneItemHUD.super.Ctor(self, self.gameObject)
+end
+
+function SceneItemHUD:SetHost(battleUnit)
     self.battleUnit = battleUnit
     self.worldCamera = battleUnit.context.currSubScene:GetCamera()
     self.battleUnitVo = self.battleUnit.battleUnitVo

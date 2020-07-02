@@ -121,9 +121,7 @@ end
 
 ---@param hurtInfo HurtInfo
 function BattleItem:DoHurt(hurtInfo)
-    if self.floatNum then
-        self.floatNum:Play(hurtInfo.dam)
-    end
+    FloatNumber.Create(self, hurtInfo)
 end
 
 function BattleItem:OnDeadOver()

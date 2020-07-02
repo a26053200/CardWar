@@ -83,23 +83,24 @@ function AccountContext:DamageAccount(skillVo, account, target)
     --是否增益结算 例如加血  上buff等
     local isHelpful = account.targetMode == TargetMode.Self or account.targetMode == TargetMode.Friend
     local battleUnitVo = self.battleUnit.battleUnitVo
-    local avatarAtk = 0
-    local minDam = 0
-    if account.targetMode == TargetMode.Enemy
-            --or account.targetMode == TargetMode.AOE
-            or account.targetMode == TargetMode.Pos then
-        avatarAtk = battleUnitVo.battleUnitInfo.atk
-        minDam = 1
-    end
+    local minDam = 1
+    local unitAttribute = battleUnitVo.attributeBase --单位属性
     local hurtInfo = {} ---@type HurtInfo
     hurtInfo.atker = self.battleUnit
     hurtInfo.target = target
     hurtInfo.isHelpful = isHelpful
-    hurtInfo.atk = avatarAtk + avatarAtk * (skillVo.skillInfo.damageAdd + account.damageAdd)
-    hurtInfo.def = target and target.battleUnitVo.battleUnitInfo.def or 0
-    local crit = skillVo.skillInfo.crit + battleUnitVo.battleUnitInfo.crit -- 技能本身的暴击率与自身暴击率相加
-    hurtInfo.crit = (math.random() <= crit) and battleUnitVo.battleUnitInfo.critPow or 1 --暴击
-    hurtInfo.dam = math.max(minDam, math.floor((hurtInfo.atk - hurtInfo.def) * hurtInfo.crit)) --简单计算:伤害 - 防御
+    --伤害计算 (技能提供伤害*技能等级+面板魔法/物理攻击*技能倍率)
+    if skillVo.skillInfo.attackType == AttackType.Physic then
+        hurtInfo.atk = skillVo.skillInfo.damage * skillVo.level + unitAttribute.p_atk * (skillVo.skillInfo.damageAdd + 1) * (account.damageRatio / 1)
+        hurtInfo.def = target.battleUnitVo.attributeBase.p_def
+        hurtInfo.crit = (math.random() < unitAttribute.p_crit) and 2 or 1 --暴击
+    else
+        hurtInfo.atk = skillVo.skillInfo.damage * skillVo.level + unitAttribute.m_atk * (skillVo.skillInfo.damageAdd + 1) * (account.damageRatio / 1)
+        hurtInfo.def = target.battleUnitVo.attributeBase.m_def
+        hurtInfo.crit = (math.random() < unitAttribute.m_crit) and 2 or 1 --暴击
+    end
+    --伤害=攻击力/ ( 1 +防御力/ 100 )
+    hurtInfo.dam = math.max(minDam, hurtInfo.atk / (1 + hurtInfo.def / 100))
     hurtInfo.acc = math.random() --命中率
     local isMiss = false
     --计算闪避
@@ -117,6 +118,7 @@ function AccountContext:DamageAccount(skillVo, account, target)
         --print("miss")
         if target then
             target:DoHurt(hurtInfo)
+            target.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)--恢复Tp
         end
         return
     end
@@ -126,9 +128,11 @@ function AccountContext:DamageAccount(skillVo, account, target)
         if isHelpful then
             target.battleUnitVo.curHp = math.min(target.battleUnitVo.curHp + hurtInfo.dam, target.battleUnitVo.maxHp)
             target:DoHurt(hurtInfo)
+            target.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)--恢复Tp
         else
             target.battleUnitVo.curHp = math.max(0,target.battleUnitVo.curHp - hurtInfo.dam)
             target:DoHurt(hurtInfo)
+            target.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)--恢复Tp
             target:PlayIdle()
             target:PlayHit()
             --target.soundGroup:Play(skillInfo.hitSound)

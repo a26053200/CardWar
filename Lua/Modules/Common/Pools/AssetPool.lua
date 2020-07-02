@@ -92,7 +92,7 @@ function AssetPool:Pop()
     end
     if self.pool:Size() == 0 then
         self.initNum = self.initNum + 1
-        --logWarning("[Warnning]ObjectPool is overflow! -- " .. self.orgObj.name .. " new num:" .. self.initNum)
+        --logError("[Warning]ObjectPool is overflow! -- " .. self.orgObj.name .. " new num:" .. self.initNum)
         self:ExpandPoolObj()
     end
     local itemObj = self.pool:Pop()
@@ -100,9 +100,9 @@ function AssetPool:Pop()
     --itemObj.transform.localPosition = Vector3.zero
     itemObj:SetActive(true)
 
-    itemObj.transform.localPosition = self.orgObj.transform.localPosition
+    --itemObj.transform.localPosition = self.orgObj.transform.localPosition
     --itemObj.transform.localScale    = self.orgObj.transform.localScale
-    itemObj.transform.localRotation = self.orgObj.transform.localRotation
+    --itemObj.transform.localRotation = self.orgObj.transform.localRotation
     self.delList:Push(itemObj)
     return itemObj
 end

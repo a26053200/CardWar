@@ -39,14 +39,14 @@ function BattleHeroItem:UpdateItem(battleUnit, index)
     self.hpBar.minValue = 0
     self.hpBar.maxValue = self.battleUnitVo.maxHp
     self.pwBar.maxValue = 0
-    self.pwBar.maxValue = self.battleUnitVo.maxAnger
+    self.pwBar.maxValue = self.battleUnitVo.maxTp
 end
 
 
 function BattleHeroItem:Update()
     if self.battleUnitVo then
         self.hpBar.value = self.battleUnitVo.curHp
-        self.pwBar.value = self.battleUnitVo.curAnger
+        self.pwBar.value = self.battleUnitVo.curTp
     end
 end
 

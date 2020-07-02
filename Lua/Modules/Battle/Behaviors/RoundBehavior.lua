@@ -115,7 +115,7 @@ function RoundBehavior:RoundStart()
     behavior:AppendState(function()
         if self.isRoundOver then
             self.isRoundOver = false
-            self:_debug("RoundBehavior RoundStart")
+            --self:_debug("RoundBehavior RoundStart")
             self:ResetAttackSortArray()
         end
         self:NextState()
@@ -129,7 +129,7 @@ function RoundBehavior:RoundProgress()
     local behavior = self:CreateSubBehavior()
     behavior:AppendState(function()
         self:StartCoroutine(function()
-            self:_debug("RoundBehavior RoundProgress " .. self.attackSortList:Size() .. "/" .. self.totalAttackNum)
+            --self:_debug("RoundBehavior RoundProgress " .. self.attackSortList:Size() .. "/" .. self.totalAttackNum)
             --等待暂停
             while self.isPause do
                 coroutine.step(1)
@@ -143,7 +143,7 @@ function RoundBehavior:RoundProgress()
                 end
                 self.currRoundAvatar = currAvatar
             end
-            self:_debug("RoundBehavior Round Attack Over")
+            --self:_debug("RoundBehavior Round Attack Over")
             self:NextState()
         end)
     end)
@@ -156,14 +156,14 @@ function RoundBehavior:RoundEnd()
     behavior:AppendState(function()
         if self.attackSortList:Size() == 0 then
             self.isRoundOver = true
-            self:_debug("RoundBehavior RoundEnd")
+            --elf:_debug("RoundBehavior RoundEnd")
         end
         self.currRoundAvatar = nil
         if self.mode == RoundMode.Auto then
             self:NextState()
-            self:_debug("RoundBehavior Next Round")
+            --self:_debug("RoundBehavior Next Round")
         else --self.mode == RoundMode.Auto
-            self:_debug("RoundBehavior Stop")
+            --self:_debug("RoundBehavior Stop")
             self.isRoundOver = true
             self:StopRound()
         end

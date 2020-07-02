@@ -182,7 +182,13 @@ SomethingType = {
     Buff = 2,       -- Buff效果飘动
 }
 
-DamageType = {
+AttackType =
+{
+    Physic = "Physic",
+    Magic = "Magic"
+}
+
+HurtType = {
     Normal = 1,         -- 普通伤害
     Crit = 2,           -- 暴击伤害
     Miss = 3,           -- 闪避文字

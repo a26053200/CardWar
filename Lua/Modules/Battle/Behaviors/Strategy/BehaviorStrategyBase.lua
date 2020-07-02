@@ -55,8 +55,8 @@ function BehaviorStrategyBase:AutoSelectSkill()
             elseif skill.skillInfo.cd == 0 or skill.startTime == 0 or Time.time - skill.startTime > skill.skillInfo.cd then
                 if skill.skillInfo.triggerCondition == SkillTriggerCondition.CD then -- CD
                     self.canUseList:Add(skill)
-                elseif skill.skillInfo.triggerCondition == SkillTriggerCondition.FullAnger then -- 满怒气
-                    if self.battleUnit.battleUnitVo.curAnger >= self.battleUnit.battleUnitVo.maxAnger then
+                elseif skill.skillInfo.triggerCondition == SkillTriggerCondition.FullTp then -- 满怒气
+                    if self.battleUnit.battleUnitVo.curTp >= self.battleUnit.battleUnitVo.maxTp then
                         self.canUseList:Add(skill)
                     end
                 elseif skill.skillInfo.triggerCondition == SkillTriggerCondition.Prob then -- 触发概率

@@ -13,7 +13,7 @@
 ---@field gridSelect string
 ---@field targetMode string
 ---@field accountPoint number
----@field damageAdd number
+---@field damageRatio number
 
 local AccountConfig = {}
 

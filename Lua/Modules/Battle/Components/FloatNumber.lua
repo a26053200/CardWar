@@ -9,14 +9,38 @@ local AssetPool = require("Game.Modules.Common.Pools.AssetPool")
 local SceneUnitHUD = require('Game.Modules.Battle.Components.SceneUnitHUD')
 
 ---@class Game.Modules.Battle.Components.FloatNumber : Game.Modules.Battle.Components.SceneUnitHUD
----@field pool Game.Modules.Common.Pools.AssetPool\
+---@field New fun()
+---@field pool Game.Modules.Common.Pools.AssetPool
 local FloatNumber = class("Game.Modules.Battle.Components.FloatNumber", SceneUnitHUD)
 
 local Offset = Vector3.New(0,80,0)
+local Duration_Crit = 0.4
+local Duration_Normal = 0.5
 
 ---@param battleUnit Game.Modules.World.Items.BattleUnit
-function FloatNumber:Ctor(battleUnit)
-    FloatNumber.super.Ctor(self, battleUnit)
+---@param hurtInfo HurtInfo
+function FloatNumber.Create(battleUnit, hurtInfo)
+    if FloatNumber.cache == nil then
+        FloatNumber.cache = List.New()
+    end
+    local num
+    if FloatNumber.cache:Size() > 0 then
+        num = FloatNumber.cache:Shift()
+    else
+        num = FloatNumber.New()
+    end
+    num:SetHost(battleUnit)
+    num:Play(hurtInfo, function()
+        FloatNumber.cache:Push(num)
+    end)
+end
+
+function FloatNumber:Ctor()
+    FloatNumber.super.Ctor(self)
+end
+
+function FloatNumber:SetHost(battleUnit)
+    FloatNumber.super.SetHost(self, battleUnit)
 end
 
 function FloatNumber:Init()
@@ -27,26 +51,56 @@ function FloatNumber:Update()
 
 end
 
-function FloatNumber:Play(dam)
-    local obj = self.battleUnit.context.pool:CreateObjectByPool(Prefabs.FloatNumber)
-    Layers.SetLayer(obj, Layers.UI())
-    obj.name = "FloatNumber"
+---@param hurtInfo HurtInfo
+function FloatNumber:Play(hurtInfo, callback)
+    self.gameObject = self.battleUnit.context.pool:CreateObjectByPool(Prefabs.FloatNumber)
+    Layers.SetLayer(self.gameObject, Layers.UI())
+    self.gameObject.name = "FloatNumber"
     local pos = self:GetTargetUIPos(Offset)
-    obj.transform:SetParent(self.uiLayer)
-    obj.transform.localPosition = pos
-    obj.transform.localScale = Vector3.one
-    obj.transform.localEulerAngles = Vector3.zero
-    local damText = obj:GetText("Dam")
-    damText.transform:DOPause()
+    self.transform = self.gameObject.transform
+    self.transform:SetParent(self.uiLayer)
+    self.transform.localPosition = pos
+    self.transform.localScale = Vector3.one
+    self.transform.localEulerAngles = Vector3.zero
+    local damText = self.gameObject:GetText("Dam")
+    --damText.transform:DOPause()
+    --四舍五入
+    local integer, decimal = math.modf(hurtInfo.dam)
+    local dam = integer + (decimal >= 0.5 and 1 or 0)
     damText.text = dam
-    damText.transform.localPosition = Vector3.zero
-    damText.transform:DOLocalJump(pos + Vector3.right * (1 + math.random() * 5),60,1,(0.6 + math.random()*0.1),true):OnComplete(function ()
-        self.battleUnit.context.pool:StoreObject(Prefabs.FloatNumber, obj)
+    self.sequence = DOTween.Sequence()
+    if hurtInfo.crit > 1 then
+        damText.fontStyle = UnityEngine.FontStyle.Bold
+        self.sequence:Append(self.transform:DOScale(Vector3.New(1.5, 1.5, 1.5),Duration_Crit + math.random() * 0.1))
+        self.sequence:Join(self.transform:DOLocalMoveY(pos.y + 5,Duration_Crit + math.random() * 0.1))
+        self.sequence:AppendInterval(Duration_Crit * 0.2)
+    else
+        damText.fontStyle = UnityEngine.FontStyle.Normal
+        local tagPos = pos + Vector3.right * (80 + math.random() * 20)
+        self.sequence:Append(self.transform:DOLocalJump(tagPos,100,1,Duration_Normal + math.random() * 0.1,true))
+    end
+    self.sequence:AppendCallback(function()
+        self:OnOver()
+        if callback then
+            callback()
+        end
     end)
+end
+
+function FloatNumber:OnOver()
+    if self.sequence then
+        self.sequence:Kill()
+        self.sequence = nil
+    end
+    if self.gameObject then
+        self.battleUnit.context.pool:StoreObject(Prefabs.FloatNumber, self.gameObject)
+        self.gameObject = nil
+    end
 end
 
 function FloatNumber:Dispose()
     FloatNumber.super.Dispose(self)
+    self:OnOver()
 end
 
 return FloatNumber

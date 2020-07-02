@@ -20,8 +20,9 @@ local Offset = Vector3.New(0,110,0)
 ---@param battleUnit Game.Modules.World.Items.BattleUnit
 function BattleUnitHUD:Ctor(battleUnit)
     self.gameObject = battleUnit.context.pool:CreateObjectByPool(Prefabs.BattleUnitHUD)
-    BattleUnitHUD.super.Ctor(self, battleUnit)
+    BattleUnitHUD.super.Ctor(self)
     Layers.SetLayer(self.gameObject, Layers.UI())
+    self:SetHost(battleUnit)
     self.transform:SetParent(self.uiLayer)
     self.transform.localPosition = Vector3.zero
     self.transform.localEulerAngles = Vector3.zero
@@ -54,7 +55,7 @@ function BattleUnitHUD:Update()
     --self.text.text = self.battleItemVo.curHp .. "/" .. self.battleItemVo.maxHp
     if self.battleUnitVo.battleUnitInfo.type == BattleUnitType.Monster then
         local hpPer = Mathf.Max(0, self.battleUnitVo.curHp / self.battleUnitVo.maxHp)
-        local agPer = Mathf.Max(0, self.battleUnitVo.curAnger / self.battleUnitVo.maxAnger)
+        local agPer = Mathf.Max(0, self.battleUnitVo.curTp / self.battleUnitVo.maxTp)
         self.hpMain.fillAmount = hpPer
         self.hpSub.fillAmount = agPer
         self.hpMain.fillAmount = hpPer

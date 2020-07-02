@@ -12,6 +12,8 @@
 ---@field type string
 ---@field performance string
 ---@field priority number
+---@field attackType number
+---@field damage number
 ---@field damageAdd number
 ---@field crit number
 ---@field critPow number

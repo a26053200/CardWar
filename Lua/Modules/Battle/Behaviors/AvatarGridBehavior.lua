@@ -61,7 +61,7 @@ function AvatarGridBehavior:SelectSkill()
     behavior:AppendState(function()
         --self:_debug("AvatarGridBehavior SelectSkill")
     end, function()
-        self:_debug("AvatarGridBehavior SelectSkill")
+        --self:_debug("AvatarGridBehavior SelectSkill")
         if self.currArea and self.currArea.isActive then
             self.battleUnit.strategy:AutoSelectSkill()
             self.stateMachine:NextState()
@@ -109,7 +109,7 @@ function AvatarGridBehavior:OnSkillUse(behavior, skill)
     --if target and target.layoutGrid then
     --    target.layoutGrid:SetAttackSelect(true)
     --end
-    self.battleUnit:_debug(string.format("use skill:[%s]",skill.skillInfo.id))
+    --self.battleUnit:_debug(string.format("use skill:[%s]",skill.skillInfo.id))
     self.battleUnit.accountCtrl:Account(skill,
             Handler.New(function()
                 behavior:NextState()
