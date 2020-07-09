@@ -44,6 +44,7 @@ function BattleUnitBehavior:OnAccountBegin()
     local behavior = self:CreateSubBehavior()
     behavior:AppendState(function()
         local skillVo = self.attackRound.skill
+        self.battleUnit.battleUnitVo:RecoveryTP(self.attackRound.actionRecoveryTP)
         self.battleUnit:SetHudVisible(false)
         local tagPos = self.battleUnit.context.battleLayout.center
         self.battleUnit:PlayRun()
@@ -73,6 +74,7 @@ function BattleUnitBehavior:OnAccountEnd()
         self.battleUnit:SetHudVisible(true)
         --self.battleUnit.context.battleLayout:SetAttackSelect(self.targetCamp, self.targetGridList, false)--设置选取效果
         self.battleUnit:BackToBorn()
+        self.battleUnit:PlayIdle()
         self.attackRound:RoundEnd()
         BattleEvent.DispatchItemEvent(BattleEvent.ExitAttack, self.battleUnit)
         self:Stop()
@@ -88,6 +90,7 @@ function BattleUnitBehavior:OnAttackAccount(accountInfo)
             local hurtInfo = hurtList[i]
             local battleUnit = self.battleUnit.context:GetBattleUnit(hurtInfo.defer.camp, hurtInfo.defer.layoutIndex)
             battleUnit:AccountHurt(hurtInfo)
+            battleUnit.battleUnitVo:RecoveryTP(hurtInfo.damRecoveryTP)
             --self:_debug("Replay hurt info account:" .. hurtInfo.accountId)
             if battleUnit:IsDead() then
                 self.deadItemList:Add(battleUnit)
@@ -106,7 +109,6 @@ end
 function BattleUnitBehavior:OnAttackAccountEnd()
     for i = 1, self.deadItemList:Size() do
         self.deadItemList[i]:OnDead()
-        self:_debug(self.deadItemList[i].debugName .. " OnDead OnDead OnDead OnDead")
     end
     self.deadItemList:Clear()
 end

@@ -64,13 +64,18 @@ function BattleMdr:OnGridBattleStart()
 end
 
 function BattleMdr:OnAllMonsterDeadOver()
-    self.battleModel.battleResult = true
-    vmgr:LoadView(ViewConfig.BattleResult)
+    self:OnBattleOver(true)
 end
 
 function BattleMdr:OnAllHeroDeadOver()
-    self.battleModel.battleResult = false
+    self:OnBattleOver(false)
+end
+
+function BattleMdr:OnBattleOver(win)
+    self.battleModel.battleResult = win
     vmgr:LoadView(ViewConfig.BattleResult)
+    vmgr:UnloadView(ViewConfig.PveBattleInfo)
+    vmgr:UnloadView(ViewConfig.BattleInfo)
 end
 
 function BattleMdr:InitLayoutData()

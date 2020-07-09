@@ -9,9 +9,11 @@
 ---@field New fun():Game.Modules.Battle.Report.ReportHurtInfo
 ---@field atker Game.Modules.Battle.Vo.BattleUnitVo
 ---@field defer Game.Modules.Battle.Vo.BattleUnitVo
+---@field skillVo Game.Modules.Battle.Vo.SkillVo
 ---@field isHelpful boolean
 ---@field accountId string
 ---@field deferIsDead boolean
+---@field damRecoveryTP number 伤害恢复的TP
 ---@field dam number     伤害
 ---@field critDam number 暴击伤害
 ---@field atk number     攻击

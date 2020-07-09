@@ -39,7 +39,9 @@ end
 
 ---@param data Game.Modules.World.Items.BattleUnit
 function BattleInfoMdr:onHeroItemClick(event, data, index)
-    print("Click hero " .. data.battleUnitVo.battleUnitInfo.name)
+    if data.battleUnitVo.curTp >= data.battleUnitVo.maxTp then
+        print("UBUBUBUBUBUUBBUBU")
+    end
 end
 
 function BattleInfoMdr:On_Click_BtnAuto()

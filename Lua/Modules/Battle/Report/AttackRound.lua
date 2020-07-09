@@ -12,6 +12,7 @@ local ReportHurtInfo = require("Game.Modules.Battle.Report.ReportHurtInfo")
 ---@field callback fun() | Handler
 ---@field hurtInfoMap table<string, table<number, Game.Modules.Battle.Report.ReportHurtInfo>>
 ---@field skill Game.Modules.Battle.Vo.SkillVo
+---@field actionRecoveryTP number 行动恢复的TP
 ---@field targetList table<number, Game.Modules.Battle.Report.ReportBattleUnit>
 local AttackRound = class("Game.Modules.Battle.Report.AttackRound");
 
@@ -60,6 +61,9 @@ end
 ---@param skillVo Game.Modules.Battle.Vo.SkillVo
 function AttackRound:OnAccountBegin(skillVo)
     self.battleUnit.battleUnitVo:ActionRecoveryTP()
+    local tpRecover = 90 * (1 + self.battleUnit.battleUnitVo.attributeBase.tpUp / 100)
+    self.actionRecoveryTP = tpRecover
+    self.battleUnit.battleUnitVo:RecoveryTP(tpRecover)--恢复Tp
 end
 
 ---@param skillVo Game.Modules.Battle.Vo.SkillVo
@@ -139,12 +143,14 @@ function AttackRound:DamageAccount(skillVo, account, target)
     end
     hurtInfo.miss = false
     if target then
-        target.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)--恢复Tp
+        local tpRecover = (hurtInfo.dam / target.battleUnitVo.maxHp) * 500 * (1 + target.battleUnitVo.attributeBase.tpUp / 100)
+        target.battleUnitVo:RecoveryTP(tpRecover)--恢复Tp
         if isHelpful then
             target.battleUnitVo.curHp = math.min(target.battleUnitVo.curHp + hurtInfo.dam, target.battleUnitVo.maxHp)
         else
             target.battleUnitVo.curHp = math.max(0,target.battleUnitVo.curHp - hurtInfo.dam)
         end
+        hurtInfo.damRecoveryTP = tpRecover
     end
     print(string.format("Skill:%s Atker:<color=#FFFFFFFF>%s</color> atk Defer:<color=#FFFFFFFF>%s</color> - dam:<color=#FFFF00FF>%s</color> (%2f)",
             hurtInfo.skillVo.skillInfo.id,

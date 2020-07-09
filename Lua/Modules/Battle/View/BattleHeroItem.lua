@@ -19,7 +19,10 @@ function BattleHeroItem:UpdateItem(battleUnit, index)
     self.battleUnitVo = battleUnit.battleUnitVo
     local cardVo = battleUnit.ownerCardVo
     BattleHeroItem.super.UpdateItem(self, self.battleUnitVo, index)
-    local frameImg = self.gameObject:GetImage()
+    self.shan = self.gameObject:GetImage("Shan")
+    self.shan.gameObject:SetActive(false)
+
+    local frameImg = self.gameObject:GetImage("Frame")
     frameImg.sprite = Res.LoadSprite(RankFrameUrl[cardVo.cardInfo.rank])
 
     local iconImg = self.gameObject:GetImage("Icon")
@@ -42,11 +45,40 @@ function BattleHeroItem:UpdateItem(battleUnit, index)
     self.pwBar.maxValue = self.battleUnitVo.maxTp
 end
 
+function BattleHeroItem:SetShan(shan)
+    if shan then
+        if self.shanTween == nil then
+            self.shan.gameObject:SetActive(true)
+            self.shan.transform.localScale = Vector3.one
+            self.shan.color = Color.New(1,1,1,0.5)
+            self.shanTween = self:CreateSequence()
+            self.shanTween:Append(self.shan.transform:DOScale(Vector3.New(1.1,1.1,1.1), 0.3))
+            self.shanTween:Join(self.shan:DOFade(1, 0.3))
+            self.shanTween:Append(self.shan.transform:DOScale(Vector3.one, 0.3))
+            self.shanTween:Join(self.shan:DOFade(0.5, 0.3))
+            self.shanTween:SetLoops(-1, DOTween_Enum.LoopType.Yoyo)
+        end
+    else
+        if self.shanTween then
+            self.shan.transform.localScale = Vector3.one
+            self.shan.gameObject:SetActive(false)
+            self.shan.transform:DOPause()
+            self.shan.transform:DOKill()
+            self.shanTween:Kill()
+            self.shanTween = nil
+        end
+    end
+end
 
 function BattleHeroItem:Update()
     if self.battleUnitVo then
         self.hpBar.value = self.battleUnitVo.curHp
         self.pwBar.value = self.battleUnitVo.curTp
+        if self.battleUnitVo.curTp >= self.battleUnitVo.maxTp then
+            self:SetShan(true)
+        else
+            self:SetShan(false)
+        end
     end
 end
 
@@ -60,7 +92,10 @@ function BattleHeroItem:SetStar(starBar, starNum)
 end
 
 function BattleHeroItem:OnDestroy()
-
+    if self.shanTween then
+        self.shanTween:Kill()
+        self.shanTween = nil
+    end
 end
 
 return BattleHeroItem

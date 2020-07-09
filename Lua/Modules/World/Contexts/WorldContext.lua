@@ -128,6 +128,18 @@ function WorldContext:IsCampAllDeadOver(camp)
     return allDead
 end
 
+--遍历
+---@param camp Camp
+---@param doFun fun(b:Game.Modules.World.Items.BattleUnit) | Handler
+function WorldContext:ForEach(camp, doFun)
+    local gridList = self.battleLayout.gridLayoutMap[camp]
+    for i = 1, #gridList do
+        if gridList[i].owner then
+            invoke(doFun, gridList[i].owner)
+        end
+    end
+end
+
 function WorldContext:Dispose()
     if self.battleBehavior then
         self.battleBehavior:Dispose()

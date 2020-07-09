@@ -58,7 +58,7 @@ function LayoutGrid:ClearOwner()
     end
     self.owner = nil
     self:SetAttackSelect(false)
-    self:SetGridVisible(true)
+    --self:SetGridVisible(true)
 end
 
 function LayoutGrid:SetSelect(bool)

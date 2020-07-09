@@ -154,6 +154,13 @@ function PveBattleBehavior:StopBattle(winCamp)
         else
             BattleEvents.Dispatch(BattleEvents.AllHeroDeadOver)
         end
+
+        self.context.battleSpeed = 1
+
+        ---@param unit Game.Modules.World.Items.BattleUnit
+        self.context:ForEach(winCamp, function(unit)
+            unit:PlayWin()
+        end)
         print("获胜方:" .. winCamp)
     end
 end

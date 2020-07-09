@@ -41,6 +41,10 @@ function NetModal:DisplayShow()
     self.gameObject:SetActive(true)
     self.text.text = "Net working"
     local sequence = self:CreateSequence()
+    if self.hideSequence then
+        self.hideSequence:Kill()
+        self.hideSequence = nil
+    end
     self.showSequence = sequence;
     sequence:AppendInterval(0.8)
     sequence:AppendCallback(function ()
@@ -54,6 +58,11 @@ end
 function NetModal:DisplayHide()
     --print("Show Modal " .. (Time.realtimeSinceStartup - self.startTime) * 1000 .. "ms")
     local sequence = self:CreateSequence()
+    if self.showSequence then
+        self.showSequence:Kill()
+        self.showSequence = nil
+    end
+    self.hideSequence = sequence
     self.tip.transform.localScale = Vector3.one
     sequence:Append(self.tip.transform:DOScale(Vector3.New(1,0,1),0.3))
     sequence:AppendCallback(function ()
