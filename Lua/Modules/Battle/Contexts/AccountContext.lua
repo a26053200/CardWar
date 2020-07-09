@@ -7,9 +7,13 @@
 
 --伤害信息
 ---@class HurtInfo
----@field atker Game.Modules.World.Items.BattleUnit
----@field defer Game.Modules.World.Items.BattleUnit
+---@field atker Game.Modules.Battle.Vo.BattleUnitVo
+---@field defer Game.Modules.Battle.Vo.BattleUnitVo
 ---@field isHelpful boolean
+---@field accountId string
+---@field deferCamp Camp
+---@field deferLayoutIndex number
+---@field deferIsDead boolean
 ---@field dam number     伤害
 ---@field critDam number 暴击伤害
 ---@field atk number     攻击
@@ -21,6 +25,7 @@
 local PoolVo = require("Game.Modules.Common.Pools.PoolObject")
 ---@class Game.Modules.World.Contexts.AccountContext : Game.Modules.Common.Pools.PoolObject
 ---@field New fun():Game.Modules.World.Contexts.AccountContext
+---@field isReportMode boolean 录制模式
 ---@field battleUnit Game.Modules.World.Items.BattleUnit 攻击者
 ---@field targetList table<number, Game.Modules.World.Items.BattleUnit> 目标
 ---@field accountTargetList table<number, Game.Modules.World.Items.BattleUnit> 已经被结算的目标
@@ -67,12 +72,15 @@ end
 --单个目标结算
 ---@param target Game.Modules.World.Items.BattleUnit
 function AccountContext:OnAccount(target)
-    --target:_debug("target is be account")
-
-    self.accountTargetList:Add(target)
-    self:DamageAccount(self.skillVo, self.account, target)
-    --检查目标是否死亡
-    self.battleUnit.accountCtrl:OnCheckDead(self.skillVo, target)
+    if target:IsDead() then
+        --target:_debug("target is be dead. can not be account")
+    else
+        --target:_debug("target is be account")
+        self.accountTargetList:Add(target)
+        self:DamageAccount(self.skillVo, self.account, target)
+        --检查目标是否死亡
+        self.battleUnit.accountCtrl:OnCheckDead(self.skillVo, target)
+    end
 end
 
 --最终伤害结算
@@ -87,7 +95,7 @@ function AccountContext:DamageAccount(skillVo, account, target)
     local unitAttribute = battleUnitVo.attributeBase --单位属性
     local hurtInfo = {} ---@type HurtInfo
     hurtInfo.atker = self.battleUnit
-    hurtInfo.target = target
+    hurtInfo.defer = target
     hurtInfo.isHelpful = isHelpful
     --伤害计算 (技能提供伤害*技能等级+面板魔法/物理攻击*技能倍率)
     if skillVo.skillInfo.attackType == AttackType.Physic then
@@ -123,21 +131,40 @@ function AccountContext:DamageAccount(skillVo, account, target)
         return
     end
     hurtInfo.miss = false
-    --print("dam:" .. hurtInfo.dam)
+    if target then
+        target.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)--恢复Tp
+        if isHelpful then
+            target.battleUnitVo.curHp = math.min(target.battleUnitVo.curHp + hurtInfo.dam, target.battleUnitVo.maxHp)
+        else
+            target.battleUnitVo.curHp = math.max(0,target.battleUnitVo.curHp - hurtInfo.dam)
+        end
+    end
+    if self.isReportMode then --录制模式
+        print(string.format("Atker:<color=#FFFFFFFF>%s</color> atk Defer:<color=#FFFFFFFF>%s</color> - dam:<color=#FFFF00FF>%s</color>",
+                hurtInfo.atker.battleUnitVo.battleUnitInfo.name,
+                hurtInfo.defer.battleUnitVo.battleUnitInfo.name,
+                hurtInfo.dam))
+        if target:IsDead() then
+            print(string.format("<color=#FFFFFFFF>%s</color> is Dead",target.battleUnitVo.battleUnitInfo.name))
+        end
+    else
+        self:DisplayHurt(target, hurtInfo, isHelpful)
+    end
+end
+
+function AccountContext:DisplayHurt(target, hurtInfo, isHelpful)
     if target then
         if isHelpful then
             target.battleUnitVo.curHp = math.min(target.battleUnitVo.curHp + hurtInfo.dam, target.battleUnitVo.maxHp)
             target:DoHurt(hurtInfo)
-            target.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)--恢复Tp
         else
             target.battleUnitVo.curHp = math.max(0,target.battleUnitVo.curHp - hurtInfo.dam)
             target:DoHurt(hurtInfo)
-            target.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)--恢复Tp
             target:PlayIdle()
             target:PlayHit()
             --target.soundGroup:Play(skillInfo.hitSound)
         end
-        --self:DisplayHurt(target, skillInfo, account)
+        --self:HurtPerformance(target, skillInfo, account)
     else
         --无目标结算
     end
@@ -147,7 +174,7 @@ end
 ---@param target Game.Modules.World.Items.Avatar
 ---@param skillInfo SkillInfo
 ---@param account AccountInfo
-function AccountContext:DisplayHurt(target, skillInfo, account)
+function AccountContext:HurtPerformance(target, skillInfo, account)
     target.performancePlayer:Play(account.targetPerformance,nil,self.battleUnit)
     --buff 计算
     if not StringUtil.IsEmpty(account.buffer) then
@@ -166,6 +193,7 @@ end
 
 function AccountContext:Dispose()
     self.effect = nil
+    self.isReportMode = false
     self.accountTargetList:Clear()
     AccountContextPool:Store(self)
 end

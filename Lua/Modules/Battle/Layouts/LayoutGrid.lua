@@ -100,4 +100,11 @@ function LayoutGrid:Shine()
     --self.gridObj.transform:DOShakePosition(Shine_Duration, Vector3.New(0,0,0.01),1,1):SetLoops(-1, DOTween_Enum.LoopType.Incremental)
 end
 
+function LayoutGrid:Dispose()
+    LayoutGrid.super.Dispose(self)
+    self.gridMat:DOPause()
+    self.selectObj.transform:DOPause()
+    self.gameObject.transform:DOPause()
+end
+
 return LayoutGrid

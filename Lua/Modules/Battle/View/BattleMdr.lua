@@ -111,12 +111,12 @@ function BattleMdr:StartBattle()
     BattleEvents.Dispatch(BattleEvents.EnterScene)
 
     self:StartCoroutine(function()
-        local currArea = self.context.battleBehavior:GetCurrArea()
-        currArea:Active()
+        --local currArea = self.context.battleBehavior:GetCurrArea()
+        --currArea:Active()
         --等待刷怪结束
-        while not currArea.isBornOver do
-            coroutine.step(1)
-        end
+        --while not currArea.isBornOver do
+        --    coroutine.step(1)
+        --end
         coroutine.wait(0.2)
         --self.context.attachCamera:AttachPos(self.context.battleLayout.areaPointObj.transform.position)
         --vmgr:LoadView(ViewConfig.BattleArrayEditor)--布阵

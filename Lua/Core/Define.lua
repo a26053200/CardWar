@@ -163,3 +163,6 @@ AccountContextPool = PoolObjectProxy.New(require("Game.Modules.Battle.Contexts.A
 --Icon = require("Game.Modules.Common.Icon.Icon")
 --Star = require("Game.Modules.Common.Star.Star")
 --WorldIcon = require("Game.Modules.Common.Icon.WorldIcon")
+
+--战报系统
+require("Game.Modules.Battle.Report.Init")

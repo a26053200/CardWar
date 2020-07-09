@@ -11,16 +11,17 @@ local GridArea = require("Game.Modules.Battle.Layouts.GridArea")
 local BattleBehavior = require("Game.Modules.Battle.Behaviors.BattleBehavior")
 local PoolProxy = require("Game.Modules.Common.Pools.AssetPoolProxy")
 local RoundBehavior = require("Game.Modules.Battle.Behaviors.RoundBehavior")
+local ReportPlayer = require("Game.Modules.Battle.Behaviors.ReportPlayer")
+local ReportContext = require("Game.Modules.Battle.Report.ReportContext")
+local ReportBehavior = require("Game.Modules.Battle.Report.ReportBehavior")
 
 ---@class Game.Modules.Battle.Behaviors.PveBattleBehavior : Game.Modules.Battle.Behaviors.BattleBehavior
 ---@field New fun(checkPointData:CheckPointData, cardList : table, context:WorldContext):Game.Modules.Battle.Behaviors.BattleBehavior
----@field roundBehavior Game.Modules.Battle.Behaviors.RoundBehavior
----@field areas table<number,Game.Modules.Battle.Layouts.GridArea>  刷新区域数据
----@field areaQueue List | table<number, Game.Modules.Battle.Layouts.GridArea>  刷新区域数据 刷新区域队列
----@field lastArea Game.Modules.Battle.Layouts.GridArea 上一区域
+---@field reportBehavior Game.Modules.Battle.Report.ReportBehavior
+---@field reportReplay Game.Modules.Battle.Behaviors.ReportPlayer
 ---@field cardList List | table<number, Game.Modules.Card.Vo.CardVo> 上阵的卡牌
----@field atkUnitList List | table<number, Game.Modules.World.Items.BattleUnit> 上阵的卡牌
----@field transitionCtrl Game.Modules.Transition.Controller.TransitionController
+---@field reportContext Game.Modules.Battle.Report.ReportContext 战报上下文
+---@field currAreaInfo GridAreaInfo --当前区域信息
 local PveBattleBehavior = class("Game.Modules.Battle.Behaviors.PveBattleBehavior",BattleBehavior)
 
 ---@param checkPointData CheckPointData
@@ -29,9 +30,6 @@ function PveBattleBehavior:Ctor(checkPointData, cardList, context)
     PveBattleBehavior.super.Ctor(self, checkPointData, context)
     self.checkPointData = checkPointData
     self.cardList = cardList
-    self.areas = {}
-
-    AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnBattleItemDead, self)
 end
 
 --初始化对象池
@@ -39,6 +37,7 @@ function PveBattleBehavior:InitObjectPool()
     local poolObj = self.context.currSubScene:CreateGameObject("[Pool" .. self.context.id .. "]")
     self.context.pool = PoolProxy.New(poolObj)
     local battleUnitList = List.New() ---@type List | table<number,number> avatarName
+    --怪物的对象池
     if self.checkPointData.areas then
         for i = 1, #self.checkPointData.areas do
             local areaInfo =  self.checkPointData.areas[i]
@@ -53,13 +52,14 @@ function PveBattleBehavior:InitObjectPool()
             end
         end
     end
-
+    --英雄的对象池
     for i = 1, self.cardList:Size() do
         local battleUnit = self.cardList[i].cardInfo.battleUnit
         if not battleUnitList:Contain(battleUnit) then
             battleUnitList:Add(battleUnit)
         end
     end
+    --其他
     local poolsInfos = PoolFactory.CalcPoolInfoMap(battleUnitList)
     table.insert(poolsInfos,{prefabUrl = Prefabs.LayoutGrid, initNum = 18})
     table.insert(poolsInfos,{prefabUrl = Prefabs.BattleUnitHUD, initNum = 8})
@@ -68,175 +68,100 @@ function PveBattleBehavior:InitObjectPool()
 end
 
 function PveBattleBehavior:CreateBattle()
-    --初始化区域
-    for i = 1, #self.checkPointData.areas do
-        local areaInfo =  self.checkPointData.areas[i] ---@type GridAreaInfo
-        areaInfo.index = i
-        local area = GridArea.New(areaInfo, self.checkPointData)
-        area.context = self.context
-        area:InitArea()
-        table.insert(self.areas, area)
-    end
-    self:NewQueue()
-    self:GetCurrArea():Refresh()
+    self.reportContext = ReportContext.New(self.context.mode)
 
-    --上阵玩家英雄
-    self.atkUnitList = List.New()
+    --创建上阵玩家英雄
     for i = 1, self.cardList:Size() do
         local battleUnitName = self.cardList[i].cardInfo.battleUnit
-        local battleItem = self.context:AddBattleUnit(Camp.Atk, battleUnitName)
-        battleItem.ownerCardVo = self.cardList[i]
-        self.atkUnitList:Add(battleItem)
+        local reportUnit = self.reportContext:AddBattleUnit(Camp.Atk, battleUnitName)
+        reportUnit.ownerCardVo = self.cardList[i]
+        local battleUnit = self.context:AddBattleUnit(Camp.Atk, battleUnitName, reportUnit.layoutIndex)
+        battleUnit.ownerCardVo = self.cardList[i]
     end
 end
 
 function PveBattleBehavior:StartBattle()
-    self.roundBehavior = RoundBehavior.New(self.context)
-    self.roundBehavior:SetRoundMode(RoundMode.Auto)
-    self.roundBehavior:Play()
-end
+    self.reportBehavior = ReportBehavior.New(self.reportContext)
+    self.reportContext.reportBehavior = self.reportBehavior
 
---新的队列
-function PveBattleBehavior:NewQueue()
-    local list = {}
-    for i = 1, #self.areas do
-        table.insert(list, self.areas[i])
-    end
-    self.areaQueue = List.New(list)
-end
-
-function PveBattleBehavior:NextArea()
-    self.areaQueue:Shift()
-end
-
---获取当前波怪物数据
----@return Game.Modules.Battle.Layouts.GridArea
-function PveBattleBehavior:GetCurrArea()
-    --if self.currBossArea and self.currBossArea.isActive then
-    --    return self.currBossArea
-    --else
-    return self.areaQueue:Peek()
-    --end
-end
-
----@param event Game.Modules.World.Events.BattleItemEvents
-function PveBattleBehavior:OnBattleItemDead(event)
-    if self.isAllDead then --任何一方全部死亡
-        return
-    end
-    local unitList = nil
-    if event.target.battleUnitVo.battleUnitInfo.type == BattleUnitType.Hero then
-        unitList = self.atkUnitList
-    else
-        unitList = self:GetCurrArea():GetAllMonster()
-    end
-    if self:IsAllDead(unitList) then
-        self.isAllDead = true
-        if event.target.battleUnitVo.battleUnitInfo.type == BattleUnitType.Hero then
-            self:OnAtkerAllDead()
-        else
-            self:OnCurrAreaAllDead()
+    --战斗流程
+    local winCamp = nil
+    self:StartCoroutine(function()
+        for i = 1, #self.checkPointData.areas do
+            self:RefreshArea(i)
+            coroutine.wait(1)
+            self.reportBehavior:Play()
+            while not self.reportBehavior.isAllDead do
+                coroutine.step(1)
+            end
+            local anyAllDead = self.context:IsCampAllDead(Camp.Atk) or self.context:IsCampAllDead(Camp.Def)
+            while not anyAllDead do
+                coroutine.step(1)
+            end
+            if self.context:IsCampAllDead(Camp.Atk) then
+                --英雄阵亡战斗结束
+                self:_debug("所有英雄已经死亡")
+                winCamp = Camp.Def --怪物胜利
+                break;
+            elseif self.context:IsCampAllDead(Camp.Def) then
+                self:_debug("当前区域怪物都已经死亡")
+                while not self.context:IsCampAllDeadOver(Camp.Def) do
+                    coroutine.step(1)
+                end
+                self:_debug("当前区域怪物都已经死亡 --- 结束,继续下一个区域")
+            else
+                logError("死亡一次")
+            end
         end
-    end
-end
-
---所有英雄都死亡结束
-function PveBattleBehavior:OnAtkerAllDead()
-    self:StartCoroutine(function ()
-        self:_debug("所有英雄都已经死亡:")
-        self.roundBehavior:StopRound()
-        while not self:IsAllDeadOver(self.atkUnitList) do
-            coroutine.step(1)
+        if winCamp == nil then
+            self:_debug("所有怪物都已经死亡")
+            winCamp = Camp.Atk --玩家英雄胜利
         end
-        self:StopRound()
-        BattleEvents.Dispatch(BattleEvents.AllHeroDeadOver)
+        self:_debug("整场战斗结束 " .. winCamp)
+        self:StopBattle(winCamp) --停止战斗
     end)
+    self.reportReplay = ReportPlayer.New(self.context, self.reportContext)
+    self.reportReplay:Play()
 end
 
---所有怪物死亡
-function PveBattleBehavior:OnCurrAreaAllDead()
-    self.lastArea = self:GetCurrArea()
-    self:_debug("当前区域所有怪物死亡 areaId:" .. self.lastArea.areaInfo.areaIndex)
-    self:NextArea()
-    local currArea = self:GetCurrArea()
-    if currArea then
-        self:_debug("下一个区域 areaId:" .. currArea.areaInfo.areaIndex)
-        currArea:Refresh()
-        self.roundBehavior:StopRound()
-        transition:DoTransition(function()
-            currArea:Active()
-            self.roundBehavior:Play()
-            self.isAllDead = false
-        end)
-    else --没有下个区域,战斗结束
-        self:OnCurrAreaAllDeadOver()
-    end
-end
-
-
-function PveBattleBehavior:OnCurrAreaAllDeadOver()
-    --等待所有目标的死亡动画都播放完毕
-    self:_debug("没有下个区域，战斗结束")
-    self:StartCoroutine(function ()
-        while not self.lastArea:IsAllDeadOver() do
-            coroutine.step(1)
-        end
-        --所有怪物死亡结束
-        self.lastArea:OnAreaExit(Handler.New(function()
-            self:_debug("清除上一区域怪 areaId:" .. self.lastArea.areaInfo.areaIndex)
-            self.lastArea:Clear()
-            self:_debug("当前区域所有怪物死亡结束 areaId:" .. self.lastArea.areaInfo.areaIndex)
-            BattleEvents.Dispatch(BattleEvents.AllMonsterDeadOver)
-            self:StopRound()
-        end , self))
-    end)
-end
-
-
---死亡
----@param unitList List | table<number, Game.Modules.World.Items.BattleUnit>
-function PveBattleBehavior:IsAllDead(unitList)
-    local allDead = true
-    for i = 1, unitList:Size() do
-        if not unitList[i]:IsDead() then
-            allDead = false
-            break;
+--开始录制战报
+function PveBattleBehavior:RefreshArea(areaIndex)
+    local areaInfo =  self.checkPointData.areas[areaIndex]
+    self:_debug(("Area Refresh AreaId:" .. areaInfo.areaIndex))
+    self.reportContext.layout:Clear(Camp.Def)
+    for i = 1, #areaInfo.waves do
+        local wave = areaInfo.waves[i]
+        for j = 1, #wave.wavePoints do
+            local reportUnit = self.reportContext:AddBattleUnit(Camp.Def, wave.wavePoints[i].battleUnit)
+            local battleUnit = self.context:AddBattleUnit(Camp.Def, wave.wavePoints[i].battleUnit, reportUnit.layoutIndex)
         end
     end
-    return allDead
-end
-
---死亡
----@param unitList List | table<number, Game.Modules.World.Items.BattleUnit>
-function PveBattleBehavior:IsAllDeadOver(unitList)
-    local allDeadOver = true
-    for i = 1, unitList:Size() do
-        if not unitList[i].deadOver then
-            allDeadOver = false
-            break;
-        end
-    end
-    return allDeadOver
 end
 
 --停止回合
-function PveBattleBehavior:StopRound()
-    if self.roundBehavior then
-        self.roundBehavior:Dispose()
-        self.roundBehavior = nil
+function PveBattleBehavior:StopBattle(winCamp)
+    if self.reportReplay then
+        self.reportReplay:Dispose()
+        self.reportReplay = nil
+    end
+    if self.reportBehavior then
+        self.reportBehavior:Dispose()
+        self.reportBehavior = nil
+    end
+    if winCamp then
+        if winCamp == Camp.Atk then
+            BattleEvents.Dispatch(BattleEvents.AllMonsterDeadOver)
+        else
+            BattleEvents.Dispatch(BattleEvents.AllHeroDeadOver)
+        end
+        print("获胜方:" .. winCamp)
     end
 end
 
 function PveBattleBehavior:Dispose()
     PveBattleBehavior.super.Dispose(self)
-    for i = 1, #self.areas do
-        self.areas[i]:Dispose()
-    end
     self:Clear()
-
-    self:StopRound()
-
-    RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnBattleItemDead, self)
+    self:StopBattle()
 end
 
 return PveBattleBehavior

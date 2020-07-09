@@ -13,6 +13,7 @@ local AvatarVo = require("Game.Modules.World.Vo.AvatarVo")
 ---@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
 ---@field normalSkill Game.Modules.Battle.Vo.SkillVo
 ---@field camp Camp 阵营 所属阵营
+---@field layoutIndex number
 ---@field atk number
 ---@field def number
 ---@field curHp number
@@ -47,6 +48,9 @@ function BattleUnitVo:Init(battleUnitName)
     self:Reset()
 end
 
+function BattleUnitVo:GetDebugName()
+    return self.battleUnitInfo.name .. "_" .. self.camp .. "-" .. self.layoutIndex
+end
 --伤害恢复tp
 --实际获得 TP = 基础值 * (100 + TP 上升) / 100
 --行动时获取TP = 90 * (1 + TP上升 / 100)

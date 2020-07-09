@@ -42,7 +42,7 @@ function NetModal:DisplayShow()
     self.text.text = "Net working"
     local sequence = self:CreateSequence()
     self.showSequence = sequence;
-    sequence:AppendInterval(0.2)
+    sequence:AppendInterval(0.8)
     sequence:AppendCallback(function ()
         self.tip:SetActive(true)
     end)

@@ -72,6 +72,20 @@ function BattleBehavior:GetCampAvatarList(camp, includeDead)
     return tempList
 end
 
+--某阵营是否都以阵亡
+---@param camp Camp
+function BattleBehavior:IsCampAllDead(camp)
+    local gridList = self.context.battleLayout.gridLayoutMap[camp] ---@type table<number, Game.Modules.Battle.Layouts.LayoutGrid>
+    local allDead = true
+    for i = 1, #gridList do
+        if gridList[i].owner and not gridList[i].owner:IsDead() then
+            allDead = false
+            break;
+        end
+    end
+    return allDead
+end
+
 function BattleBehavior:Clear()
     self:_debug("强制清场")
     if self:GetCurrArea() then

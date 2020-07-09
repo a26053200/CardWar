@@ -12,6 +12,12 @@ local BattleItemEvents = {}
 --怪物登场
 BattleItemEvents.BattleItemBorn = "BattleItemBorn"
 
+--攻击结算
+BattleItemEvents.AttackAccount = "BattleItemAttackAccount"
+
+--攻击结算结束
+BattleItemEvents.AttackAccountEnd = "BattleItemAttackAccountEnd"
+
 --怪物单位死亡
 BattleItemEvents.BattleItemDead = "BattleItemDead"
 

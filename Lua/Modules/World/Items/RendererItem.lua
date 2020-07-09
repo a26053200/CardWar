@@ -20,6 +20,7 @@ function RendererItem:Ctor(sceneItemData)
     self.aroundItems = {}
     self.aroundNodesMap = {}
     self.isMoving = false
+    self.debugName = ""
     self:LoadObject()
 end
 
@@ -71,7 +72,7 @@ end
 --调试
 function RendererItem:_debug(msg)
     if self.gameObject then
-        print(string.format("\n<color=#3A9BF8FF>[%s]</color><color=#FFFFFFFF>%s</color>",self.gameObject.name,msg))
+        print(string.format("\n<color=#3A9BF8FF>[%s]</color><color=#FFFFFFFF>%s</color>",self.debugName,msg))
     else
         print(string.format("\n<color=#3A9BF8FF>[%s]</color><color=#FFFFFFFF>%s</color>",self.__classname,msg))
     end
@@ -80,7 +81,7 @@ end
 --调试
 function RendererItem:_debugError(msg)
     if self.gameObject then
-        logError(string.format("[%s]\n%s",self.gameObject.name,msg))
+        logError(string.format("[%s]\n%s",self.debugName,msg))
     else
         logError(string.format("[%s]\n%s",self.__classname,msg))
     end

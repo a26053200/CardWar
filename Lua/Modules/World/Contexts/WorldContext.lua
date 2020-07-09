@@ -4,6 +4,7 @@
 --- DateTime: 2020/4/10 23:37
 ---
 
+local FloatNumber = require("Game.Modules.Battle.Components.FloatNumber")
 local BattleUnit = require("Game.Modules.World.Items.BattleUnit")
 
 ---@class WorldContext
@@ -43,16 +44,10 @@ end
 ---@param camp Camp
 ---@param battleUnitName string
 ---@return Game.Modules.World.Items.BattleUnit
-function WorldContext:AddBattleUnit(camp, battleUnitName)
-    local emptyGrid = self.battleLayout:GetFirstEmptyGrid(camp)
-    if emptyGrid then
-        local layoutIndex = emptyGrid.index
-        local battleItem = self:CreateBattleItem(camp, battleUnitName, layoutIndex)
-        self.battleLayout:AddUnit(battleItem, camp, layoutIndex)
-        return battleItem
-    else
-        logError("There is no empty grid")
-    end
+function WorldContext:AddBattleUnit(camp, battleUnitName, layoutIndex)
+    local battleUnit = self:CreateBattleUnit(camp,battleUnitName, layoutIndex)
+    self.battleLayout:AddUnit(battleUnit, camp, layoutIndex)
+    return battleUnit
 end
 
 function WorldContext:RemoveBattleUnit(camp, index)
@@ -70,17 +65,67 @@ end
 ---@param camp Camp 卡牌
 ---@param battleUnitName string 单位名字
 ---@param layoutIndex number
-function WorldContext:CreateBattleItem(camp, battleUnitName, layoutIndex)
-    local battleItemVo = World.CreateBattleUnitVo(battleUnitName)
-    battleItemVo.camp = camp
-    battleItemVo.isLeader = layoutIndex == 1
-    battleItemVo.index = layoutIndex
-    local battleItem = BattleUnit.New(battleItemVo, self)
+function WorldContext:CreateBattleUnit(camp, battleUnitName, layoutIndex)
+    local battleUnitVo = World.CreateBattleUnitVo(battleUnitName)
+    battleUnitVo.camp = camp
+    battleUnitVo.layoutIndex = layoutIndex
+    local battleItem = BattleUnit.New(battleUnitVo, self)
     return battleItem
 end
 
 function WorldContext:SetBattleSpeed(speed)
     self.battleSpeed = speed
+end
+
+---@return Game.Modules.World.Items.BattleUnit
+function WorldContext:GetBattleUnit(camp, layoutIndex)
+    return self.battleLayout:GetLayoutGridByIndex(camp, layoutIndex).owner
+end
+
+--获取某阵营所有单位
+---@param camp Camp
+---@param includeDead boolean 是否包含死亡单位
+---@return List | table<number, Game.Modules.Battle.Report.ReportBattleUnit>
+function WorldContext:GetCampUnitList(camp, includeDead)
+    local gridList = self.battleLayout.gridLayoutMap[camp] ---@type table<number, Game.Modules.Battle.Report.ReportBattleUnit>
+    local tempList = List.New()
+    for i = 1, #gridList do
+        if gridList[i].owner then
+            local checkDead = includeDead and true or (not gridList[i].owner:IsDead())
+            if checkDead and gridList[i].owner.battleUnitVo.layoutIndex ~= 0 then
+                tempList:Add(gridList[i].owner)
+            end
+        end
+    end
+    return tempList
+end
+
+--某阵营是否都以阵亡
+---@param camp Camp
+function WorldContext:IsCampAllDead(camp)
+    local gridList = self.battleLayout.gridLayoutMap[camp]
+    local allDead = true
+    for i = 1, #gridList do
+        if gridList[i].owner and not gridList[i].owner:IsDead() then
+            allDead = false
+            break;
+        end
+    end
+    return allDead
+end
+
+--某阵营是否都以死亡结束
+---@param camp Camp
+function WorldContext:IsCampAllDeadOver(camp)
+    local gridList = self.battleLayout.gridLayoutMap[camp]
+    local allDead = true
+    for i = 1, #gridList do
+        if gridList[i].owner and not gridList[i].owner.deadOver then
+            allDead = false
+            break;
+        end
+    end
+    return allDead
 end
 
 function WorldContext:Dispose()
@@ -96,8 +141,13 @@ function WorldContext:Dispose()
         self.pool:Dispose()
         self.pool = nil
     end
+    if self.battleLayout then
+        self.battleLayout:Dispose()
+        self.battleLayout = nil
+    end
     Destroy(self.avatarRoot)
     self.avatarRoot = nil
+    FloatNumber.Clear()
 end
 
 return WorldContext

@@ -13,7 +13,6 @@ local RendererItem = require("Game.Modules.World.Items.RendererItem")
 ---@field cc UnityEngine.CharacterController
 ---@field animCtrl Game.Modules.Common.Components.AnimController
 ---@field soundGroup Game.Modules.Common.Sound.SoundGroup
----@field avatarBehavior Game.Modules.Battle.Behaviors.AvatarBehavior
 ---@field deadOver boolean  是否死亡结束,表示死亡动作播放完毕
 ---@field isBorn boolean 是否出生
 ---@field aiParam table<string, any>
@@ -31,7 +30,8 @@ end
 
 function Avatar:OnRenderObjInit()
     Avatar.super.OnRenderObjInit(self)
-    self.gameObject.name = self.avatarInfo.id .. "_" .. self.sid
+    self.gameObject.name = self.avatarInfo.name .. "_" .. self.sid
+    self.debugName = self.avatarInfo.name .. "_" .. self.sid
 
     self.animCtrl = AnimController.New(self, self.avatarInfo.ctrlUrl)
     self.soundGroup = SoundPlayer:CreateOrGetSoundGroup(SoundType.EFFECT, self.avatarInfo.id .. "_" .. self.sid)

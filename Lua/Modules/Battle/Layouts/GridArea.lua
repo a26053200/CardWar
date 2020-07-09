@@ -40,20 +40,11 @@ end
 
 --初始化该区域
 function GridArea:InitArea()
-    --local totalNum = 0
     for i = 1, #self.areaInfo.waves do
-        --local waveInfo = self.areaInfo.waves[i]
-        --waveInfo.index = i
-        --for j = 1, #waveInfo.wavePoints do
-            --local num = math.random(waveInfo.wavePoints[j].minNum, waveInfo.wavePoints[j].maxNum)
-            --waveInfo.wavePoints[j].num = num
-            --totalNum = totalNum + num
-        --end
         local wave = GridWave.New(self.areaInfo.waves[i])
         wave.context = self.context
         self.waves[i] = wave
     end
-
     self.layoutGrids = self.context.battleLayout.gridLayoutMap[Camp.Def]
 end
 
@@ -63,67 +54,12 @@ function GridArea:Refresh()
     end
     AddEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnBattleItemDead, self)
     self:_debug(("GridArea Ready to Refresh AreaId:" .. self.areaInfo.areaIndex))
-    self:DoActive()
-    --BattleUtils.CreateGrid(self.orgBornPoints, self.forward, self.context)
-end
-
-function GridArea:Active()
-    if self.isActive then
-        return --重复激活
+    for i = 1, #self.waves do
+        local wave = self.waves[i]
+        wave:Refresh()
     end
-    self.isRefreshOver = false
-    self:_debug(("Active AreaId:" .. self.areaInfo.areaIndex))
-    self.isActive = true
+    self.isBornOver = true
 end
-
-function GridArea:DoActive()
-    if self.isActive then
-        return --重复激活
-    end
-    if self.DoActiveCo then
-        coroutine.stop(self.DoActiveCo)
-    end
-    local lastWave = nil ---@type Game.Modules.Battle.Layouts.GridWave
-    self.DoActiveCo = coroutine.start(function()
-        while not self.isActive do
-            coroutine.step(1)
-        end
-        --等待剧情
-        self:OnAreaEnter(Handler.New(function()
-            for i = 1, #self.waves do
-                local wave = self.waves[i]
-                if wave.waveInfo.waveMode == WaveType.Trigger then
-                    if wave.waveInfo.delay and wave.waveInfo.delay > 0 then
-                        coroutine.wait(wave.waveInfo.delay)
-                    end
-                elseif wave.waveInfo.waveMode == WaveType.AllDead then --上一波彻底死亡
-                    if lastWave then
-                        while not lastWave:IsAllDeadOver() do
-                            coroutine.step(1)
-                        end
-                    end
-                end
-
-                wave:Refresh(function()
-                    self.isBornOver = true
-                end)
-                while not self.isBornOver do --等到引导结束
-                    coroutine.step(1)
-                end
-                wave:Active()
-                self:_debug(string.format("Wave <color=#00FFE2FF>%s</color> Refresh: %s/%s",wave.waveInfo.waveMode,i,#self.waves))
-                self.currWave = wave
-                lastWave = wave
-                if i == 1 then
-                    BattleEvent.Dispatch(BattleEvent.BattleStart)
-                end
-            end
-        end , self))
-        self:_debug(string.format("Wave Refresh Over"))
-        self.isRefreshOver = true
-    end)
-end
-
 
 ---@param callback Handler
 function GridArea:OnAreaEnter(callback)
@@ -188,6 +124,18 @@ function GridArea:GetAllMonster()
         end
     end
     return monsters
+end
+
+---@return List | table<number, WavePointInfo>
+function GridArea:GetAllWavePointInfo()
+    local wavePointInfos = List.New()
+    for i = 1, #self.areaInfo.waves do
+        local wave = self.areaInfo.waves[i]
+        for j = 1, #wave.wavePoints do
+            wavePointInfos:Push(wave.wavePoints[j])
+        end
+    end
+    return wavePointInfos
 end
 
 ---@param event Game.Modules.World.Events.BattleItemEvents

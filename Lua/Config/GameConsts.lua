@@ -154,12 +154,7 @@ BattleMode =
     PVP = "PVP",          --营地挂机模式
 }
 
---对阵阵营
----@class Camp
-Camp = {
-    Atk = "Atk",    --攻防阵营
-    Def = "Def",    --守方阵营
-}
+
 
 ---@class BattleUnitType
 BattleUnitType =
@@ -182,11 +177,7 @@ SomethingType = {
     Buff = 2,       -- Buff效果飘动
 }
 
-AttackType =
-{
-    Physic = "Physic",
-    Magic = "Magic"
-}
+
 
 HurtType = {
     Normal = 1,         -- 普通伤害
@@ -286,16 +277,6 @@ ItemSubType =
     DrawCardTicket = "DrawCardTicket",  -- 抽卡券
     Equip = "Equip",                    -- 装备
     EquipFragment = "EquipFragment",    -- 装备碎片
-}
-
----@class TargetMode
-TargetMode =
-{
-    Self = "Self",      --施法者本身
-    Friend = "Friend",  --友方个体，包括自己
-    Enemy = "Enemy",    --敌方
-    AOE = "AOE",        --具体位置（形状）
-    Pos = "Pos",        --具体位置（形状）
 }
 
 SkillType =

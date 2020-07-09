@@ -25,6 +25,7 @@
 ---@field delay number      延时
 ---@field times number      次数
 ---@field param string      表现相关参数
+---@field accounts table<number, AccountInfo>
 
 local PerformanceConfig = {}
 

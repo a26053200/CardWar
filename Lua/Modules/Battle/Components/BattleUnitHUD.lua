@@ -32,7 +32,7 @@ end
 function BattleUnitHUD:Init()
     BattleUnitHUD.super.Init(self)
     self.text = self.gameObject:GetText("Text")
-    self.text.text = self.battleUnitVo.battleUnitInfo.name
+    self.text.text = self.battleUnitVo:GetDebugName()
     self.hpBar = self.gameObject:FindChild("HpBar")
     self.agBar = self.gameObject:FindChild("AgBar")
     if self.battleUnitVo.battleUnitInfo.type == BattleUnitType.Monster then

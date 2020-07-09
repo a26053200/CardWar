@@ -5,6 +5,7 @@
 --- 标准的表现
 ---
 
+local BattleItemEvents = require("Game.Modules.Battle.Events.BattleItemEvents")
 local PerformanceBase = require("Game.Modules.Battle.Performances.PerformanceBase")
 ---@class Game.Modules.Battle.Performances.Standard : Game.Modules.Battle.Performances.PerformanceBase
 ---@field New fun(avatar: Game.Modules.World.Items.BattleUnit):Game.Modules.Battle.Performances.Standard
@@ -38,11 +39,13 @@ function Standard:OnBeginPerformance(sequence)
         while self.accountCount < self.performanceInfo.times * #self.accounts do
             coroutine.step(1)
         end
+        self:OnAllAccountEnd()
         while self.animCount < self.performanceInfo.times do
             coroutine.step(1)
         end
-        self.sequenceOver = true
         self:OnProcessEnd()
+        self.sequenceOver = true
+
     end)
     return true
 end
@@ -74,16 +77,12 @@ end
 
 ---@param account AccountInfo
 function Standard:DoAccount(account)
-    local accountContext = World.CreateAccountContext(self.skillVo, self.battleUnit, account)
-    --local effect = self.avatar.effectWidget:Play(self.skillVo.skillInfo.effect,nil, nil , startPosList[i])
-    --effect.tagPos = destPosList[i]
-    --effect.minDistance = 0
-    --accountContext.effect = effect
-    accountContext:Start(self.performanceInfo.gridSelect)
-    accountContext:ExecuteAccount()
+    self.battleUnit.behavior:OnAttackAccount(account)
     self.accountCount = self.accountCount + 1
-    table.insert(self.accountContextList, accountContext)
-    --self.lastEffect = effect
+end
+
+function Standard:OnAllAccountEnd()
+    self.battleUnit.behavior:OnAttackAccountEnd()
 end
 
 function Standard:OnProcessEnd()
@@ -101,10 +100,6 @@ end
 
 function Standard:Dispose()
     Standard.super.Dispose(self)
-    for i = 1, #self.accountContextList do
-        self.accountContextList[i]:End()
-    end
-
 end
 
 return Standard

@@ -134,6 +134,21 @@ function AccountCtrl:Dispose()
     AccountCtrl.super.Dispose(self)
 end
 
+function AccountCtrl:DisplayHurt(hurtInfo, isHelpful)
+    if isHelpful then
+        self.battleUnit.battleUnitVo.curHp = math.min( self.battleUnit.battleUnitVo.curHp + hurtInfo.dam,  self.battleUnit.battleUnitVo.maxHp)
+        self.battleUnit:DoHurt(hurtInfo)
+    else
+        self.battleUnit.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)--恢复Tp
+        self.battleUnit.battleUnitVo.curHp = math.max(0, self.battleUnit.battleUnitVo.curHp - hurtInfo.dam)
+        self.battleUnit:DoHurt(hurtInfo)
+        self.battleUnit:PlayIdle()
+        self.battleUnit:PlayHit()
+        --target.soundGroup:Play(skillInfo.hitSound)
+    end
+    --self:HurtPerformance(target, skillInfo, account)
+end
+
 ---@param targetCamp Camp
 ---@param targetGridList table<number, number>
 ---@return Game.Modules.World.Items.BattleUnit

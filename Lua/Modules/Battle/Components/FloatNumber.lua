@@ -35,6 +35,16 @@ function FloatNumber.Create(battleUnit, hurtInfo)
     end)
 end
 
+function FloatNumber.Clear()
+    if FloatNumber.cache then
+        for i = 1, FloatNumber.cache:Size() do
+            FloatNumber.cache[i]:Dispose()
+        end
+        FloatNumber.cache:Clear()
+        FloatNumber.cache = nil
+    end
+end
+
 function FloatNumber:Ctor()
     FloatNumber.super.Ctor(self)
 end
@@ -93,8 +103,10 @@ function FloatNumber:OnOver()
         self.sequence = nil
     end
     if self.gameObject then
+        self.transform:DOPause()
         self.battleUnit.context.pool:StoreObject(Prefabs.FloatNumber, self.gameObject)
         self.gameObject = nil
+        self.transform = nil
     end
 end
 

@@ -12,12 +12,13 @@ local AccountCtrl = require("Game.Modules.Battle.Components.AccountCtrl")
 local GridBehaviorStrategy = require("Game.Modules.Battle.Behaviors.Strategy.GridBehaviorStrategy")
 local BattleItemEvents = require("Game.Modules.Battle.Events.BattleItemEvents")
 local AvatarGridBehavior = require("Game.Modules.Battle.Behaviors.AvatarGridBehavior")
+local BattleUnitBehavior = require("Game.Modules.Battle.Behaviors.BattleUnitBehavior")
 local Avatar = require("Game.Modules.World.Items.Avatar")
 
 ---@class Game.Modules.World.Items.BattleUnit : Game.Modules.World.Items.Avatar
 ---@field New fun(battleUnitVo:Game.Modules.Battle.Vo.BattleUnitVo, context:WorldContext) : Module.World.Items.Monster
 ---@field battleUnitVo Game.Modules.Battle.Vo.BattleUnitVo
----@field behavior Game.Modules.Battle.Behaviors.GridBattleBehavior
+---@field behavior Game.Modules.Battle.Behaviors.BattleUnitBehavior
 ---@field strategy Game.Modules.Battle.Behaviors.Strategy.BehaviorStrategyBase -- 策略
 ---@field accountCtrl Game.Modules.Battle.Components.AccountCtrl
 ---@field performancePlayer Game.Modules.Battle.Performances.PerformancePlayer
@@ -25,22 +26,22 @@ local Avatar = require("Game.Modules.World.Items.Avatar")
 ---@field layoutIndex number 布局索引 默认0 表示没有上场
 ---@field layoutGrid Game.Modules.Battle.Layouts.LayoutGrid 所在布局格子
 ---@field floatNum Game.Modules.Battle.Components.FloatNumber
-local BattleItem = class("Game.Modules.World.Items.BattleUnit", Avatar)
+local BattleUnit = class("Game.Modules.World.Items.BattleUnit", Avatar)
 
 ---@param battleUnitVo Game.Modules.Battle.Vo.BattleUnitVo
 ---@param context WorldContext
-function BattleItem:Ctor(battleUnitVo, context)
+function BattleUnit:Ctor(battleUnitVo, context)
     self:SetContext(context)
     self.battleUnitVo = battleUnitVo
-    BattleItem.super.Ctor(self, battleUnitVo)
+    BattleUnit.super.Ctor(self, battleUnitVo)
 end
 
 --重置属性
-function BattleItem:ResetAttr()
+function BattleUnit:ResetAttr()
     self.battleUnitVo:Reset()
 end
 
-function BattleItem:LoadObject()
+function BattleUnit:LoadObject()
     if self.avatarInfo.prefabUrl then
         self.renderObj = self.context.pool:CreateObjectByPool(self.avatarInfo.prefabUrl)
         self.renderObj.transform:SetParent(self.transform)
@@ -49,26 +50,28 @@ function BattleItem:LoadObject()
     end
 end
 
-function BattleItem:OnRenderObjInit()
-    BattleItem.super.OnRenderObjInit(self)
+function BattleUnit:OnRenderObjInit()
+    BattleUnit.super.OnRenderObjInit(self)
     self:SetLayer(Layers.Name.BattleItem)
+
+    self.debugName = self.battleUnitVo:GetDebugName()
 
     self.accountCtrl = AccountCtrl.New(self)
     self.performancePlayer = PerformancePlayer.New(self)
     self.strategy = GridBehaviorStrategy.New(self)
+    self.behavior = BattleUnitBehavior.New(self)
 
     self.hud = BattleUnitHUD.New(self)
-    self.floatNum = FloatNumber.New(self)
 end
 
-function BattleItem:SetHudVisible(visible)
+function BattleUnit:SetHudVisible(visible)
     if self.hud then
         self.hud.gameObject:SetActive(visible)
     end
 end
 
 --出生效果
-function BattleItem:Born(callback)
+function BattleUnit:Born(callback)
     LuaReflectHelper.PushVo(self, self.battleUnitVo)
     self.luaReflect:PushLuaFunction("JsonToLua", handler(self,self.JsonToLua))
     self:PlayBorn(function()
@@ -79,18 +82,18 @@ function BattleItem:Born(callback)
     self:SetRenderEnabled(true)
 end
 
-function BattleItem:JsonToLua(key, json)
+function BattleUnit:JsonToLua(key, json)
     LuaReflectHelper.JsonToLua(self, key, json)
 end
 
-function BattleItem:OnBorn(callback)
+function BattleUnit:OnBorn(callback)
     BattleItemEvents.DispatchItemEvent(BattleItemEvents.BattleItemBorn, self)
     if callback then
         callback()
     end
 end
 
-function BattleItem:SetRenderEnabled(enabled)
+function BattleUnit:SetRenderEnabled(enabled)
     self.renderObj:SetActive(enabled)
     --if not enabled then
     --    logError("SetRenderEnabled")
@@ -100,10 +103,9 @@ function BattleItem:SetRenderEnabled(enabled)
     end
 end
 
-function BattleItem:SetBehaviorEnabled(enabled)
+function BattleUnit:SetBehaviorEnabled(enabled)
     if not self.behavior then
-
-        self.behavior = AvatarGridBehavior.New(self)
+        self.behavior = BattleUnitBehavior.New(self)
     end
     if enabled then
         if self:IsDead() then
@@ -119,22 +121,45 @@ function BattleItem:SetBehaviorEnabled(enabled)
     end
 end
 
+--伤害结算
+---@param hurtInfo Game.Modules.Battle.Report.ReportHurtInfo
+function BattleUnit:AccountHurt(hurtInfo, isHelpful)
+    if isHelpful then
+        self.battleUnitVo.curHp = math.min( self.battleUnitVo.curHp + hurtInfo.dam,  self.battleUnit.battleUnitVo.maxHp)
+        self:DoHurt(hurtInfo)
+    else
+        self.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)--恢复Tp
+        self.battleUnitVo.curHp = math.max(0, self.battleUnitVo.curHp - hurtInfo.dam)
+        self:DoHurt(hurtInfo)
+        self:PlayIdle()
+        self:PlayHit()
+        self:_debug(string.format("<color=#FFFFFFFF>Skill:%s</color> <color=#FFFF00FF>%s/%s %s</color> (%2f)",
+                hurtInfo.skillVo.skillInfo.id,
+                self.battleUnitVo.curHp,
+                self.battleUnitVo.maxHp,
+                hurtInfo.dam,
+                (self.battleUnitVo.curHp / self.battleUnitVo.maxHp) * 100))
+        --target.soundGroup:Play(skillInfo.hitSound)
+    end
+    --self:HurtPerformance(target, skillInfo, account)
+end
+
 ---@param hurtInfo HurtInfo
-function BattleItem:DoHurt(hurtInfo)
+function BattleUnit:DoHurt(hurtInfo)
     FloatNumber.Create(self, hurtInfo)
 end
 
-function BattleItem:OnDeadOver()
+function BattleUnit:OnDeadOver()
     self.deadOver = true
     self:Dispose()
 end
 
-function BattleItem:OnDead()
-    BattleItem.super.OnDead(self)
+function BattleUnit:OnDead()
+    BattleUnit.super.OnDead(self)
 
     self:Clean()
 
-    self:_debug("BattleItem:OnDead " .. self.gameObject.name )
+    --self:_debug("BattleItem:OnDead " .. self.gameObject.name )
     local event = {}
     event.type = BattleItemEvents.BattleItemDead
     event.target = self
@@ -143,18 +168,13 @@ function BattleItem:OnDead()
         self.layoutGrid:ClearOwner()
         self.layoutGrid = nil
     end
-    self:PlayDead(Handler.New(function()
-        self:OnDeadOver()
-    end))
-end
 
-function Avatar:PlayDead(callback)
-    self.animCtrl:PlayAnim(self.avatarInfo.animDead, callback)
+    self:PlayDead(Handler.New(self.OnDeadOver, self))
 end
 
 --回收
-function BattleItem:Recovery()
-    BattleItem.super.Recovery(self)
+function BattleUnit:Recovery()
+    BattleUnit.super.Recovery(self)
     local pool = self.context.pool:GetObjectPool(self.avatarInfo.prefabUrl)
     --把影子换回去
     if not isnull(self.shadow)  then
@@ -163,7 +183,7 @@ function BattleItem:Recovery()
     pool:Store(self.renderObj)
 end
 
-function BattleItem:Clean()
+function BattleUnit:Clean()
     if self.behavior then
         self.behavior:Dispose()
         self.behavior = nil
@@ -177,9 +197,9 @@ function BattleItem:Clean()
     end
 end
 
-function BattleItem:Dispose()
+function BattleUnit:Dispose()
     self:Recovery()
-    BattleItem.super.Dispose(self)
+    BattleUnit.super.Dispose(self)
     self:Clean()
 
     if self.animCtrl then
@@ -199,4 +219,4 @@ function BattleItem:Dispose()
     Destroy(self.gameObject)
 end
 
-return BattleItem
+return BattleUnit

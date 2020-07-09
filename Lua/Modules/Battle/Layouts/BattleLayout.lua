@@ -302,4 +302,13 @@ function BattleLayout:GetForwardPos(camp,num,gap,distance)
     return points
 end
 
+function BattleLayout:Dispose()
+    BattleLayout.super.Dispose(self)
+    for _, list in pairs(self.gridLayoutMap) do
+        for i = 1, #list do
+            list[i]:Dispose()
+        end
+    end
+end
+
 return BattleLayout
