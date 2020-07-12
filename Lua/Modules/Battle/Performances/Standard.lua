@@ -34,7 +34,9 @@ function Standard:OnBeginPerformance(sequence)
         self:OnProcessStart()
         for i = 1, self.performanceInfo.times do
             self:Process()
-            coroutine.wait(self.performanceInfo.interval / self.battleUnit.context.battleSpeed)
+            if self.performanceInfo.interval > 0 then
+                coroutine.wait(self.performanceInfo.interval / self.battleUnit.context.battleSpeed)
+            end
         end
         while self.accountCount < self.performanceInfo.times * #self.accounts do
             coroutine.step(1)
@@ -58,22 +60,49 @@ end
 function Standard:Process()
     if self.performanceInfo.accountType == AccountType.Single then
         --self.battleUnit:PlayIdle()
-        self.battleUnit.accountCtrl:AccountProgress(self.performanceInfo.animInfo,function()
+        self:AccountProgress(self.performanceInfo.animInfo,function()
             for i = 1, #self.accounts do
                 self:DoAccount(self.accounts[i])
             end
         end)
     else
         ---@param account AccountInfo
-        self.battleUnit.accountCtrl:MultiAccountProgress(self.performanceInfo.animInfo, self.accounts, function(account)
+        self:MultiAccountProgress(self.performanceInfo.animInfo, self.accounts, function(account)
             self:DoAccount(account)
         end)
     end
     self.battleUnit.animCtrl:PlayAnimInfo(self.performanceInfo.animInfo,Handler.New(function()
         self.animCount = self.animCount + 1
-    end))
+    end), self:GetAnimSpeed(self.performanceInfo.animInfo))
 end
 
+
+---@param animInfo AnimInfo
+function Standard:AccountProgress(animInfo, accountCallback)
+    local animLength = self.battleUnit.animCtrl:GetAnimLength(animInfo.animName)
+    self:CreateDelay(animInfo.accountPoint * self:GetAnimLength(animLength, animInfo), accountCallback)
+end
+
+---@param animInfo AnimInfo
+---@param accounts table<number, AccountInfo>
+function Standard:MultiAccountProgress(animInfo, accounts, accountCallback)
+    local animLength = self.battleUnit.animCtrl:GetAnimLength(animInfo.animName)
+    for i = 1, #accounts do
+        self:CreateDelay(accounts[i].accountPoint * self:GetAnimLength(animLength, animInfo), function()
+            accountCallback(accounts[i])
+        end)
+    end
+end
+
+---@param animInfo AnimInfo
+function Standard:GetAnimLength(animLength, animInfo)
+    return math.max(0.1,animLength / self:GetAnimSpeed(animInfo))
+end
+
+---@param animInfo AnimInfo
+function Standard:GetAnimSpeed(animInfo)
+    return animInfo.animSpeed * 1.5 * self.battleUnit.context.battleSpeed
+end
 
 ---@param account AccountInfo
 function Standard:DoAccount(account)

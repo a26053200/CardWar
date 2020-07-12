@@ -7,6 +7,7 @@
 
 ---@class World
 ---@field mdr Game.Modules.World.View.WorldMdr
+---@field model Game.Modules.World.Model.WorldModel
 ---@field worldScene Game.Modules.World.Scenes.WorldScene
 local World = {}
 

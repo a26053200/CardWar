@@ -80,7 +80,6 @@ function AnimController:PlayAnim(animName,callback, speed, crossFade)
     end
     --self.avatar:_debug("play anim " .. animName)
     speed = speed == nil and 1 or speed
-    speed = speed * self.avatar.context.battleSpeed
     if callback then
         local length = self:GetAnimLength(animName)
         if length then
@@ -283,9 +282,10 @@ end
 
 --动作进度
 ---@param animInfo AnimInfo
-function AnimController:PlayAnimInfo(animInfo, animOverCallback)
+function AnimController:PlayAnimInfo(animInfo, animOverCallback, speed)
     --print("play anim info:" .. animInfo.id)
-    self:PlayAnim(animInfo.animName, animOverCallback, animInfo.animSpeed,0.1)
+    speed = speed or 1
+    self:PlayAnim(animInfo.animName, animOverCallback, animInfo.animSpeed * speed,0.1)
 end
 
 function AnimController:Clear()

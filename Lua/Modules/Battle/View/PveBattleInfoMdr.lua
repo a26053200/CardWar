@@ -11,7 +11,21 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 local PveBattleInfoMdr = class("Game.Modules.Battle.View.PveBattleInfoMdr",BaseMediator)
 
 function PveBattleInfoMdr:OnInit()
-    
+    self.processText = self.gameObject:GetText("TopLeft/Progress/Text")
+    self.dropMoney = self.gameObject:GetText("TopLeft/DropMoney/Text")
+    self.dropItems = self.gameObject:GetText("TopLeft/DropItems/Text")
+end
+
+function PveBattleInfoMdr:RegisterListeners()
+    AddEventListener(self, Event.UPDATE, self.Update, self)
+end
+
+function PveBattleInfoMdr:Update()
+    self.processText.text = string.format("%s/%s", self.battleModel.currAreaId, #self.battleModel.currCheckPointData.areas)
+end
+
+function PveBattleInfoMdr:OnRemove()
+    RemoveEventListener(self, Event.UPDATE, self.Update, self)
 end
 
 return PveBattleInfoMdr

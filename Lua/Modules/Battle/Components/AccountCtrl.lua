@@ -116,7 +116,7 @@ end
 ---@param animInfo AnimInfo
 function AccountCtrl:AccountProgress(animInfo, accountCallback)
     local animLength = self.battleUnit.animCtrl:GetAnimLength(animInfo.animName)
-    self:CreateDelay(animInfo.accountPoint * (animLength / (animInfo.animSpeed * self.battleUnit.context.battleSpeed)), accountCallback)
+    self:CreateDelay(animInfo.accountPoint * self:GetAnimLength(animLength, animInfo), accountCallback)
 end
 
 ---@param animInfo AnimInfo
@@ -124,14 +124,15 @@ end
 function AccountCtrl:MultiAccountProgress(animInfo, accounts, accountCallback)
     local animLength = self.battleUnit.animCtrl:GetAnimLength(animInfo.animName)
     for i = 1, #accounts do
-        self:CreateDelay(accounts[i].accountPoint * (animLength / (animInfo.animSpeed * self.battleUnit.context.battleSpeed)), function()
+        self:CreateDelay(accounts[i].accountPoint * self:GetAnimLength(animLength, animInfo), function()
             accountCallback(accounts[i])
         end)
     end
 end
 
-function AccountCtrl:Dispose()
-    AccountCtrl.super.Dispose(self)
+---@param animInfo AnimInfo
+function AccountCtrl:GetAnimLength(animLength, animInfo)
+    return math.max(0.1,animLength / (animInfo.animSpeed * 1.5 * self.battleUnit.context.battleSpeed))
 end
 
 function AccountCtrl:DisplayHurt(hurtInfo, isHelpful)
@@ -162,4 +163,9 @@ function AccountCtrl:GetTarget(targetCamp, targetGridList)
     end
     return target
 end
+
+function AccountCtrl:Dispose()
+    AccountCtrl.super.Dispose(self)
+end
+
 return AccountCtrl

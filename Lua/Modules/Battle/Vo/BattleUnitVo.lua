@@ -59,19 +59,19 @@ end
 ---@param dam number 伤害
 function BattleUnitVo:DamageRecoveryTP(dam)
     local tpRecover = (dam / self.maxHp) * 500 * (1 + self.attributeBase.tpUp / 100)
-    self.curTp = math.min(self.curTp + tpRecover, self.maxTp)
+    return tpRecover
 end
 
 --行动恢复Tp
 function BattleUnitVo:ActionRecoveryTP()
-    local tpRecover = 90 * (1 + self.attributeBase.tpUp / 100)
-    self.curTp = math.min(self.curTp + tpRecover, self.maxTp)
+    local tpRecover = 200 * (1 + self.attributeBase.tpUp / 100)
+    return tpRecover
 end
 
 --自动恢复Tp
 function BattleUnitVo:AutoRecoveryTP()
     local tpRecover = self.tpRecover * (1 + self.attributeBase.tpUp / 100)
-    self.curTp = math.min(self.curTp + tpRecover, self.maxTp)
+    return tpRecover
 end
 
 --恢复Tp

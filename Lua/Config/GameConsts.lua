@@ -279,10 +279,17 @@ ItemSubType =
     EquipFragment = "EquipFragment",    -- 装备碎片
 }
 
+--技能循环
+---@class SkillLoop
+SkillLoop = {"Normal","Normal","Skill2","Normal","Skill1"}
+
 SkillType =
 {
     Normal = "Normal",      --普攻
     Skill = "Skill",        --魔法技能
+    Skill1 = "Skill1",        --魔法技能1
+    Skill2 = "Skill2",        --魔法技能2
+    UB = "UB",        --UB技能(大招)
     Passive = "Passive",    --被动技能
     Dig = "Dig",            --采集
 }

@@ -14,6 +14,7 @@ local ReportHurtInfo = require("Game.Modules.Battle.Report.ReportHurtInfo")
 ---@field skill Game.Modules.Battle.Vo.SkillVo
 ---@field actionRecoveryTP number 行动恢复的TP
 ---@field targetList table<number, Game.Modules.Battle.Report.ReportBattleUnit>
+---@field skillLoopIndex number
 local AttackRound = class("Game.Modules.Battle.Report.AttackRound");
 
 ---@param battleUnit Game.Modules.Battle.Report.ReportBattleUnit
@@ -37,9 +38,9 @@ end
 
 function AttackRound:AppendSkill()
     self.skill = self.battleUnit.currSelectedSkill
-    self.battleUnit.currSelectedSkill = nil
+    self.skillLoopIndex = self.battleUnit.skillLoopIndex
     if self.skill == nil then
-        print("当前没有可以使用的技能")
+        self.battleUnit:_debug("当前没有可以使用的技能")
         --self:RoundEnd()
         return
     end
@@ -60,8 +61,7 @@ end
 
 ---@param skillVo Game.Modules.Battle.Vo.SkillVo
 function AttackRound:OnAccountBegin(skillVo)
-    self.battleUnit.battleUnitVo:ActionRecoveryTP()
-    local tpRecover = 90 * (1 + self.battleUnit.battleUnitVo.attributeBase.tpUp / 100)
+    local tpRecover = self.battleUnit.battleUnitVo:ActionRecoveryTP()
     self.actionRecoveryTP = tpRecover
     self.battleUnit.battleUnitVo:RecoveryTP(tpRecover)--恢复Tp
 end
@@ -143,7 +143,7 @@ function AttackRound:DamageAccount(skillVo, account, target)
     end
     hurtInfo.miss = false
     if target then
-        local tpRecover = (hurtInfo.dam / target.battleUnitVo.maxHp) * 500 * (1 + target.battleUnitVo.attributeBase.tpUp / 100)
+        local tpRecover = target.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)
         target.battleUnitVo:RecoveryTP(tpRecover)--恢复Tp
         if isHelpful then
             target.battleUnitVo.curHp = math.min(target.battleUnitVo.curHp + hurtInfo.dam, target.battleUnitVo.maxHp)

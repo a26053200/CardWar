@@ -74,7 +74,7 @@ function BattleHeroItem:Update()
     if self.battleUnitVo then
         self.hpBar.value = self.battleUnitVo.curHp
         self.pwBar.value = self.battleUnitVo.curTp
-        if self.battleUnitVo.curTp >= self.battleUnitVo.maxTp then
+        if self.battleUnitVo.curTp >= self.battleUnitVo.maxTp and self.battleUnitVo.curTp > 0 then
             self:SetShan(true)
         else
             self:SetShan(false)

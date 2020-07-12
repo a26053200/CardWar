@@ -14,10 +14,12 @@ local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@field playerVo Game.Modules.Player.Vo.PlayerVo    当前战斗的玩家
 ---@field currBattleMode BattleMode
 ---@field battleResult boolean
+---@field currAreaId number
+---@field startTime number
 local BattleModel = class("BattleModel",BaseModel)
 
 function BattleModel:Ctor()
-    
+    self.startTime = 0
 end
 
 function BattleModel:Clear()

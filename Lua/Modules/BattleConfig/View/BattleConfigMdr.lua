@@ -105,6 +105,7 @@ function BattleConfigMdr:OfficialStartBattle(battleArray)
             function()
                 self.battleConfigModel.selectList = self.selectList
 
+                --清除导航
                 navigation:Clear(function()
                     local checkPointData = CheckPointConfig.GetBattleSceneData(self.checkPointModel.currSection.checkPointData.id)
                     self.battleModel.currBattleMode = BattleMode.PVE

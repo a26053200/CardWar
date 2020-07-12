@@ -6,6 +6,7 @@
 
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.World.View.WorldMdr : Game.Core.Ioc.BaseMediator
+---@field worldModel Game.Modules.World.Model.WorldModel
 ---@field currScene Game.Modules.World.Scenes.Core.BaseScene
 ---@field currLevelName string
 local WorldMdr = class("WorldMdr",BaseMediator)
@@ -21,6 +22,7 @@ function WorldMdr:Ctor()
 end
 
 function WorldMdr:OnInit()
+    World.model = self.worldModel
     self:EnterScene(WorldConfig.Login)
 
     --self.gameObject:AddComponent(typeof(Framework.ShowFPS))

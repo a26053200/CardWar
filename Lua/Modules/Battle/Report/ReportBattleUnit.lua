@@ -12,6 +12,7 @@
 ---@field ownerCardVo Game.Modules.Card.Vo.CardVo
 ---@field currSelectedSkill Game.Modules.Battle.Vo.SkillVo 当前被选中的技能
 ---@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
+---@field skillMap table<string, Game.Modules.Battle.Vo.SkillVo>
 ---@field layoutIndex number
 local ReportBattleUnit = class("Game.Modules.Battle.Report.ReportBattleUnit");
 
@@ -26,10 +27,16 @@ function ReportBattleUnit:Ctor(battleUnitVo, context)
     self.battleUnitVo = battleUnitVo
 
     self.skills = battleUnitVo.skills
+    self.skillMap = {}
+    for i = 1, #self.skills do
+        self.skillMap[self.skills[i].skillInfo.type] = self.skills[i]
+    end
     self.canUseList = List.New()
     self.currTargetAttackNum = 0
 
     self.debugName = self.battleUnitVo.battleUnitInfo.name .. "_" .. self.battleUnitVo.camp .. "-" .. self.battleUnitVo.layoutIndex
+
+    self.skillLoopIndex = 1
 end
 
 ---@param s1 Game.Modules.Battle.Vo.SkillVo
@@ -46,7 +53,28 @@ function ReportBattleUnit:IsDead()
     return self.battleUnitVo.curHp == 0
 end
 
+
 function ReportBattleUnit:AutoSelectSkill()
+    if self.skillMap[SkillType.UB] ~= nil and
+            self.battleUnitVo.curTp > 0 and
+            self.battleUnitVo.curTp >= self.battleUnitVo.maxTp and
+            self.context:UseUB(self) then--是否满足使用UB技能
+        self.currSelectedSkill = self.skillMap[SkillType.UB]
+        self.battleUnitVo.curTp = 0
+    else--正规输出循环
+        self.currSelectedSkill = self.skillMap[SkillLoop[self.skillLoopIndex]]
+        while self.currSelectedSkill == nil do
+            if self.skillLoopIndex + 1 > #SkillLoop then
+                self.skillLoopIndex = 1
+            else
+                self.skillLoopIndex = self.skillLoopIndex + 1
+            end
+            self.currSelectedSkill = self.skillMap[self.skillLoopIndex]
+        end
+    end
+end
+
+function ReportBattleUnit:AutoSelectSkill_old()
     self.canUseList:Clear()
     for i = 1, #self.skills do
         local skill = self.skills[i] ---@type Game.Modules.Battle.Vo.SkillVo
@@ -56,7 +84,7 @@ function ReportBattleUnit:AutoSelectSkill()
             break;
         else
             if skill.skillInfo.skillType == SkillType.Passive then
-                -- do nothing
+                -- do nothing被动技能
             elseif skill.skillInfo.cd == 0 or skill.startTime == 0 or Time.time - skill.startTime > skill.skillInfo.cd then
                 if skill.skillInfo.triggerCondition == SkillTriggerCondition.CD then -- CD
                     self.canUseList:Add(skill)
@@ -85,6 +113,15 @@ function ReportBattleUnit:AutoSelectSkill()
         self.currSelectedSkill = nil
     end
     return self.currSelectedSkill
+end
+
+--调试
+function ReportBattleUnit:_debug(msg)
+    if self.gameObject then
+        print(string.format("\n<color=#3A9BF8FF>[%s]</color><color=#5394ecff>%s</color>",self.debugName,msg))
+    else
+        print(string.format("\n<color=#3A9BF8FF>[%s]</color><color=#5394ecff>%s</color>",self.__classname,msg))
+    end
 end
 
 return ReportBattleUnit

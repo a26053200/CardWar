@@ -14,13 +14,15 @@ local ReportBattleUnit = require("Game.Modules.Battle.Report.ReportBattleUnit")
 ---@field reportBehavior Game.Modules.Battle.Report.ReportBehavior 行为
 ---@field layout Game.Modules.Battle.Report.ReportLayout
 ---@field battleSpeed number 战斗速度
+---@field autoUB boolean 自动UB
+---@field ubBattleUnit Game.Modules.World.Items.BattleUnit
 local ReportContext = class("Game.Modules.Battle.Report.ReportContext")
 
 ---@param mode BattleMode
 function ReportContext:Ctor(mode)
     self.mode = mode
-
     self.layout = ReportLayout.New()
+    self.ubList = List.New()
 end
 
 ---@param camp Camp
@@ -84,6 +86,33 @@ function ReportContext:IsCampAllDead(camp)
         end
     end
     return allDead
+end
+
+function ReportContext:SetAutoUB(autoUB)
+    self.autoUB = autoUB
+end
+
+---@param camp Camp
+---@param layoutIndex number
+function ReportContext:SetUBUnit(camp, layoutIndex)
+    local unit = self.layout:GetUnit(camp, layoutIndex)
+    self.ubBattleUnit = unit
+end
+
+function ReportContext:ClearUBUnit()
+    self.ubBattleUnit = nil
+end
+
+---@param unit Game.Modules.Battle.Report.ReportBattleUnit
+function ReportContext:UseUB(unit)
+    if self.autoUB then
+        self.ubBattleUnit = nil
+        return true
+    elseif self.ubBattleUnit == unit then
+        return true
+    else
+        return false
+    end
 end
 
 function ReportContext:Dispose()

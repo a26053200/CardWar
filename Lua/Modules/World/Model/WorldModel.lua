@@ -22,6 +22,7 @@
 local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@class Game.Modules.World.Model.WorldModel : Game.Core.Ioc.BaseModel
 ---@field worldService Game.Modules.World.Service.WorldService
+---@field battleModel Game.Modules.Battle.Model.BattleModel
 local WorldModel = class("WorldModel",BaseModel)
 
 function WorldModel:Ctor()

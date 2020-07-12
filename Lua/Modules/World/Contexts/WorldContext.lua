@@ -14,7 +14,7 @@ local BattleUnit = require("Game.Modules.World.Items.BattleUnit")
 ---@field checkPointData CheckPointData
 ---@field battleSceneInfo BattleSceneInfo --战斗场景信息
 ---@field currSubScene Game.Modules.World.Scenes.Core.SubScene | Game.Modules.World.Scenes.BattleScene  当前子场景
----@field battleBehavior Game.Modules.Battle.Behaviors.BattleBehavior    战场行为
+---@field battleBehavior Game.Modules.Battle.Behaviors.BattleBehavior | Game.Modules.Battle.Behaviors.PveBattleBehavior    战场行为
 ---@field avatarRoot UnityEngine.GameObject
 ---@field luaReflect Framework.LuaReflect
 ---@field pool Game.Modules.Common.Pools.AssetPoolProxy 对象池

@@ -38,7 +38,7 @@ end
 function CheckPointInfoMdr:UpdateView()
     self.textStrength.text = self.section.checkPointData.strength .. "/" .. self.roleModel.roleInfo.curStrength
     if self.section.checkPointData.maxPassNum == 0 then
-        self.textTimes.text = "oo"
+        self.textTimes.text = "∞"
     else
         self.textTimes.text = self.section.passNum .. "/" .. self.section.checkPointData.maxPassNum
     end

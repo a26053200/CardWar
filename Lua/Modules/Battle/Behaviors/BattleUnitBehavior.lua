@@ -23,6 +23,7 @@ function BattleUnitBehavior:Ctor(battleUnit)
     BattleUnitBehavior.super.Ctor(self, battleUnit.gameObject)
     self.battleUnit = battleUnit
     local name = self.battleUnit.gameObject.name
+    self:AppendBehavior(self:OnWaitPerformance(),   name .. " BattleUnitBehavior OnWaitPerformance")
     self:AppendBehavior(self:OnAccountBegin(),      name .. " BattleUnitBehavior OnAccountBegin")
     self:AppendBehavior(self:OnAccountProcess(),    name .. " BattleUnitBehavior OnAccountProcess")
     self:AppendBehavior(self:OnAccountEnd(),        name .. " BattleUnitBehavior OnAccountEnd")
@@ -31,6 +32,7 @@ function BattleUnitBehavior:Ctor(battleUnit)
     --AddEventListener(BattleItemEvents, BattleItemEvents.AttackAccountEnd, self.OnAttackAccountEnd, self)
 
     self.deadItemList = List.New()
+    self.performanceOver = true
 end
 
 ---@param attackRound Game.Modules.Battle.Report.AttackRound
@@ -40,18 +42,32 @@ function BattleUnitBehavior:Play(attackRound)
     self.hurtInfoMap = self.attackRound.hurtInfoMap
 end
 
+function BattleUnitBehavior:OnWaitPerformance()
+    local behavior = self:CreateSubBehavior()
+    behavior:AppendState(nil,function()
+        if self.performanceOver then
+            self:NextState()
+        end
+    end)
+    return behavior
+end
+
 function BattleUnitBehavior:OnAccountBegin()
     local behavior = self:CreateSubBehavior()
     behavior:AppendState(function()
         local skillVo = self.attackRound.skill
         self.battleUnit.battleUnitVo:RecoveryTP(self.attackRound.actionRecoveryTP)
+        if skillVo.skillInfo.type == SkillType.UB then
+            self.battleUnit.battleUnitVo.curTp = 0 --大招消耗
+        end
         self.battleUnit:SetHudVisible(false)
         local tagPos = self.battleUnit.context.battleLayout.center
         self.battleUnit:PlayRun()
-        self.battleUnit.transform:DOMove(tagPos, FRAME_TIME * 9 / self.battleUnit.context.battleSpeed):OnComplete(function()
+        self.battleUnit.transform.position = tagPos
+        --self.battleUnit.transform:DOMove(tagPos, FRAME_TIME * 9 / self.battleUnit.context.battleSpeed):OnComplete(function()
             self.battleUnit:PlayIdle()
             self:NextState()
-        end)
+        --end)
     end)
     return behavior
 end
@@ -61,7 +77,10 @@ function BattleUnitBehavior:OnAccountProcess(skillVo)
     behavior:AppendState(function()
         local skillVo = self.attackRound.skill
         self.deadItemList:Clear()
+        self.performanceOver = false
         self.battleUnit.performancePlayer:Play(skillVo.skillInfo.performance,function()
+            self.performanceOver = true
+            self.attackRound:RoundEnd()
             self:NextState()
         end, skillVo, self.attackRound)
     end)
@@ -75,7 +94,7 @@ function BattleUnitBehavior:OnAccountEnd()
         --self.battleUnit.context.battleLayout:SetAttackSelect(self.targetCamp, self.targetGridList, false)--设置选取效果
         self.battleUnit:BackToBorn()
         self.battleUnit:PlayIdle()
-        self.attackRound:RoundEnd()
+
         BattleEvent.DispatchItemEvent(BattleEvent.ExitAttack, self.battleUnit)
         self:Stop()
     end)

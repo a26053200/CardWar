@@ -7,7 +7,7 @@
 local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 
 ---@class Game.Modules.Common.Behavior.BaseBehavior : Betel.LuaMonoBehaviour
----@field New fun(gameObject:UnityEngine.GameObject,parent:number,cycleOverCallback:fun()):Game.Modules.Common.Behavior.BaseBehavior
+---@field New fun(gameObject:UnityEngine.GameObject,parent:number):Game.Modules.Common.Behavior.BaseBehavior
 ---@field id number
 ---@field parent Game.Modules.Common.Behavior.BaseBehavior
 ---@field stateMachine FastBehavior.StateMachine
@@ -26,6 +26,7 @@ function BaseBehavior:Ctor(gameObject, parent)
 end
 
 --创建子行为
+---@return Game.Modules.Common.Behavior.BaseBehavior
 function BaseBehavior:CreateSubBehavior()
     if self.subBehaviors == nil then
         self.subBehaviors = List.New()

@@ -61,6 +61,14 @@ function ReportLayout:GetFirstGridByIndexs(camp, indexs)
     return nil
 end
 
+---@param camp Camp
+---@param index number
+---@return Game.Modules.Battle.Report.ReportBattleUnit
+function ReportLayout:GetUnit(camp, index)
+    local units = self.unitMap[camp]
+    return units[index]
+end
+
 --获取没有死亡的
 ---@param camp Camp
 ---@param selectGrids table<number, Game.Modules.Battle.Report.ReportBattleUnit>

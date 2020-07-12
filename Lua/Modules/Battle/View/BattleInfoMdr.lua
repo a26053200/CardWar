@@ -15,37 +15,72 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@field battleConfigService Game.Modules.BattleConfig.Service.BattleConfigService
 ---@field scoreText UnityEngine.UI.Text
 ---@field heroList List | table<number, Game.Modules.World.Items.BattleUnit>
+---@field speedIndex number
+---@field battleAuto boolean
 local BattleInfoMdr = class("BattleInfoMdr",BaseMediator)
 
 local SpeedValues = {1,1.8,2.5}
 
 function BattleInfoMdr:OnInit()
     self.context = self.battleModel.currentContext
-    self.heroList = self.context.battleBehavior:GetCampAvatarList(Camp.Atk)
-
     self.speedIndex = self.battleConfigModel.battleSpeed
+    self.battleAuto = self.battleConfigModel.battleAuto
+    self.context.battleBehavior.reportContext.autoUB = self.battleAuto
+
+    self.heroList = self.context.battleBehavior:GetCampAvatarList(Camp.Atk)
+    self.btnAutoMark = self.gameObject:FindChild("BtnAuto/Mark")
+    self.time = self.gameObject:GetText("TopRight/Time/Text")
+    self.btnAutoMark:SetActive(self.battleAuto)
+
     self.gameObject:SetButtonText("BtnSpeed", "x" .. self.speedIndex)
 
     self.heroListView = TableList.New(self.gameObject:FindChild("HeroList"), BattleHeroItem)
     self.heroListView:SetData(self.heroList)
     self.heroListView:SetScrollEnable(false)
     self.heroListView.eventDispatcher:AddEventListener(ListViewEvent.ItemClick, self.onHeroItemClick, self)
+
+    self.clickTime = 0
 end
 
 
 function BattleInfoMdr:RegisterListeners()
-
+    AddEventListener(self, Event.UPDATE, self.Update, self)
 end
 
----@param data Game.Modules.World.Items.BattleUnit
-function BattleInfoMdr:onHeroItemClick(event, data, index)
-    if data.battleUnitVo.curTp >= data.battleUnitVo.maxTp then
-        print("UBUBUBUBUBUUBBUBU")
+function BattleInfoMdr:Update()
+    if Input.GetMouseButton(0) then
+        if self.click then
+            self.click = false
+            print(string.format("%.2f", (Time.realtimeSinceStartup - self.clickTime) * 1000))
+        else
+            self.click = true
+            self.clickTime = Time.realtimeSinceStartup
+        end
+    end
+    if self.time and self.battleModel.startTime > 0 then
+        self.time.text = TimeConvert.Time_toString1(Time.time - self.battleModel.startTime, TimeConvert.TYPE_S)
+    end
+end
+
+---@param battleUnit Game.Modules.World.Items.BattleUnit
+function BattleInfoMdr:onHeroItemClick(event, battleUnit, index)
+    if battleUnit:IsDead() then
+
+    else
+        if battleUnit.battleUnitVo.curTp >= battleUnit.battleUnitVo.maxTp then
+            self.context.battleBehavior.reportContext:SetUBUnit(battleUnit.battleUnitVo.camp, battleUnit.battleUnitVo.layoutIndex)
+            self:CreateDelayedFrameCall(function()
+                self.context.battleBehavior.reportContext:ClearUBUnit()
+            end,16)
+        end
     end
 end
 
 function BattleInfoMdr:On_Click_BtnAuto()
-
+    self.battleAuto = not self.battleAuto
+        self.btnAutoMark:SetActive(self.battleAuto)
+    self.context.battleBehavior.reportContext.autoUB = self.battleAuto
+    self:SaveBattleConfig()
 end
 
 function BattleInfoMdr:On_Click_BtnSpeed()
@@ -57,16 +92,23 @@ function BattleInfoMdr:On_Click_BtnSpeed()
     self.context.battleSpeed = SpeedValues[self.speedIndex]
     BattleEvents.Dispatch(BattleEvents.BattleSpeedChanged)
     self.gameObject:SetButtonText("BtnSpeed", "x" .. self.speedIndex)
+    self:SaveBattleConfig()
+end
+
+function BattleInfoMdr:On_Click_BtnMenu()
+    --点击
+end
+
+function BattleInfoMdr:SaveBattleConfig()
     self.battleConfigService:SaveBattleConfig(
             self.roleModel.roleId,
             self.battleConfigModel.battleType,
-            self.speedIndex,false)
+            self.speedIndex,self.battleAuto)
 end
 
-function BattleInfoMdr:Update()
-    if self.scoreText then
-        self.scoreText.text = Game.ECSWorld.Instance.score .. ""
-    end
+
+function BattleInfoMdr:OnRemove()
+    RemoveEventListener(self, Event.UPDATE, self.Update, self)
 end
 
 return BattleInfoMdr

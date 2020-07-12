@@ -83,11 +83,12 @@ end
 function PveBattleBehavior:StartBattle()
     self.reportBehavior = ReportBehavior.New(self.reportContext)
     self.reportContext.reportBehavior = self.reportBehavior
-
+    World.model.battleModel.startTime = Time.time
     --战斗流程
     local winCamp = nil
     self:StartCoroutine(function()
         for i = 1, #self.checkPointData.areas do
+            World.model.battleModel.currAreaId = i
             self:RefreshArea(i)
             coroutine.wait(1)
             self.reportBehavior:Play()

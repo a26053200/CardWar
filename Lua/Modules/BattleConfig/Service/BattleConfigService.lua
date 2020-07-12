@@ -37,6 +37,7 @@ end
 ---@param roleId string
 ---@param battleType number
 ---@param battleSpeed number
+---@param auto boolean
 ---@param callback fun()
 function ArrayService:SaveBattleConfig(roleId, battleType, battleSpeed, auto, callback)
     self:HttpRequest(Action.SaveBattleConfig, {roleId, battleType, battleSpeed, auto}, function(data)

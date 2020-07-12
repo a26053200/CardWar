@@ -128,7 +128,8 @@ function BattleUnit:AccountHurt(hurtInfo, isHelpful)
         self.battleUnitVo.curHp = math.min( self.battleUnitVo.curHp + hurtInfo.dam,  self.battleUnit.battleUnitVo.maxHp)
         self:DoHurt(hurtInfo)
     else
-        self.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)--恢复Tp
+        local tpRecover = self.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)
+        self.battleUnitVo:RecoveryTP(tpRecover)--恢复Tp
         self.battleUnitVo.curHp = math.max(0, self.battleUnitVo.curHp - hurtInfo.dam)
         self:DoHurt(hurtInfo)
         self:PlayIdle()
