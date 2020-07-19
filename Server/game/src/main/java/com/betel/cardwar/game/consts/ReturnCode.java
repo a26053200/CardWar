@@ -25,7 +25,11 @@ public class ReturnCode
 
     //CheckPoint
     public static final String Checkpoint_Not_Found         = "找不到关卡信息";
+    public static final String Checkpoint_Pass              = "关卡通关";
 
     //Battle
     public static final String Battle_Error_No_Card         = "找不卡牌信息";
+
+    //Battle Report
+    public static final String Save_Report_Success         = "保存战报成功";
 }

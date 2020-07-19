@@ -125,4 +125,9 @@ public class CheckPointService extends BaseService<CheckPoint>
         }
         return null;
     }
+
+    public void saveCheckPoint(CheckPoint checkPoint)
+    {
+        dao.updateEntity(checkPoint);
+    }
 }

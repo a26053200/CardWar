@@ -66,6 +66,10 @@ public class Field
      * 获取章节信息
      */
     public static final String CHAPTER_INFO            = "chapterInfo";
+    /**
+     * 通关心级
+     */
+    public static final String CHAPTER_STAR           = "chapterStar";
 
     //==================
     // 战斗
@@ -94,4 +98,24 @@ public class Field
      * 该战斗类型的是否开启自动战斗
      */
     public static final String BATTLE_AUTO               = "battleAuto";
+
+    //==================
+    // 战报
+    //==================
+    /**
+     * 参战的单位
+     */
+    public static final String BATTLE_UNITS               = "battleUnits";
+    /**
+     * 战报节点
+     */
+    public static final String REPORT_NODES               = "reportNodes";
+    /**
+     * 结算节点
+     */
+    public static final String ACCOUNT_NODES               = "accountNodes";
+    /**
+     * 战报节点
+     */
+    public static final String BATTLE_STAR               = "battleStar";
 }

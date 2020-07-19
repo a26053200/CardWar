@@ -74,6 +74,7 @@ public class BattleConfigService extends BaseService<BattleConfig>
         JSONObject sendJson = new JSONObject();
         battleArray.setBattleSpeed(battleSpeed);
         battleArray.setCardIds(cardIds);
+        battleArray.setAuto(battleAuto);
         dao.updateEntity(battleArray);
         //这里需要检测编队数据的合法性, 以后有时间再开发
         sendJson.put(Field.BATTLE_ARRAY_RESULT, true);

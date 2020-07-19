@@ -1,6 +1,10 @@
 package com.betel.cardwar.game.modules.battle.model;
 
 import com.betel.asd.interfaces.IVo;
+import com.betel.cardwar.game.consts.Camp;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @Description 战报
@@ -11,6 +15,14 @@ public class BattleReport implements IVo
 {
     private String id;
     private String roleId;
+
+    private int chapterId; //战斗所在章节
+    private String checkpointId; //战斗所在章节
+    private int star;//几星通关
+    private BattleUnit[] battleUnits;//参战双方索引单位
+    private ReportNode[] reportNodes;//战报节点
+    private AccountNode[] accountNodes;//战报节点
+    private String lastPassTime;    //上次通关时间
 
     @Override
     public String getId()
@@ -34,5 +46,75 @@ public class BattleReport implements IVo
     public void setVid(String s)
     {
         roleId = s;
+    }
+
+    public int getChapterId()
+    {
+        return chapterId;
+    }
+
+    public void setChapterId(int chapterId)
+    {
+        this.chapterId = chapterId;
+    }
+
+    public String getCheckpointId()
+    {
+        return checkpointId;
+    }
+
+    public void setCheckpointId(String checkpointId)
+    {
+        this.checkpointId = checkpointId;
+    }
+
+    public int getStar()
+    {
+        return star;
+    }
+
+    public void setStar(int star)
+    {
+        this.star = star;
+    }
+
+    public BattleUnit[] getBattleUnits()
+    {
+        return battleUnits;
+    }
+
+    public void setBattleUnits(BattleUnit[] battleUnits)
+    {
+        this.battleUnits = battleUnits;
+    }
+
+    public ReportNode[] getReportNodes()
+    {
+        return reportNodes;
+    }
+
+    public void setReportNodes(ReportNode[] reportNodes)
+    {
+        this.reportNodes = reportNodes;
+    }
+
+    public AccountNode[] getAccountNodes()
+    {
+        return accountNodes;
+    }
+
+    public void setAccountNodes(AccountNode[] accountNodes)
+    {
+        this.accountNodes = accountNodes;
+    }
+
+    public String getLastPassTime()
+    {
+        return lastPassTime;
+    }
+
+    public void setLastPassTime(String lastPassTime)
+    {
+        this.lastPassTime = lastPassTime;
     }
 }
