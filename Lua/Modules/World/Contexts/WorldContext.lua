@@ -21,6 +21,7 @@ local BattleUnit = require("Game.Modules.World.Items.BattleUnit")
 ---@field attachCamera Game.Modules.Common.Components.AttachCamera
 ---@field battleLayout Game.Modules.Battle.View.BattleLayout
 ---@field battleSpeed number 战斗速度
+---@field isReplaying boolean 是否是重播
 local WorldContext = class("WorldContext")
 
 local Sid = 1

@@ -13,6 +13,7 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@field battleModel Game.Modules.Battle.Model.BattleModel
 ---@field checkPointModel Game.Modules.CheckPoint.Model.CheckPointModel
 ---@field battleConfigService Game.Modules.BattleConfig.Service.BattleConfigService
+---@field battleService Game.Modules.Battle.Service.BattleService
 ---@field ownerList List | table<number, Game.Modules.Card.Vo.CardVo>
 ---@field cardList Betel.UI.TableList
 ---@field selectList List | table<number, Game.Modules.Card.Vo.CardVo>
@@ -96,12 +97,10 @@ end
 
 --正式进入战斗
 function BattleConfigMdr:OfficialStartBattle(battleArray)
-    self.battleConfigService:StartBattle(
+    self.battleService:StartBattle(
             self.roleModel.roleId,
             self.checkPointModel.currSection.checkPointData.chapter,
             self.checkPointModel.currSection.checkPointData.id,
-            self.battleConfigModel.battleType,
-            battleArray,
             function()
                 self.battleConfigModel.selectList = self.selectList
 

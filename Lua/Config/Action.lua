@@ -62,14 +62,30 @@ Action.ChapterInfo = { server = "GameServer", action = "checkpoint@chapterInfo",
 --- Battle
 ---==================
 --请求开始战斗
-Action.StartBattle = {server = "GameServer", action = "battlereport@startBattle", fields = "roleId,chapterId,checkpointId,battleType,battleArray"}
+Action.StartBattle = {server = "GameServer", action = "battlereport@startBattle", fields = "roleId,chapterId,checkpointId"}
 
 --请求结束战斗
-Action.EndBattle = {server = "GameServer", action = "battlereport@endBattle", fields = "roleId,chapterId,checkpointId"}
+Action.EndBattle = {server = "GameServer", action = "battlereport@endBattle", fields = "roleId,chapterId,checkpointId,star"}
 
+
+---==================
+--- Battle Report
+---==================
 --请求生成战报
 Action.GenerateBattleReport = { server = "GameServer", action = "battlereport@generateBattleReport", fields = "roleId,checkpointId" }
 
+--请求保存战报
+Action.SaveBattleReport = { server = "GameServer", action = "battlereport@saveBattleReport", fields = "roleId,roleLevel,chapterId,checkpointId,battleStar,battleUnits,reportNodes,accountNodes" }
+
+--请求获取战报列表
+Action.GetBattleReportList = { server = "GameServer", action = "battlereport@getBattleReportList", fields = "chapterId,checkpointId" }
+
+--请求获取战报
+Action.GetBattleReport = { server = "GameServer", action = "battlereport@getBattleReport", fields = "reportId" }
+
+---==================
+--- Battle Config
+---==================
 --获取战斗配置
 Action.GetBattleConfig = { server = "GameServer", action = "battleConfig@getBattleConfig", fields = "roleId,battleType" }
 

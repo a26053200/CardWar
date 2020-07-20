@@ -18,6 +18,17 @@ local CardVo = class("Module.Card.Vo.CardVo",BaseVo)
 
 ---@param card table
 function CardVo:Ctor(card)
+    self:Init(card)
+end
+
+--根据战报生成
+---@param node Game.Modules.Battle.Report.Nodes.UnitNode
+function CardVo:FromReport(node)
+    self:Init(node)
+end
+
+---@param card table
+function CardVo:Init(card)
     self.cardInfo = CardConfig.Get(card.cardId)
     self.id = card.id
     self.active = card.active

@@ -16,6 +16,7 @@ local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@field battleResult boolean
 ---@field currAreaId number
 ---@field startTime number
+---@field checkpointReports table<number, Game.Modules.Battle.Vo.BattleReportVo> pve关卡战报
 local BattleModel = class("BattleModel",BaseModel)
 
 function BattleModel:Ctor()

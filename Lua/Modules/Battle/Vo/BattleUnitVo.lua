@@ -4,18 +4,18 @@
 --- DateTime: 2020-04-12-20:24:22
 ---
 
+local CardVo = require("Game.Modules.Card.Vo.CardVo")
 local Attribute = require("Game.Modules.Battle.Vo.Attribute")
 local AvatarVo = require("Game.Modules.World.Vo.AvatarVo")
 ---@class Game.Modules.Battle.Vo.BattleUnitVo : Game.Modules.World.Vo.AvatarVo
 ---@field New fun():Game.Modules.Battle.Vo.BattleUnitVo
+---@field cardId string
 ---@field battleUnitInfo BattleUnitInfo
----@field attributeBase Game.Modules.Battle.Vo.Attribute
+---@field attribute Game.Modules.Battle.Vo.Attribute
 ---@field skills table<number, Game.Modules.Battle.Vo.SkillVo>
 ---@field normalSkill Game.Modules.Battle.Vo.SkillVo
 ---@field camp Camp 阵营 所属阵营
 ---@field layoutIndex number
----@field atk number
----@field def number
 ---@field curHp number
 ---@field maxHp number
 ---@field curTp number
@@ -24,12 +24,14 @@ local BattleUnitVo = class("Game.Modules.Battle.Vo.BattleUnitVo",AvatarVo)
 
 function BattleUnitVo:Ctor()
     BattleUnitVo.super:Ctor(self)
+    self.sid = self:__sid()
     self.skills = {}
 end
 
+
 function BattleUnitVo:Init(battleUnitName)
     self.battleUnitInfo = BattleUnitConfig.Get(battleUnitName)
-    self.attributeBase = self.battleUnitInfo
+    self.attribute = self.battleUnitInfo
     BattleUnitVo.super.Init(self, self.battleUnitInfo.avatarName)
     --local skillInfoList = SkillConfig.GetList(battleUnitName)
     local skillInfoList = SkillConfig.GetList(self.battleUnitInfo.avatarName)--测试时按模型来选技能
@@ -58,19 +60,19 @@ end
 --被伤害时获取TP = (损失血量 / 最大血量) * 500 * (1 + TP上升 / 100)
 ---@param dam number 伤害
 function BattleUnitVo:DamageRecoveryTP(dam)
-    local tpRecover = (dam / self.maxHp) * 500 * (1 + self.attributeBase.tpUp / 100)
+    local tpRecover = (dam / self.maxHp) * 500 * (1 + self.attribute.tpUp / 100)
     return tpRecover
 end
 
 --行动恢复Tp
 function BattleUnitVo:ActionRecoveryTP()
-    local tpRecover = 200 * (1 + self.attributeBase.tpUp / 100)
+    local tpRecover = 200 * (1 + self.attribute.tpUp / 100)
     return tpRecover
 end
 
 --自动恢复Tp
 function BattleUnitVo:AutoRecoveryTP()
-    local tpRecover = self.tpRecover * (1 + self.attributeBase.tpUp / 100)
+    local tpRecover = self.tpRecover * (1 + self.attribute.tpUp / 100)
     return tpRecover
 end
 
@@ -84,20 +86,26 @@ function BattleUnitVo:Reset()
         local skill = self.skills[i] ---@type Game.Modules.Battle.Vo.SkillVo
         skill:Reset()
     end
-    self.level = 0
-    self.curHp = self.attributeBase.maxHp
-    self.maxHp = self.attributeBase.maxHp
+    self.curHp = self.attribute.maxHp
+    self.maxHp = self.attribute.maxHp
     self.curTp = 0
     self.maxTp = self.battleUnitInfo.maxTp
+end
+
+function BattleUnitVo:GetReportJson()
+    local json = {}
+    json.cardId = self.cardId
+    json.camp = self.camp
+    json.layoutIndex = self.layoutIndex
+    return json
 end
 
 function BattleUnitVo:Dispose()
     BattleUnitVo.super.Dispose(self)
     self.skills = {}
     self.battleUnitInfo = nil
-    self.attributeBase = nil
+    self.attribute = nil
     self.normalSkill = nil
-    self.level = 0
     self.curHp = 0
     self.maxHp = 0
     self.curTp = 0

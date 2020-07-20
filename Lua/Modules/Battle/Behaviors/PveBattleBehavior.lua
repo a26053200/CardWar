@@ -142,12 +142,10 @@ end
 --停止回合
 function PveBattleBehavior:StopBattle(winCamp)
     if self.reportReplay then
-        self.reportReplay:Dispose()
-        self.reportReplay = nil
+        self.reportReplay:Stop()
     end
     if self.reportBehavior then
-        self.reportBehavior:Dispose()
-        self.reportBehavior = nil
+        self.reportBehavior:Stop()
     end
     if winCamp then
         if winCamp == Camp.Atk then
@@ -170,6 +168,15 @@ function PveBattleBehavior:Dispose()
     PveBattleBehavior.super.Dispose(self)
     self:Clear()
     self:StopBattle()
+
+    if self.reportReplay then
+        self.reportReplay:Dispose()
+        self.reportReplay = nil
+    end
+    if self.reportBehavior then
+        self.reportBehavior:Dispose()
+        self.reportBehavior = nil
+    end
 end
 
 return PveBattleBehavior

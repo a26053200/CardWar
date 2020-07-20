@@ -19,7 +19,6 @@ function BaseService:Ctor()
 end
 
 --Http请求
----@param url string
 ---@param action Action
 ---@param params table
 ---@param callback fun()
@@ -27,6 +26,28 @@ function BaseService:HttpRequest(action, params, callback)
     NetModal.Show()
     ---@param response Response
     nmgr:HttpRqst(action, params, function(response)
+        NetModal.Hide()
+        if response.state == SessionState.Success then
+            callback(response.data)
+        elseif response.state == SessionState.Fail then
+            --Tips.Show(response.data.msg)
+        else
+            logError("Unknown session error:" .. response.state)
+        end
+        if response and response.data and response.data.msg then
+            Tips.Show(response.data.msg)
+        end
+    end)
+end
+
+--Http请求
+---@param action Action
+---@param params table
+---@param callback fun()
+function BaseService:HttpPost(action, params, callback)
+    NetModal.Show()
+    ---@param response Response
+    nmgr:HttpPost(action, params, function(response)
         NetModal.Hide()
         if response.state == SessionState.Success then
             callback(response.data)

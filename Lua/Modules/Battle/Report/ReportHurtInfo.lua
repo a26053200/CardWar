@@ -9,7 +9,7 @@
 ---@field New fun():Game.Modules.Battle.Report.ReportHurtInfo
 ---@field atker Game.Modules.Battle.Vo.BattleUnitVo
 ---@field defer Game.Modules.Battle.Vo.BattleUnitVo
----@field skillVo Game.Modules.Battle.Vo.SkillVo
+---@field skill Game.Modules.Battle.Vo.SkillVo
 ---@field isHelpful boolean
 ---@field accountId string
 ---@field deferIsDead boolean

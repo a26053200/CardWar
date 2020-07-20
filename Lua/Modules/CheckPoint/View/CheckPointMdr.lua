@@ -11,6 +11,7 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@field roleModel Game.Modules.Role.Model.RoleModel
 ---@field battleConfigModel Game.Modules.BattleConfig.Model.BattleConfigModel
 ---@field checkPointService Game.Modules.CheckPoint.Service.CheckPointService
+---@field battleService Game.Modules.Battle.Service.BattleService
 ---@field currChapter ChapterData
 ---@field positionList Betel.UI.PositionList
 local CheckPointMdr = class("Game.Modules.CheckPoint.View.CheckPointMdr",BaseMediator)
@@ -37,6 +38,7 @@ function CheckPointMdr:onItemClick(event, data, index)
     self.checkPointModel.currSection = data
     navigation:Push(ViewConfig.CheckPointInfo)
 end
+
 
 function CheckPointMdr:On_Click_BtnBack()
     navigation:Pop(ViewConfig.CheckPoint)

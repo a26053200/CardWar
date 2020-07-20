@@ -92,7 +92,7 @@ function AccountContext:DamageAccount(skillVo, account, target)
     local isHelpful = account.targetMode == TargetMode.Self or account.targetMode == TargetMode.Friend
     local battleUnitVo = self.battleUnit.battleUnitVo
     local minDam = 1
-    local unitAttribute = battleUnitVo.attributeBase --单位属性
+    local unitAttribute = battleUnitVo.attribute --单位属性
     local hurtInfo = {} ---@type HurtInfo
     hurtInfo.atker = self.battleUnit
     hurtInfo.defer = target
@@ -100,11 +100,11 @@ function AccountContext:DamageAccount(skillVo, account, target)
     --伤害计算 (技能提供伤害*技能等级+面板魔法/物理攻击*技能倍率)
     if skillVo.skillInfo.attackType == AttackType.Physic then
         hurtInfo.atk = skillVo.skillInfo.damage * skillVo.level + unitAttribute.p_atk * (skillVo.skillInfo.damageAdd + 1) * (account.damageRatio / 1)
-        hurtInfo.def = target.battleUnitVo.attributeBase.p_def
+        hurtInfo.def = target.battleUnitVo.attribute.p_def
         hurtInfo.crit = (math.random() < unitAttribute.p_crit) and 2 or 1 --暴击
     else
         hurtInfo.atk = skillVo.skillInfo.damage * skillVo.level + unitAttribute.m_atk * (skillVo.skillInfo.damageAdd + 1) * (account.damageRatio / 1)
-        hurtInfo.def = target.battleUnitVo.attributeBase.m_def
+        hurtInfo.def = target.battleUnitVo.attribute.m_def
         hurtInfo.crit = (math.random() < unitAttribute.m_crit) and 2 or 1 --暴击
     end
     --伤害=攻击力/ ( 1 +防御力/ 100 )

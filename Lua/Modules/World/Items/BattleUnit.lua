@@ -135,7 +135,7 @@ function BattleUnit:AccountHurt(hurtInfo, isHelpful)
         self:PlayIdle()
         self:PlayHit()
         self:_debug(string.format("<color=#FFFFFFFF>Skill:%s</color> <color=#FFFF00FF>%s/%s %s</color> (%2f)",
-                hurtInfo.skillVo.skillInfo.id,
+                hurtInfo.skill.skillInfo.id,
                 self.battleUnitVo.curHp,
                 self.battleUnitVo.maxHp,
                 hurtInfo.dam,

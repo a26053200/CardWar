@@ -10,6 +10,7 @@ local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@field roleModel Game.Modules.Role.Model.RoleModel
 ---@field battleConfigModel Game.Modules.BattleConfig.Model.BattleConfigModel
 ---@field checkPointService Game.Modules.CheckPoint.Service.CheckPointService
+---@field battleService Game.Modules.Battle.Service.BattleService
 ---@field section Game.Modules.CheckPoint.Vo.SectionVo
 local CheckPointInfoMdr = class("Game.Modules.CheckPoint.View.CheckPointInfoMdr",BaseMediator)
 
@@ -51,6 +52,15 @@ end
 
 function CheckPointInfoMdr:On_Click_BtnCancel()
     navigation:Pop(ViewConfig.CheckPointInfo)
+end
+
+function CheckPointInfoMdr:On_Click_BtnRecord()
+    --获取改关卡的战报
+    self.battleService:GetBattleReportList(
+            self.checkPointModel.currSection.checkPointData.chapter,
+            self.checkPointModel.currSection.checkPointData.id, function(data)
+
+            end)
 end
 
 return CheckPointInfoMdr

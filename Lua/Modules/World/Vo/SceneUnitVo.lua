@@ -10,8 +10,15 @@ local PoolObject = require("Game.Modules.Common.Pools.PoolObject")
 ---@field sid number
 local SceneUnitVo = class("Game.Modules.World.Vo.SceneUnitVo", PoolObject)
 
+local S_ID = 0
+
 function SceneUnitVo:Ctor()
     
+end
+
+function SceneUnitVo:__sid()
+    S_ID = S_ID + 1
+    return S_ID
 end
 
 return SceneUnitVo

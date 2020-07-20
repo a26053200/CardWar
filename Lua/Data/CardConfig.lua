@@ -21,14 +21,15 @@ local CardConfig = {}
 
 CardConfig.data = nil
 
+---@param cardId number
 ---@return CardInfo
-function CardConfig.Get(name)
+function CardConfig.Get(cardId)
     if CardConfig.data == nil then
         CardConfig.data = require("Game.Data.Excel.Card")
     end
-    local info = CardConfig.data.Get(name) ---@type CardInfo
+    local info = CardConfig.data.Get(cardId) ---@type CardInfo
     if info == nil then
-        logError(string.format("There is not Card info named %s!", name))
+        logError(string.format("There is not Card info id:%s!", cardId))
     end
     return info
 end

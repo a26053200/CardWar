@@ -6,6 +6,7 @@
 ---
 
 ---@class Game.Modules.Battle.Report.ReportBattleUnit
+---@field New fun(battleUnitVo, context):Game.Modules.Battle.Report.ReportBattleUnit
 ---@field battleUnitVo Game.Modules.Battle.Vo.BattleUnitVo
 ---@field sid number 唯一id
 ---@field context Game.Modules.Battle.Report.ReportContext

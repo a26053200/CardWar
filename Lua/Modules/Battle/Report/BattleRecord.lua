@@ -4,3 +4,61 @@
 --- DateTime: 2020/7/4 21:26
 --- 战斗记录
 ---
+
+---@class Game.Modules.Battle.Report.BattleRecord
+---@field New fun(roleId, context):Game.Modules.Battle.Report.BattleRecord
+---@field recordList List | table<number, Game.Modules.Battle.Report.AttackRound>
+---@field unitList List | table<number, Game.Modules.Battle.Report.ReportBattleUnit>
+---@field context Game.Modules.Battle.Report.ReportContext
+local BattleRecord = class("Game.Modules.Battle.Report.BattleRecord");
+
+---@param context Game.Modules.Battle.Report.ReportContext
+function BattleRecord:Ctor(context)
+    self.recordList = List.New()
+    self.context = context
+    self.unitList = List.New() ---@type table<number, Game.Modules.World.Items.BattleUnit>
+    self.unitList:Concat(self.context:GetCampUnitList(Camp.Atk))
+    self.unitList:Concat(self.context:GetCampUnitList(Camp.Def))
+end
+
+---@param attackRound Game.Modules.Battle.Report.AttackRound
+function BattleRecord:Push(attackRound)
+    self.recordList:Push(attackRound)
+end
+
+---@return table<number, Game.Modules.Battle.Report.Nodes.UnitNode>
+function BattleRecord:GetBattleUnits()
+    local units = {}
+    for i = 1, self.unitList:Size() do
+        local unit = {}
+        unit.sid = self.unitList[i].sid
+        unit.cardId = self.unitList[i].ownerCardVo.cardInfo.id
+        unit.camp = self.unitList[i].battleUnitVo.camp
+        unit.layoutIndex = self.unitList[i].battleUnitVo.layoutIndex
+        unit.rank = self.unitList[i].ownerCardVo.rank
+        unit.level = self.unitList[i].ownerCardVo.level
+        unit.star = self.unitList[i].ownerCardVo.star
+        table.insert(units, unit)
+    end
+    return units
+end
+
+---@return table<number, Game.Modules.Battle.Report.Nodes.ReportNode>
+function BattleRecord:GetReportNodes()
+    local nodes = {}
+    for i = 1, self.recordList:Size() do
+        table.insert(nodes, self.recordList[i]:GetReportNode())
+    end
+    return nodes
+end
+
+---@return table<number, Game.Modules.Battle.Report.Nodes.AccountNode>
+function BattleRecord:GetAccountNodes()
+    local list = List.New()
+    for i = 1, self.recordList:Size() do
+        list:Concat(List.New(self.recordList[i]:GetAccountNodes()))
+    end
+    return list:GetArray()
+end
+
+return BattleRecord

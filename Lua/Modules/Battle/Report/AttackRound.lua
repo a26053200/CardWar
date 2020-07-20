@@ -17,11 +17,15 @@ local ReportHurtInfo = require("Game.Modules.Battle.Report.ReportHurtInfo")
 ---@field skillLoopIndex number
 local AttackRound = class("Game.Modules.Battle.Report.AttackRound");
 
+local SID = 1
+
 ---@param battleUnit Game.Modules.Battle.Report.ReportBattleUnit
 function AttackRound:Ctor(battleUnit, callback)
     self.battleUnit = battleUnit
     self.callback = callback
     self.hurtInfoMap = {}
+    self.id = SID
+    SID = SID + 1
 end
 
 --回合开始
@@ -102,21 +106,21 @@ function AttackRound:DamageAccount(skillVo, account, target)
     local isHelpful = account.targetMode == TargetMode.Self or account.targetMode == TargetMode.Friend
     local battleUnitVo = self.battleUnit.battleUnitVo
     local minDam = 1
-    local unitAttribute = battleUnitVo.attributeBase --单位属性
+    local unitAttribute = battleUnitVo.attribute --单位属性
     local hurtInfo = ReportHurtInfo.New()
     hurtInfo.atker = copy(self.battleUnit.battleUnitVo)
     hurtInfo.defer = copy(target.battleUnitVo)
-    hurtInfo.skillVo = skillVo
+    hurtInfo.skill = skillVo
     hurtInfo.accountId = account.id
     hurtInfo.isHelpful = isHelpful
     --伤害计算 (技能提供伤害*技能等级+面板魔法/物理攻击*技能倍率)
     if skillVo.skillInfo.attackType == AttackType.Physic then
         hurtInfo.atk = skillVo.skillInfo.damage * skillVo.level + unitAttribute.p_atk * (skillVo.skillInfo.damageAdd + 1) * (account.damageRatio / 1)
-        hurtInfo.def = target.battleUnitVo.attributeBase.p_def
+        hurtInfo.def = target.battleUnitVo.attribute.p_def
         hurtInfo.crit = (math.random() < unitAttribute.p_crit) and 2 or 1 --暴击
     else
         hurtInfo.atk = skillVo.skillInfo.damage * skillVo.level + unitAttribute.m_atk * (skillVo.skillInfo.damageAdd + 1) * (account.damageRatio / 1)
-        hurtInfo.def = target.battleUnitVo.attributeBase.m_def
+        hurtInfo.def = target.battleUnitVo.attribute.m_def
         hurtInfo.crit = (math.random() < unitAttribute.m_crit) and 2 or 1 --暴击
     end
     --伤害=攻击力/ ( 1 +防御力/ 100 )
@@ -153,7 +157,7 @@ function AttackRound:DamageAccount(skillVo, account, target)
         hurtInfo.damRecoveryTP = tpRecover
     end
     print(string.format("Skill:%s Atker:<color=#FFFFFFFF>%s</color> atk Defer:<color=#FFFFFFFF>%s</color> - dam:<color=#FFFF00FF>%s</color> (%2f)",
-            hurtInfo.skillVo.skillInfo.id,
+            hurtInfo.skill.skillInfo.id,
             hurtInfo.atker:GetDebugName(),
             hurtInfo.defer:GetDebugName(),
             hurtInfo.dam, (target.battleUnitVo.curHp)))
@@ -173,6 +177,40 @@ end
 ---@param skillVo Game.Modules.Battle.Vo.SkillVo
 function AttackRound:OnAccountEnd(skillVo)
 
+end
+
+---@return Game.Modules.Battle.Report.Nodes.ReportNode
+function AttackRound:GetReportNode()
+    local json = {}
+    json.id = self.id
+    json.skillId = self.skill.skillInfo.id
+    json.skillLevel = self.skill.level
+    return json
+end
+
+---@return table<number, Game.Modules.Battle.Report.Nodes.AccountNode>
+function AttackRound:GetAccountNodes()
+    local reportNodes = {}
+    for accountId, hurtList in pairs(self.hurtInfoMap) do
+        for i = 1, hurtList:Size() do
+            local node = {} ---@type Game.Modules.Battle.Report.Nodes.AccountNode
+            node.pid =              self.id
+            node.accountId =        accountId
+            node.atkerId =          hurtList[i].atker.sid
+            node.deferId =          hurtList[i].defer.sid
+            node.damRecoveryTP =    hurtList[i].damRecoveryTP
+            node.isHelpful =        hurtList[i].isHelpful
+            node.dam =              hurtList[i].dam
+            node.critDam =          hurtList[i].critDam
+            node.atk =              hurtList[i].atk
+            node.def =              hurtList[i].def
+            node.crit =             hurtList[i].crit
+            node.miss =             hurtList[i].miss
+            node.acc =              hurtList[i].acc
+            table.insert(reportNodes, node)
+        end
+    end
+    return reportNodes
 end
 
 --回合结束

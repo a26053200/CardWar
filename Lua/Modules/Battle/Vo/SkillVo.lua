@@ -34,6 +34,13 @@ function SkillVo:Reset()
     self.level = 1
 end
 
+function SkillVo:GetReportJson()
+    local json = {}
+    json.id = self.id
+    json.level = self.level
+    return json
+end
+
 function SkillVo:Dispose()
     self.skillInfo = nil
     self.active = false

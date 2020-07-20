@@ -5,7 +5,7 @@
 --- 战报播放器
 ---
 
-
+local BattleRecord = require("Game.Modules.Battle.Report.BattleRecord")
 local BattleEvent = require("Game.Modules.Battle.Events.BattleEvents")
 local BaseBehavior = require("Game.Modules.Common.Behavior.BaseBehavior")
 
@@ -45,6 +45,7 @@ end
 
 function ReportPlayer:Play()
     ReportPlayer.super.Play(self)
+    self.record = BattleRecord.New(self.reportContext)
 end
 
 function ReportPlayer:OnExitAttack()
@@ -92,6 +93,7 @@ function ReportPlayer:RoundProgress()
                 coroutine.step(1)
             end
             local attackRound = self.reportContext.reportBehavior.currAttackRound
+            self.record:Push(attackRound)
             local reportUnit = attackRound.battleUnit
             local battleUnit = self.context:GetBattleUnit(reportUnit.battleUnitVo.camp, reportUnit.battleUnitVo.layoutIndex)
             if battleUnit and not battleUnit:IsDead() then
@@ -126,15 +128,6 @@ end
 function ReportPlayer:Stop()
     ReportPlayer.super.Stop(self)
     --剩下的单位都停止行为
-    self.attackSortList:Clear()
-end
-
-function ReportPlayer:Dispose()
-    ReportPlayer.super.Dispose(self)
-    RemoveEventListener(BattleEvent, BattleEvent.ExitAttack, self.OnExitAttack, self)
-    --RemoveEventListener(BattleEvent, BattleEvent.BattlePause, self.OnBattlePause, self)
-
-    --剩下的单位都停止行为
     local tempList = List.New()
     tempList:Concat(self.context.battleBehavior:GetCampAvatarList(Camp.Atk))
     tempList:Concat(self.context.battleBehavior:GetCampAvatarList(Camp.Def))
@@ -143,6 +136,12 @@ function ReportPlayer:Dispose()
             tempList[i]:SetBehaviorEnabled(false)
         end
     end
+end
+
+function ReportPlayer:Dispose()
+    ReportPlayer.super.Dispose(self)
+    RemoveEventListener(BattleEvent, BattleEvent.ExitAttack, self.OnExitAttack, self)
+    --RemoveEventListener(BattleEvent, BattleEvent.BattlePause, self.OnBattlePause, self)
 end
 --调试
 function ReportPlayer:_debug(msg)
