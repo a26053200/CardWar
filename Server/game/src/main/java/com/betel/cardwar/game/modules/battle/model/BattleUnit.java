@@ -12,9 +12,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class BattleUnit
 {
     public int sid;
-    public String cardId;
+    public int cardId;
     public String camp;
     public int layoutIndex;
     public int rank;
     public int level;
+    public int star;
 }

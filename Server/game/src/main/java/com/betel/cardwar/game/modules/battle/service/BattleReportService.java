@@ -19,6 +19,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Description
  * @Author zhengnan
@@ -30,6 +33,7 @@ public class BattleReportService extends BaseService<BattleReport>
 
     @Autowired
     protected BattleReportDao dao;
+
     @Override
     public RedisDao<BattleReport> getDao()
     {
@@ -41,6 +45,7 @@ public class BattleReportService extends BaseService<BattleReport>
 
     /**
      * 生成战报
+     *
      * @param session
      */
     private void startBattle(Session session)
@@ -50,7 +55,8 @@ public class BattleReportService extends BaseService<BattleReport>
         {
             session.setState(SessionState.Fail);
             rspdMessage(session, ReturnCode.Checkpoint_Not_Found);
-        }else{
+        } else
+        {
             JSONObject sendJson = new JSONObject();
             //保存编组
             String battleArray = session.getRecvJson().getString(Field.BATTLE_ARRAY);
@@ -62,17 +68,19 @@ public class BattleReportService extends BaseService<BattleReport>
 
     /**
      * 结束战斗
+     *
      * @param session
      */
     private void endBattle(Session session)
     {
-        int star       = session.getRecvJson().getIntValue(Field.CHAPTER_STAR);
+        int star = session.getRecvJson().getIntValue(Field.CHAPTER_STAR);
         CheckPoint checkPoint = getCheckPoint(session);
         if (checkPoint == null)
         {
             session.setState(SessionState.Fail);
             rspdMessage(session, ReturnCode.Checkpoint_Not_Found);
-        }else{
+        } else
+        {
             checkPoint.setStar(star);
             checkPoint.setLastPassTime(now());
             checkPointService.saveCheckPoint(checkPoint);
@@ -82,6 +90,7 @@ public class BattleReportService extends BaseService<BattleReport>
 
     /**
      * 生成战报
+     *
      * @param session
      */
     private void generateBattleReport(Session session)
@@ -93,15 +102,17 @@ public class BattleReportService extends BaseService<BattleReport>
 
     /**
      * 保存战报
+     *
      * @param session
      */
     private void saveBattleReport(Session session)
     {
-        String roleId       = session.getRecvJson().getString(Field.ROLE_ID);
-        int chapterId    = session.getRecvJson().getIntValue(Field.CHAPTER_ID);
+        String roleId = session.getRecvJson().getString(Field.ROLE_ID);
+        int chapterId = session.getRecvJson().getIntValue(Field.CHAPTER_ID);
+        int roleLevel = session.getRecvJson().getIntValue(Field.ROLE_LEVEL);
         String checkpointId = session.getRecvJson().getString(Field.CHECKPOINT_ID);
 
-        int star    = session.getRecvJson().getIntValue(Field.BATTLE_STAR);
+        int star = session.getRecvJson().getIntValue(Field.BATTLE_STAR);
         JSONArray battleUnitArray = session.getRecvJson().getJSONArray(Field.BATTLE_UNITS);
         JSONArray reportNodeArray = session.getRecvJson().getJSONArray(Field.REPORT_NODES);
         JSONArray accountNodeArray = session.getRecvJson().getJSONArray(Field.ACCOUNT_NODES);
@@ -111,10 +122,13 @@ public class BattleReportService extends BaseService<BattleReport>
         {
             session.setState(SessionState.Fail);
             rspdMessage(session, ReturnCode.Checkpoint_Not_Found);
-        }else{
+        } else
+        {
             BattleReport battleReport = new BattleReport();
             battleReport.setId(Long.toString(IdGenerator.getInstance().nextId()));
-            battleReport.setVid(roleId);
+            battleReport.setVid(chapterId + "_" + checkpointId);//章节构成的副键
+            battleReport.setRoleId(roleId);
+            battleReport.setRoleLevel(roleLevel);
             battleReport.setChapterId(chapterId);
             battleReport.setCheckpointId(checkpointId);
             battleReport.setStar(star);
@@ -127,10 +141,47 @@ public class BattleReportService extends BaseService<BattleReport>
         }
     }
 
+
+    /**
+     * 获取某章节的战报列表
+     * @param session
+     */
+    private void getBattleReportList(Session session)
+    {
+        List<BattleReport> battleReports = getBattleReports(session);
+        List<JSONObject> sampleJsonList = new ArrayList<>();
+        for (BattleReport report : battleReports)
+            sampleJsonList.add(report.getSampleJSON());
+        JSONObject sendJson = new JSONObject();
+        sendJson.put(Field.BATTLE_REPORT_LIST, sampleJsonList);
+        rspdClient(session, sendJson);
+    }
+
+    /**
+     * 获取某章节的详细战报
+     * @param session
+     */
+    private void getBattleReport(Session session)
+    {
+        String reportId = session.getRecvJson().getString(Field.REPORT_ID);
+        BattleReport battleReport = dao.getEntity(reportId);
+        JSONObject sendJson = new JSONObject();
+        sendJson.put(Field.BATTLE_REPORT, battleReport);
+        rspdClient(session, sendJson);
+    }
+
+    private List<BattleReport> getBattleReports(Session session)
+    {
+        int chapterId = session.getRecvJson().getIntValue(Field.CHAPTER_ID);
+        String checkpointId = session.getRecvJson().getString(Field.CHECKPOINT_ID);
+        List<BattleReport> battleReports = dao.getViceEntities(chapterId + "_" + checkpointId);
+        return battleReports;
+    }
+
     private CheckPoint getCheckPoint(Session session)
     {
-        String roleId       = session.getRecvJson().getString(Field.ROLE_ID);
-        int chapterId    = session.getRecvJson().getIntValue(Field.CHAPTER_ID);
+        String roleId = session.getRecvJson().getString(Field.ROLE_ID);
+        int chapterId = session.getRecvJson().getIntValue(Field.CHAPTER_ID);
         String checkpointId = session.getRecvJson().getString(Field.CHECKPOINT_ID);
         CheckPoint checkPoint = checkPointService.getCheckPoint(roleId, chapterId, checkpointId);
         return checkPoint;

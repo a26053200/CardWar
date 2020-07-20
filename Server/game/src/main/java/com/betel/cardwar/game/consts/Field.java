@@ -10,6 +10,7 @@ public class Field
     public static final String ACCOUNT_ID       = "aid";
     public static final String PLAYER_ID        = "playerId";
     public static final String ROLE_ID          = "roleId";
+    public static final String ROLE_LEVEL       = "roleLevel";
     public static final String ROLE_INFO        = "roleInfo";
     public static final String ROLE_NAME        = "roleName";
     public static final String ROLE_RESOURCE    = "roleResource";
@@ -79,10 +80,6 @@ public class Field
      */
     public static final String BATTLE_TYPE              = "battleType";
     /**
-     * 生成战报
-     */
-    public static final String BATTLE_REPORT            = "battleReport";
-    /**
      * 阵容结果
      */
     public static final String BATTLE_ARRAY_RESULT               = "battleArrayResult";
@@ -102,6 +99,18 @@ public class Field
     //==================
     // 战报
     //==================
+    /**
+     * 战报Id
+     */
+    public static final String REPORT_ID                = "reportId";
+    /**
+     * 战报列表
+     */
+    public static final String BATTLE_REPORT_LIST       = "battleReportList";
+    /**
+     * 战报
+     */
+    public static final String BATTLE_REPORT              = "battleReport";
     /**
      * 参战的单位
      */

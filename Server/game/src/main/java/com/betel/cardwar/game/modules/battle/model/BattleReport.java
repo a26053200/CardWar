@@ -1,5 +1,6 @@
 package com.betel.cardwar.game.modules.battle.model;
 
+import com.alibaba.fastjson.JSONObject;
 import com.betel.asd.interfaces.IVo;
 import com.betel.cardwar.game.consts.Camp;
 
@@ -14,15 +15,33 @@ import java.util.List;
 public class BattleReport implements IVo
 {
     private String id;
-    private String roleId;
+    private String vid;
 
+    private String roleId; //上传者
+    private int roleLevel;
     private int chapterId; //战斗所在章节
     private String checkpointId; //战斗所在章节
     private int star;//几星通关
+    private String lastPassTime;    //上次通关时间
+
     private BattleUnit[] battleUnits;//参战双方索引单位
     private ReportNode[] reportNodes;//战报节点
     private AccountNode[] accountNodes;//战报节点
-    private String lastPassTime;    //上次通关时间
+
+
+    public JSONObject getSampleJSON()
+    {
+        JSONObject json = new JSONObject();
+        json.put("id",id);
+        json.put("roleId",roleId);
+        json.put("roleLevel",roleLevel);
+        json.put("chapterId",chapterId);
+        json.put("checkpointId",checkpointId);
+        json.put("star",star);
+        json.put("lastPassTime",lastPassTime);
+        json.put("battleUnits",battleUnits);
+        return json;
+    }
 
     @Override
     public String getId()
@@ -39,13 +58,33 @@ public class BattleReport implements IVo
     @Override
     public String getVid()
     {
-        return roleId;
+        return vid;
     }
 
     @Override
     public void setVid(String s)
     {
-        roleId = s;
+        vid = s;
+    }
+
+    public String getRoleId()
+    {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId)
+    {
+        this.roleId = roleId;
+    }
+
+    public int getRoleLevel()
+    {
+        return roleLevel;
+    }
+
+    public void setRoleLevel(int roleLevel)
+    {
+        this.roleLevel = roleLevel;
     }
 
     public int getChapterId()
@@ -117,4 +156,5 @@ public class BattleReport implements IVo
     {
         this.lastPassTime = lastPassTime;
     }
+
 }
