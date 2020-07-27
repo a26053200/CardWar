@@ -58,7 +58,10 @@ end
 function BattleService:GetBattleReportList(chapterId, checkpointId, callback)
     self:HttpRequest(Action.GetBattleReportList, {chapterId, checkpointId}, function(data)
         self.battleModel.checkpointReports = {}
+        self.battleModel.checkpointReportMap = {}
         for i = 1, #data.battleReportList do
+            local report = BattleReportVo.New(data.battleReportList[i])
+            self.battleModel.checkpointReportMap[report.checkpointId] = report
             table.insert(self.battleModel.checkpointReports, BattleReportVo.New(data.battleReportList[i]))
         end
         invoke(callback, data)

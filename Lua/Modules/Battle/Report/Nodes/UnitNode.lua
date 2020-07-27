@@ -9,6 +9,7 @@
 ---@field New fun():Game.Modules.Battle.Report.Nodes.UnitNode
 ---@field sid number
 ---@field cardId number
+---@field cardInfo CardInfo
 ---@field camp string
 ---@field layoutIndex number
 ---@field rank number
@@ -19,6 +20,7 @@ local UnitNode = class("Game.Modules.Battle.Report.Nodes.UnitNode");
 function UnitNode:Ctor(data)
     self.sid = data.sid
     self.cardId = data.cardId
+    self.cardInfo = CardConfig.Get(data.cardId)
     self.camp = data.camp
     self.layoutIndex = data.layoutIndex
     self.rank = data.rank

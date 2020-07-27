@@ -9,6 +9,7 @@ ViewConfig.CardDraw = {name = "CardDraw",module = "Card",prefab = "Prefabs/UI/Ca
 ViewConfig.CardList = {name = "CardList",module = "Card",prefab = "Prefabs/UI/Card/CardList.prefab",}
 ViewConfig.CheckPoint = {name = "CheckPoint",module = "CheckPoint",prefab = "Prefabs/UI/CheckPoint/CheckPoint.prefab",}
 ViewConfig.CheckPointInfo = {name = "CheckPointInfo",module = "CheckPoint",prefab = "Prefabs/UI/CheckPoint/CheckPointInfo.prefab",}
+ViewConfig.CheckPointReport = {name = "CheckPointReport",module = "CheckPoint",prefab = "Prefabs/UI/CheckPoint/CheckPointReport.prefab",}
 ViewConfig.DrawCardList = {name = "DrawCardList",module = "Card",prefab = "Prefabs/UI/Card/DrawCardList.prefab",}
 ViewConfig.ItemBag = {name = "ItemBag",module = "Item",}
 ViewConfig.Joystick = {module = "Joystick",name = "Joystick",prefab = "Prefabs/UI/Common/Joystick.prefab",}

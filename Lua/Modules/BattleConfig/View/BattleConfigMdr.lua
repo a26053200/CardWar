@@ -97,22 +97,34 @@ end
 
 --正式进入战斗
 function BattleConfigMdr:OfficialStartBattle(battleArray)
-    self.battleService:StartBattle(
-            self.roleModel.roleId,
-            self.checkPointModel.currSection.checkPointData.chapter,
-            self.checkPointModel.currSection.checkPointData.id,
-            function()
-                self.battleConfigModel.selectList = self.selectList
+    if self.battleModel.isReplayReport then
+        --清除导航
+        navigation:Clear(function()
+            local checkPointData = CheckPointConfig.GetBattleSceneData(self.checkPointModel.currSection.checkPointData.id)
+            self.battleModel.currBattleMode = BattleMode.PVE
+            self.battleModel.currCheckPointData = checkPointData
+            self.battleModel.battleSceneInfo = BattleSceneConfig.Get(checkPointData.battleScene)
+            transition:EnterCheckPoint(checkPointData.id)
+        end)
+    else
+        --真实战斗
+        self.battleService:StartBattle(
+                self.roleModel.roleId,
+                self.checkPointModel.currSection.checkPointData.chapter,
+                self.checkPointModel.currSection.checkPointData.id,
+                function()
+                    self.battleConfigModel.selectList = self.selectList
 
-                --清除导航
-                navigation:Clear(function()
-                    local checkPointData = CheckPointConfig.GetBattleSceneData(self.checkPointModel.currSection.checkPointData.id)
-                    self.battleModel.currBattleMode = BattleMode.PVE
-                    self.battleModel.currCheckPointData = checkPointData
-                    self.battleModel.battleSceneInfo = BattleSceneConfig.Get(checkPointData.battleScene)
-                    transition:EnterCheckPoint(checkPointData.id)
+                    --清除导航
+                    navigation:Clear(function()
+                        local checkPointData = CheckPointConfig.GetBattleSceneData(self.checkPointModel.currSection.checkPointData.id)
+                        self.battleModel.currBattleMode = BattleMode.PVE
+                        self.battleModel.currCheckPointData = checkPointData
+                        self.battleModel.battleSceneInfo = BattleSceneConfig.Get(checkPointData.battleScene)
+                        transition:EnterCheckPoint(checkPointData.id)
+                    end)
                 end)
-            end)
+    end
 end
 
 return BattleConfigMdr

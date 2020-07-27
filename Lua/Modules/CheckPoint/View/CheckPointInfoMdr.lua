@@ -55,12 +55,7 @@ function CheckPointInfoMdr:On_Click_BtnCancel()
 end
 
 function CheckPointInfoMdr:On_Click_BtnRecord()
-    --获取改关卡的战报
-    self.battleService:GetBattleReportList(
-            self.checkPointModel.currSection.checkPointData.chapter,
-            self.checkPointModel.currSection.checkPointData.id, function(data)
-
-            end)
+    vmgr:LoadView(ViewConfig.CheckPointReport)
 end
 
 return CheckPointInfoMdr
