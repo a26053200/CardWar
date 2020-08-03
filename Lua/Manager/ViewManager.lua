@@ -213,4 +213,12 @@ function ViewManager:CreateController(class)
     ctrl:OnInit()
     return ctrl
 end
+
+---@param ctrl Game.Core.BaseController
+function ViewManager:RegisterCtrl(ctrl)
+    self.ioc.binder:InjectSingle(ctrl)
+    ctrl:OnInit()
+    return ctrl
+end
+
 return ViewManager

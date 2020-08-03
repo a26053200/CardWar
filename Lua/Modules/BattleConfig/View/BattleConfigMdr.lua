@@ -4,6 +4,7 @@
 --- DateTime: 2020-06-17-21:31:19
 ---
 
+local BattleCtrl = require("Game.Modules.Battle.Ctrl.BattleCtrl")
 local ArrayCardItem = require("Game.Modules.BattleConfig.View.ArrayCardItem")
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.BattleConfig.View.ArrayEditorMdr : Game.Core.Ioc.BaseMediator
@@ -36,10 +37,7 @@ function BattleConfigMdr:OnInit()
 end
 
 function BattleConfigMdr:OnInitSelectList(data)
-    self.selectList = List.New()
-    for i = 1, #data.battleArray do
-        self.selectList:Add(self.cardModel:GetCardById(data.battleArray[i]))
-    end
+    self.selectList = self.battleConfigModel.selectList
     self.selectCardList = TableList.New(self.gameObject:FindChild("ListSelect/ListView"), ArrayCardItem)
     self.selectCardList:SetData(self.selectList)
     self.selectCardList:SetScrollEnable(false)
@@ -96,35 +94,10 @@ function BattleConfigMdr:On_Click_BtnEnter()
 end
 
 --正式进入战斗
-function BattleConfigMdr:OfficialStartBattle(battleArray)
-    if self.battleModel.isReplayReport then
-        --清除导航
-        navigation:Clear(function()
-            local checkPointData = CheckPointConfig.GetBattleSceneData(self.checkPointModel.currSection.checkPointData.id)
-            self.battleModel.currBattleMode = BattleMode.PVE
-            self.battleModel.currCheckPointData = checkPointData
-            self.battleModel.battleSceneInfo = BattleSceneConfig.Get(checkPointData.battleScene)
-            transition:EnterCheckPoint(checkPointData.id)
-        end)
-    else
-        --真实战斗
-        self.battleService:StartBattle(
-                self.roleModel.roleId,
-                self.checkPointModel.currSection.checkPointData.chapter,
-                self.checkPointModel.currSection.checkPointData.id,
-                function()
-                    self.battleConfigModel.selectList = self.selectList
-
-                    --清除导航
-                    navigation:Clear(function()
-                        local checkPointData = CheckPointConfig.GetBattleSceneData(self.checkPointModel.currSection.checkPointData.id)
-                        self.battleModel.currBattleMode = BattleMode.PVE
-                        self.battleModel.currCheckPointData = checkPointData
-                        self.battleModel.battleSceneInfo = BattleSceneConfig.Get(checkPointData.battleScene)
-                        transition:EnterCheckPoint(checkPointData.id)
-                    end)
-                end)
-    end
+function BattleConfigMdr:OfficialStartBattle()
+    transition:CleatNavigation(function()
+        BattleCtrl.New():StartPveBattle(self.selectList)
+    end)
 end
 
 return BattleConfigMdr

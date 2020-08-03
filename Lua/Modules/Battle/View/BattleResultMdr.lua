@@ -23,16 +23,20 @@ end
 
 function BattleResultMdr:OnEndBattle()
     local record = self.context.battleBehavior.reportReplay.record
-    self.battleService:SaveBattleReport(
-            self.roleModel.roleInfo.id,
-            self.roleModel.roleInfo.level,
-            self.checkPointModel.currSection.checkPointData.chapter,
-            self.checkPointModel.currSection.checkPointData.id,
-            2,
-            record:GetBattleUnits(),
-            record:GetReportNodes(),
-            record:GetAccountNodes()
-    )
+    if self.battleModel.isReplayReport then
+        --重播不保存战报
+    else
+        self.battleService:SaveBattleReport(
+                self.roleModel.roleInfo.id,
+                self.roleModel.roleInfo.level,
+                self.checkPointModel.currSection.checkPointData.chapter,
+                self.checkPointModel.currSection.checkPointData.id,
+                2,
+                record:GetBattleUnits(),
+                record:GetReportNodes(),
+                record:GetAccountNodes()
+        )
+    end
 end
 
 function BattleResultMdr:On_Click_BtnDone()

@@ -16,9 +16,8 @@ local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
 ---@field New fun()
 local BaseController = class("Game.Core.BaseController ",LuaMonoBehaviour)
 
-
 function BaseController:Ctor()
-
+    vmgr:RegisterCtrl(self)
 end
 
 function BaseController:OnInit()

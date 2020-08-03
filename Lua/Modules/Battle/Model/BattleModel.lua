@@ -19,6 +19,7 @@ local BaseModel = require("Game.Core.Ioc.BaseModel")
 ---@field checkpointReports table<number, Game.Modules.Battle.Vo.BattleReportVo> pve关卡战报
 ---@field checkpointReportMap table<string, Game.Modules.Battle.Vo.BattleReportVo> pve关卡战报
 ---@field isReplayReport boolean 播放战报
+---@field report Game.Modules.Battle.Vo.BattleReportVo
 local BattleModel = class("BattleModel",BaseModel)
 
 function BattleModel:Ctor()
@@ -32,6 +33,7 @@ function BattleModel:Clear()
     self.playerVo = nil
     self.isEditBattleArrayComplete = false
     self.isReplayReport = false
+    self.report = nil
 end
 
 return BattleModel

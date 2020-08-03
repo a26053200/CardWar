@@ -55,7 +55,7 @@ function CheckPointInfoMdr:On_Click_BtnCancel()
 end
 
 function CheckPointInfoMdr:On_Click_BtnRecord()
-    vmgr:LoadView(ViewConfig.CheckPointReport)
+    navigation:Push(ViewConfig.CheckPointReport)
 end
 
 return CheckPointInfoMdr

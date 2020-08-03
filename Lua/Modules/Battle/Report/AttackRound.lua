@@ -12,6 +12,8 @@ local ReportHurtInfo = require("Game.Modules.Battle.Report.ReportHurtInfo")
 ---@field callback fun() | Handler
 ---@field hurtInfoMap table<string, table<number, Game.Modules.Battle.Report.ReportHurtInfo>>
 ---@field skill Game.Modules.Battle.Vo.SkillVo
+---@field camp string
+---@field layoutIndex number
 ---@field actionRecoveryTP number 行动恢复的TP
 ---@field targetList table<number, Game.Modules.Battle.Report.ReportBattleUnit>
 ---@field skillLoopIndex number
@@ -19,13 +21,20 @@ local AttackRound = class("Game.Modules.Battle.Report.AttackRound");
 
 local SID = 1
 
----@param battleUnit Game.Modules.Battle.Report.ReportBattleUnit
-function AttackRound:Ctor(battleUnit, callback)
-    self.battleUnit = battleUnit
+function AttackRound:Ctor(callback)
     self.callback = callback
     self.hurtInfoMap = {}
     self.id = SID
     SID = SID + 1
+end
+
+---@param battleUnit Game.Modules.Battle.Report.ReportBattleUnit
+function AttackRound:SetBattleUnit(battleUnit)
+    self.battleUnit = battleUnit
+end
+
+function AttackRound:RoundStart()
+
 end
 
 --回合开始
@@ -183,6 +192,9 @@ end
 function AttackRound:GetReportNode()
     local json = {}
     json.id = self.id
+    json.camp = self.battleUnit.battleUnitVo.camp
+    json.layoutIndex = self.battleUnit.battleUnitVo.layoutIndex
+    json.actionRecoveryTP = self.actionRecoveryTP
     json.skillId = self.skill.skillInfo.id
     json.skillLevel = self.skill.level
     return json

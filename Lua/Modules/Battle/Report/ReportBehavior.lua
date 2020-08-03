@@ -77,9 +77,10 @@ function ReportBehavior:RoundProgress()
                 if battleUnit:IsDead() then
                     --self:_debug("攻击者已经死亡 - " .. battleUnit.debugName)
                 else
-                    self.currAttackRound = AttackRound.New(battleUnit, function()
+                    self.currAttackRound = AttackRound.New(function()
                         waitAttackOver = false
                     end)
+                    self.currAttackRound:SetBattleUnit(battleUnit)
                     self.currAttackRound:RoundStart()
                     --self.currAttackRound:RoundEnd()
                     while waitAttackOver do

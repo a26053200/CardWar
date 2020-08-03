@@ -5,6 +5,7 @@
 --- 战报播放器
 ---
 
+local AttackRound = require("Game.Modules.Battle.Report.AttackRound")
 local BattleRecord = require("Game.Modules.Battle.Report.BattleRecord")
 local BattleEvent = require("Game.Modules.Battle.Events.BattleEvents")
 local BaseBehavior = require("Game.Modules.Common.Behavior.BaseBehavior")
@@ -24,6 +25,7 @@ local BaseBehavior = require("Game.Modules.Common.Behavior.BaseBehavior")
 ---@field manualCamp Camp 手动模式攻击的阵营
 ---@field manualLayoutIndex number 手动模式攻击索引
 ---@field manualSkillName string 手动模式使用的技能
+---@field attackRoundQueue table<number, Game.Modules.Battle.Report.AttackRound>
 local ReportPlayer = class("Module.Battle.Behaviors.ReportPlayer",BaseBehavior)
 
 ---@param context WorldContext
@@ -43,9 +45,33 @@ function ReportPlayer:Ctor(context, reportContext)
     self.isRoundOver = true
 end
 
+function ReportPlayer:BeginReport()
+    self.attackRoundQueue = List.New()
+    for i = 1, #self.context.reportVo.reportNodes do
+        local node = self.context.reportVo.reportNodes[i]
+        local attackRound = AttackRound.New()
+        attackRound.camp = node.camp
+        attackRound.layoutIndex = node.layoutIndex
+        attackRound.actionRecoveryTP = node.actionRecoveryTP
+        attackRound.skill = SkillVoPool:Get()
+        attackRound.skill:Init(SkillConfig.Get(node.skillId))
+        attackRound.skill.level = node.level
+        self.attackRoundQueue:Push(attackRound)
+    end
+end
+
+---@return Game.Modules.Battle.Report.AttackRound
+function ReportPlayer:ShiftReport()
+    return self.attackRoundQueue:Shift()
+end
+
 function ReportPlayer:Play()
     ReportPlayer.super.Play(self)
-    self.record = BattleRecord.New(self.reportContext)
+    if self.context.isReplaying then
+        self:BeginReport()
+    else
+        self.record = BattleRecord.New(self.reportContext)
+    end
 end
 
 function ReportPlayer:OnExitAttack()
@@ -81,6 +107,20 @@ function ReportPlayer:RoundStart()
     return behavior
 end
 
+---@return Game.Modules.Battle.Report.AttackRound
+function ReportPlayer:GetAttackRound()
+    local attackRound = nil
+    if self.context.isReplaying then
+        --播放战报
+        attackRound = self:ShiftReport()
+        attackRound:SetBattleUnit(self.context:GetBattleUnit(attackRound.camp, attackRound.layoutIndex))
+    else
+        --录制战报
+        attackRound = self.reportContext.reportBehavior.currAttackRound
+        self.record:Push(attackRound)
+    end
+    return attackRound
+end
 
 --按队列进行攻击
 function ReportPlayer:RoundProgress()
@@ -92,8 +132,7 @@ function ReportPlayer:RoundProgress()
             while self.isPause do
                 coroutine.step(1)
             end
-            local attackRound = self.reportContext.reportBehavior.currAttackRound
-            self.record:Push(attackRound)
+            local attackRound = self:GetAttackRound()
             local reportUnit = attackRound.battleUnit
             local battleUnit = self.context:GetBattleUnit(reportUnit.battleUnitVo.camp, reportUnit.battleUnitVo.layoutIndex)
             if battleUnit and not battleUnit:IsDead() then

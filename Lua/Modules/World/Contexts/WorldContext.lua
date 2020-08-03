@@ -22,17 +22,24 @@ local BattleUnit = require("Game.Modules.World.Items.BattleUnit")
 ---@field battleLayout Game.Modules.Battle.View.BattleLayout
 ---@field battleSpeed number 战斗速度
 ---@field isReplaying boolean 是否是重播
+---@field reportVo Game.Modules.Battle.Vo.BattleReportVo 战报
 local WorldContext = class("WorldContext")
 
 local Sid = 1
 
 ---@param mode BattleMode
-function WorldContext:Ctor(mode, speed)
+function WorldContext:Ctor(mode, speed, isReplaying)
     self.id = Sid
     Sid = Sid + 1
     self.mode = mode
     self.battleSpeed = speed
+    self.isReplaying = isReplaying
     self.dropList = List.New()
+end
+
+---@param reportVo Game.Modules.Battle.Vo.BattleReportVo
+function WorldContext:SetReport(reportVo)
+    self.reportVo = reportVo
 end
 
 function WorldContext:CreateAvatarRoot()

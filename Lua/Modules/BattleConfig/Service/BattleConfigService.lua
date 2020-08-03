@@ -7,6 +7,7 @@
 local BaseService = require("Game.Core.Ioc.BaseService")
 ---@class Game.Modules.BattleConfig.Service.BattleConfigService : Game.Core.Ioc.BaseService
 ---@field battleConfigModel Game.Modules.BattleConfig.Model.BattleConfigModel
+---@field cardModel Game.Modules.Card.Model.CardModel
 local ArrayService = class("BattleConfigService",BaseService)
 
 function ArrayService:Ctor()
@@ -20,6 +21,10 @@ function ArrayService:GetBattleConfig(roleId, battleType, callback)
     self:HttpRequest(Action.GetBattleConfig, {roleId, battleType}, function(data)
         self.battleConfigModel.battleSpeed = data.battleSpeed == nil and 1 or data.battleSpeed
         self.battleConfigModel.battleAuto = data.battleAuto == nil and false or data.battleAuto
+        self.battleConfigModel.selectList = List.New()
+        for i = 1, #data.battleArray do
+            self.battleConfigModel.selectList:Add(self.cardModel:GetCardById(data.battleArray[i]))
+        end
         invoke(callback, data)
     end)
 end

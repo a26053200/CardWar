@@ -4,6 +4,7 @@
 --- DateTime: 2020-07-21-23:18:25
 ---
 
+local BattleCtrl = require("Game.Modules.Battle.Ctrl.BattleCtrl")
 local CheckPointReportItem = require("Game.Modules.CheckPoint.View.CheckPointReportItem")
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
 ---@class Game.Modules.CheckPoint.View.CheckPointReportMdr : Game.Core.Ioc.BaseMediator
@@ -20,6 +21,7 @@ function CheckPointReportMdr:Ctor()
 end
 
 function CheckPointReportMdr:OnInit()
+    self:SetCloseBg(self.gameObject:FindChild("Bg"))
     self.battleService:GetBattleReportList(
             self.checkPointModel.currSection.checkPointData.chapter,
             self.checkPointModel.currSection.checkPointData.id, Handler.New(self.OnBattleReportList, self))
@@ -31,10 +33,13 @@ function CheckPointReportMdr:OnBattleReportList()
     self.reportItemList.eventDispatcher:AddEventListener("CheckPointReportReplay", self.CheckPointReportReplay, self)
 end
 
+--重播
 function CheckPointReportMdr:CheckPointReportReplay(event)
-    self.battleService:GetBattleReport(event.reportVo.id, function()
-        self.battleModel.isReplayReport = true
-        self:Unload()
+    self.battleService:GetBattleReport(event.reportVo.id, function(report)
+        self.battleModel.report = report
+        transition:CleatNavigation(function()
+            BattleCtrl.New():ReplayReport(event.reportVo.id)
+        end)
     end)
 end
 

@@ -5,6 +5,7 @@
 ---
 
 ---@class Game.Modules.Battle.Report.Nodes.AccountNode
+---@field New fun():Game.Modules.Battle.Report.Nodes.AccountNode
 ---@field pid number
 ---@field accountId string
 ---@field atkerId number

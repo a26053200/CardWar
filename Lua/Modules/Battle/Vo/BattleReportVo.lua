@@ -4,6 +4,8 @@
 --- DateTime: 2020/7/20 23:35
 ---
 
+local AttackRound =require("Game.Modules.Battle.Report.AttackRound")
+local CardVo = require("Game.Modules.Card.Vo.CardVo")
 local AccountNode = require("Game.Modules.Battle.Report.Nodes.AccountNode")
 local ReportNode = require("Game.Modules.Battle.Report.Nodes.ReportNode")
 local UnitNode = require("Game.Modules.Battle.Report.Nodes.UnitNode")
@@ -35,6 +37,16 @@ function BattleReportVo:Ctor(data)
     for i = 1, #data.battleUnits do
         table.insert(self.battleUnits, UnitNode.New(data.battleUnits[i]))
     end
+end
+
+---@return table<number, Game.Modules.Card.Vo.CardVo>
+function BattleReportVo:GetCardList()
+    local list = List.New()
+    for i = 1, #self.battleUnits do
+        local cardVo = CardVo.New(self.battleUnits[i])
+        list:Add(cardVo)
+    end
+    return list;
 end
 
 --战报详情

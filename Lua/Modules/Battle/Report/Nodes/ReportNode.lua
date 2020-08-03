@@ -6,6 +6,9 @@
 
 ---@class Game.Modules.Battle.Report.Nodes.ReportNode
 ---@field New fun():Game.Modules.Battle.Report.Nodes.ReportNode
+---@field camp string
+---@field layoutIndex number
+---@field actionRecoveryTP number
 ---@field skillId number
 ---@field skillLevel number
 ---@field accountNodes table<number, Game.Modules.Battle.Report.Nodes.AccountNode>
@@ -13,6 +16,9 @@ local ReportNode = class("Game.Modules.Battle.Report.Nodes.ReportNode");
 
 function ReportNode:Ctor(data)
     self.id = data.id
+    self.layoutIndex = data.layoutIndex
+    self.camp = data.camp
+    self.actionRecoveryTP = data.actionRecoveryTP
     self.skillId = data.skillId
     self.skillLevel = data.skillLevel
 end

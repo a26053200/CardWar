@@ -78,6 +78,11 @@ function BattleMdr:OnBattleOver(win)
     vmgr:UnloadView(ViewConfig.BattleInfo)
 end
 
+
+--初始化关卡数据
+function BattleMdr:InitCheckPointData()
+    BattleMdr.super.InitCheckPointData(self)
+end
 function BattleMdr:InitLayoutData()
     BattleMdr.super.InitLayoutData(self)
 end

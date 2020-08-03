@@ -30,5 +30,11 @@ function Transition:EnterCheckPoint(checkPointName)
     end)
 end
 
+--清楚导航
+function Transition:CleatNavigation(callback)
+    self:DoTransition(function()
+        navigation:Clear(callback)
+    end)
+end
 
 return Transition

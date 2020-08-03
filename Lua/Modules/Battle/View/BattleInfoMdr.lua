@@ -30,7 +30,9 @@ function BattleInfoMdr:OnInit()
     self.heroList = self.context.battleBehavior:GetCampAvatarList(Camp.Atk)
     self.btnAutoMark = self.gameObject:FindChild("BtnAuto/Mark")
     self.time = self.gameObject:GetText("TopRight/Time/Text")
+    self.info = self.gameObject:FindChild("TopRight/Info")
     self.btnAutoMark:SetActive(self.battleAuto)
+    self.info:SetActive(self.battleModel.isReplayReport)
 
     self.gameObject:SetButtonText("BtnSpeed", "x" .. self.speedIndex)
 

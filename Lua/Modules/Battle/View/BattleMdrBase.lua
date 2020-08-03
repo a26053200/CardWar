@@ -39,7 +39,8 @@ end
 --初始化关卡数据
 function BattleMdrBase:InitCheckPointData()
     log("Init Battle Scene" .. self.battleSceneInfo.id)
-    self.context = WorldContext.New(self.battleModel.currBattleMode, self.battleConfigModel.battleSpeed)
+    self.context = WorldContext.New(self.battleModel.currBattleMode, self.battleConfigModel.battleSpeed, self.battleModel.isReplayReport)
+    self.context:SetReport(self.battleModel.report)
     self.battleModel.currentContext = self.context
     self.context.checkPointData = self.battleModel.currCheckPointData
     self.context.battleSceneInfo = self.battleSceneInfo
