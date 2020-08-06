@@ -15,6 +15,9 @@ import java.util.List;
 public class ReportNode
 {
     public int id;
+    public String camp;
+    public int layoutIndex;
+    public int actionRecoveryTP;
     public String skillId;
     public int skillLevel;
 }

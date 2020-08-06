@@ -7,6 +7,7 @@ import com.betel.asd.BaseService;
 import com.betel.asd.RedisDao;
 import com.betel.cardwar.game.consts.Field;
 import com.betel.cardwar.game.consts.ReturnCode;
+import com.betel.cardwar.game.modules.battle.ModuleConfig;
 import com.betel.cardwar.game.modules.battle.model.*;
 import com.betel.cardwar.game.modules.checkpoint.model.CheckPoint;
 import com.betel.cardwar.game.modules.checkpoint.service.CheckPointService;
@@ -20,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -30,6 +32,8 @@ import java.util.List;
 public class BattleReportService extends BaseService<BattleReport>
 {
     final static Logger logger = LogManager.getLogger(BattleReportService.class);
+
+    final static int MAX_REPORT_NUM = 10;
 
     @Autowired
     protected BattleReportDao dao;
@@ -124,6 +128,11 @@ public class BattleReportService extends BaseService<BattleReport>
             rspdMessage(session, ReturnCode.Checkpoint_Not_Found);
         } else
         {
+
+            List<BattleReport> battleReports = getBattleReports(session);
+            battleReports.sort(Comparator.comparing(BattleReport::getId).reversed());//按添加时间排序
+            if(battleReports.size() >= MAX_REPORT_NUM)//移除最老的战报
+                dao.deleteEntity(battleReports.get(battleReports.size() - 1));
             BattleReport battleReport = new BattleReport();
             battleReport.setId(Long.toString(IdGenerator.getInstance().nextId()));
             battleReport.setVid(chapterId + "_" + checkpointId);//章节构成的副键
@@ -149,9 +158,10 @@ public class BattleReportService extends BaseService<BattleReport>
     private void getBattleReportList(Session session)
     {
         List<BattleReport> battleReports = getBattleReports(session);
+        battleReports.sort(Comparator.comparing(BattleReport::getId).reversed());//按添加时间排序
         List<JSONObject> sampleJsonList = new ArrayList<>();
         for (BattleReport report : battleReports)
-            sampleJsonList.add(report.getSampleJSON());
+            sampleJsonList.add(ModuleConfig.getSampleJSON(report));
         JSONObject sendJson = new JSONObject();
         sendJson.put(Field.BATTLE_REPORT_LIST, sampleJsonList);
         rspdClient(session, sendJson);

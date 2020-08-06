@@ -3,6 +3,7 @@ package com.betel.cardwar.game.modules.battle.model;
 import com.alibaba.fastjson.JSONObject;
 import com.betel.asd.interfaces.IVo;
 import com.betel.cardwar.game.consts.Camp;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,21 +28,6 @@ public class BattleReport implements IVo
     private BattleUnit[] battleUnits;//参战双方索引单位
     private ReportNode[] reportNodes;//战报节点
     private AccountNode[] accountNodes;//战报节点
-
-
-    public JSONObject getSampleJSON()
-    {
-        JSONObject json = new JSONObject();
-        json.put("id",id);
-        json.put("roleId",roleId);
-        json.put("roleLevel",roleLevel);
-        json.put("chapterId",chapterId);
-        json.put("checkpointId",checkpointId);
-        json.put("star",star);
-        json.put("lastPassTime",lastPassTime);
-        json.put("battleUnits",battleUnits);
-        return json;
-    }
 
     @Override
     public String getId()

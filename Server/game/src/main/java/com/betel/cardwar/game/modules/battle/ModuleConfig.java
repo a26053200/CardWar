@@ -1,5 +1,7 @@
 package com.betel.cardwar.game.modules.battle;
 
+import com.alibaba.fastjson.JSONObject;
+import com.betel.cardwar.game.modules.battle.model.BattleReport;
 import com.betel.cardwar.game.modules.battle.model.BattleUnitInfo;
 import com.betel.cardwar.game.modules.card.model.CardInfo;
 import com.betel.cardwar.game.modules.card.model.CardPool;
@@ -53,5 +55,19 @@ public class ModuleConfig
                 checkPointInfoHashMap.put(list.get(i).id, list.get(i));
         }
         return checkPointInfoHashMap.get(checkPointId);
+    }
+
+    public static JSONObject getSampleJSON(BattleReport report)
+    {
+        JSONObject json = new JSONObject();
+        json.put("id",report.getId());
+        json.put("roleId",report.getRoleId());
+        json.put("roleLevel",report.getRoleLevel());
+        json.put("chapterId",report.getChapterId());
+        json.put("checkpointId",report.getCheckpointId());
+        json.put("star",report.getStar());
+        json.put("lastPassTime",report.getLastPassTime());
+        json.put("battleUnits",report.getBattleUnits());
+        return json;
     }
 }
