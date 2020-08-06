@@ -36,6 +36,10 @@ function BattleConfigMdr:OnInit()
     self.battleConfigService:GetBattleConfig(self.roleModel.roleId,self.battleConfigModel.battleType, handler(self, self.OnInitSelectList))
 end
 
+function BattleConfigMdr:OnClickBg()
+    navigation:Pop(self.viewInfo)
+end
+
 function BattleConfigMdr:OnInitSelectList(data)
     self.selectList = self.battleConfigModel.selectList
     self.selectCardList = TableList.New(self.gameObject:FindChild("ListSelect/ListView"), ArrayCardItem)

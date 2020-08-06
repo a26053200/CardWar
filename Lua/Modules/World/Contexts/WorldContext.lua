@@ -90,6 +90,19 @@ function WorldContext:GetBattleUnit(camp, layoutIndex)
     return self.battleLayout:GetLayoutGridByIndex(camp, layoutIndex).owner
 end
 
+---@return Game.Modules.World.Items.BattleUnit
+function WorldContext:GetBattleUnitById(id)
+    for _, layoutGrids in pairs(self.battleLayout.gridLayoutMap) do
+        for i = 1, #layoutGrids do
+            local grid = layoutGrids[i]
+            if grid.owner and grid.owner.battleUnitVo.battleUnitInfo.id == id then
+                return layoutGrids[i].owner
+            end
+        end
+    end
+    return nil
+end
+
 --获取某阵营所有单位
 ---@param camp Camp
 ---@param includeDead boolean 是否包含死亡单位

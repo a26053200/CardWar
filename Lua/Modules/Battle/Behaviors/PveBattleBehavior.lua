@@ -72,18 +72,24 @@ function PveBattleBehavior:CreateBattle()
 
     --创建上阵玩家英雄
     for i = 1, self.cardList:Size() do
-        local battleUnitName = self.cardList[i].cardInfo.battleUnit
-        local reportUnit = self.reportContext:AddBattleUnit(Camp.Atk, battleUnitName)
-        reportUnit.ownerCardVo = self.cardList[i]
-        local battleUnit = self.context:AddBattleUnit(Camp.Atk, battleUnitName, reportUnit.layoutIndex)
-        battleUnit.ownerCardVo = self.cardList[i]
+        local cardVo = self.cardList[i]
+        local battleUnitName = cardVo.cardInfo.battleUnit
+        local reportUnit = self.reportContext:AddBattleUnit(cardVo.camp or Camp.Atk, battleUnitName, cardVo.layoutIndex or nil)
+        reportUnit.ownerCardVo = cardVo
+        local battleUnit = self.context:AddBattleUnit(reportUnit.battleUnitVo.camp, battleUnitName, reportUnit.layoutIndex)
+        battleUnit.ownerCardVo = cardVo
     end
 end
 
 function PveBattleBehavior:StartBattle()
-    self.reportBehavior = ReportBehavior.New(self.reportContext)
-    self.reportContext.reportBehavior = self.reportBehavior
+    if not self.context.isReplaying then
+        self.reportBehavior = ReportBehavior.New(self.reportContext)
+        self.reportContext.reportBehavior = self.reportBehavior
+    end
     World.model.battleModel.startTime = Time.time
+
+    self.reportReplay = ReportPlayer.New(self.context, self.reportContext)
+    self.reportReplay:BeginReport()
     --战斗流程
     local winCamp = nil
     self:StartCoroutine(function()
@@ -91,9 +97,16 @@ function PveBattleBehavior:StartBattle()
             World.model.battleModel.currAreaId = i
             self:RefreshArea(i)
             coroutine.wait(1)
-            self.reportBehavior:Play()
-            while not self.reportBehavior.isAllDead do
-                coroutine.step(1)
+            self.reportReplay:Play()
+            if self.context.isReplaying then
+                while not self.reportReplay.isAllDead do
+                    coroutine.step(1)
+                end
+            else
+                self.reportBehavior:Play()
+                while not self.reportBehavior.isAllDead do
+                    coroutine.step(1)
+                end
             end
             local anyAllDead = self.context:IsCampAllDead(Camp.Atk) or self.context:IsCampAllDead(Camp.Def)
             while not anyAllDead do
@@ -109,7 +122,7 @@ function PveBattleBehavior:StartBattle()
                 while not self.context:IsCampAllDeadOver(Camp.Def) do
                     coroutine.step(1)
                 end
-                self:_debug("当前区域怪物都已经死亡 --- 结束,继续下一个区域")
+                self:_debug("当前区域怪物都已经死亡结束,继续下一个区域")
             else
                 logError("死亡一次")
             end
@@ -121,8 +134,6 @@ function PveBattleBehavior:StartBattle()
         self:_debug("整场战斗结束 " .. winCamp)
         self:StopBattle(winCamp) --停止战斗
     end)
-    self.reportReplay = ReportPlayer.New(self.context, self.reportContext)
-    self.reportReplay:Play()
 end
 
 --开始录制战报

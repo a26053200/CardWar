@@ -27,6 +27,10 @@ function CheckPointReportMdr:OnInit()
             self.checkPointModel.currSection.checkPointData.id, Handler.New(self.OnBattleReportList, self))
 end
 
+function CheckPointReportMdr:OnClickBg()
+    navigation:Pop(self.viewInfo)
+end
+
 function CheckPointReportMdr:OnBattleReportList()
     self.reportItemList = TableList.New(self.gameObject:FindChild("List/ListView"), CheckPointReportItem)
     self.reportItemList:SetData(List.New(self.battleModel.checkpointReports))

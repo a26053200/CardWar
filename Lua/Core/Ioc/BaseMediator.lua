@@ -100,13 +100,6 @@ function BaseMediator:AddClickEventListener(go, clickFun, addPointerScale)
     table.insert(self.clickEventMap[clickFun], {go = go, handler = handler})
 end
 
----@param bg UnityEngine.GameObject
-function BaseMediator:SetCloseBg(bg)
-    self:AddClickEventListener(bg, function()
-        self:Unload()
-    end,false)
-end
-
 function BaseMediator:RegisterButtonClick(go, clickFun, addPointerScale)
     if addPointerScale == nil or addPointerScale == true then
         go:GetOrAddComponent(typeof(Framework.ClickFeedback))
@@ -138,6 +131,15 @@ end
 
 function BaseMediator:Unload()
     vmgr:UnloadView(self.viewInfo)
+end
+
+---@param bg UnityEngine.GameObject
+function BaseMediator:SetCloseBg(bg)
+    self:AddClickEventListener(bg, self.OnClickBg,false)
+end
+
+function BaseMediator:OnClickBg()
+    self:Unload()
 end
 
 function BaseMediator:DoRemove(callback,removeCallback)

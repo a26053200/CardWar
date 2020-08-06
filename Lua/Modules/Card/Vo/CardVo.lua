@@ -14,6 +14,8 @@ local BaseVo = require("Game.Core.BaseVo")
 ---@field star number 星级
 ---@field rank number 品阶
 ---@field ce number 战力
+---@field camp Camp 阵营 所属阵营
+---@field layoutIndex number
 local CardVo = class("Module.Card.Vo.CardVo",BaseVo)
 
 ---@param card table
@@ -32,6 +34,8 @@ function CardVo:Init(card)
     self.star = card.star
     self.rank = card.rank
     self.ce = card.ce
+    self.camp = card.camp
+    self.layoutIndex = card.layoutIndex
 end
 
 return CardVo

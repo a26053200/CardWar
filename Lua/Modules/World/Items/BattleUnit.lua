@@ -122,23 +122,23 @@ function BattleUnit:SetBehaviorEnabled(enabled)
 end
 
 --伤害结算
----@param hurtInfo Game.Modules.Battle.Report.ReportHurtInfo
-function BattleUnit:AccountHurt(hurtInfo, isHelpful)
+---@param accountNode Game.Modules.Battle.Report.Nodes.AccountNode
+function BattleUnit:AccountHurt(accountNode, isHelpful)
     if isHelpful then
-        self.battleUnitVo.curHp = math.min( self.battleUnitVo.curHp + hurtInfo.dam,  self.battleUnit.battleUnitVo.maxHp)
-        self:DoHurt(hurtInfo)
+        self.battleUnitVo.curHp = math.min( self.battleUnitVo.curHp + accountNode.dam,  self.battleUnit.battleUnitVo.maxHp)
+        self:DoHurt(accountNode)
     else
-        local tpRecover = self.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)
+        local tpRecover = self.battleUnitVo:DamageRecoveryTP(accountNode.dam)
         self.battleUnitVo:RecoveryTP(tpRecover)--恢复Tp
-        self.battleUnitVo.curHp = math.max(0, self.battleUnitVo.curHp - hurtInfo.dam)
-        self:DoHurt(hurtInfo)
+        self.battleUnitVo.curHp = math.max(0, self.battleUnitVo.curHp - accountNode.dam)
+        self:DoHurt(accountNode)
         self:PlayIdle()
         self:PlayHit()
         self:_debug(string.format("<color=#FFFFFFFF>Skill:%s</color> <color=#FFFF00FF>%s/%s %s</color> (%2f)",
-                hurtInfo.skill.skillInfo.id,
+                accountNode.skillId,
                 self.battleUnitVo.curHp,
                 self.battleUnitVo.maxHp,
-                hurtInfo.dam,
+                accountNode.dam,
                 (self.battleUnitVo.curHp / self.battleUnitVo.maxHp) * 100))
         --target.soundGroup:Play(skillInfo.hitSound)
     end

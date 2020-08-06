@@ -4,9 +4,8 @@
 --- DateTime: 2020/7/20 23:35
 ---
 
-local AttackRound =require("Game.Modules.Battle.Report.AttackRound")
-local CardVo = require("Game.Modules.Card.Vo.CardVo")
 local AccountNode = require("Game.Modules.Battle.Report.Nodes.AccountNode")
+local CardVo = require("Game.Modules.Card.Vo.CardVo")
 local ReportNode = require("Game.Modules.Battle.Report.Nodes.ReportNode")
 local UnitNode = require("Game.Modules.Battle.Report.Nodes.UnitNode")
 
@@ -56,13 +55,13 @@ function BattleReportVo:SetReport(data)
         if accountNodeMap[data.accountNodes[i].pid] == nil then
             accountNodeMap[data.accountNodes[i].pid] = {}
         end
-        table.insert(accountNodeMap[data.accountNodes[i].pid], AccountNode.New(data.accountNodes[i]))
+        table.insert(accountNodeMap[data.accountNodes[i].pid], data.accountNodes[i])
     end
 
     self.reportNodes = {}
     for i = 1, #data.reportNodes do
         local node = ReportNode.New(data.reportNodes[i])
-        node.accountNodes = accountNodeMap[node.id]
+        node:InitAccountMap(accountNodeMap[node.id])
         table.insert(self.reportNodes, node)
     end
 end

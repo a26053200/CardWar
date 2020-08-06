@@ -149,7 +149,9 @@ end
 function BattleMdr:OnRemove()
     RemoveEventListener(BattleEvents, BattleEvents.BattleStart, self.OnGridBattleStart, self)
     RemoveEventListener(BattleEvents, BattleEvents.BattlePause, self.OnBattlePause, self)
+    RemoveEventListener(BattleEvents, BattleEvents.BattleResume, self.OnBattleResume, self)
     RemoveEventListener(BattleEvents, BattleEvents.AllMonsterDeadOver, self.OnAllMonsterDeadOver, self)
+    RemoveEventListener(BattleEvents, BattleEvents.AllHeroDeadOver, self.OnAllHeroDeadOver, self)
     RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemDead, self.OnBattleItemDead, self)
     RemoveEventListener(BattleItemEvents, BattleItemEvents.BattleItemBorn, self.OnBattleItemBorn, self)
 

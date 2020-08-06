@@ -5,12 +5,12 @@
 --- 攻击回合
 ---
 
-local ReportHurtInfo = require("Game.Modules.Battle.Report.ReportHurtInfo")
 ---@class Game.Modules.Battle.Report.AttackRound
 ---@field New fun():Game.Modules.Battle.Report.AttackRound
+---@field id number
 ---@field battleUnit Game.Modules.Battle.Report.ReportBattleUnit
 ---@field callback fun() | Handler
----@field hurtInfoMap table<string, table<number, Game.Modules.Battle.Report.ReportHurtInfo>>
+---@field accountNodeMap table<string, List | table<number, Game.Modules.Battle.Report.Nodes.AccountNode>>
 ---@field skill Game.Modules.Battle.Vo.SkillVo
 ---@field camp string
 ---@field layoutIndex number
@@ -23,7 +23,7 @@ local SID = 1
 
 function AttackRound:Ctor(callback)
     self.callback = callback
-    self.hurtInfoMap = {}
+    self.accountNodeMap = {}
     self.id = SID
     SID = SID + 1
 end
@@ -31,10 +31,6 @@ end
 ---@param battleUnit Game.Modules.Battle.Report.ReportBattleUnit
 function AttackRound:SetBattleUnit(battleUnit)
     self.battleUnit = battleUnit
-end
-
-function AttackRound:RoundStart()
-
 end
 
 --回合开始
@@ -116,25 +112,28 @@ function AttackRound:DamageAccount(skillVo, account, target)
     local battleUnitVo = self.battleUnit.battleUnitVo
     local minDam = 1
     local unitAttribute = battleUnitVo.attribute --单位属性
-    local hurtInfo = ReportHurtInfo.New()
-    hurtInfo.atker = copy(self.battleUnit.battleUnitVo)
-    hurtInfo.defer = copy(target.battleUnitVo)
-    hurtInfo.skill = skillVo
-    hurtInfo.accountId = account.id
-    hurtInfo.isHelpful = isHelpful
+    local accountNode = {} ---@type Game.Modules.Battle.Report.Nodes.AccountNode --结算节点
+    accountNode.pid = self.id
+    accountNode.accountId = account.id
+    accountNode.atkerCamp = self.battleUnit.battleUnitVo.camp
+    accountNode.atkerLayoutIndex = self.battleUnit.layoutIndex
+    accountNode.deferCamp = target.battleUnitVo.camp
+    accountNode.deferLayoutIndex = target.layoutIndex
+    accountNode.skillId = skillVo.skillInfo.id
+    accountNode.isHelpful = isHelpful
     --伤害计算 (技能提供伤害*技能等级+面板魔法/物理攻击*技能倍率)
     if skillVo.skillInfo.attackType == AttackType.Physic then
-        hurtInfo.atk = skillVo.skillInfo.damage * skillVo.level + unitAttribute.p_atk * (skillVo.skillInfo.damageAdd + 1) * (account.damageRatio / 1)
-        hurtInfo.def = target.battleUnitVo.attribute.p_def
-        hurtInfo.crit = (math.random() < unitAttribute.p_crit) and 2 or 1 --暴击
+        accountNode.atk = skillVo.skillInfo.damage * skillVo.level + unitAttribute.p_atk * (skillVo.skillInfo.damageAdd + 1) * (account.damageRatio / 1)
+        accountNode.def = target.battleUnitVo.attribute.p_def
+        accountNode.crit = (math.random() < unitAttribute.p_crit) and 2 or 1 --暴击
     else
-        hurtInfo.atk = skillVo.skillInfo.damage * skillVo.level + unitAttribute.m_atk * (skillVo.skillInfo.damageAdd + 1) * (account.damageRatio / 1)
-        hurtInfo.def = target.battleUnitVo.attribute.m_def
-        hurtInfo.crit = (math.random() < unitAttribute.m_crit) and 2 or 1 --暴击
+        accountNode.atk = skillVo.skillInfo.damage * skillVo.level + unitAttribute.m_atk * (skillVo.skillInfo.damageAdd + 1) * (account.damageRatio / 1)
+        accountNode.def = target.battleUnitVo.attribute.m_def
+        accountNode.crit = (math.random() < unitAttribute.m_crit) and 2 or 1 --暴击
     end
     --伤害=攻击力/ ( 1 +防御力/ 100 )
-    hurtInfo.dam = math.floor(math.max(minDam, hurtInfo.atk / (1 + hurtInfo.def / 100)))
-    hurtInfo.acc = math.random() --命中率
+    accountNode.dam = math.floor(math.max(minDam, accountNode.atk / (1 + accountNode.def / 100)))
+    accountNode.acc = math.random() --命中率
     local isMiss = false
     --计算闪避
     --local signet = target.signetMap[self.battleUnit.sid .. "_" .. skillInfo.id]
@@ -146,41 +145,42 @@ function AttackRound:DamageAccount(skillVo, account, target)
     --    target.performancePlayer:Play(account.signetPerformance,nil,self.battleUnit, account)
     --end
     if isMiss then
-        hurtInfo.miss = true
+        accountNode.miss = true
         --print("miss")
         if target then
-            target:DoHurt(hurtInfo)
-            target.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)--恢复Tp
+            target:DoHurt(accountNode)
+            target.battleUnitVo:DamageRecoveryTP(accountNode.dam)--恢复Tp
         end
         return
     end
-    hurtInfo.miss = false
+    accountNode.miss = false
     if target then
-        local tpRecover = target.battleUnitVo:DamageRecoveryTP(hurtInfo.dam)
+        local tpRecover = target.battleUnitVo:DamageRecoveryTP(accountNode.dam)
         target.battleUnitVo:RecoveryTP(tpRecover)--恢复Tp
         if isHelpful then
-            target.battleUnitVo.curHp = math.min(target.battleUnitVo.curHp + hurtInfo.dam, target.battleUnitVo.maxHp)
+            target.battleUnitVo.curHp = math.min(target.battleUnitVo.curHp + accountNode.dam, target.battleUnitVo.maxHp)
         else
-            target.battleUnitVo.curHp = math.max(0,target.battleUnitVo.curHp - hurtInfo.dam)
+            target.battleUnitVo.curHp = math.max(0,target.battleUnitVo.curHp - accountNode.dam)
         end
-        hurtInfo.damRecoveryTP = tpRecover
+        accountNode.damRecoveryTP = tpRecover
     end
     print(string.format("Skill:%s Atker:<color=#FFFFFFFF>%s</color> atk Defer:<color=#FFFFFFFF>%s</color> - dam:<color=#FFFF00FF>%s</color> (%2f)",
-            hurtInfo.skill.skillInfo.id,
-            hurtInfo.atker:GetDebugName(),
-            hurtInfo.defer:GetDebugName(),
-            hurtInfo.dam, (target.battleUnitVo.curHp)))
+            self.skill.skillInfo.id,
+            self.battleUnit.battleUnitVo:GetDebugName(),
+            target.battleUnitVo:GetDebugName(),
+            accountNode.dam, (target.battleUnitVo.curHp)))
     if target:IsDead() then
-        hurtInfo.deferIsDead = true
+        accountNode.deferIsDead = true
         --self.battleUnit.context:RemoveBattleUnit(target.battleUnitVo.camp, target.battleUnitVo.layoutIndex)
         print(string.format("<color=#FF0000FF>%s</color> is Dead",target.debugName))
     end
-    local hurtList = self.hurtInfoMap[account.id]
-    if hurtList == nil then
-        hurtList = List.New()
-        self.hurtInfoMap[account.id] = hurtList
+    local accountNodeList = self.accountNodeMap[account.id]
+    if accountNodeList == nil then
+        accountNodeList = List.New()
+        self.accountNodeMap[account.id] = accountNodeList
     end
-    hurtList:Add(hurtInfo)
+    accountNodeList:Add(accountNode)
+    accountNode.id = accountNodeList:Size()
 end
 
 ---@param skillVo Game.Modules.Battle.Vo.SkillVo
@@ -202,27 +202,13 @@ end
 
 ---@return table<number, Game.Modules.Battle.Report.Nodes.AccountNode>
 function AttackRound:GetAccountNodes()
-    local reportNodes = {}
-    for accountId, hurtList in pairs(self.hurtInfoMap) do
-        for i = 1, hurtList:Size() do
-            local node = {} ---@type Game.Modules.Battle.Report.Nodes.AccountNode
-            node.pid =              self.id
-            node.accountId =        accountId
-            node.atkerId =          hurtList[i].atker.sid
-            node.deferId =          hurtList[i].defer.sid
-            node.damRecoveryTP =    hurtList[i].damRecoveryTP
-            node.isHelpful =        hurtList[i].isHelpful
-            node.dam =              hurtList[i].dam
-            node.critDam =          hurtList[i].critDam
-            node.atk =              hurtList[i].atk
-            node.def =              hurtList[i].def
-            node.crit =             hurtList[i].crit
-            node.miss =             hurtList[i].miss
-            node.acc =              hurtList[i].acc
-            table.insert(reportNodes, node)
+    local accountNodes = {}
+    for _, accountNodeList in pairs(self.accountNodeMap) do
+        for i = 1, accountNodeList:Size() do
+            table.insert(accountNodes, accountNodeList[i])
         end
     end
-    return reportNodes
+    return accountNodes
 end
 
 --回合结束

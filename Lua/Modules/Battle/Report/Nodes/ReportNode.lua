@@ -6,12 +6,14 @@
 
 ---@class Game.Modules.Battle.Report.Nodes.ReportNode
 ---@field New fun():Game.Modules.Battle.Report.Nodes.ReportNode
+---@field id number
 ---@field camp string
 ---@field layoutIndex number
 ---@field actionRecoveryTP number
 ---@field skillId number
 ---@field skillLevel number
----@field accountNodes table<number, Game.Modules.Battle.Report.Nodes.AccountNode>
+---@field accountNodeList table<number, Game.Modules.Battle.Report.Nodes.AccountNode>
+---@field accountNodeMap table<string, table<number, Game.Modules.Battle.Report.Nodes.AccountNode>>
 local ReportNode = class("Game.Modules.Battle.Report.Nodes.ReportNode");
 
 function ReportNode:Ctor(data)
@@ -21,6 +23,19 @@ function ReportNode:Ctor(data)
     self.actionRecoveryTP = data.actionRecoveryTP
     self.skillId = data.skillId
     self.skillLevel = data.skillLevel
+    self.accountNodeMap = {}
 end
 
+---@param accountNodeList table<number, Game.Modules.Battle.Report.Nodes.AccountNode>
+function ReportNode:InitAccountMap(accountNodeList)
+    for i = 1, #accountNodeList do
+        local accountNode = accountNodeList[i]
+        local nodeList = self.accountNodeMap[accountNode.accountId]
+        if nodeList == nil then
+            nodeList = List.New()
+            self.accountNodeMap[accountNode.accountId] = nodeList
+        end
+        nodeList:Add(accountNode)
+    end
+end
 return ReportNode

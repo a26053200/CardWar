@@ -193,6 +193,7 @@ end
 
 function Monster:OnMonsterDeadOver()
     self.deadOver = true
+    self:Dispose()
 end
 
 function Monster:OnDead()

@@ -28,8 +28,8 @@ end
 ---@param camp Camp
 ---@param battleUnitName string
 ---@return Game.Modules.Battle.Report.ReportBattleUnit
-function ReportContext:AddBattleUnit(camp, battleUnitName)
-    local layoutIndex = self.layout:GetFirstEmptyIndex(camp)
+function ReportContext:AddBattleUnit(camp, battleUnitName, layoutIndex)
+    local layoutIndex = layoutIndex or self.layout:GetFirstEmptyIndex(camp)
     if layoutIndex then
         local battleUnitVo = self:CreateBattleUnitVo(camp, battleUnitName, layoutIndex)
         local battleItem = ReportBattleUnit.New(battleUnitVo, self)

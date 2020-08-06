@@ -85,7 +85,7 @@ end
 function Navigation:Push(viewInfo)
     local currPage = self.navigationPages[self.currPageIndex]
     if currPage.loadedViews:Contain(viewInfo) then
-        logError("This view has already loaded")
+        logError("This view has already loaded! - " .. viewInfo.name)
     else
         vmgr:LoadView(viewInfo)
         currPage.loadedViews:Add(viewInfo)
@@ -108,6 +108,8 @@ function Navigation:Pop(viewInfo, callback)
                 callback()
             end
         end)
+    else
+        logError("Pop view has not exit! - " .. viewInfo.name)
     end
 end
 

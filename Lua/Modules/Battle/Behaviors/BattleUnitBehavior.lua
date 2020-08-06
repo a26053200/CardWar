@@ -15,7 +15,7 @@ local BaseBehavior = require("Game.Modules.Common.Behavior.BaseBehavior")
 ---@field currArea Game.Modules.Battle.Layouts.GridArea
 ---@field attackRound Game.Modules.Battle.Report.AttackRound --当前攻击回合
 ---@field deadItemList List | table<number, Game.Modules.World.Items.BattleUnit>
----@field hurtInfoMap table<string, table<number, Game.Modules.Battle.Report.ReportHurtInfo>>
+---@field accountNodeMap table<string, table<number, Game.Modules.Battle.Report.Nodes.AccountNode>>
 local BattleUnitBehavior = class("Game.Modules.Battle.Behaviors.BattleUnitBehavior",BaseBehavior)
 
 ---@param battleUnit Game.Modules.World.Items.BattleUnit
@@ -39,7 +39,8 @@ end
 function BattleUnitBehavior:Play(attackRound)
     BattleUnitBehavior.super.Play(self)
     self.attackRound = attackRound
-    self.hurtInfoMap = self.attackRound.hurtInfoMap
+    print("BattleUnitBehavior:Play(attackRound)" .. attackRound.id)
+    self.accountNodeMap = self.attackRound.accountNodeMap
 end
 
 function BattleUnitBehavior:OnWaitPerformance()
@@ -94,30 +95,36 @@ function BattleUnitBehavior:OnAccountEnd()
         --self.battleUnit.context.battleLayout:SetAttackSelect(self.targetCamp, self.targetGridList, false)--设置选取效果
         self.battleUnit:BackToBorn()
         self.battleUnit:PlayIdle()
-
         BattleEvent.DispatchItemEvent(BattleEvent.ExitAttack, self.battleUnit)
         self:Stop()
+        self:OnAttackAccountEnd()
     end)
     return behavior
 end
 
 ---@param accountInfo AccountInfo
 function BattleUnitBehavior:OnAttackAccount(accountInfo)
-    local hurtList = self.hurtInfoMap[accountInfo.id]
-    if hurtList ~= nil then
-        for i = 1, hurtList:Size() do
-            local hurtInfo = hurtList[i]
-            local battleUnit = self.battleUnit.context:GetBattleUnit(hurtInfo.defer.camp, hurtInfo.defer.layoutIndex)
-            battleUnit:AccountHurt(hurtInfo)
-            battleUnit.battleUnitVo:RecoveryTP(hurtInfo.damRecoveryTP)
-            --self:_debug("Replay hurt info account:" .. hurtInfo.accountId)
-            if battleUnit:IsDead() then
-                self.deadItemList:Add(battleUnit)
-                self:_debug(battleUnit.debugName .. " is Dead")
-            else
-                if hurtInfo.deferIsDead then
-                    logError(battleUnit.debugName .. " is will Dead, but not")
+    local accountNodeList = self.accountNodeMap[accountInfo.id]
+    if accountNodeList ~= nil then
+        for i = 1, accountNodeList:Size() do
+            local accountNode = accountNodeList[i]
+            local battleUnit = self.battleUnit.context:GetBattleUnit(accountNode.deferCamp, accountNode.deferLayoutIndex)
+            if battleUnit then
+                battleUnit:AccountHurt(accountNode)
+                battleUnit.battleUnitVo:RecoveryTP(accountNode.damRecoveryTP)
+                --self:_debug("Replay hurt info account:" .. hurtInfo.accountId)
+                if battleUnit:IsDead() then
+                    self.deadItemList:Add(battleUnit)
+                    self:_debug(battleUnit.debugName .. " is Dead - account dead:" .. tostring(accountNode.deferIsDead))
+                else
+                    if accountNode.deferIsDead then
+                        logError(battleUnit.debugName .. " is will Dead, but not")
+                    elseif battleUnit:IsDead() then
+                        logError(battleUnit.debugName .. " is not Dead, but now is dead")
+                    end
                 end
+            else
+                logError(string.format("can not found unit camp:%s index:%s", accountNode.deferCamp, accountNode.deferLayoutIndex))
             end
         end
     else

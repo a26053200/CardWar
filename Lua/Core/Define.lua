@@ -60,7 +60,7 @@ StateMachine = FastBehavior.StateMachine
 FastLuaBehavior = FastBehavior.FastLuaBehavior
 smMgr = FastBehavior.StateMachineManager.GetInstance() --状态机
 smMgr:Init()
-smMgr.StateActionTimeout = 100
+smMgr.StateActionTimeout = 10
 
 ---Utils
 StringUtil = require("Game.Core.Utils.StringUtil")

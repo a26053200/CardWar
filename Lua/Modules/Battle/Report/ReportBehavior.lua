@@ -75,7 +75,7 @@ function ReportBehavior:RoundProgress()
             local battleUnit = self.attackSortList:Shift() ---@type Game.Modules.World.Items.BattleUnit
             if battleUnit then
                 if battleUnit:IsDead() then
-                    --self:_debug("攻击者已经死亡 - " .. battleUnit.debugName)
+                    self:_debug("攻击者已经死亡 - " .. battleUnit.debugName)
                 else
                     self.currAttackRound = AttackRound.New(function()
                         waitAttackOver = false
@@ -105,7 +105,7 @@ function ReportBehavior:RoundEnd()
     behavior:AppendState(function()
         if self.attackSortList:Size() == 0 then
             self.isRoundOver = true
-            --elf:_debug("RoundBehavior RoundEnd")
+            self:_debug("RoundBehavior RoundEnd")
         end
         self.currAttackRound = nil
         if self.context:IsCampAllDead(Camp.Def) then

@@ -23,7 +23,8 @@ function CheckPointReportItem:UpdateItem(reportVo, index)
     --starBar:SetActive(cardVo.fragmentStoneNum == 0)
 
     local levelText = self.gameObject:GetText("Info/Level/Text")
-    levelText.text = "Lv." .. reportVo.roleLevel
+    --levelText.text = "Lv." .. reportVo.roleLevel
+    levelText.text = reportVo.lastPassTime
 
     local ceText = self.gameObject:GetText("Info/CE/Text")
     ceText.text = "战斗力 " .. reportVo.roleLevel

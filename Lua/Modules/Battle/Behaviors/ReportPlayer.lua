@@ -43,6 +43,8 @@ function ReportPlayer:Ctor(context, reportContext)
     AddEventListener(BattleEvent, BattleEvent.ExitAttack, self.OnExitAttack, self)
     --AddEventListener(BattleEvent, BattleEvent.BattlePause, self.OnBattlePause, self)
     self.isRoundOver = true
+
+    self.record = BattleRecord.New(self.reportContext)
 end
 
 function ReportPlayer:BeginReport()
@@ -50,9 +52,11 @@ function ReportPlayer:BeginReport()
     for i = 1, #self.context.reportVo.reportNodes do
         local node = self.context.reportVo.reportNodes[i]
         local attackRound = AttackRound.New()
+        attackRound.id = node.id
         attackRound.camp = node.camp
         attackRound.layoutIndex = node.layoutIndex
         attackRound.actionRecoveryTP = node.actionRecoveryTP
+        attackRound.accountNodeMap = node.accountNodeMap
         attackRound.skill = SkillVoPool:Get()
         attackRound.skill:Init(SkillConfig.Get(node.skillId))
         attackRound.skill.level = node.level
@@ -67,11 +71,7 @@ end
 
 function ReportPlayer:Play()
     ReportPlayer.super.Play(self)
-    if self.context.isReplaying then
-        self:BeginReport()
-    else
-        self.record = BattleRecord.New(self.reportContext)
-    end
+    self.isAllDead = false
 end
 
 function ReportPlayer:OnExitAttack()
@@ -97,9 +97,13 @@ function ReportPlayer:RoundStart()
             while self.isPause do
                 coroutine.step(1)
             end
-            while self.reportContext.reportBehavior.currAttackRound == nil do
-                coroutine.step()
-                --print("wait Attack round ready")
+            if self.context.isReplaying then
+
+            else
+                while self.reportContext.reportBehavior.currAttackRound == nil do
+                    coroutine.step()
+                    --print("wait Attack round ready")
+                end
             end
             self:NextState()
         end)
@@ -114,6 +118,9 @@ function ReportPlayer:GetAttackRound()
         --播放战报
         attackRound = self:ShiftReport()
         attackRound:SetBattleUnit(self.context:GetBattleUnit(attackRound.camp, attackRound.layoutIndex))
+        if attackRound.battleUnit == nil then
+            self:_debugError("battleUnit is nil. Why?" .. attackRound.camp .. attackRound.layoutIndex)
+        end
     else
         --录制战报
         attackRound = self.reportContext.reportBehavior.currAttackRound
@@ -135,16 +142,19 @@ function ReportPlayer:RoundProgress()
             local attackRound = self:GetAttackRound()
             local reportUnit = attackRound.battleUnit
             local battleUnit = self.context:GetBattleUnit(reportUnit.battleUnitVo.camp, reportUnit.battleUnitVo.layoutIndex)
-            if battleUnit and not battleUnit:IsDead() then
+            if battleUnit == nil then
+                self:_debugError("Attacker is nil. Why?" .. reportUnit.battleUnitVo.camp .. reportUnit.battleUnitVo.layoutIndex)
+            elseif battleUnit:IsDead() then
+                self:_debugError("Attacker is Dead. Why?")
+            else
                 battleUnit.behavior:Play(attackRound)
                 self.attackRoundOver = false
                 while not self.attackRoundOver do
                     coroutine.step(1)
                 end
                 self.currBattleUnit = battleUnit
+                self:NextState()
             end
-            --self:_debug("RoundBehavior Round Attack Over")
-            self:NextState()
         end)
     end)
     return behavior
@@ -155,12 +165,23 @@ function ReportPlayer:RoundEnd()
     local behavior = self:CreateSubBehavior()
     behavior:AppendState(function()
         --self:_debug("ReportPlayer RoundEnd")
-        self:NextState()
+
+        if self.context:IsCampAllDead(Camp.Def) then
+            self:StopRound(Camp.Atk)
+        elseif self.context:IsCampAllDead(Camp.Atk)then
+            self:StopRound(Camp.Def)
+        else
+            self:NextState()
+        end
     end)
     return behavior
 end
 
-function ReportPlayer:StopRound()
+function ReportPlayer:StopRound(winCamp)
+    if winCamp then
+        print("战斗结束 win:" .. winCamp)
+        self.isAllDead = true
+    end
     self:Stop()
 end
 

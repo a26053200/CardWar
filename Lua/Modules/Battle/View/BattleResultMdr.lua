@@ -32,7 +32,7 @@ function BattleResultMdr:OnEndBattle()
                 self.checkPointModel.currSection.checkPointData.chapter,
                 self.checkPointModel.currSection.checkPointData.id,
                 2,
-                record:GetBattleUnits(),
+                record.unitCards,
                 record:GetReportNodes(),
                 record:GetAccountNodes()
         )
