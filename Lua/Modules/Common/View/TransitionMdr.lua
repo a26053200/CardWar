@@ -6,10 +6,10 @@
 
 local WorldEvents = require("Game.Modules.World.Events.WorldEvents")
 local BaseMediator = require("Game.Core.Ioc.BaseMediator")
----@class Game.Modules.Transition.View.TransitionMdr : Game.Core.Ioc.BaseMediator
-local TransitionMdr = class("Game.Modules.Transition.View.TransitionMdr",BaseMediator)
+---@class Game.Modules.Common.View.TransitionMdr : Game.Core.Ioc.BaseMediator
+local TransitionMdr = class("Game.Modules.Common.View.TransitionMdr",BaseMediator)
 
-local Duration = 0.5
+local Duration = 1
 
 function TransitionMdr:Ctor()
     TransitionMdr.super.Ctor(self)

@@ -41,7 +41,7 @@ end
 function CheckPointReportMdr:CheckPointReportReplay(event)
     self.battleService:GetBattleReport(event.reportVo.id, function(report)
         self.battleModel.report = report
-        transition:CleatNavigation(function()
+        Transition:CleatNavigation(function()
             BattleCtrl.New():ReplayReport(event.reportVo.id)
         end)
     end)

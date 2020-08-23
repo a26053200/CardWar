@@ -99,7 +99,7 @@ end
 
 --正式进入战斗
 function BattleConfigMdr:OfficialStartBattle()
-    transition:CleatNavigation(function()
+    Transition:CleatNavigation(function()
         BattleCtrl.New():StartPveBattle(self.selectList)
     end)
 end

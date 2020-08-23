@@ -62,6 +62,7 @@ function BattleUnit:OnRenderObjInit()
     self.behavior = BattleUnitBehavior.New(self)
 
     self.hud = BattleUnitHUD.New(self)
+    self:SetHudVisible(false)
 end
 
 function BattleUnit:SetHudVisible(visible)
@@ -80,6 +81,32 @@ function BattleUnit:Born(callback)
         self:OnBorn()
     end)
     self:SetRenderEnabled(true)
+end
+
+function BattleUnit:OutStage(forward, duration)
+    if forward then --前进离开场景
+        local bornPos = self.bornPos
+        local dstPos = bornPos + self.transform.forward * OutStageDistance_Next
+        self.transform:DOMove(dstPos, duration):OnComplete(function()
+            self.transform.position = bornPos + -self.transform.forward * OutStageDistance
+        end)
+    else
+        self.transform.position = self.bornPos + -self.transform.forward * OutStageDistance
+    end
+end
+
+--登场
+function BattleUnit:PlayOnStage(duration, callback)
+    self.stageTween = DOTween.Sequence()
+    self:PlayRun()
+    self.stageTween:Append(self.transform:DOMove(self.bornPos, duration))
+    self.stageTween:AppendCallback(function()
+        self:PlayBorn(function()
+            invoke(callback)
+            self:OnBorn()
+            self:PlayIdle()
+        end)
+    end)
 end
 
 function BattleUnit:JsonToLua(key, json)
@@ -195,6 +222,10 @@ function BattleUnit:Clean()
     end
     if self.cc then
         self.cc.enabled = false
+    end
+    if self.stageTween then
+        self.stageTween:Kill()
+        self.stageTween = nil
     end
 end
 

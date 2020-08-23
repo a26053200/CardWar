@@ -127,7 +127,7 @@ function BattleMdr:StartBattle()
         --while not currArea.isBornOver do
         --    coroutine.step(1)
         --end
-        coroutine.wait(0.2)
+        --coroutine.wait(0.2)
         --self.context.attachCamera:AttachPos(self.context.battleLayout.areaPointObj.transform.position)
         --vmgr:LoadView(ViewConfig.BattleArrayEditor)--布阵
         coroutine.step(1)
@@ -135,7 +135,7 @@ function BattleMdr:StartBattle()
         --while not self.battleModel.isEditBattleArrayComplete do
         --    coroutine.step(1)
         --end
-        coroutine.wait(1)
+        --coroutine.wait(1)
         self:OnBattleStart()
         log("Battle Start")
     end)

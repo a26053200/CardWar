@@ -43,11 +43,11 @@ function GridWave:Refresh(callback)
             local layoutGrid = self.context.battleLayout:AddUnit(battleItem,Camp.Def, wavePoint.grid)
             battleItem:SetBornPos(layoutGrid.transform.position, layoutGrid.forward)
             if wavePoint.bornMode == WaveBornMode.BornEffect then
-                battleItem:Born()
+                battleItem:PlayStage()
                 coroutine.step()
             elseif wavePoint.bornMode == WaveBornMode.WaitBorn then
                 local bornOver = false
-                battleItem:Born(function()
+                battleItem:PlayStage(function()
                     bornOver = true
                 end)
                 while not bornOver do

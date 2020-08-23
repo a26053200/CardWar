@@ -18,6 +18,10 @@ HERO_AWAKEN_UP_ATTRIBUTE = 0.1 -- 觉醒增加的属性值
 HERO_MOOD_MAX = 100       -- 心情的最大值
 
 
+OutStageDistance = 12  --登场距离
+OutStageDistance_Next = 30  --登场距离
+OnStageDuration = 1  --登场时间
+
 RankFrameUrl =
 {
     [1] = "Atlas/RankFrame/dikuang_16_1_0.png",

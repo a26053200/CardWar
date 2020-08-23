@@ -78,6 +78,7 @@ function PveBattleBehavior:CreateBattle()
         reportUnit.ownerCardVo = cardVo
         local battleUnit = self.context:AddBattleUnit(reportUnit.battleUnitVo.camp, battleUnitName, reportUnit.layoutIndex)
         battleUnit.ownerCardVo = cardVo
+        battleUnit:OutStage()
     end
 end
 
@@ -95,7 +96,9 @@ function PveBattleBehavior:StartBattle()
     self:StartCoroutine(function()
         for i = 1, #self.checkPointData.areas do
             World.model.battleModel.currAreaId = i
+            --怪物刷新
             self:RefreshArea(i)
+            self:OnPreReplay(i)
             coroutine.wait(1)
             self.reportReplay:Play()
             if self.context.isReplaying then
@@ -136,6 +139,33 @@ function PveBattleBehavior:StartBattle()
     end)
 end
 
+
+function PveBattleBehavior:OnPreReplay(areaIndex)
+    --英雄登场
+    if areaIndex > 1 then
+        ---@param unit Game.Modules.World.Items.BattleUnit
+        self.context:ForEach(Camp.Atk, function(unit)
+            unit:OutStage(true,1)
+        end)
+        local transitionOver = false
+        Transition:FadeIn(function()
+            transitionOver = true
+        end,2.2)
+        while not transitionOver do
+            coroutine.step(1)
+        end
+    end
+    ---@param unit Game.Modules.World.Items.BattleUnit
+    self.context:ForEach(Camp.Atk, function(unit)
+        unit:PlayOnStage(OnStageDuration)
+    end)
+    ---@param unit Game.Modules.World.Items.BattleUnit
+    self.context:ForEach(Camp.Def, function(unit)
+        unit:PlayOnStage(OnStageDuration)
+    end)
+    coroutine.wait(OnStageDuration * 1.1)
+end
+
 --开始录制战报
 function PveBattleBehavior:RefreshArea(areaIndex)
     local areaInfo =  self.checkPointData.areas[areaIndex]
@@ -146,6 +176,7 @@ function PveBattleBehavior:RefreshArea(areaIndex)
         for j = 1, #wave.wavePoints do
             local reportUnit = self.reportContext:AddBattleUnit(Camp.Def, wave.wavePoints[i].battleUnit)
             local battleUnit = self.context:AddBattleUnit(Camp.Def, wave.wavePoints[i].battleUnit, reportUnit.layoutIndex)
+            battleUnit:OutStage()
         end
     end
 end

@@ -83,7 +83,7 @@ World = require("Game.Modules.World.World")
 navigation = require("Game.Modules.Lobby.View.Navigation").New()
 
 ---过场
-transition = require("Game.Modules.Transition.View.Transition").New()
+Transition = require("Game.Modules.Common.View.Transition").New()
 
 FRAME_TIME = 1 / Application.targetFrameRate
 

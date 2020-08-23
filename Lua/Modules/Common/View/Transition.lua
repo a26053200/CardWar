@@ -6,12 +6,14 @@
 
 local WorldEvents = require("Game.Modules.World.Events.WorldEvents")
 local LuaMonoBehaviour = require("Betel.LuaMonoBehaviour")
----@class Game.Modules.Transition.View.Transition
----@field New():Game.Modules.Transition.View.Transition
-local Transition = class("Game.Modules.Transition.View.Transition", LuaMonoBehaviour)
+---@class Game.Modules.Common.View.Transition
+---@field New():Game.Modules.Common.View.Transition
+local Transition = class("Game.Modules.Common.View.Transition", LuaMonoBehaviour)
 
+---@param duration number
 ---@param callback fun()
-function Transition:DoTransition(callback)
+function Transition:DoTransition(callback, duration)
+    self.duration = duration or 1
     local OnTransitionStart
     OnTransitionStart = function()
         invoke(callback)
@@ -20,6 +22,10 @@ function Transition:DoTransition(callback)
     end
     AddEventListener(WorldEvents, WorldEvents.TransitionStart, OnTransitionStart , self)
     vmgr:LoadView(ViewConfig.Transition)
+end
+
+function Transition:FadeIn(callback, duration)
+    self:DoTransition(callback, duration)
 end
 
 --进关卡战斗

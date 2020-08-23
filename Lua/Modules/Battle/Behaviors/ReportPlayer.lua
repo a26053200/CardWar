@@ -48,19 +48,23 @@ function ReportPlayer:Ctor(context, reportContext)
 end
 
 function ReportPlayer:BeginReport()
-    self.attackRoundQueue = List.New()
-    for i = 1, #self.context.reportVo.reportNodes do
-        local node = self.context.reportVo.reportNodes[i]
-        local attackRound = AttackRound.New()
-        attackRound.id = node.id
-        attackRound.camp = node.camp
-        attackRound.layoutIndex = node.layoutIndex
-        attackRound.actionRecoveryTP = node.actionRecoveryTP
-        attackRound.accountNodeMap = node.accountNodeMap
-        attackRound.skill = SkillVoPool:Get()
-        attackRound.skill:Init(SkillConfig.Get(node.skillId))
-        attackRound.skill.level = node.level
-        self.attackRoundQueue:Push(attackRound)
+    if self.context.isReplaying then
+        self.attackRoundQueue = List.New()
+        for i = 1, #self.context.reportVo.reportNodes do
+            local node = self.context.reportVo.reportNodes[i]
+            local attackRound = AttackRound.New()
+            attackRound.id = node.id
+            attackRound.camp = node.camp
+            attackRound.layoutIndex = node.layoutIndex
+            attackRound.actionRecoveryTP = node.actionRecoveryTP
+            attackRound.accountNodeMap = node.accountNodeMap
+            attackRound.skill = SkillVoPool:Get()
+            attackRound.skill:Init(SkillConfig.Get(node.skillId))
+            attackRound.skill.level = node.level
+            self.attackRoundQueue:Push(attackRound)
+        end
+    else
+
     end
 end
 

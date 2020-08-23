@@ -84,7 +84,7 @@ function BattleLayout:AddUnit(unit, camp, layoutIndex)
     unit:SetBornPos(grid.transform.position, grid.forward)
     unit:CreateCC() --  创建碰撞体，接受点击事件
     unit:ResetAttr()
-    unit:Born()
+    --unit:Born()
     return grid
 end
 
